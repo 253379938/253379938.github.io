@@ -13,23 +13,28 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="http://example.com/2024/10/18/elmessagebox的async异步问题/"/>
+    <link rel="canonical" href="http://example.com/2024/10/19/css属性计算/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="ElMessageBox 中的 async 异步问题在 vue 中使用 ElMessageBox 之后返回的对象不是一个 promise 对象,无法使用 async,await 实现异步操作,需要使用 return new promise 返回一个 promise 对象在进行 await 操作,如下的 editHouse 函数返回的对象为解析后的 promise 对象 12345678910111">
+        <meta name="description" content="我们所书写的任何一个 HTML 元素，实际上都有完整的一整套 CSS 样式。任何一个 HTML 元素，都有一套完整的 CSS 样式，只不过你没有书写的样式，大概率可能会使用其默认值。但是注意，我这里强调的是「大概率可能」，难道还有我们「没有设置值，但是不使用默认值」的情况么？嗯，确实有的，所以我才强调你要了解「CSS 属性的计算过程」总的来讲，属性值的计算过程，分为如下这么 4 个步骤：  确定声">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ElMessageBox中的async异步问题">
-<meta property="og:url" content="http://example.com/2024/10/18/ElMessageBox%E7%9A%84async%E5%BC%82%E6%AD%A5%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="css属性计算">
+<meta property="og:url" content="http://example.com/2024/10/19/css%E5%B1%9E%E6%80%A7%E8%AE%A1%E7%AE%97/index.html">
 <meta property="og:site_name" content="MrZ的个人博客">
-<meta property="og:description" content="ElMessageBox 中的 async 异步问题在 vue 中使用 ElMessageBox 之后返回的对象不是一个 promise 对象,无法使用 async,await 实现异步操作,需要使用 return new promise 返回一个 promise 对象在进行 await 操作,如下的 editHouse 函数返回的对象为解析后的 promise 对象 12345678910111">
+<meta property="og:description" content="我们所书写的任何一个 HTML 元素，实际上都有完整的一整套 CSS 样式。任何一个 HTML 元素，都有一套完整的 CSS 样式，只不过你没有书写的样式，大概率可能会使用其默认值。但是注意，我这里强调的是「大概率可能」，难道还有我们「没有设置值，但是不使用默认值」的情况么？嗯，确实有的，所以我才强调你要了解「CSS 属性的计算过程」总的来讲，属性值的计算过程，分为如下这么 4 个步骤：  确定声">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-10-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-10-19T07:23:59.380Z">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35307424/1729324282587-ab93d25c-492f-4721-9da9-6a15c8c8ed20.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35307424/1729324352537-aaad1952-443e-4e7e-a0d2-5183a1086608.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35307424/1729324832407-6e3523df-a794-46af-8dcc-62aae7ab0cc3.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35307424/1729324948735-627a43a4-a6e9-414f-bb33-a761910f4c75.png">
+<meta property="article:published_time" content="2024-10-18T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-10-19T08:09:10.351Z">
 <meta property="article:author" content="MrZ">
-<meta property="article:tag" content="vue">
+<meta property="article:tag" content="css">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2024/png/35307424/1729324282587-ab93d25c-492f-4721-9da9-6a15c8c8ed20.png">
     
     
     <!--- Icon Part-->
@@ -41,7 +46,7 @@
     
     <title>
         
-            ElMessageBox中的async异步问题 -
+            css属性计算 -
         
         MrZ个人博客
     </title>
@@ -298,7 +303,7 @@
         <div class="article-title relative w-full">
             
                 <div class="w-full flex items-center pt-6 justify-start">
-                    <h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">ElMessageBox中的async异步问题</h1>
+                    <h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">css属性计算</h1>
                 </div>
             
             </div>
@@ -319,15 +324,15 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2024-10-18</span>
-        <span class="mobile">2024-10-18</span>
+        <span class="desktop">2024-10-19</span>
+        <span class="mobile">2024-10-19</span>
         <span class="hover-info">Created</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2024-10-19 15:23:59</span>
-            <span class="mobile">2024-10-19 15:23:59</span>
+            <span class="desktop">2024-10-19 16:09:10</span>
+            <span class="mobile">2024-10-19 16:09:10</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -341,7 +346,7 @@
                     
                         
                         <li>
-                            <a href="/categories/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86%E7%82%B9/">零碎知识点</a>&nbsp;
+                            <a href="/categories/css/">css</a>&nbsp;
                         </li>
                     
                     
@@ -355,7 +360,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/vue/">vue</a>&nbsp;
+                        <a href="/tags/css/">css</a>&nbsp;
                     </li>
                 
             </ul>
@@ -381,11 +386,82 @@
 
 
         <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
-            <h1 id="ElMessageBox-中的-async-异步问题"><a href="#ElMessageBox-中的-async-异步问题" class="headerlink" title="ElMessageBox 中的 async 异步问题"></a>ElMessageBox 中的 async 异步问题</h1><p>在 vue 中使用 ElMessageBox 之后返回的对象不是一个 promise 对象,无法使用 async,await 实现异步操作,需要使用 return new promise 返回一个 promise 对象在进行 await 操作,如下的 editHouse 函数返回的对象为解析后的 promise 对象</p>
-<div class="highlight-container" data-rel="Javascript"><figure class="iseeu highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">       <span class="title class_">ElMessageBox</span>.<span class="title function_">confirm</span>(</span><br><span class="line">           <span class="string">&#x27;请确定是否进行提交操作?&#x27;</span>,</span><br><span class="line">           &#123;</span><br><span class="line">               <span class="attr">confirmButtonText</span>: <span class="string">&#x27;确定&#x27;</span>,</span><br><span class="line">               <span class="attr">cancelButtonText</span>: <span class="string">&#x27;取消&#x27;</span>,</span><br><span class="line">               <span class="attr">type</span>: <span class="string">&#x27;warning&#x27;</span>,</span><br><span class="line">           &#125;</span><br><span class="line">       ).<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">               baseService.<span class="title function_">put</span>(<span class="string">&#x27;/property/house/updateHouse&#x27;</span>, &#123;</span><br><span class="line">                   ...<span class="title class_">HouseForm</span></span><br><span class="line">               &#125;).<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">                   <span class="title class_">ElMessage</span>(&#123;</span><br><span class="line">                       <span class="attr">type</span>: <span class="string">&#x27;success&#x27;</span>,</span><br><span class="line">                       <span class="attr">message</span>: <span class="string">&#x27;编辑成功&#x27;</span>,</span><br><span class="line">                   &#125;);</span><br><span class="line">                   <span class="title function_">resolve</span>(); <span class="comment">// 在编辑成功后解析 Promise</span></span><br><span class="line">               &#125;).<span class="title function_">catch</span>(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">                   <span class="title class_">ElMessage</span>(&#123;</span><br><span class="line">                       <span class="attr">type</span>: <span class="string">&#x27;error&#x27;</span>,</span><br><span class="line">                       <span class="attr">message</span>: <span class="string">&#x27;编辑失败&#x27;</span>,</span><br><span class="line">                   &#125;);</span><br><span class="line">                   <span class="title function_">reject</span>(error); <span class="comment">// 在编辑失败时拒绝 Promise</span></span><br><span class="line">               &#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+            <p><strong><font style="color:rgb(60, 60, 67);">我们所书写的任何一个 HTML 元素，实际上都有完整的一整套 CSS 样式</font></strong><font style="color:rgb(60, 60, 67);">。任何一个 HTML 元素，都有一套完整的 CSS 样式，只不过你没有书写的样式，</font><strong><font style="color:rgb(60, 60, 67);">大概率可能</font></strong><font style="color:rgb(60, 60, 67);">会使用其默认值。但是注意，我这里强调的是「</font><strong><font style="color:rgb(60, 60, 67);">大概率可能</font></strong><font style="color:rgb(60, 60, 67);">」，难道还有我们「没有设置值，但是不使用默认值」的情况么？嗯，确实有的，所以我才强调你要了解「CSS 属性的计算过程」总的来讲，属性值的计算过程，分为如下这么 </font><strong><font style="color:rgb(60, 60, 67);">4</font></strong><font style="color:rgb(60, 60, 67);"> 个步骤：</font></p>
+<ul>
+<li><font style="color:rgb(60, 60, 67);">确定声明值</font></li>
+<li><font style="color:rgb(60, 60, 67);">层叠冲突</font></li>
+<li><font style="color:rgb(60, 60, 67);">使用继承</font></li>
+<li><font style="color:rgb(60, 60, 67);">使用默认值</font></li>
+</ul>
+<h2 id="确定声明值"><a href="#确定声明值" class="headerlink" title="确定声明值"></a>确定声明值</h2><p><font style="color:rgb(60, 60, 67);">首先第一步，是确定声明值。所谓声明值就是开发者自己所书写的 CSS 样式.当然，除了「</font><strong><font style="color:rgb(60, 60, 67);">页面作者样式</font></strong><font style="color:rgb(60, 60, 67);">」，一般浏览器还会存在「</font><strong><font style="color:rgb(60, 60, 67);">用户代理样式表</font></strong><font style="color:rgb(60, 60, 67);">」，简单来讲就是浏览器内置了一套样式表.</font></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.nlark.com/yuque/0/2024/png/35307424/1729324282587-ab93d25c-492f-4721-9da9-6a15c8c8ed20.png"
+                     
+                ></p>
+<p><font style="color:rgb(60, 60, 67);">在上面的示例中，「页面作者样式」中设置了</font><code>color</code><font style="color:rgb(60, 60, 67);">属性，而用户代理样式表（浏览器提供的样式表）中设置了诸如</font><code>display</code><font style="color:rgb(60, 60, 67);">、</font><code>margin-block-start</code><font style="color:rgb(60, 60, 67);">、</font><code>margin-block-end</code><font style="color:rgb(60, 60, 67);">、</font><code>margin-inline-start</code><font style="color:rgb(60, 60, 67);">、</font><code>margin-inline-end</code><font style="color:rgb(60, 60, 67);">等属性对应的值</font></p>
+<p><font style="color:rgb(60, 60, 67);">这些值目前来讲也没有什么冲突，因此最终就会应用这些属性值.</font></p>
+<h2 id="层叠冲突"><a href="#层叠冲突" class="headerlink" title="层叠冲突"></a>层叠冲突</h2><p><font style="color:rgb(60, 60, 67);">在确定声明值时，可能出现一种情况，那就是声明的样式规则发生了冲突</font></p>
+<p><font style="color:rgb(60, 60, 67);">此时会进入解决层叠冲突的流程。而这一步又可以细分为下面这三个步骤：</font></p>
+<ul>
+<li><font style="color:rgb(60, 60, 67);">比较源的重要性</font></li>
+<li><font style="color:rgb(60, 60, 67);">比较优先级</font></li>
+<li><font style="color:rgb(60, 60, 67);">比较次序</font></li>
+</ul>
+<h3 id="比较源的重要性"><a href="#比较源的重要性" class="headerlink" title="比较源的重要性"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Cascade"><font style="color:rgb(60, 60, 67);">比较源的重要性</font></a></h3><p><font style="color:rgb(60, 60, 67);">当不同的 CSS 样式来源拥有相同的声明时，此时就会根据样式表来源的重要性来确定应用哪一条样式规则</font></p>
+<p><font style="color:rgb(60, 60, 67);">那么问题来了，咱们的样式表的源究竟有几种呢？</font></p>
+<p><font style="color:rgb(60, 60, 67);">整体来讲有三种来源：</font></p>
+<ul>
+<li><font style="color:rgb(60, 60, 67);">浏览器会有一个基本的样式表来给任何网页设置默认样式。这些样式统称「</font><strong><font style="color:rgb(60, 60, 67);">用户代理样式表</font></strong><font style="color:rgb(60, 60, 67);">」</font></li>
+<li><font style="color:rgb(60, 60, 67);">网页的作者可以定义文档的样式，这是最常见的样式表，称之为「</font><strong><font style="color:rgb(60, 60, 67);">页面作者样式</font></strong><font style="color:rgb(60, 60, 67);">」</font></li>
+<li><font style="color:rgb(60, 60, 67);">浏览器的用户，可以使用自定义样式表定制使用体验，称之为「</font><strong><font style="color:rgb(60, 60, 67);">用户样式</font></strong><font style="color:rgb(60, 60, 67);">」</font></li>
+</ul>
+<p><font style="color:rgb(60, 60, 67);">对应的重要性顺序依次为：</font><strong><font style="color:rgb(60, 60, 67);">页面作者样式 &gt; 用户样式 &gt; 用户代理样式</font></strong></p>
+<p><font style="color:rgb(60, 60, 67);">例如现在有「页面作者样式」和「用户代理样式表」中存在属性的冲突，那么会以「页面作者样式」优先</font></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.nlark.com/yuque/0/2024/png/35307424/1729324352537-aaad1952-443e-4e7e-a0d2-5183a1086608.png"
+                     
+                ></p>
+<p><font style="color:rgb(60, 60, 67);">可以明显的看到，「页面作者样式」和「用户代理样式表」中同时存在的</font><code>display</code><font style="color:rgb(60, 60, 67);">属性的设置，最终「页面作者样式」干掉了「用户代理样式表」中冲突的属性。这就是第一步，根据不同源的重要性来决定应用哪一个源的样式.</font></p>
+<p>:::info<br><font style="color:rgb(79, 79, 79);">查看是否为行内样式</font></p>
+<p><font style="color:rgb(77, 77, 77);">这里不仅仅有使用选择器设置于行内设置的差异，还有一个很特殊但几乎不会使用的情况——</font><code>&lt;font style=&quot;color:rgb(199, 37, 78);background-color:rgb(249, 242, 244);&quot;&gt;! important&lt;/font&gt;</code><font style="color:rgb(77, 77, 77);">，优先级为：设置</font><code>&lt;font style=&quot;color:rgb(199, 37, 78);background-color:rgb(249, 242, 244);&quot;&gt;! important&lt;/font&gt;</code><font style="color:rgb(77, 77, 77);">的样式 &gt; 行内样式&gt; 选择器样式。</font><font style="color:rgb(60, 60, 67);"></font></p>
+<p>:::</p>
+<h3 id="比较优先级"><a href="#比较优先级" class="headerlink" title="比较优先级"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Specificity"><font style="color:rgb(60, 60, 67);">比较优先级</font></a></h3><p><font style="color:rgb(60, 60, 67);">那么接下来，如果是在在同一个源中有样式声明冲突怎么办呢？此时就会进行样式声明的优先级比较</font></p>
+<div class="highlight-container" data-rel="Css"><figure class="iseeu highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.test</span> <span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">50px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
-<p>在进行异步操作</p>
-<div class="highlight-container" data-rel="Javascript"><figure class="iseeu highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">handleEdit</span> = <span class="keyword">async</span> (<span class="params">editTitle</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">await</span> <span class="title function_">editHouse</span>(editTitle);</span><br><span class="line">    <span class="title function_">getHouse</span>();</span><br><span class="line">    visible.<span class="property">value</span> = <span class="literal">false</span>;</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></div>
+<p><font style="color:rgb(60, 60, 67);">在上面的代码中，同属于「页面作者样式」，源的重要性是相同的，此时会以选择器的权重来比较重要性</font></p>
+<p><font style="color:rgb(60, 60, 67);">很明显，上面的选择器的权重要大于下面的选择器，因此最终标题呈现为</font><code>50px</code>.详细权重请看<a class="link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity" >MDN <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="比较次序"><a href="#比较次序" class="headerlink" title="比较次序"></a><font style="color:rgb(60, 60, 67);">比较次序</font></h3><p><font style="color:rgb(60, 60, 67);">经历了上面两个步骤，大多数的样式声明能够被确定下来。但是还剩下最后一种情况，那就是样式声明既是同源，权重也相同，此时就会进入第三个步骤，比较样式声明的次序.后声明的会覆盖前面所声明的.</font></p>
+<h2 id="使用继承"><a href="#使用继承" class="headerlink" title="使用继承"></a>使用继承</h2><p><font style="color:rgb(60, 60, 67);">层叠冲突这一步完成后，解决了相同元素被声明了多条样式规则究竟应用哪一条样式规则的问题</font></p>
+<p><font style="color:rgb(60, 60, 67);">那么如果没有声明的属性呢？此时就使用默认值么？</font></p>
+<p><font style="color:rgb(60, 60, 67);">No、No、No，别急，此时还有第三个步骤，那就是使用继承而来的值</font></p>
+<div class="highlight-container" data-rel="Css"><figure class="iseeu highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">div</span>&gt;</span><br><span class="line">  &lt;<span class="selector-tag">p</span>&gt;Lorem ipsum dolor sit amet.&lt;/<span class="selector-tag">p</span>&gt;</span><br><span class="line">&lt;/<span class="selector-tag">div</span>&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">  <span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: red;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></div>
+
+<p><font style="color:rgb(60, 60, 67);">在上面的代码中，我们针对</font><code>div</code><font style="color:rgb(60, 60, 67);">设置了</font><code>color</code><font style="color:rgb(60, 60, 67);">属性值为红色，而针对</font><code>p</code><font style="color:rgb(60, 60, 67);">元素我们没有声明任何的属性，但是由于</font><code>color</code><font style="color:rgb(60, 60, 67);">是可以继承的，因此</font><code>p</code><font style="color:rgb(60, 60, 67);">元素从</font><strong><font style="color:rgb(60, 60, 67);">最近的</font></strong><code>div</code><font style="color:rgb(60, 60, 67);">身上继承到了</font><code>color</code><font style="color:rgb(60, 60, 67);">属性的值</font></p>
+<p><font style="color:rgb(60, 60, 67);">这里有两个点需要注意一下</font></p>
+<p><font style="color:rgb(60, 60, 67);">首先第一个是我强调了是</font><strong><font style="color:rgb(60, 60, 67);">最近的</font></strong><code>div</code><font style="color:rgb(60, 60, 67);">元素，看下面的例子：</font></p>
+<div class="highlight-container" data-rel="Css"><figure class="iseeu highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">div</span> class=&quot;test&quot;&gt;</span><br><span class="line">  &lt;<span class="selector-tag">div</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">p</span>&gt;Lorem ipsum dolor sit amet.&lt;/<span class="selector-tag">p</span>&gt;</span><br><span class="line">  &lt;/<span class="selector-tag">div</span>&gt;</span><br><span class="line">&lt;/<span class="selector-tag">div</span>&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">  <span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: red;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-class">.test</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.nlark.com/yuque/0/2024/png/35307424/1729324832407-6e3523df-a794-46af-8dcc-62aae7ab0cc3.png"
+                     
+                ></p>
+<p><font style="color:rgb(60, 60, 67);">因为这里并不涉及到选中</font><code>p</code><font style="color:rgb(60, 60, 67);">元素声明</font><code>color</code><font style="color:rgb(60, 60, 67);">值，而是从父元素上面继承到</font><code>color</code><font style="color:rgb(60, 60, 67);">对应的值，因此这里是「</font><strong><font style="color:rgb(60, 60, 67);">就近原则</font></strong><font style="color:rgb(60, 60, 67);">」，初学者往往会产生混淆，又去比较权重，但是这里根本不会涉及到权重比较，因为压根儿就没有选中到</font><code>p</code><font style="color:rgb(60, 60, 67);">元素</font></p>
+<p><font style="color:rgb(60, 60, 67);">第二个就是哪些属性能够继承？</font></p>
+<p><font style="color:rgb(60, 60, 67);">关于这一点的话，在</font><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS"><font style="color:#117CEE;"> MDN</font></a><font style="color:#117CEE;"> </font>进行查询.</p>
+<h2 id="使用默认值"><a href="#使用默认值" class="headerlink" title="使用默认值"></a>使用默认值</h2><p><font style="color:rgb(60, 60, 67);">好了，目前走到这一步，如果属性值都还不能确定下来，那么就只能是使用默认值了</font></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.nlark.com/yuque/0/2024/png/35307424/1729324948735-627a43a4-a6e9-414f-bb33-a761910f4c75.png"
+                     
+                ></p>
+<p><font style="color:rgb(60, 60, 67);">前面我们也说过，一个 HTML 元素要在浏览器中渲染出来，必须具备所有的 CSS 属性值，但是绝大部分我们是不会去设置的，「用户代理样式表」里面也不会去设置，也无法从继承拿到，因此最终都是用默认值</font></p>
 
         </div>
 
@@ -393,18 +469,18 @@
             <div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
                 <div class="article-copyright-info-container">
     <ul>
-        <li><strong>Title:</strong> ElMessageBox中的async异步问题</li>
+        <li><strong>Title:</strong> css属性计算</li>
         <li><strong>Author:</strong> MrZ</li>
         <li><strong>Created at
-                :</strong> 2024-10-18 00:00:00</li>
+                :</strong> 2024-10-19 00:00:00</li>
         
             <li>
                 <strong>Updated at
-                    :</strong> 2024-10-19 15:23:59
+                    :</strong> 2024-10-19 16:09:10
             </li>
         
         <li>
-            <strong>Link:</strong> https://253379938.github.io/2024/10/18/ElMessageBox的async异步问题/
+            <strong>Link:</strong> https://253379938.github.io/2024/10/19/css属性计算/
         </li>
         <li>
             <strong>
@@ -426,7 +502,7 @@
             <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
                 
                     <li class="tag-item mx-0.5">
-                        <a href="/tags/vue/">#vue</a>&nbsp;
+                        <a href="/tags/css/">#css</a>&nbsp;
                     </li>
                 
             </ul>
@@ -437,21 +513,21 @@
         
             <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
                 
-                    <div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
-                        <a class="prev"
-                        rel="prev"
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
                         href="/2024/10/18/Foreword/"
                         >
-                            <span class="left arrow-icon flex justify-center items-center">
-                                <i class="fa-solid fa-chevron-left"></i>
-                            </span>
                             <span class="title flex justify-center items-center">
                                 <span class="post-nav-title-item">杂记</span>
-                                <span class="post-nav-item">Prev posts</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
                             </span>
                         </a>
                     </div>
-                
                 
             </div>
         
@@ -508,8 +584,8 @@
             <div class="post-toc-wrap">
     <div class="post-toc">
         <div class="toc-title">On this page</div>
-        <div class="page-title">ElMessageBox中的async异步问题</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ElMessageBox-%E4%B8%AD%E7%9A%84-async-%E5%BC%82%E6%AD%A5%E9%97%AE%E9%A2%98"><span class="nav-text">ElMessageBox 中的 async 异步问题</span></a></li></ol>
+        <div class="page-title">css属性计算</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AE%E5%AE%9A%E5%A3%B0%E6%98%8E%E5%80%BC"><span class="nav-text">确定声明值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%82%E5%8F%A0%E5%86%B2%E7%AA%81"><span class="nav-text">层叠冲突</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E6%BA%90%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7"><span class="nav-text">比较源的重要性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-text">比较优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E6%AC%A1%E5%BA%8F"><span class="nav-text">比较次序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%BB%A7%E6%89%BF"><span class="nav-text">使用继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-text">使用默认值</span></a></li></ol>
 
     </div>
 </div>
