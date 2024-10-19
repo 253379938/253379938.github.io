@@ -26,8 +26,9 @@
 <meta property="og:description" content="ElMessageBox 中的 async 异步问题在 vue 中使用 ElMessageBox 之后返回的对象不是一个 promise 对象,无法使用 async,await 实现异步操作,需要使用 return new promise 返回一个 promise 对象在进行 await 操作,如下的 editHouse 函数返回的对象为解析后的 promise 对象 12345678910111">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-10-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-10-19T07:13:19.655Z">
+<meta property="article:modified_time" content="2024-10-19T07:23:59.380Z">
 <meta property="article:author" content="MrZ">
+<meta property="article:tag" content="vue">
 <meta name="twitter:card" content="summary">
     
     
@@ -263,15 +264,15 @@
 
         <div class="statistics flex justify-around my-2.5">
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">0</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">1</div>
         <div class="label text-third-text-color text-sm">Tags</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">3</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">2</div>
         <div class="label text-third-text-color text-sm">Categories</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">3</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">2</div>
         <div class="label text-third-text-color text-sm">Posts</div>
     </a>
 </div>
@@ -325,8 +326,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2024-10-19 15:13:19</span>
-            <span class="mobile">2024-10-19 15:13:19</span>
+            <span class="desktop">2024-10-19 15:23:59</span>
+            <span class="mobile">2024-10-19 15:23:59</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -340,7 +341,7 @@
                     
                         
                         <li>
-                            <a href="/categories/vue/">vue</a>&nbsp;
+                            <a href="/categories/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86%E7%82%B9/">零碎知识点</a>&nbsp;
                         </li>
                     
                     
@@ -348,6 +349,17 @@
             </ul>
         </span>
     
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/vue/">vue</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
     
 
     
@@ -388,7 +400,7 @@
         
             <li>
                 <strong>Updated at
-                    :</strong> 2024-10-19 15:13:19
+                    :</strong> 2024-10-19 15:23:59
             </li>
         
         <li>
@@ -410,6 +422,14 @@
             </div>
         
 
+        
+            <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/vue/">#vue</a>&nbsp;
+                    </li>
+                
+            </ul>
         
 
         
@@ -522,7 +542,7 @@
                 
                 <p class="post-count space-x-0.5">
                     <span>
-                        3 posts in total
+                        2 posts in total
                     </span>
                     
                 </p>
