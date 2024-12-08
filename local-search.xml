@@ -33,7 +33,7 @@
     <link href="/2024/10/18/Foreword/"/>
     <url>/2024/10/18/Foreword/</url>
     
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>hexo+github</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>hexo本地部署github</p>]]></content>
     
     
     <categories>
@@ -46,6 +46,31 @@
     <tags>
       
       <tag>杂记</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>test</title>
+    <link href="/2024/10/18/textartical/"/>
+    <url>/2024/10/18/textartical/</url>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>test</p><p>–</p><p>–</p><p><img src="D:\Git\hexo-blog\source_posts\textartical\image-20241208194522534.png" alt="image-20241208194522534"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>test</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>test</tag>
       
     </tags>
     
