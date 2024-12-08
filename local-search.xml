@@ -4,23 +4,48 @@
   
   
   <entry>
-    <title>onetest</title>
-    <link href="/2024/12/08/onetest/"/>
-    <url>/2024/12/08/onetest/</url>
+    <title>tttest</title>
+    <link href="/2024/12/08/tttest/"/>
+    <url>/2024/12/08/tttest/</url>
     
-    <content type="html"><![CDATA[<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>test</p><p><img src="/./onetest/image-20241208195418500.png" alt="image-20241208195418500"></p>]]></content>
+    <content type="html"><![CDATA[<h3 id="test-介绍"><a href="#test-介绍" class="headerlink" title="test 介绍"></a>test 介绍</h3><p>tt</p><p><img src="/./tttest/image-20241208201212018.png" alt="image-20241208201212018"></p>]]></content>
     
     
     <categories>
       
-      <category>杂记</category>
+      <category>ttt</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>杂记</tag>
+      <tag>ttt</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>t2test</title>
+    <link href="/2024/12/08/t2test/"/>
+    <url>/2024/12/08/t2test/</url>
+    
+    <content type="html"><![CDATA[<p>test</p><p><img src="/./t2test/image-20241208202051599.png" alt="image-20241208202051599"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>ttt</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>tttt</tag>
       
     </tags>
     
