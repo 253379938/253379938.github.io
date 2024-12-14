@@ -27,7 +27,7 @@
 <meta property="og:description" content="文档声明HTML 最上方的一段文本称之位文档类型声明,用于声明文档类型 &lt;!DOCTYPE html&gt; 1 HTML 文档声明，告诉浏览器当前页面是HTML5页面 2 让浏览器用HTML5 的标准去解析识别内容: 3 必须放在 HTML 文档的最前面，不能省略，省略了会出现兼容性问题 html 元素元素 表示一个 HTML 文档的根元素(顶级元素)。所有其他元素必须是此元素的后代  &amp;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-12-10T06:06:57.000Z">
-<meta property="article:modified_time" content="2024-12-12T15:57:11.550Z">
+<meta property="article:modified_time" content="2024-12-14T12:33:26.129Z">
 <meta property="article:author" content="MrZ">
 <meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1k 字
+          1.2k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          9 分钟
+          11 分钟
         
       </span>
     
@@ -330,6 +330,19 @@
 <li><font style="color:rgb(85, 85, 85);">前端可以通过访问并得到资源，这是 URL</font></li>
 <li><font style="color:rgb(85, 85, 85);">服务器内部，可以得到某一图片等资源，即图片等资源会有一个标识交给服务器，服务器可以通过该标识访问到该资源，甚至是物理设备，这期间不一定有 WEB 的参与，这是 URI</font></li>
 </ul>
+<h5 id="元素语义化"><a href="#元素语义化" class="headerlink" title="元素语义化"></a>元素语义化</h5><p>元素的语义化:用正确的元素做正确的事情。</p>
+<p>标签语义化的好处:</p>
+<ul>
+<li>方便代码维护</li>
+<li>减少让开发者之间的沟通成本</li>
+<li>能让语音合成工具正确识别网页元素的用途，以便作出正确的反应</li>
+<li>有利于SEO</li>
+<li>…</li>
+</ul>
+<h5 id="DNS解析"><a href="#DNS解析" class="headerlink" title="DNS解析"></a>DNS解析</h5><p>浏览器通过域名获取资源时, 会先访问域名服务器（DNS）, DNS服务器会解析域名, 找到对应的IP地址, 再通过IP地址访问对应服务器。</p>
+<p>域名的解析这一过程也是需要时间的, 我们可以尝试提前解析资源所在域名, 以提高获取资源时的访问速度</p>
+<p>可以通过对link标签设置 dns-prefetch 来进行优化, 如下:</p>
+<p><code>&lt;link rel=&quot;dns-prefetch&quot; href=&quot;//static.360buyimg.com&quot;&gt;</code></p>
 </html>
                 
               </div>
