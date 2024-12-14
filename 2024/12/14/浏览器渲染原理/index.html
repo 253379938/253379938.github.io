@@ -19,22 +19,21 @@
   <meta name="author" content="MrZ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="文档声明HTML 最上方的一段文本称之位文档类型声明,用于声明文档类型 &lt;!DOCTYPE html&gt; 1 HTML 文档声明，告诉浏览器当前页面是HTML5页面 2 让浏览器用HTML5 的标准去解析识别内容: 3 必须放在 HTML 文档的最前面，不能省略，省略了会出现兼容性问题 html 元素元素 表示一个 HTML 文档的根元素(顶级元素)。所有其他元素必须是此元素的后代  &amp;">
+    <meta name="description" content="浏览器是如何渲染页面的？当浏览器的网络线程收到 HTML 文档后，会产生一个渲染任务，并将其传递给渲染主线程的消息队列。 在事件循环机制的作用下，渲染主线程取出消息队列中的渲染任务，开启渲染流程。  整个渲染流程分为多个阶段，分别是： HTML 解析、样式计算、布局、分层、绘制、分块、光栅化、画 每个阶段都有明确的输入输出，上一个阶段的输出会成为下一个阶段的输入。 这样，整个渲染流程就形成了一套组">
 <meta property="og:type" content="article">
-<meta property="og:title" content="部分知识记录">
-<meta property="og:url" content="http://example.com/2024/12/10/%E9%83%A8%E5%88%86%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:title" content="MrZ的个人博客">
+<meta property="og:url" content="http://example.com/2024/12/14/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="MrZ的个人博客">
-<meta property="og:description" content="文档声明HTML 最上方的一段文本称之位文档类型声明,用于声明文档类型 &lt;!DOCTYPE html&gt; 1 HTML 文档声明，告诉浏览器当前页面是HTML5页面 2 让浏览器用HTML5 的标准去解析识别内容: 3 必须放在 HTML 文档的最前面，不能省略，省略了会出现兼容性问题 html 元素元素 表示一个 HTML 文档的根元素(顶级元素)。所有其他元素必须是此元素的后代  &amp;">
+<meta property="og:description" content="浏览器是如何渲染页面的？当浏览器的网络线程收到 HTML 文档后，会产生一个渲染任务，并将其传递给渲染主线程的消息队列。 在事件循环机制的作用下，渲染主线程取出消息队列中的渲染任务，开启渲染流程。  整个渲染流程分为多个阶段，分别是： HTML 解析、样式计算、布局、分层、绘制、分块、光栅化、画 每个阶段都有明确的输入输出，上一个阶段的输出会成为下一个阶段的输入。 这样，整个渲染流程就形成了一套组">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-12-10T06:06:57.000Z">
-<meta property="article:modified_time" content="2024-12-14T12:49:16.320Z">
+<meta property="article:published_time" content="2024-12-14T12:49:37.658Z">
+<meta property="article:modified_time" content="2024-12-14T12:49:40.087Z">
 <meta property="article:author" content="MrZ">
-<meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>部分知识记录 - MrZ的个人博客</title>
+  <title>MrZ的个人博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="部分知识记录"></span>
+            <span id="subtitle" data-typed-text=""></span>
           
         </div>
 
@@ -211,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-12-10 14:06" pubdate>
-          2024年12月10日 下午
+        <time datetime="2024-12-14 20:49" pubdate>
+          2024年12月14日 晚上
         </time>
       </span>
     
@@ -223,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          1.5k 字
         
       </span>
     
@@ -234,7 +233,7 @@
         
         
         
-          11 分钟
+          13 分钟
         
       </span>
     
@@ -271,79 +270,67 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">部分知识记录</h1>
+            <h1 id="seo-header"></h1>
             
             
               <div class="markdown-body">
                 
-                <h5 id="文档声明"><a href="#文档声明" class="headerlink" title="文档声明"></a>文档声明</h5><p>HTML 最上方的一段文本称之位文档类型声明,用于声明文档类型</p>
-<p><code>&lt;!DOCTYPE html&gt;</code></p>
-<p>1 HTML 文档声明，告诉浏览器当前页面是<font style="color:#DF2A3F;">HTML5</font>页面</p>
-<p>2 让浏览器用<font style="color:#DF2A3F;">HTML5 的标准去解析识别</font>内容:</p>
-<p>3 必须放在 HTML 文档的<font style="color:#DF2A3F;">最前面，不能省略</font>，省略了会出现<font style="color:#DF2A3F;">兼容性</font>问题</p>
-<h5 id="html-元素"><a href="#html-元素" class="headerlink" title="html 元素"></a>html 元素</h5><html>元素 表示一个 HTML 文档的根元素(顶级元素)。所有其他元素必须是此元素的后代
+                <h2 id="浏览器是如何渲染页面的？"><a href="#浏览器是如何渲染页面的？" class="headerlink" title="浏览器是如何渲染页面的？"></a>浏览器是如何渲染页面的？</h2><p>当浏览器的网络线程收到 HTML 文档后，会产生一个渲染任务，并将其传递给渲染主线程的消息队列。</p>
+<p>在事件循环机制的作用下，渲染主线程取出消息队列中的渲染任务，开启渲染流程。</p>
+<hr>
+<p>整个渲染流程分为多个阶段，分别是： HTML 解析、样式计算、布局、分层、绘制、分块、光栅化、画</p>
+<p>每个阶段都有明确的输入输出，上一个阶段的输出会成为下一个阶段的输入。</p>
+<p>这样，整个渲染流程就形成了一套组织严密的生产流水线。</p>
+<hr>
+<p>渲染的第一步是<strong>解析 HTML</strong>。</p>
+<p>解析过程中遇到 CSS 解析 CSS，遇到 JS 执行 JS。为了提高解析效率，浏览器在开始解析前，会启动一个预解析的线程，率先下载 HTML 中的外部 CSS 文件和 外部的 JS 文件。</p>
+<p>如果主线程解析到<code>link</code>位置，此时外部的 CSS 文件还没有下载解析好，主线程不会等待，继续解析后续的 HTML。这是因为下载和解析 CSS 的工作是在预解析线程中进行的。这就是 CSS 不会阻塞 HTML 解析的根本原因。</p>
+<p>如果主线程解析到<code>script</code>位置，会停止解析 HTML，转而等待 JS 文件下载好，并将全局代码解析执行完成后，才能继续解析 HTML。这是因为 JS 代码的执行过程可能会修改当前的 DOM 树，所以 DOM 树的生成必须暂停。这就是 JS 会阻塞 HTML 解析的根本原因。</p>
+<p>第一步完成后，会得到 DOM 树和 CSSOM 树，浏览器的默认样式、内部样式、外部样式、行内样式均会包含在 CSSOM 树中。</p>
+<hr>
+<p>渲染的下一步是<strong>样式计算</strong>。</p>
+<p>主线程会遍历得到的 DOM 树，依次为树中的每个节点计算出它最终的样式，称之为 Computed Style。</p>
+<p>在这一过程中，很多预设值会变成绝对值，比如<code>red</code>会变成<code>rgb(255,0,0)</code>；相对单位会变成绝对单位，比如<code>em</code>会变成<code>px</code></p>
+<p>这一步完成后，会得到一棵带有样式的 DOM 树。</p>
+<hr>
+<p>接下来是<strong>布局</strong>，布局完成后会得到布局树。</p>
+<p>布局阶段会依次遍历 DOM 树的每一个节点，计算每个节点的几何信息。例如节点的宽高、相对包含块的位置。</p>
+<p>大部分时候，DOM 树和布局树并非一一对应。</p>
+<p>比如<code>display:none</code>的节点没有几何信息，因此不会生成到布局树；又比如使用了伪元素选择器，虽然 DOM 树中不存在这些伪元素节点，但它们拥有几何信息，所以会生成到布局树中。还有匿名行盒、匿名块盒等等都会导致 DOM 树和布局树无法一一对应。</p>
+<hr>
+<p>下一步是<strong>分层</strong></p>
+<p>主线程会使用一套复杂的策略对整个布局树中进行分层。</p>
+<p>分层的好处在于，将来某一个层改变后，仅会对该层进行后续处理，从而提升效率。</p>
+<p>滚动条、堆叠上下文、transform、opacity 等样式都会或多或少的影响分层结果，也可以通过<code>will-change</code>属性更大程度的影响分层结果。</p>
+<hr>
+<p>再下一步是<strong>绘制</strong></p>
+<p>主线程会为每个层单独产生绘制指令集，用于描述这一层的内容该如何画出来。</p>
+<hr>
+<p>完成绘制后，主线程将每个图层的绘制信息提交给合成线程，剩余工作将由合成线程完成。</p>
+<p>合成线程首先对每个图层进行分块，将其划分为更多的小区域。</p>
+<p>它会从线程池中拿取多个线程来完成分块工作。</p>
+<hr>
+<p>分块完成后，进入<strong>光栅化</strong>阶段。</p>
+<p>合成线程会将块信息交给 GPU 进程，以极高的速度完成光栅化。</p>
+<p>GPU 进程会开启多个线程来完成光栅化，并且优先处理靠近视口区域的块。</p>
+<p>光栅化的结果，就是一块一块的位图</p>
+<hr>
+<p>最后一个阶段就是<strong>画</strong>了</p>
+<p>合成线程拿到每个层、每个块的位图后，生成一个个「指引（quad）」信息。</p>
+<p>指引会标识出每个位图应该画到屏幕的哪个位置，以及会考虑到旋转、缩放等变形。</p>
+<p>变形发生在合成线程，与渲染主线程无关，这就是<code>transform</code>效率高的本质原因。</p>
+<p>合成线程会把 quad 提交给 GPU 进程，由 GPU 进程产生系统调用，提交给 GPU 硬件，完成最终的屏幕成像。</p>
+<h2 id="什么是-reflow？"><a href="#什么是-reflow？" class="headerlink" title="什么是 reflow？"></a>什么是 reflow？</h2><p>reflow 的本质就是重新计算 layout 树。</p>
+<p>当进行了会影响布局树的操作后，需要重新计算布局树，会引发 layout。</p>
+<p>为了避免连续的多次操作导致布局树反复计算，浏览器会合并这些操作，当 JS 代码全部完成后再进行统一计算。所以，改动属性造成的 reflow 是异步完成的。</p>
+<p>也同样因为如此，当 JS 获取布局属性时，就可能造成无法获取到最新的布局信息。</p>
+<p>浏览器在反复权衡下，最终决定获取属性立即 reflow。</p>
+<h2 id="什么是-repaint？"><a href="#什么是-repaint？" class="headerlink" title="什么是 repaint？"></a>什么是 repaint？</h2><p>repaint 的本质就是重新根据分层信息计算了绘制指令。</p>
+<p>当改动了可见样式后，就需要重新计算，会引发 repaint。</p>
+<p>由于元素的布局信息也属于可见样式，所以 reflow 一定会引起 repaint。</p>
+<h2 id="为什么-transform-的效率高？"><a href="#为什么-transform-的效率高？" class="headerlink" title="为什么 transform 的效率高？"></a>为什么 transform 的效率高？</h2><p>因为 transform 既不会影响布局也不会影响绘制指令，它影响的只是渲染流程的最后一个「draw」阶段</p>
+<p>由于 draw 阶段在合成线程中，所以 transform 的变化几乎不会影响渲染主线程。反之，渲染主线程无论如何忙碌，也不会影响 transform 的变化。</p>
 
-<p><code>&lt;html lang=&quot;zh-CN&quot;&gt;&lt;/html&gt;</code></p>
-<p>W3C 标准建议为 html 元素增加一个 lang 属性，作用是</p>
-<p>1 帮助语音合成工具确定要使用的发音;</p>
-<p>2 帮助翻译工具确定要使用的翻译规则;</p>
-<p>比如常用的规则:</p>
-<p>lang&#x3D;“en”表示这个 HTML 文档的语言是英文</p>
-<p>lang&#x3D;“zh-CN”表示这个 HTML 文档的语言是中文</p>
-<h5 id="head-元素"><a href="#head-元素" class="headerlink" title="head 元素"></a>head 元素</h5><p>HTML head 元素 规定文档相关的<font style="color:#DF2A3F;">配置信息</font>(也称之为<font style="color:#DF2A3F;">元数据</font>)，包括文档的<font style="color:#DF2A3F;">标题，引用的文档样式和脚本</font>等。</p>
-<p>1 什么是元数据(metadaka)，是描述数据的数据;</p>
-<p>2 这里我们可以理解成对整个页面的配置:</p>
-<p>常见的设置有哪些呢?一般会至少包含如下 2 个设置。</p>
-<p>网页的标题:<strong>title 元素</strong></p>
-<p><code>&lt;title&gt;标题&lt;/title&gt;</code></p>
-<p>网页的编码:<strong>meta 元素</strong></p>
-<p><code>&lt;meta charset=&quot;UTF-8&quot;&gt; </code></p>
-<p>可以用于设置网页的<font style="color:#DF2A3F;">字符编码</font>，让浏览器更精准地显示每一个文字，<font style="color:#DF2A3F;">不设置或者设置错误会导致乱码</font></p>
-<p>一般都使用<font style="color:#DF2A3F;">utf-8</font>编码，涵盖了世界上几乎所有的文字;</p>
-<h5 id="a-标签"><a href="#a-标签" class="headerlink" title="a 标签"></a>a 标签</h5><p>在网页中我们经常需要<strong>跳转到另外一个链接</strong>，这个时候我们使用 a 元素:</p>
-<p>a 元素有两个常见的属性:</p>
-<p>href:Hypertext Reference 的简称 指定要打开的 URL 地址;</p>
-<p>target:该属性指定在何处显示链接的资源，self:默认值，在当前窗口打开 URL; blank:在一个新的窗口中打开 URL;</p>
-<p>parent top 其他不常用</p>
-<p>锚点链接可以实现:<strong>跳转到网页中的具体位置</strong></p>
-<p>锚点链接有两个重要步骤:</p>
-<p>在要跳到的元素上定义一个 id 属性</p>
-<p>定义 a 元素，并且 a 元素的 href 指向对应的 id，</p>
-<p><code> &lt;a href=&quot;#id&quot;&gt;&lt;/a&gt;</code></p>
-<h5 id="iframe-标签"><a href="#iframe-标签" class="headerlink" title="iframe 标签"></a>iframe 标签</h5><p>利用 iframe 元素可以实现:在一个 HTML 文档中嵌入其他 HTML 文档</p>
-<p><code>    &lt;iframe src=&quot;&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;</code></p>
-<p>frameborder 属性 用于规定是否显示边框 1:显示 0:不显示</p>
-<p>a 元素 target 的其他值:</p>
-<p>_parent:在父窗口中打开 URL</p>
-<p>_top:在顶层窗口中打开 URL</p>
-<h5 id="字符实体"><a href="#字符实体" class="headerlink" title="字符实体"></a>字符实体</h5><p>思考:我们编写的 HTML 代码会被浏览器解析。如下代码是如何被解析的呢?</p>
-<p>口如果你使用小于号(&lt;)，浏览器会将其后的文本解析为一个 tag 标签。但是某些情况下，我们确实需要编写一个小于号(&lt;);这个时候我们就可以使用字符实体;</p>
-<p>HTML 实体是一段以连字号(&amp;)开头、以分号(;)结尾的文本(字符串):实体常常用于显示<font style="color:#DF2A3F;">保留字符</font>(这些字符会被解析为 HTML 代码)和<font style="color:#DF2A3F;">不可见的字符</font>(如“不换行空格”);你也可以用实体来<font style="color:#DF2A3F;">代替其他难以用标准键盘键入的字符</font></p>
-<p>常见字符实体:</p>
-<p><code>&amp;nbsp;  //空格    </code></p>
-<p><code>&amp;lt;    //小于号  </code></p>
-<p><code>&amp;gt;    //大于号  </code></p>
-<h5 id="URL-和-URl"><a href="#URL-和-URl" class="headerlink" title="URL 和 URl"></a>URL 和 URl</h5><p>URl&#x3D;Uniform Resource ldentifier 统一资源<strong>标志符</strong>, 用于标识 <font style="color:#DF2A3F;">Web 技术使用的逻辑或物理资源</font>。</p>
-<p>URL&#x3D;Uniform Resource Locator 统一资源<strong>定位符</strong>，俗称<font style="color:#DF2A3F;">网络地址</font>，相当于网络中的门牌号;</p>
-<ul>
-<li><font style="color:rgb(85, 85, 85);">URL 是 URI 的子集，即 URL 一定是 URI，但 URI 不一定是 URL</font></li>
-<li><font style="color:rgb(85, 85, 85);">前端可以通过访问并得到资源，这是 URL</font></li>
-<li><font style="color:rgb(85, 85, 85);">服务器内部，可以得到某一图片等资源，即图片等资源会有一个标识交给服务器，服务器可以通过该标识访问到该资源，甚至是物理设备，这期间不一定有 WEB 的参与，这是 URI</font></li>
-</ul>
-<h5 id="元素语义化"><a href="#元素语义化" class="headerlink" title="元素语义化"></a>元素语义化</h5><p>元素的语义化:用正确的元素做正确的事情。</p>
-<p>标签语义化的好处:</p>
-<ul>
-<li>方便代码维护</li>
-<li>减少让开发者之间的沟通成本</li>
-<li>能让语音合成工具正确识别网页元素的用途，以便作出正确的反应</li>
-<li>有利于 SEO</li>
-<li>…</li>
-</ul>
-<h5 id="DNS-解析"><a href="#DNS-解析" class="headerlink" title="DNS 解析"></a>DNS 解析</h5><p>浏览器通过域名获取资源时, 会先访问域名服务器（DNS）, DNS 服务器会解析域名, 找到对应的 IP 地址, 再通过 IP 地址访问对应服务器。</p>
-<p>域名的解析这一过程也是需要时间的, 我们可以尝试提前解析资源所在域名, 以提高获取资源时的访问速度</p>
-<p>可以通过对 link 标签设置 dns-prefetch 来进行优化, 如下:</p>
-<p><code>&lt;link rel=&quot;dns-prefetch&quot; href=&quot;//static.360buyimg.com&quot;&gt;</code></p>
-</html>
                 
               </div>
             
@@ -351,34 +338,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E7%AC%94%E8%AE%B0/" class="print-no-link">#笔记</a>
-      
-    </div>
   
 </div>
 
@@ -388,8 +347,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>部分知识记录</div>
-      <div>http://example.com/2024/12/10/部分知识记录/</div>
+      <div></div>
+      <div>http://example.com/2024/12/14/浏览器渲染原理/</div>
     </div>
     <div class="license-meta">
       
@@ -401,7 +360,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年12月10日</div>
+          <div>2024年12月14日</div>
         </div>
       
       
@@ -433,18 +392,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/12/12/Git/" title="Git">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Git</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/12/08/webpack/" title="webpack">
-                        <span class="hidden-mobile">webpack</span>
+                      <a href="/2024/12/12/Git/" title="Git">
+                        <span class="hidden-mobile">Git</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
