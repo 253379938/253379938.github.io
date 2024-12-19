@@ -19,22 +19,22 @@
   <meta name="author" content="MrZ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="浏览器是如何渲染页面的？当浏览器的网络线程收到 HTML 文档后，会产生一个渲染任务，并将其传递给渲染主线程的消息队列。 在事件循环机制的作用下，渲染主线程取出消息队列中的渲染任务，开启渲染流程。  整个渲染流程分为多个阶段，分别是： HTML 解析、样式计算、布局、分层、绘制、分块、光栅化、画 每个阶段都有明确的输入输出，上一个阶段的输出会成为下一个阶段的输入。 这样，整个渲染流程就形成了一套组">
+    <meta name="description" content="GitHub地址:https:&#x2F;&#x2F;github.com&#x2F;KingSora&#x2F;OverlayScrollbars?tab&#x3D;readme-ov-file 中文文档:https:&#x2F;&#x2F;www.koudingke.cn&#x2F;docs&#x2F;zh-Hans&#x2F;overlay-scrollbars-docs&#x2F;latest&#x2F;Index 一个 JavaScript 滚动条插件，它能隐藏原生滚动条，提供可自定义样式的覆盖滚动条，并">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浏览器渲染原理">
-<meta property="og:url" content="http://example.com/2024/12/14/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:title" content="scrollBar">
+<meta property="og:url" content="http://example.com/2024/12/19/scrollBar/index.html">
 <meta property="og:site_name" content="MrZ的个人博客">
-<meta property="og:description" content="浏览器是如何渲染页面的？当浏览器的网络线程收到 HTML 文档后，会产生一个渲染任务，并将其传递给渲染主线程的消息队列。 在事件循环机制的作用下，渲染主线程取出消息队列中的渲染任务，开启渲染流程。  整个渲染流程分为多个阶段，分别是： HTML 解析、样式计算、布局、分层、绘制、分块、光栅化、画 每个阶段都有明确的输入输出，上一个阶段的输出会成为下一个阶段的输入。 这样，整个渲染流程就形成了一套组">
+<meta property="og:description" content="GitHub地址:https:&#x2F;&#x2F;github.com&#x2F;KingSora&#x2F;OverlayScrollbars?tab&#x3D;readme-ov-file 中文文档:https:&#x2F;&#x2F;www.koudingke.cn&#x2F;docs&#x2F;zh-Hans&#x2F;overlay-scrollbars-docs&#x2F;latest&#x2F;Index 一个 JavaScript 滚动条插件，它能隐藏原生滚动条，提供可自定义样式的覆盖滚动条，并">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-12-14T13:01:28.000Z">
-<meta property="article:modified_time" content="2024-12-14T12:54:33.162Z">
+<meta property="article:published_time" content="2024-12-19T12:43:46.000Z">
+<meta property="article:modified_time" content="2024-12-19T12:44:41.089Z">
 <meta property="article:author" content="MrZ">
-<meta property="article:tag" content="浏览器">
+<meta property="article:tag" content="拓展">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>浏览器渲染原理 - MrZ的个人博客</title>
+  <title>scrollBar - MrZ的个人博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="浏览器渲染原理"></span>
+            <span id="subtitle" data-typed-text="scrollBar"></span>
           
         </div>
 
@@ -211,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-12-14 21:01" pubdate>
-          2024年12月14日 晚上
+        <time datetime="2024-12-19 20:43" pubdate>
+          2024年12月19日 晚上
         </time>
       </span>
     
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          428 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          13 分钟
+          4 分钟
         
       </span>
     
@@ -271,66 +271,16 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">浏览器渲染原理</h1>
+            <h1 id="seo-header">scrollBar</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="浏览器是如何渲染页面的？"><a href="#浏览器是如何渲染页面的？" class="headerlink" title="浏览器是如何渲染页面的？"></a>浏览器是如何渲染页面的？</h2><p>当浏览器的网络线程收到 HTML 文档后，会产生一个渲染任务，并将其传递给渲染主线程的消息队列。</p>
-<p>在事件循环机制的作用下，渲染主线程取出消息队列中的渲染任务，开启渲染流程。</p>
-<hr>
-<p>整个渲染流程分为多个阶段，分别是： HTML 解析、样式计算、布局、分层、绘制、分块、光栅化、画</p>
-<p>每个阶段都有明确的输入输出，上一个阶段的输出会成为下一个阶段的输入。</p>
-<p>这样，整个渲染流程就形成了一套组织严密的生产流水线。</p>
-<hr>
-<p>渲染的第一步是<strong>解析 HTML</strong>。</p>
-<p>解析过程中遇到 CSS 解析 CSS，遇到 JS 执行 JS。为了提高解析效率，浏览器在开始解析前，会启动一个预解析的线程，率先下载 HTML 中的外部 CSS 文件和 外部的 JS 文件。</p>
-<p>如果主线程解析到<code>link</code>位置，此时外部的 CSS 文件还没有下载解析好，主线程不会等待，继续解析后续的 HTML。这是因为下载和解析 CSS 的工作是在预解析线程中进行的。这就是 CSS 不会阻塞 HTML 解析的根本原因。</p>
-<p>如果主线程解析到<code>script</code>位置，会停止解析 HTML，转而等待 JS 文件下载好，并将全局代码解析执行完成后，才能继续解析 HTML。这是因为 JS 代码的执行过程可能会修改当前的 DOM 树，所以 DOM 树的生成必须暂停。这就是 JS 会阻塞 HTML 解析的根本原因。</p>
-<p>第一步完成后，会得到 DOM 树和 CSSOM 树，浏览器的默认样式、内部样式、外部样式、行内样式均会包含在 CSSOM 树中。</p>
-<hr>
-<p>渲染的下一步是<strong>样式计算</strong>。</p>
-<p>主线程会遍历得到的 DOM 树，依次为树中的每个节点计算出它最终的样式，称之为 Computed Style。</p>
-<p>在这一过程中，很多预设值会变成绝对值，比如<code>red</code>会变成<code>rgb(255,0,0)</code>；相对单位会变成绝对单位，比如<code>em</code>会变成<code>px</code></p>
-<p>这一步完成后，会得到一棵带有样式的 DOM 树。</p>
-<hr>
-<p>接下来是<strong>布局</strong>，布局完成后会得到布局树。</p>
-<p>布局阶段会依次遍历 DOM 树的每一个节点，计算每个节点的几何信息。例如节点的宽高、相对包含块的位置。</p>
-<p>大部分时候，DOM 树和布局树并非一一对应。</p>
-<p>比如<code>display:none</code>的节点没有几何信息，因此不会生成到布局树；又比如使用了伪元素选择器，虽然 DOM 树中不存在这些伪元素节点，但它们拥有几何信息，所以会生成到布局树中。还有匿名行盒、匿名块盒等等都会导致 DOM 树和布局树无法一一对应。</p>
-<hr>
-<p>下一步是<strong>分层</strong></p>
-<p>主线程会使用一套复杂的策略对整个布局树中进行分层。</p>
-<p>分层的好处在于，将来某一个层改变后，仅会对该层进行后续处理，从而提升效率。</p>
-<p>滚动条、堆叠上下文、transform、opacity 等样式都会或多或少的影响分层结果，也可以通过<code>will-change</code>属性更大程度的影响分层结果。</p>
-<hr>
-<p>再下一步是<strong>绘制</strong></p>
-<p>主线程会为每个层单独产生绘制指令集，用于描述这一层的内容该如何画出来。</p>
-<hr>
-<p>完成绘制后，主线程将每个图层的绘制信息提交给合成线程，剩余工作将由合成线程完成。</p>
-<p>合成线程首先对每个图层进行分块，将其划分为更多的小区域。</p>
-<p>它会从线程池中拿取多个线程来完成分块工作。</p>
-<hr>
-<p>分块完成后，进入<strong>光栅化</strong>阶段。</p>
-<p>合成线程会将块信息交给 GPU 进程，以极高的速度完成光栅化。</p>
-<p>GPU 进程会开启多个线程来完成光栅化，并且优先处理靠近视口区域的块。</p>
-<p>光栅化的结果，就是一块一块的位图</p>
-<hr>
-<p>最后一个阶段就是<strong>画</strong>了</p>
-<p>合成线程拿到每个层、每个块的位图后，生成一个个「指引（quad）」信息。</p>
-<p>指引会标识出每个位图应该画到屏幕的哪个位置，以及会考虑到旋转、缩放等变形。</p>
-<p>变形发生在合成线程，与渲染主线程无关，这就是<code>transform</code>效率高的本质原因。</p>
-<p>合成线程会把 quad 提交给 GPU 进程，由 GPU 进程产生系统调用，提交给 GPU 硬件，完成最终的屏幕成像。</p>
-<h2 id="什么是-reflow？"><a href="#什么是-reflow？" class="headerlink" title="什么是 reflow？"></a>什么是 reflow？</h2><p>reflow 的本质就是重新计算 layout 树。</p>
-<p>当进行了会影响布局树的操作后，需要重新计算布局树，会引发 layout。</p>
-<p>为了避免连续的多次操作导致布局树反复计算，浏览器会合并这些操作，当 JS 代码全部完成后再进行统一计算。所以，改动属性造成的 reflow 是异步完成的。</p>
-<p>也同样因为如此，当 JS 获取布局属性时，就可能造成无法获取到最新的布局信息。</p>
-<p>浏览器在反复权衡下，最终决定获取属性立即 reflow。</p>
-<h2 id="什么是-repaint？"><a href="#什么是-repaint？" class="headerlink" title="什么是 repaint？"></a>什么是 repaint？</h2><p>repaint 的本质就是重新根据分层信息计算了绘制指令。</p>
-<p>当改动了可见样式后，就需要重新计算，会引发 repaint。</p>
-<p>由于元素的布局信息也属于可见样式，所以 reflow 一定会引起 repaint。</p>
-<h2 id="为什么-transform-的效率高？"><a href="#为什么-transform-的效率高？" class="headerlink" title="为什么 transform 的效率高？"></a>为什么 transform 的效率高？</h2><p>因为 transform 既不会影响布局也不会影响绘制指令，它影响的只是渲染流程的最后一个「draw」阶段</p>
-<p>由于 draw 阶段在合成线程中，所以 transform 的变化几乎不会影响渲染主线程。反之，渲染主线程无论如何忙碌，也不会影响 transform 的变化。</p>
+                <p>GitHub地址:<a target="_blank" rel="noopener" href="https://github.com/KingSora/OverlayScrollbars?tab=readme-ov-file">https://github.com/KingSora/OverlayScrollbars?tab=readme-ov-file</a></p>
+<p>中文文档:<a target="_blank" rel="noopener" href="https://www.koudingke.cn/docs/zh-Hans/overlay-scrollbars-docs/latest/Index">https://www.koudingke.cn/docs/zh-Hans/overlay-scrollbars-docs/latest/Index</a></p>
+<p><font style="color:rgb(58, 62, 72);">一个 </font><code>JavaScript</code><font style="color:rgb(58, 62, 72);"> 滚动条插件，它能隐藏原生滚动条，提供可自定义样式的覆盖滚动条，并保留原生的功能和手感。创建这个插件是因为讨厌既难看又占用空间的原生滚动条。类似的插件在功能、质量、简洁性、许可协议或浏览器兼容性方面没有达到要求。</font></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Document<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://cdn.bootcdn.net/ajax/libs/overlayscrollbars/2.10.0/styles/overlayscrollbars.css&quot;</span></span><br><span class="hljs-tag">        <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://cdn.bootcdn.net/ajax/libs/overlayscrollbars/2.10.0/browser/overlayscrollbars.browser.es6.js&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">        <span class="hljs-selector-tag">html</span>,</span><br><span class="language-css">        <span class="hljs-selector-tag">body</span> &#123;</span><br><span class="language-css">            <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;</span><br><span class="language-css">            <span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;</span><br><span class="language-css">            <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;</span><br><span class="language-css">            <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;</span><br><span class="language-css">        &#125;</span><br><span class="language-css"></span><br><span class="language-css">        <span class="hljs-selector-class">.wrapper</span> &#123;</span><br><span class="language-css">            <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;</span><br><span class="language-css">        &#125;</span><br><span class="language-css"></span><br><span class="language-css">        <span class="hljs-selector-class">.item</span> &#123;</span><br><span class="language-css">            <span class="hljs-attribute">height</span>: <span class="hljs-number">72px</span>;</span><br><span class="language-css">            <span class="hljs-attribute">text-align</span>: center;</span><br><span class="language-css">            <span class="hljs-attribute">line-height</span>: <span class="hljs-number">72px</span>;</span><br><span class="language-css">            <span class="hljs-attribute">border-bottom</span>: <span class="hljs-number">1px</span> solid <span class="hljs-number">#e8e8e8</span>;</span><br><span class="language-css">        &#125;</span><br><span class="language-css">    </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;wrapper&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-comment">//OverlayScrollbars初始化</span></span><br><span class="language-javascript">    <span class="hljs-keyword">var</span> &#123;</span><br><span class="language-javascript">        <span class="hljs-title class_">OverlayScrollbars</span>,</span><br><span class="language-javascript">        <span class="hljs-comment">// ScrollbarsHidingPlugin,</span></span><br><span class="language-javascript">        <span class="hljs-comment">// SizeObserverPlugin,</span></span><br><span class="language-javascript">        <span class="hljs-comment">// ClickScrollPlugin</span></span><br><span class="language-javascript">    &#125; = <span class="hljs-title class_">OverlayScrollbarsGlobal</span>;</span><br><span class="language-javascript">    <span class="hljs-keyword">const</span> osInstance = <span class="hljs-title class_">OverlayScrollbars</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;body&#x27;</span>), &#123;</span><br><span class="language-javascript">        <span class="hljs-attr">scrollbars</span>: &#123;</span><br><span class="language-javascript">            <span class="hljs-comment">//scrollbars.autoHide属性有效值为：&#x27;never&#x27;, &#x27;scroll&#x27;, &#x27;leave&#x27;, 和 &#x27;move&#x27;。自动隐藏可见滚动条的可见性，在用户执行特定操作后。</span></span><br><span class="language-javascript">            <span class="hljs-attr">autoHide</span>: <span class="hljs-string">&#x27;leave&#x27;</span>,</span><br><span class="language-javascript">            <span class="hljs-comment">//自动隐藏滚动条之前的时间延迟（以毫秒为单位）。</span></span><br><span class="language-javascript">            <span class="hljs-attr">autoHideDelay</span>: <span class="hljs-number">3000</span>,</span><br><span class="language-javascript">        &#125;,</span><br><span class="language-javascript">    &#125;);</span><br><span class="language-javascript">    <span class="hljs-comment">//插件配置,见文档</span></span><br><span class="language-javascript">    <span class="hljs-comment">// OverlayScrollbarsGlobal.OverlayScrollbars.plugin([</span></span><br><span class="language-javascript">    <span class="hljs-comment">//     OverlayScrollbarsGlobal.SizeObserverPlugin,</span></span><br><span class="language-javascript">    <span class="hljs-comment">//     OverlayScrollbarsGlobal.ClickScrollPlugin,</span></span><br><span class="language-javascript">    <span class="hljs-comment">//     OverlayScrollbarsGlobal.ScrollbarsHidingPlugin,</span></span><br><span class="language-javascript">    <span class="hljs-comment">// ])</span></span><br><span class="language-javascript"></span><br><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-keyword">function</span> <span class="hljs-title function_">genDiv</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">        <span class="hljs-keyword">const</span> wrapperEle = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;wrapper&#x27;</span>)</span><br><span class="language-javascript">        <span class="hljs-keyword">var</span> divList = <span class="hljs-string">&#x27;&#x27;</span>;</span><br><span class="language-javascript">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> index = <span class="hljs-number">1</span>; index &lt;= <span class="hljs-number">50</span>; index++) &#123;</span><br><span class="language-javascript">            divList += <span class="hljs-string">&#x27;&lt;div class=&quot;item&quot;&gt;&#x27;</span> + index + <span class="hljs-string">&#x27;&lt;/div&gt;&#x27;</span></span><br><span class="language-javascript">        &#125;</span><br><span class="language-javascript">        wrapperEle.<span class="hljs-property">innerHTML</span> = divList</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript">    <span class="hljs-title function_">genDiv</span>()</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
@@ -349,7 +299,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/" class="category-chain-item">浏览器</a>
+  <a href="/categories/%E6%8B%93%E5%B1%95/" class="category-chain-item">拓展</a>
   
   
 
@@ -364,7 +314,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" class="print-no-link">#浏览器</a>
+        <a href="/tags/%E6%8B%93%E5%B1%95/" class="print-no-link">#拓展</a>
       
     </div>
   
@@ -376,8 +326,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>浏览器渲染原理</div>
-      <div>http://example.com/2024/12/14/浏览器渲染原理/</div>
+      <div>scrollBar</div>
+      <div>http://example.com/2024/12/19/scrollBar/</div>
     </div>
     <div class="license-meta">
       
@@ -389,7 +339,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年12月14日</div>
+          <div>2024年12月19日</div>
         </div>
       
       
@@ -421,18 +371,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/12/19/scrollBar/" title="scrollBar">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">scrollBar</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/12/12/Git/" title="Git">
-                        <span class="hidden-mobile">Git</span>
+                      <a href="/2024/12/14/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/" title="浏览器渲染原理">
+                        <span class="hidden-mobile">浏览器渲染原理</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
