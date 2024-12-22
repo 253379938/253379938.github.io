@@ -19,22 +19,22 @@
   <meta name="author" content="MrZ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="浏览器是如何渲染页面的？当浏览器的网络线程收到 HTML 文档后，会产生一个渲染任务，并将其传递给渲染主线程的消息队列。 在事件循环机制的作用下，渲染主线程取出消息队列中的渲染任务，开启渲染流程。  整个渲染流程分为多个阶段，分别是： HTML 解析、样式计算、布局、分层、绘制、分块、光栅化、画 每个阶段都有明确的输入输出，上一个阶段的输出会成为下一个阶段的输入。 这样，整个渲染流程就形成了一套组">
+    <meta name="description" content="形变-transform CSS transform属性允许对某一个元素进行某些形变,包括旋转，缩放，倾斜或平移等  注意事项，并非所有的盒子都可以进行transform的转换(通常行内级元素不能进行形变) :::infoWarning: Only elements that are positioned by the box model, i.e., all elements whose lay">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浏览器渲染原理">
-<meta property="og:url" content="http://example.com/2024/12/14/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:title" content="CSS的形变,过渡,动画">
+<meta property="og:url" content="http://example.com/2024/12/20/CSS%E4%B8%AD%E7%9A%84%E5%BD%A2%E5%8F%98%E3%80%81%E8%BF%87%E6%B8%A1%E3%80%81%E5%8A%A8%E7%94%BB%E5%B1%9E%E6%80%A7/index.html">
 <meta property="og:site_name" content="MrZ的个人博客">
-<meta property="og:description" content="浏览器是如何渲染页面的？当浏览器的网络线程收到 HTML 文档后，会产生一个渲染任务，并将其传递给渲染主线程的消息队列。 在事件循环机制的作用下，渲染主线程取出消息队列中的渲染任务，开启渲染流程。  整个渲染流程分为多个阶段，分别是： HTML 解析、样式计算、布局、分层、绘制、分块、光栅化、画 每个阶段都有明确的输入输出，上一个阶段的输出会成为下一个阶段的输入。 这样，整个渲染流程就形成了一套组">
+<meta property="og:description" content="形变-transform CSS transform属性允许对某一个元素进行某些形变,包括旋转，缩放，倾斜或平移等  注意事项，并非所有的盒子都可以进行transform的转换(通常行内级元素不能进行形变) :::infoWarning: Only elements that are positioned by the box model, i.e., all elements whose lay">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-12-14T13:01:28.000Z">
-<meta property="article:modified_time" content="2024-12-14T12:54:33.162Z">
+<meta property="article:published_time" content="2024-12-20T07:01:28.000Z">
+<meta property="article:modified_time" content="2024-12-22T07:28:16.967Z">
 <meta property="article:author" content="MrZ">
-<meta property="article:tag" content="浏览器">
+<meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>浏览器渲染原理 - MrZ的个人博客</title>
+  <title>CSS的形变,过渡,动画 - MrZ的个人博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="浏览器渲染原理"></span>
+            <span id="subtitle" data-typed-text="CSS的形变,过渡,动画"></span>
           
         </div>
 
@@ -211,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-12-14 21:01" pubdate>
-          2024年12月14日 晚上
+        <time datetime="2024-12-20 15:01" pubdate>
+          2024年12月20日 下午
         </time>
       </span>
     
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          1.4k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          13 分钟
+          12 分钟
         
       </span>
     
@@ -271,67 +271,180 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">浏览器渲染原理</h1>
+            <h1 id="seo-header">CSS的形变,过渡,动画</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="浏览器是如何渲染页面的？"><a href="#浏览器是如何渲染页面的？" class="headerlink" title="浏览器是如何渲染页面的？"></a>浏览器是如何渲染页面的？</h2><p>当浏览器的网络线程收到 HTML 文档后，会产生一个渲染任务，并将其传递给渲染主线程的消息队列。</p>
-<p>在事件循环机制的作用下，渲染主线程取出消息队列中的渲染任务，开启渲染流程。</p>
-<hr>
-<p>整个渲染流程分为多个阶段，分别是： HTML 解析、样式计算、布局、分层、绘制、分块、光栅化、画</p>
-<p>每个阶段都有明确的输入输出，上一个阶段的输出会成为下一个阶段的输入。</p>
-<p>这样，整个渲染流程就形成了一套组织严密的生产流水线。</p>
-<hr>
-<p>渲染的第一步是<strong>解析 HTML</strong>。</p>
-<p>解析过程中遇到 CSS 解析 CSS，遇到 JS 执行 JS。为了提高解析效率，浏览器在开始解析前，会启动一个预解析的线程，率先下载 HTML 中的外部 CSS 文件和 外部的 JS 文件。</p>
-<p>如果主线程解析到<code>link</code>位置，此时外部的 CSS 文件还没有下载解析好，主线程不会等待，继续解析后续的 HTML。这是因为下载和解析 CSS 的工作是在预解析线程中进行的。这就是 CSS 不会阻塞 HTML 解析的根本原因。</p>
-<p>如果主线程解析到<code>script</code>位置，会停止解析 HTML，转而等待 JS 文件下载好，并将全局代码解析执行完成后，才能继续解析 HTML。这是因为 JS 代码的执行过程可能会修改当前的 DOM 树，所以 DOM 树的生成必须暂停。这就是 JS 会阻塞 HTML 解析的根本原因。</p>
-<p>第一步完成后，会得到 DOM 树和 CSSOM 树，浏览器的默认样式、内部样式、外部样式、行内样式均会包含在 CSSOM 树中。</p>
-<hr>
-<p>渲染的下一步是<strong>样式计算</strong>。</p>
-<p>主线程会遍历得到的 DOM 树，依次为树中的每个节点计算出它最终的样式，称之为 Computed Style。</p>
-<p>在这一过程中，很多预设值会变成绝对值，比如<code>red</code>会变成<code>rgb(255,0,0)</code>；相对单位会变成绝对单位，比如<code>em</code>会变成<code>px</code></p>
-<p>这一步完成后，会得到一棵带有样式的 DOM 树。</p>
-<hr>
-<p>接下来是<strong>布局</strong>，布局完成后会得到布局树。</p>
-<p>布局阶段会依次遍历 DOM 树的每一个节点，计算每个节点的几何信息。例如节点的宽高、相对包含块的位置。</p>
-<p>大部分时候，DOM 树和布局树并非一一对应。</p>
-<p>比如<code>display:none</code>的节点没有几何信息，因此不会生成到布局树；又比如使用了伪元素选择器，虽然 DOM 树中不存在这些伪元素节点，但它们拥有几何信息，所以会生成到布局树中。还有匿名行盒、匿名块盒等等都会导致 DOM 树和布局树无法一一对应。</p>
-<hr>
-<p>下一步是<strong>分层</strong></p>
-<p>主线程会使用一套复杂的策略对整个布局树中进行分层。</p>
-<p>分层的好处在于，将来某一个层改变后，仅会对该层进行后续处理，从而提升效率。</p>
-<p>滚动条、堆叠上下文、transform、opacity 等样式都会或多或少的影响分层结果，也可以通过<code>will-change</code>属性更大程度的影响分层结果。</p>
-<hr>
-<p>再下一步是<strong>绘制</strong></p>
-<p>主线程会为每个层单独产生绘制指令集，用于描述这一层的内容该如何画出来。</p>
-<hr>
-<p>完成绘制后，主线程将每个图层的绘制信息提交给合成线程，剩余工作将由合成线程完成。</p>
-<p>合成线程首先对每个图层进行分块，将其划分为更多的小区域。</p>
-<p>它会从线程池中拿取多个线程来完成分块工作。</p>
-<hr>
-<p>分块完成后，进入<strong>光栅化</strong>阶段。</p>
-<p>合成线程会将块信息交给 GPU 进程，以极高的速度完成光栅化。</p>
-<p>GPU 进程会开启多个线程来完成光栅化，并且优先处理靠近视口区域的块。</p>
-<p>光栅化的结果，就是一块一块的位图</p>
-<hr>
-<p>最后一个阶段就是<strong>画</strong>了</p>
-<p>合成线程拿到每个层、每个块的位图后，生成一个个「指引（quad）」信息。</p>
-<p>指引会标识出每个位图应该画到屏幕的哪个位置，以及会考虑到旋转、缩放等变形。</p>
-<p>变形发生在合成线程，与渲染主线程无关，这就是<code>transform</code>效率高的本质原因。</p>
-<p>合成线程会把 quad 提交给 GPU 进程，由 GPU 进程产生系统调用，提交给 GPU 硬件，完成最终的屏幕成像。</p>
-<h2 id="什么是-reflow？"><a href="#什么是-reflow？" class="headerlink" title="什么是 reflow？"></a>什么是 reflow？</h2><p>reflow 的本质就是重新计算 layout 树。</p>
-<p>当进行了会影响布局树的操作后，需要重新计算布局树，会引发 layout。</p>
-<p>为了避免连续的多次操作导致布局树反复计算，浏览器会合并这些操作，当 JS 代码全部完成后再进行统一计算。所以，改动属性造成的 reflow 是异步完成的。</p>
-<p>也同样因为如此，当 JS 获取布局属性时，就可能造成无法获取到最新的布局信息。</p>
-<p>浏览器在反复权衡下，最终决定获取属性立即 reflow。</p>
-<h2 id="什么是-repaint？"><a href="#什么是-repaint？" class="headerlink" title="什么是 repaint？"></a>什么是 repaint？</h2><p>repaint 的本质就是重新根据分层信息计算了绘制指令。</p>
-<p>当改动了可见样式后，就需要重新计算，会引发 repaint。</p>
-<p>由于元素的布局信息也属于可见样式，所以 reflow 一定会引起 repaint。</p>
-<h2 id="为什么-transform-的效率高？"><a href="#为什么-transform-的效率高？" class="headerlink" title="为什么 transform 的效率高？"></a>为什么 transform 的效率高？</h2><p>因为 transform 既不会影响布局也不会影响绘制指令，它影响的只是渲染流程的最后一个「draw」阶段</p>
-<p>由于 draw 阶段在合成线程中，所以 transform 的变化几乎不会影响渲染主线程。反之，渲染主线程无论如何忙碌，也不会影响 transform 的变化。</p>
+                <h4 id="VqwHr">形变-transform</h4>
+CSS transform属性允许对某一个元素进行某些形变,包括旋转，缩放，倾斜或平移等
 
+<p>注意事项，并非所有的盒子都可以进行transform的转换(通常行内级元素不能进行形变)</p>
+<p>:::info<br><strong><font style="color:rgb(78, 78, 78);">Warning:</font></strong><font style="color:rgb(78, 78, 78);"> Only elements that are positioned by the box model, i.e., all elements whose layout is managed by the CSS box model, except: </font><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/Inline-level_content"><font style="color:rgb(78, 78, 78);">non-replacing in-row boxes</font></a><font style="color:rgb(78, 78, 78);">, </font><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/col"><font style="color:rgb(78, 78, 78);">table columns</font></a><font style="color:rgb(78, 78, 78);">, and </font><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/colgroup"><font style="color:rgb(78, 78, 78);">table column groups</font></a><font style="color:rgb(78, 78, 78);">.</font><code>transform</code></p>
+<p><strong><font style="color:rgb(78, 78, 78);">警告：</font></strong><font style="color:rgb(78, 78, 78);"> 只能 由盒模型定位的元素，也就是所有布局由 CSS 盒模型管理的元素，除了：</font><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/Inline-level_content"><font style="color:rgb(78, 78, 78);">非替换的行内盒子</font></a><font style="color:rgb(78, 78, 78);">、</font><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/col"><font style="color:rgb(78, 78, 78);">表格列</font></a><font style="color:rgb(78, 78, 78);">和</font><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/colgroup"><font style="color:rgb(78, 78, 78);">表格列组</font></a><font style="color:rgb(78, 78, 78);">。</font><code>transform</code></p>
+<p>:::</p>
+<p>所以，transform对于行内级非替换元素是无效的  比如对span、a元素等:</p>
+<p><font style="color:#DF2A3F;">常见的函数transform function有</font>:</p>
+<ul>
+<li>平移:translate(x, y)</li>
+<li>缩放:scale(x,y) </li>
+<li>旋转:rotate(deg)</li>
+<li>倾斜:skew(deg, deg)</li>
+</ul>
+<p><strong><font style="color:#DF2A3F;">transform可以设置多个值</font></strong></p>
+<p><code>transform:translate(188px) scale(0.5) rotate(45deg);</code></p>
+<h6 id="BmQiH">translate</h6>
+**平移:translate(x,y)**
+
+<ul>
+<li>translate是translateX和translateY函数的简写</li>
+<li>这个CSS 函数用于移动元素在平面上的位置，</li>
+<li>translate本身可以表示翻译的意思，在物理上也可以表示平移</li>
+</ul>
+<p><strong>值个数</strong></p>
+<ul>
+<li>一个值时，设置x轴上的位移</li>
+<li>二个值时，设置x轴和y轴上的位移</li>
+</ul>
+<p><strong>值类型:</strong></p>
+<ul>
+<li>数字:100px</li>
+<li>百分比:参照元素本身(referto the size of bounding box)</li>
+</ul>
+<h6 id="oytPc">scale</h6>
+**缩放:scale(x,y)**
+
+<p><strong>scale()可改变元系的大小</strong></p>
+<p>值个数</p>
+<ul>
+<li>一个值时，设置x轴上的缩放</li>
+<li>二个值时，设置x轴和y<font style="color:#DF2A3F;"></font>轴上的缩放</li>
+</ul>
+<p>**值类型:**数字:</p>
+<ul>
+<li>1:保持不变</li>
+<li>2:放大一倍</li>
+<li>0.5:缩小一半</li>
+<li>百分比:百分比不常用</li>
+</ul>
+<p>scale函数是scaleX和scaleY的缩写</p>
+<h6 id="tl3BT">rotate</h6>
+**旋转:rotate(<angle>)**
+
+<p>值类型:</p>
+<ul>
+<li>常用单位deg:旋转的角度(degrees)</li>
+<li>正数为顺时针</li>
+<li>负数为逆时针</li>
+</ul>
+<p><strong>补充一:rotate函数是rotateZ函数的简写写法。</strong></p>
+<p><strong>补充二:rotate的其他单位</strong></p>
+<ul>
+<li>事实上rotate支持的单位是很多的;度(degrees)、百分度(gradians)弧度(radians)或圈数(turns)</li>
+</ul>
+<h6 id="KrVSR">transform-origin</h6>
+**transform-origin:形变的原点**
+
+<p>比如在进行scale缩放或者rotate旋转时，都会有一个原点。</p>
+<ul>
+<li>一个值:设置x轴的原点</li>
+<li>两个值:设置x轴和y轴的原点</li>
+</ul>
+<p>必须是<length>，<percentage>，或left,center, right, top, bottom关键字中的一个</percentage></length></p>
+<ul>
+<li>left, center, right, top, bottom关键字</li>
+<li>length:从左上角开始计算</li>
+<li>百分比:参考元素本身大小</li>
+</ul>
+<h6 id="dwaNH">skew</h6>
+倾斜:skew(x，y)
+
+<p>** 函数定义了一个元素在二维平面上的倾斜转换。**</p>
+<ul>
+<li>一个值时，表示x轴上的倾斜</li>
+<li>二个值时，表示x轴和y轴上的倾斜</li>
+</ul>
+<p>值类型:</p>
+<ul>
+<li>deg:旋转的角度</li>
+<li>正数为顺时针</li>
+<li>负数为逆时针</li>
+</ul>
+<h4 id="muMft">过渡-transition</h4>
+什么是transition动画呢?
+
+<ul>
+<li>CSS transitions 提供了一种在更改CSS属性时控制动画速度的方法,</li>
+<li>可以让CSS属性变化成为一个持续一段时间的过程，而不是立即生效的;</li>
+<li>比如将一个元素从一个位置移动到另外一个位置，默认在修改完CSS属性后会立即生效:</li>
+<li>但是我们可以通过CSS transition，让这个过程加上一定的动画效果，包括一定的曲线速率变化;</li>
+</ul>
+<p>通常将两个状态之间的过渡称为隐式过渡(implicit transitions)，因为开始与结束之间的状态由浏览器决定。</p>
+<p><strong>Css transitions可以决定</strong></p>
+<ul>
+<li>哪些属性发生动画效果(明确地列出这些属性)</li>
+<li>何时开始(设置 delay)</li>
+<li>持续多久(设置 duration)</li>
+<li>效何动画(定义timing function，比如匀速地或先快后慢)。</li>
+</ul>
+<p><font style="color:#DF2A3F;">transition CSS属性是 </font><strong><font style="color:#DF2A3F;">transition-property, transition-duration, transition-timing-function 和transition-delay</font></strong><font style="color:#DF2A3F;"> 的一个简写属性。</font></p>
+<p><code>transition-property:all  //动画生效的属性</code></p>
+<p><code>transition-duration:1s  //动画持续的时间</code></p>
+<p><code>transition-timing-function:ease //动画执行曲线</code></p>
+<p><code>transition-delay:1s  //延迟动画</code></p>
+<p><strong>transition-property:指定应用过渡属性的名称</strong></p>
+<ul>
+<li>all:所有属性都执行动画;</li>
+<li>none:所有属性都不执行动画:</li>
+<li>CSS属性名称:要执行动画的CSS属性名称，比如width、left、transform等;</li>
+</ul>
+<p><strong>transition-duration:指定过渡动画所需的时间</strong></p>
+<ul>
+<li>单位可以是秒(s)或毫秒(ms)</li>
+</ul>
+<p><strong>transition-timing-function:指定动画的变化曲线</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transition-timing-function">transition-timing-function - CSS：层叠样式表 | MDN</a></li>
+</ul>
+<p><strong>transition-delay:指定过渡动画执行之前的等待时间</strong></p>
+<p><strong>transition的缺点:</strong></p>
+<ul>
+<li>transition只能定义开始状态和结束状态，不能定义中间状态，也就是说只有两个状态;</li>
+<li>transition不能重复执行，除非一再触发动画;</li>
+<li>transition需要在特定状态下会触发才能执行，比如某个属性被修改了。</li>
+</ul>
+<hr>
+<h4 id="sGDf4">动画-animation</h4>
+**CSS Animation的使用分成两个步骤:**
+
+<ul>
+<li><font style="color:#DF2A3F;">步骤一</font>:使用keyframes定义动画序列(每一帧动画如何执行)</li>
+<li><font style="color:#DF2A3F;">步骤二</font>:配置动画执行的名称、持续时间、动画曲线、延迟、执行次数、方向等等</li>
+</ul>
+<p>可以使用@keyframes来定义多个变化状态，并且使用animation-name来声明匹配</p>
+<ul>
+<li>关键帧使用percentage来指定动画发生的时间点;</li>
+<li>0%表示动画的第一时刻，100%表示动画的最终时刻;</li>
+<li>因为这两个时间点十分重要，所以还有特殊的别名:from和to</li>
+</ul>
+<p><code>animation-iteration-count:2; //动画执行次数</code></p>
+<p><code>animation-direction:normal;  //动画执行方向</code></p>
+<p><code>animation-fill-mode: forwards; //动画停留位置</code></p>
+<p><code>animation-play-state:paused;  //js动态修改</code></p>
+<p><strong>CSS animation 属性是 animation-name, animation-duration, animation-timing-function, animation-delay,animation-iteration-count,animation-direction,animation-fill-mode属性的一个简写属性</strong></p>
+<p><font style="color:#DF2A3F;">animation-name</font>:指定执行哪一个关键帧动画</p>
+<p><font style="color:#DF2A3F;">animation-duration</font>:指定动画的持续时间</p>
+<p><font style="color:#DF2A3F;">animation-timing-function</font>:指定动画的变化曲线</p>
+<p><font style="color:#DF2A3F;">animation-delay</font>:指定延迟执行的时间</p>
+<p><font style="color:#DF2A3F;">animation-iteration-count</font>:指定动画执行的次数，执行infinite表示无限动画</p>
+<p><font style="color:#DF2A3F;">animation-direction</font>:指定方向，常用值normal和reverse</p>
+<p><font style="color:#DF2A3F;">animation-fill-mode</font>:执行动画最后保留哪一个值</p>
+<ul>
+<li>none:回到没有执行动画的位置</li>
+<li>forwards:动画最后一帧的位置</li>
+<li>backwards:动画第一帧的位置</li>
+</ul>
+</angle>
                 
               </div>
             
@@ -349,7 +462,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/" class="category-chain-item">浏览器</a>
+  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
   
   
 
@@ -364,7 +477,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" class="print-no-link">#浏览器</a>
+        <a href="/tags/%E7%AC%94%E8%AE%B0/" class="print-no-link">#笔记</a>
       
     </div>
   
@@ -376,8 +489,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>浏览器渲染原理</div>
-      <div>http://example.com/2024/12/14/浏览器渲染原理/</div>
+      <div>CSS的形变,过渡,动画</div>
+      <div>http://example.com/2024/12/20/CSS中的形变、过渡、动画属性/</div>
     </div>
     <div class="license-meta">
       
@@ -389,7 +502,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年12月14日</div>
+          <div>2024年12月20日</div>
         </div>
       
       
@@ -421,18 +534,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/12/19/scrollBar/" title="一个不占据空间的滚动条">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">一个不占据空间的滚动条</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/12/14/%E9%83%A8%E5%88%86%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/" title="部分知识记录">
-                        <span class="hidden-mobile">部分知识记录</span>
+                      <a href="/2024/12/19/scrollBar/" title="一个不占据空间的滚动条">
+                        <span class="hidden-mobile">一个不占据空间的滚动条</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
