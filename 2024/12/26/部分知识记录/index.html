@@ -27,7 +27,7 @@
 <meta property="og:description" content="文档声明  HTML 最上方的一段文本称之位文档类型声明,用于声明文档类型 &lt;!DOCTYPE html&gt; 1 HTML 文档声明，告诉浏览器当前页面是HTML5页面 2 让浏览器用HTML5 的标准去解析识别内容: 3 必须放在 HTML 文档的最前面，不能省略，省略了会出现兼容性问题 html元素  元素 表示一个 HTML 文档的根元素(顶级元素)。所有其他元素必须是此元素的后代">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-12-26T11:01:28.000Z">
-<meta property="article:modified_time" content="2024-12-26T11:33:48.020Z">
+<meta property="article:modified_time" content="2024-12-27T16:36:39.906Z">
 <meta property="article:author" content="MrZ">
 <meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7k 字
+          7.6k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          59 分钟
+          64 分钟
         
       </span>
     
@@ -859,12 +859,12 @@
 <p>媒体查询是一种提供给开发者针对不同设备需求进行定制化开发的一个接口。</p>
 <p>你可以根据设备的类型(比如屏幕设备、打印机设备)或者特定的特性(比如屏幕的宽度)来修改你的页面。</p>
 <p><strong>媒体查询的使用方式主要有三种:</strong></p>
-<p>方式一:通过@media和@import使用不同的CSS规则(常用):</p>
+<p>方式一:通过@media 和@import 使用不同的 CSS 规则(常用):</p>
 <p><code> &lt;style&gt;    @import url() (max-width:800px);   &lt;/style&gt;</code></p>
-<p>方式二:使用media属性为<style>,<link>,<source>和其他HTML元素指定特定的媒体类型;</p>
+<p>方式二:使用 media 属性为<style>,<link>,<source>和其他 HTML 元素指定特定的媒体类型;</p>
 <p><code>&lt;link rel=&quot;stylesheet&quot; media=&quot;(max-width:800px)&quot; href=&quot;&quot;&gt;</code></p>
 <p><code>@media (max-width:800px) &#123;  &#125;</code></p>
-<p>方式三:使用Window.matchMedia()和MediaQueryList.addListener()方法来测试和监控媒体状态</p>
+<p>方式三:使用 Window.matchMedia()和 MediaQueryList.addListener()方法来测试和监控媒体状态</p>
 <p><strong>常见的媒体类型值如下:</strong></p>
 <ul>
 <li>all:适用于所有设备</li>
@@ -872,26 +872,26 @@
 <li>screen(掌握):主要用于屏幕。</li>
 <li>speech:主要用于语音合成器。</li>
 </ul>
-<p><strong>媒体查询的表达式最终会获得一个Boolean值，也就是真(true)或者假(false)</strong></p>
+<p><strong>媒体查询的表达式最终会获得一个 Boolean 值，也就是真(true)或者假(false)</strong></p>
 <p><strong>如果有多个条件，我们可以通过逻辑操作符联合复杂的媒体查询:</strong></p>
 <ul>
 <li><font style="color:#DF2A3F;">and</font>:and 操作符用于将多个媒体查询规则组合成单条媒体查询</li>
-<li>not:not运算符用于否定媒体查询，如果不满足这个条件则返回true，否则返回false.</li>
-<li>only:only运算符仅在整个查询匹配时才用于应用样式。</li>
+<li>not:not 运算符用于否定媒体查询，如果不满足这个条件则返回 true，否则返回 false.</li>
+<li>only:only 运算符仅在整个查询匹配时才用于应用样式。</li>
 <li>，(逗号):逗号用于将多个媒体查询合并为一个规则。</li>
 </ul>
 <h5 id="kN0uZ">Less</h5>
 <h6 id="jVbLV">Less的引入或使用</h6>
 
 <ul>
-<li>Node环境下，通过npm包管理下载less编译器，对代码进行编译</li>
-<li>通过VSCode插件来编译成CSS或者在线编译</li>
-<li>引入CDN的less编译代码，对less进行实时的处理;</li>
+<li>Node 环境下，通过 npm 包管理下载 less 编译器，对代码进行编译</li>
+<li>通过 VSCode 插件来编译成 CSS 或者在线编译</li>
+<li>引入 CDN 的 less 编译代码，对 less 进行实时的处理;</li>
 </ul>
 <h6 id="xyuzL">Less特性</h6>
 
 <ol>
-<li>使用Less语法支持嵌套</li>
+<li>使用 Less 语法支持嵌套</li>
 </ol>
 <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-selector-class">.box</span> &#123;<br>    <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;<br>    <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;<br>    <span class="hljs-selector-class">.left</span>&#123;<br>        <span class="hljs-attribute">display</span>: block;<br>      <span class="hljs-selector-tag">&amp;</span><span class="hljs-selector-pseudo">:hover</span>&#123;<br>        <span class="hljs-attribute">color</span>:red<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -901,24 +901,76 @@
 <p><code>@TestColor: #f3c258 ;</code></p>
 <ol start="3">
 <li>支持运算(数字,颜色,变量)</li>
-<li>Mixins混入</li>
+<li>Mixins 混入</li>
 </ol>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-selector-class">.pray</span>&#123;<br>    <span class="hljs-attribute">color</span>: <span class="hljs-number">#000</span>;<br>&#125;<br><span class="hljs-selector-class">.box</span> &#123;<br>    <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;<br>    <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;<br>    <span class="hljs-selector-class">.pray</span>();<br>&#125;<br><span class="hljs-comment">/*混入可以传入参数  */</span><br>  <span class="hljs-selector-class">.pray</span>(<span class="hljs-variable">@color</span>:red)&#123;<br>    <span class="hljs-attribute">color</span>: <span class="hljs-variable">@color</span>;<br>    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">12px</span>;<br>&#125;<br><span class="hljs-selector-class">.box</span> &#123;<br>    <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;<br>    <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;<br>    <span class="hljs-selector-class">.pray</span>(black);<br>&#125; <br></code></pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-selector-class">.pray</span> &#123;<br>  <span class="hljs-attribute">color</span>: <span class="hljs-number">#000</span>;<br>&#125;<br><span class="hljs-selector-class">.box</span> &#123;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;<br>  <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;<br>  <span class="hljs-selector-class">.pray</span>();<br>&#125;<br><span class="hljs-comment">/*混入可以传入参数  */</span><br><span class="hljs-selector-class">.pray</span>(<span class="hljs-variable">@color</span>:red) &#123;<br>  <span class="hljs-attribute">color</span>: <span class="hljs-variable">@color</span>;<br>  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">12px</span>;<br>&#125;<br><span class="hljs-selector-class">.box</span> &#123;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;<br>  <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;<br>  <span class="hljs-selector-class">.pray</span>(black);<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <ol start="5">
-<li>Mixins和Map混合使用(也可以当作简单自定义函数使用)</li>
+<li>Mixins 和 Map 混合使用(也可以当作简单自定义函数使用)</li>
 </ol>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-selector-class">.pray</span>(<span class="hljs-variable">@color</span>: red) &#123;<br>    <span class="hljs-attribute">color</span>: <span class="hljs-variable">@color</span>;<br>    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">12px</span>;<br>&#125;<br><br><span class="hljs-selector-class">.box</span> &#123;<br>    <span class="hljs-attribute">font-size</span>: .<span class="hljs-built_in">pray</span>()[font-size];<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-selector-class">.pray</span>(<span class="hljs-variable">@color</span>: red) &#123;<br>  <span class="hljs-attribute">color</span>: <span class="hljs-variable">@color</span>;<br>  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">12px</span>;<br>&#125;<br><br><span class="hljs-selector-class">.box</span> &#123;<br>  <span class="hljs-attribute">font-size</span>: .<span class="hljs-built_in">pray</span>() [font-size];<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <ol start="6">
 <li>继承</li>
 </ol>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-selector-class">.pry</span>&#123;<br>    <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;<br>    <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;<br>&#125;<br><span class="hljs-selector-class">.box</span> &#123;<br>    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">12px</span>;<br>    <span class="hljs-selector-tag">&amp;</span>:<span class="hljs-selector-tag">extend</span>(.pry);<br>&#125;<br><span class="hljs-comment">/*相当于  */</span><br><span class="hljs-selector-class">.pry</span> <span class="hljs-selector-class">.box</span>&#123;<br>    <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;<br>    <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;<br>&#125;<br><span class="hljs-selector-class">.box</span> &#123;<br>    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">12px</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-selector-class">.pry</span> &#123;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;<br>  <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;<br>&#125;<br><span class="hljs-selector-class">.box</span> &#123;<br>  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">12px</span>;<br>  <span class="hljs-selector-tag">&amp;</span>:<span class="hljs-selector-tag">extend</span>(.pry);<br>&#125;<br><span class="hljs-comment">/*相当于  */</span><br><span class="hljs-selector-class">.pry</span> <span class="hljs-selector-class">.box</span> &#123;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;<br>  <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;<br>&#125;<br><span class="hljs-selector-class">.box</span> &#123;<br>  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">12px</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <ol start="7">
 <li>内置函数</li>
 </ol>
 <p><a target="_blank" rel="noopener" href="https://less.bootcss.com/functions/">Less 函数 | Less.js 中文文档 - Less 中文网</a></p>
+<h5 id="Xy6lo">移动端适配</h5>
+
+<ul>
+<li><font style="color:#DF2A3F;">方案一:百分比设置:</font></li>
+</ul>
+<p>因为不同属性的百分比值，相对的可能是不同参照物，所以百分比很难统一所以百分比在移动端适配中基本不使用</p>
+<ul>
+<li><font style="color:#DF2A3F;">方案二:rem 单位+动态 html 的 font-size;</font></li>
+<li><font style="color:#DF2A3F;">方案三:vw 单位;</font></li>
+<li><font style="color:#DF2A3F;">方案四:flex 的弹性布局</font></li>
+</ul>
+<h6 id="RS7Aw">rem适配移动端</h6>
+
+<ol>
+<li><font style="color:#DF2A3F;">媒体查询</font></li>
+<li><font style="color:#DF2A3F;">JS 动态改变 fontSize</font></li>
+</ol>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs less">&lt;!<span class="hljs-selector-tag">DOCTYPE</span> <span class="hljs-selector-tag">html</span>&gt;<br>&lt;<span class="hljs-selector-tag">html</span> <span class="hljs-selector-tag">lang</span>=&quot;<span class="hljs-selector-tag">en</span>&quot;&gt;<br><br>&lt;<span class="hljs-selector-tag">head</span>&gt;<br>  &lt;<span class="hljs-selector-tag">meta</span> <span class="hljs-selector-tag">charset</span>=&quot;<span class="hljs-selector-tag">UTF-8</span>&quot;&gt;<br>  &lt;<span class="hljs-selector-tag">meta</span> <span class="hljs-selector-tag">name</span>=&quot;<span class="hljs-selector-tag">viewport</span>&quot; <span class="hljs-selector-tag">content</span>=&quot;<span class="hljs-selector-tag">width</span>=<span class="hljs-selector-tag">device-width</span>, <span class="hljs-selector-tag">initial-scale</span>=<span class="hljs-number">1.0</span>&quot;&gt;<br>  &lt;<span class="hljs-selector-tag">title</span>&gt;<span class="hljs-selector-tag">Document</span>&lt;/<span class="hljs-selector-tag">title</span>&gt;<br><br>&lt;/<span class="hljs-selector-tag">head</span>&gt;<br><br>&lt;<span class="hljs-selector-tag">body</span>&gt;<br>  &lt;<span class="hljs-selector-tag">div</span> <span class="hljs-selector-tag">class</span>=&quot;<span class="hljs-selector-tag">box</span>&quot;&gt;&lt;/<span class="hljs-selector-tag">div</span>&gt;<br>  &lt;<span class="hljs-selector-tag">script</span>&gt;<br>    <span class="hljs-selector-tag">const</span> <span class="hljs-selector-tag">htmlEl</span> = <span class="hljs-selector-tag">document</span><span class="hljs-selector-class">.documentElement</span><br>    <span class="hljs-selector-tag">function</span> <span class="hljs-selector-tag">setFontSize</span>() &#123;<br>      <span class="hljs-selector-tag">const</span> <span class="hljs-selector-tag">htmlWidth</span> = <span class="hljs-selector-tag">htmlEl</span><span class="hljs-selector-class">.clientWidth</span><br>      <span class="hljs-selector-tag">const</span> <span class="hljs-selector-tag">htmlFontSize</span> = <span class="hljs-selector-tag">htmlWidth</span> / <span class="hljs-number">10</span><br>      <span class="hljs-selector-tag">htmlEl</span><span class="hljs-selector-class">.style</span><span class="hljs-selector-class">.fontSize</span> = <span class="hljs-selector-tag">htmlFontSize</span> + &#x27;<span class="hljs-selector-tag">px</span>&#x27;<br>    &#125;<br>    <span class="hljs-selector-tag">setFontSize</span>()<br>    <span class="hljs-selector-tag">window</span><span class="hljs-selector-class">.addEventListener</span>(<span class="hljs-string">&#x27;resize&#x27;</span>, setFontSize)<br>  &lt;/<span class="hljs-selector-tag">script</span>&gt;<br>  &lt;<span class="hljs-selector-tag">style</span>&gt;<br>    <span class="hljs-selector-class">.box</span> &#123;<br>      <span class="hljs-attribute">width</span>: <span class="hljs-number">2rem</span>;<br>      <span class="hljs-attribute">height</span>: <span class="hljs-number">2rem</span>;<br>      <span class="hljs-attribute">background-color</span>: antiquewhite;<br>    &#125;<br>  &lt;/<span class="hljs-selector-tag">style</span>&gt;<br>&lt;/<span class="hljs-selector-tag">body</span>&gt;<br><br>&lt;/<span class="hljs-selector-tag">html</span>&gt;<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><font style="color:#DF2A3F;">使用第三方库 lib-flexible</font></li>
+</ol>
+<p><strong>px&#x3D;&gt;rem 方案</strong></p>
+<ul>
+<li><strong>手动计算</strong></li>
+<li><strong>less&#x2F;scss 函数</strong></li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-comment">/*@remUnit:37.5由设计得 */</span><br><span class="hljs-variable">@remUnit:</span> <span class="hljs-number">37.5</span>;<br><span class="hljs-selector-class">.pxToRem</span>(<span class="hljs-variable">@px</span>) &#123;<br>  result: (@px / @remUnit) * 1rem;<br>&#125;<br><br><span class="hljs-selector-class">.box</span> &#123;<br>  <span class="hljs-attribute">width</span>: .<span class="hljs-built_in">pxToRem</span>(<span class="hljs-number">100</span>) [result];<br>  <span class="hljs-attribute">height</span>: .<span class="hljs-built_in">pxToRem</span>(<span class="hljs-number">100</span>) [result];<br>  <span class="hljs-attribute">background-color</span>: antiquewhite;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><font style="color:#DF2A3F;">postcss-pxtorem </font>webpack 插件自动转化</li>
+<li>vscode 插件 px to rem</li>
+</ul>
+<h6 id="UsEFp">vw适配移动端</h6>
+
+<p><strong>rem 事实上是作为一种过渡的方案</strong>，它利用的也是 vw 的思想。前面不管是我们自己编写的 js，还是 flexible 的源码;</p>
+<p>都是将 1rem 等同于设计稿的 1&#x2F;10，在利用 1rem 计算相对于整个屏幕的尺寸大小，那么我们来思考，1vw 不是刚好等于屏幕的 1&#x2F;100 吗?且相对于 rem 还更加有优势:</p>
+<p><strong>vw 相比于 rem 的优势:</strong></p>
+<ul>
+<li>优势一:不需要去计算 html 的 font-size 大小，也不需要给 html 设置这样一 font-size;</li>
+<li>优势二:不会因为设置 html 的 font-size 大小，而必须给 body 再设置一个 font-size，防止继承;</li>
+<li>优势三:因为不依赖 font-size 的尺寸，所以不用担心某些原因 html 的 font-size 尺寸被篡改，页面尺寸混乱;</li>
+<li>优势四:vw 相比于 rem 更加语义化，1vw 刚才是 1&#x2F;100 的 viewport 的大小;:</li>
+<li>优势五:可以具备 rem 之前所有的优点;</li>
+</ul>
+<p><strong>px&#x3D;&gt;vw 方案:</strong></p>
+<ul>
+<li><strong>手动计算</strong></li>
+<li><strong>less&#x2F;scss 函数</strong></li>
+<li>**postcss-px-to-viewport-8-plugin **<font style="color:#DF2A3F;"> </font>webpack 插件自动转化</li>
+<li>px to vw 的插件，在编写时自动转化</li>
+</ul>
 </style></p></html>
                 
               </div>
