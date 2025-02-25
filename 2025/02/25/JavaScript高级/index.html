@@ -1,0 +1,3589 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/baike.png">
+  <link rel="icon" href="/img/baike.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="MrZ">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="this 绑定this 绑定的三种方式 默认绑定:独立调用,this 指向 window                   Document                 &#x2F;&#x2F; &quot;use strict&quot;      &#x2F;&#x2F;普通函数的独立调用,window     function foo() &#123;         console.log(&#39;foo的this&#39;,this);">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript高级">
+<meta property="og:url" content="http://example.com/2025/02/25/JavaScript%E9%AB%98%E7%BA%A7/index.html">
+<meta property="og:site_name" content="MrZ的个人博客">
+<meta property="og:description" content="this 绑定this 绑定的三种方式 默认绑定:独立调用,this 指向 window                   Document                 &#x2F;&#x2F; &quot;use strict&quot;      &#x2F;&#x2F;普通函数的独立调用,window     function foo() &#123;         console.log(&#39;foo的this&#39;,this);">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-02-25T14:51:28.000Z">
+<meta property="article:modified_time" content="2025-02-25T14:52:09.555Z">
+<meta property="article:author" content="MrZ">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>JavaScript高级 - MrZ的个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>MirZ Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="JavaScript高级"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-02-25 22:51" pubdate>
+          2025年2月25日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          28k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          237 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">JavaScript高级</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>this 绑定<br>this 绑定的三种方式</p>
+<p>默认绑定:独立调用,this 指向 window</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // "use strict"
+
+<pre><code class="hljs">    //普通函数的独立调用,window
+    function foo() &#123;
+        console.log(&#39;foo的this&#39;,this);
+    &#125;
+    foo()
+    //定义在对象中,独立调用,window
+    var obj=&#123;
+        bar:function()&#123;
+            console.log(&#39;bar的this&#39;,this);
+        &#125;
+    &#125;
+    var baz=obj.bar
+    baz()
+    //函数互相调用,window
+    function foo1(fn)&#123;
+        fn()
+    &#125;
+    foo1(baz)
+
+    //在严格模式下,独立调用函数的this,为undefined
+&lt;/script&gt;
+</code></pre>
+</body>
+
+</html>
+隐式绑定,通过某个对象进行调用的,this指向调用对象
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //隐式绑定
+      function foo(){
+        console.log('foo',this);
+      }
+      var obj={
+        name:"obj",
+        bar:foo
+      }
+      obj.bar()
+    </script>
+</body>
+
+</html>
+new绑定,this指向创建的空对象(函数当做一个类的构造函数来使用，也就是使用new关键字)
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+    /* 
+    1.创建空对象
+    2.将this指向空对象,将函数的显式原型赋值给对象的隐式原型
+    3.执行函数体的代码
+    4.无显示返回非空对象时,会默认显示这个对象
+     */
+
+<pre><code class="hljs"> function foo()&#123;
+    console.log(&#39;foo&#39;,this);
+    this.name=&#39;MirZ&#39;
+ &#125;
+ new foo()
+&lt;/script&gt;
+</code></pre>
+</body>
+
+</html>
+显式绑定,this指向要绑定的对象
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+   function foo(){
+    console.log('foo',this);
+   }
+   var obj={
+    name:'MirZ'
+   }
+   //将foo函数的this指向obj,使用call/apply
+   foo.call(obj)
+   foo.apply(obj)
+    </script>
+</body>
+
+</html>
+
+<p>显式绑定</p>
+<p>call&#x2F;apply</p>
+<p>如果我们不希望在对象内部包含这个函数的引用同时又希望在这个对象上进行强制调用可以使用 call 和 apply 方法</p>
+<p>第一个参数传入指定绑定的对象;</p>
+<p>后面的参数，apply 为数组，call 为参数列表;</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function foo(name, age) {
+            console.log('foo调用', this);
+            console.log('参数', name, age);
+        }
+        var obj={}
+        //使用call/apply,将foo函数指向obj
+        // foo.apply(obj)
+        // foo.call(obj)
+        //传入原始类型,会指向原始类型封装的对应包装类型对象
+        // foo.call(123)
+        // foo.apply('Mir')
+
+<pre><code class="hljs">    //传参
+    foo.call(&#39;1&#39;, &#39;MirZ&#39;, 18)
+    foo.apply(&#39;1&#39;,[&#39;MirZ&#39;,18])
+&lt;/script&gt;
+</code></pre>
+</body>
+
+</html>
+bind
+
+<p>如果我们希望一个函数总是显示的绑定到一个对象上，可以使用 bind 绑定函数</p>
+<p>使用 bind 方法，bind()方法创建一个新的绑定函数(bound function，BF)</p>
+<p>绑定函数是一个 exotic function object(怪异函数对象，ECMAScript 2015 中的术语)</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function foo(name, age) {
+            console.log('foo调用', this);
+            console.log("参数",name,age);
+            
+<pre><code class="hljs">    &#125;
+    var obj=&#123;&#125;
+    //需求:调用foo时，总是绑定到obj对象身上
+    // var bar=foo.bind(obj) //yhis-&gt;obj
+    // bar()
+    // bar()
+    // bar()
+    //传参
+    var bar=foo.bind(obj,&#39;Mir&#39;)
+    bar()
+    bar(18)
+&lt;/script&gt;
+</code></pre>
+</body>
+
+</html>
+
+<p>this 绑定优先级</p>
+<p>默认规则的优先级最低,存在其他规则时，就会通过其他规则的方式绑定 this</p>
+<p>显示绑定优先级高于隐式绑定</p>
+<p>new 绑定优先级高于隐式绑定</p>
+<p>new 绑定优先级高于 bind</p>
+<p>new 绑定和 call、apply 是不允许同时使用的，所以不存在谁的优先级更高</p>
+<p>new 绑定可以和 bind 一起使用，new 绑定优先级更高</p>
+<p>bind 和 apply&#x2F;call 同时使用,bind 优先级更高</p>
+<p>箭头函数</p>
+<p>箭头函数是 ES6 之后增加的一种编写函数的方法，并且它比函数表达式要更加简洁:</p>
+<p>箭头函数不会绑定 this、arguments 属性,</p>
+<p>箭头函数不能作为构造函数来使用(不能和 new 一起来使用，会抛出错误):</p>
+<p>箭头函数的简写</p>
+<p>优化一: 如果只有一个参数()可以省略</p>
+<p>nums.forEach(item&#x3D;&gt;{})</p>
+<p>优化二: 如果函数执行体中只有一行代码,那么可以省略大括号并且这行代码的返回值会作为整个函数的返回值</p>
+<p>nums.forEach(item &#x3D;&gt;console.log(item))</p>
+<p>nums.filter(item &#x3D;&gt; true)</p>
+<p>优化三: 如果函数执行体只有返回一个对象，那么需要给这个对象加上()</p>
+<p>var foo&#x3D;()&#x3D;&gt;return{ name:”abc”}</p>
+<p>var. bar&#x3D;()&#x3D;&gt;({name:”abc”})</p>
+<p>箭头函数不使用 this 的四种标准规则(也就是不绑定 this)，而是根据**外层作用域****来决定 this.**</p>
+<p>this 指向面试题:</p>
+<p>var name &#x3D; ‘window’</p>
+<p>&#x2F;&#x2F; {} -&gt; 对象<br>&#x2F;&#x2F; {} -&gt; 代码块<br>var person1 &#x3D; {<br>name: ‘person1’,<br>foo1: function () {<br>console.log(this.name)<br>},<br>foo2: () &#x3D;&gt; console.log(this.name),<br>foo3: function () {<br>return function () {<br>console.log(this.name)<br>}<br>},<br>foo4: function () {<br>&#x2F;&#x2F; console.log(this) &#x2F;&#x2F; 第一个表达式 this -&gt; person1<br>&#x2F;&#x2F; console.log(this) &#x2F;&#x2F; 第二个表达式 this -&gt; person2<br>&#x2F;&#x2F; console.log(this) &#x2F;&#x2F; 第三个表达式 this -&gt; person1</p>
+<pre><code class="hljs">return () =&gt; &#123;
+  console.log(this.name)
+&#125;
+</code></pre>
+<p>}<br>}</p>
+<p>var person2 &#x3D; { name: ‘person2’ }</p>
+<p>&#x2F;&#x2F; 开始题目:<br>person1.foo1(); &#x2F;&#x2F; 隐式绑定: person1<br>person1.foo1.call(person2); &#x2F;&#x2F; 显式绑定: person2</p>
+<p>person1.foo2(); &#x2F;&#x2F; 上层作用域: window<br>person1.foo2.call(person2); &#x2F;&#x2F; 上层作用域: window</p>
+<p>person1.foo3()(); &#x2F;&#x2F; 默认绑定: window<br>person1.foo3.call(person2)(); &#x2F;&#x2F; 默认绑定: window<br>person1.foo3().call(person2); &#x2F;&#x2F; 显式绑定: person2</p>
+<p>person1.foo4()(); &#x2F;&#x2F; person1<br>person1.foo4.call(person2)(); &#x2F;&#x2F; person2<br>person1.foo4().call(person2); &#x2F;&#x2F; person1<br>var name &#x3D; ‘window’</p>
+<p>&#x2F;_ 1.创建一个空的对象 2.将这个空的对象赋值给 this 3.执行函数体中代码 4.将这个新的对象默认返回<br>_&#x2F;<br>function Person(name) {<br>this.name &#x3D; name<br>this.foo1 &#x3D; function () {<br>console.log(this.name)<br>},<br>this.foo2 &#x3D; () &#x3D;&gt; console.log(this.name),<br>this.foo3 &#x3D; function () {<br>return function () {<br>console.log(this.name)<br>}<br>},<br>this.foo4 &#x3D; function () {<br>return () &#x3D;&gt; {<br>console.log(this.name)<br>}<br>}<br>}</p>
+<p>&#x2F;&#x2F; person1&#x2F;person 都是对象(实例 instance)<br>var person1 &#x3D; new Person(‘person1’)<br>var person2 &#x3D; new Person(‘person2’)</p>
+<p>&#x2F;&#x2F; 面试题目:<br>person1.foo1() &#x2F;&#x2F; 隐式绑定: person1<br>person1.foo1.call(person2) &#x2F;&#x2F; 显式绑定: person2</p>
+<p>person1.foo2() &#x2F;&#x2F; 上层作用域查找: person1<br>person1.foo2.call(person2) &#x2F;&#x2F; 上层作用域查找: person1</p>
+<p>person1.foo3()() &#x2F;&#x2F; 默认绑定: window<br>person1.foo3.call(person2)() &#x2F;&#x2F; 默认绑定: window<br>person1.foo3().call(person2) &#x2F;&#x2F; 显式绑定: person2</p>
+<p>person1.foo4()() &#x2F;&#x2F; 上层作用域查找: person1(隐式绑定)<br>person1.foo4.call(person2)() &#x2F;&#x2F; 上层作用域查找: person2(显式绑定)<br>person1.foo4().call(person2) &#x2F;&#x2F; 上层作用域查找: person1(隐式绑定)<br>var name &#x3D; ‘window’</p>
+<p>&#x2F;_ 1.创建一个空的对象 2.将这个空的对象赋值给 this 3.执行函数体中代码 4.将这个新的对象默认返回<br>_&#x2F;<br>function Person(name) {<br>this.name &#x3D; name<br>this.obj &#x3D; {<br>name: ‘obj’,<br>foo1: function () {<br>return function () {<br>console.log(this.name)<br>}<br>},<br>foo2: function () {<br>return () &#x3D;&gt; {<br>console.log(this.name)<br>}<br>}<br>}<br>}</p>
+<p>var person1 &#x3D; new Person(‘person1’)<br>var person2 &#x3D; new Person(‘person2’)</p>
+<p>person1.obj.foo1()() &#x2F;&#x2F; 默认绑定: window<br>person1.obj.foo1.call(person2)() &#x2F;&#x2F; 默认绑定: window<br>person1.obj.foo1().call(person2) &#x2F;&#x2F; 显式绑定: person2</p>
+<p>person1.obj.foo2()() &#x2F;&#x2F; 上层作用域查找: obj(隐式绑定)<br>person1.obj.foo2.call(person2)() &#x2F;&#x2F; 上层作用域查找: person2(显式绑定)<br>person1.obj.foo2().call(person2) &#x2F;&#x2F; 上层作用域查找: obj(隐式绑定)</p>
+<p>浏览器原理<br>浏览器渲染页面的过程</p>
+<p>浏览器渲染页面过程:</p>
+<p>浏览器渲染原理</p>
+<p>在解析 JS 是堵塞也往往会带来新的问题，特别是现代页面开发中:</p>
+<p>目前的开发模式中(比如 Vue、React)，脚本往往比 HTML 页面更“重”处理时间需要更长所以会造成页面的解析阻塞，在脚本下载、执行完成之前，用户在界面上什么都看不到;</p>
+<p>为了解决这个问题，script 元素给我们提供了两个属性(attribute):defer 和 async。</p>
+<p>defer</p>
+<p>defer 属性告诉浏览器不要等待脚本下载，而继续解析 HTML，构建 DOM Tree</p>
+<p>脚本会由浏览器来进行下载，但是不会阻塞 DOM Tree 的构建过程;</p>
+<p>如果脚本提前下载好了，它会等待 DOM Tree 构建完成，在 DOMContentLoaded 事件之前先执行 defer 中的代码</p>
+<p>多个带 defer 的脚本是可以保持正确的顺序执行的。</p>
+<p>从某种角度来说，defer 可以提高页面的性能，并且推荐放到 head 元素中;</p>
+<p>注意:defer 仅适用于外部脚本，对于 script 默认内容会被忽略</p>
+<p>async</p>
+<p>async 特性与 defer 有些类似，它也能够让脚本不阻塞页面。</p>
+<p>async 是让一个脚本完全独立的:</p>
+<p>浏览器不会因 async 脚本而阻塞(与 defer 类似);</p>
+<p>async 脚本不能保证顺序，它是独立下载、独立运行，不会等待其他脚本</p>
+<p>async 不会能保证在 DOMContentLoaded 之前或者之后执行</p>
+<p>:::info<br>defer 通常用于需要在文档解析后操作 DOM 的 JavaScript 代码，并且对多个 script 文件有顺序要求的;</p>
+<p>async 通常用于独立的脚本，对其他脚本，甚至 DOM 没有依赖的;</p>
+<p>:::</p>
+<p>Js 原理<br>JS 执行原理</p>
+<p>初始化全局对象</p>
+<p>js 引擎会在执行代码之前，会在堆内存中创建一个全局对象:GlobalObject(GO)</p>
+<p>该对象所有的作用域(scope)都可以访问;里面会包含 Date、Array、String、Number、setTimeout、setlnterval 等等.其中还有一个 window 属性指向自己</p>
+<p>全局代码如何被执行?</p>
+<p>js 引擎内部有一个执行上下文栈(Execution Context Stack，简称 ECS)它是用于执行代码的调用栈</p>
+<p>那么现在它要执行谁呢?执行的是全局的代码块</p>
+<p>全局的代码块为了执行会构建一个 Global Execution Context(GEC)</p>
+<p>GEC 会 被放入到 ECS 中执行;</p>
+<p>每一个执行上下文会关联一个 VO(Variable Object，变量对象)**,****变量和函数声明**会被添加到这个 VO 对象中</p>
+<p>当全局代码被执行的时候，VO 就是 GO 对象了</p>
+<p>GEC 被放入到 ECS 中里面包含两部分内容:</p>
+<p>第一部分:在代码执行前，在 parser 转成 AST 的过程中，会将全局定义的变量、函数等加入等加入到 GlobalObject 中，但是并不会赋值;</p>
+<p>这个过程也称之为变量的作用域提升(hoisting)</p>
+<p>第二部分:在代码执行中，对变量赋值，或者执行其他的函数;</p>
+<p>函数如何被执行?</p>
+<p>在执行的过程中执行到一个函数时，就会根据函数体创建一个函数执行上下文(FunctionalExecutionContext，简称 FEC)并且压入到 EC Stack 中。</p>
+<p>因为每个执行上下文都会关联一个 VO，那么函数执行上下文关联的 VO 是什么呢?</p>
+<p>当进入一个函数执行上下文时，会创建一个 AO 对象(Activation Object)</p>
+<p>这个 AO 对象会使用 arguments 作为初始化，并且初始值是传入的参数;</p>
+<p>这个 AO 对象会作为执行上下文的 VO 来存放变量的初始化;</p>
+<p>作用域链</p>
+<p>当进入到一个执行上下文时，执行上下文也会关联一个作用域链(Scope Chain)</p>
+<p>作用域链是一个对象列表，用于变量标识符的求值;当进入一个执行上下文时，这个作用域链被创建，并且根据代码类型，添加一系列的对象</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+
+    // 1.面试题一:
+    // var n = 100
+    // function foo() {
+    //   n = 200
+    // }
+    // foo()
+    
+    // console.log(n)
+    
+    // 2.面试题二:
+    // var n = 100
+    // function foo() {
+    //   console.log(n)
+    //   var n = 200
+    //   console.log(n)
+    // }
+    
+    // foo()
+    
+    // 3.面试题三:
+    // var n = 100
+    
+    // function foo1() {
+    //   console.log(n)
+    // }
+    // function foo2() {
+    //   var n = 200
+    //   console.log(n)
+    //   foo1()
+    // }
+    // foo2()
+    
+    // 4.面试题四:
+    // var n = 100
+    // function foo() {
+    //   console.log(n) 
+    //   return
+    //   var n = 200   //var a是在编译解析阶段,已经声明,return是在执行阶段结束
+    // }
+    // foo()
+    
+    // 5.在开发中可能会出现这样错误的写法
+    // function foo() {
+    //   message = "Hello World" //没有声明,会被放到全局
+    // }
+    // foo()
+    // console.log(message)
+    
+    // 6.面试题五:
+    function foo() {
+      var a = b = 100
+    }
+    foo()
+    console.log(b)
+
+  </script>
+
+</body>
+</html>
+词法环境是一种规范类型，用于在词法嵌套结构中定义关联的变量、函数等标识符;
+
+<p>一个词法环境是由环境记录(Environment Record)和一个外部词法环境(oute;rLexicalEnvironment)组成:</p>
+<p>一个词法环境经常用于关联一个函数声明、代码块语句、try-catch 语句，当它们的代码被执行时，词法环境被创建出来;</p>
+<p>全局词法环境</p>
+<p>全局词法环境是最外层的词法环境，它在 JavaScript 程序开始执行时就被创建，并且在整个程序的生命周期内都存在。全局词法环境的外部引用为 null。</p>
+<p>函数词法环境</p>
+<p>每当调用一个函数时，就会为该函数创建一个新的词法环境。函数词法环境的外部引用指向创建该函数时所在的词法环境。</p>
+<ul>
+<li>LexicalEnvironment 用于处理 let、const 声明的标识符</li>
+<li>VariableEnyionment 用于处理 var 和 function 声明的标识符:<br>环境记录</li>
+</ul>
+<p>在这个规范中有两种主要的环境记录值:声明式环境记录和对象环境记录。</p>
+<p>声明式环境记录:声明性环境记录用于定义 ECMAScript 语言语法元素的效果，如函数声明、变量声明和直接将标识符绑定</p>
+<p>对象式环境记录:对象环境记录用于定义 ECMAScript 元素的效果，例如 WithStatement，它将标识符绑定与某些对象的属</p>
+<p>关联起来。</p>
+<p>JS 内存管理</p>
+<p>不管什么样的编程语言，在代码的执行过程中都是需要给它分配内存的，不同的是某些编程语言需要我们自己手动的管理内存,某些编程语言会可以自动帮助我们管理内存:</p>
+<p>不管以什么样的方式来管理内存，内存的管理都会有如下的生命周期:</p>
+<p>第一步:分配申请你需要的内存(申请);</p>
+<p>第二步:使用分配的内存(存放一些东西，比如对象等);</p>
+<p>第三步:不需要使用时，对其进行释放;</p>
+<p>不同的编程语言对于第一步和第三步会有不同的实现:</p>
+<p>手动管理内存:比如 C、C++，包括早期的 OC 都是需要手动来管理内存的申请和释放的(malloc 和 free 函数)</p>
+<p>自动管理内存:比如 Java、JavaScript、Python、Swift、Dart 等，它们有自动帮助我们管理内存;</p>
+<p>对于开发者来说，JavaScript 的内存管理是自动的、无形的。我们创建的原始值、对象、函数.…这一切都会占用内存,但是我们并不需要手动来对它们进行管理 JavaScript 引 l 擎会帮助我们处理好它;</p>
+<p>JavaScript 会在定义数据时为我们分配内存。</p>
+<p>JS 对于原始数据类型内存的分配会在执行时，直接在栈空间进行分配;</p>
+<p>JS 对于复杂数据类型内存分配会在堆内存中开辟一块空间，并且将这块空间的指针返回值变量引用;</p>
+<p>JS 的垃圾回收机制</p>
+<p>** **因为内存的大小是有限的，所以当内存不再需要的时候，我们需要对其进行释放，以便腾出更多的内存空间。</p>
+<p>在手动管理内存的语言中，我们需要通过一些方式自己来释放不再需要的内存，比如 free 函数:</p>
+<p>这种管理的方式其实非常的低效，影响我们编写逻辑的代码的效率，</p>
+<p>这种方式对开发者的要求也很高，并且一不小心就会产生内存泄露，</p>
+<p>所以大部分现代的编程语言都是有自己的垃圾回收机制:</p>
+<p>垃圾回收的英文是 Garbage Collection，简称 GC;对于那些不再使用的对象，我们都称之为是垃圾，它需要被回收，以释放更多的内存空间;而我们的语言运行环境，比如 java 的运行环境 IM，JavaScript 的运行环境 js 引擎都会内存 垃圾回收器</p>
+<p>GC 算法-标记-清除算法</p>
+<p>标记-清除是最基础的垃圾回收算法。它的工作原理如下</p>
+<p>标记清除的核心思路是可达性,这个算法是设置根对象(root object)垃圾回收器会定期从这个根开始，找所有从根开始有引用到的对象，对于哪些没有引用到的对象，就认为是不可用的对象</p>
+<p>标记阶段：垃圾回收器会遍历所有的对象，从根对象（如全局对象）开始，将所有可达对象标记为活动的。</p>
+<p>清除阶段：对于那些没有被标记为活动的对象，垃圾回收器会将其内存释放。</p>
+<p>优点</p>
+<p>可靠性：确保所有不再需要的对象都会被正确回收。</p>
+<p>简单性：实现相对简单，易于维护。</p>
+<p>缺点</p>
+<p>暂停程序执行：在垃圾回收期间需要暂停程序执行（Stop-the-world），可能会影响性能。</p>
+<p>遍历整个对象图：需要遍历整个对象图，处理大对象图时效率较低。</p>
+<p>GC 算法-引用计数</p>
+<p>引用计数是一种较早的垃圾回收算法。它的工作原理如下：</p>
+<p>计数：每个对象维护一个引用计数器，用于记录有多少其他对象引用它。</p>
+<p>增加引用：当有一个新的引用指向该对象时，计数器加 1。</p>
+<p>减少引用：当一个引用不再指向该对象时，计数器减 1。</p>
+<p>释放内存：当计数器变为 0 时，该对象可以被回收，因为没有任何引用指向它。</p>
+<p>优点</p>
+<p>即时回收：一旦对象的引用计数变为 0，可以立即回收，不需要等待垃圾回收的周期。</p>
+<p>简单：实现相对简单，不需要复杂的标记和清除过程。</p>
+<p>缺点</p>
+<p>循环引用问题：如果两个对象互相引用，即使它们没有其他引用指向它们，引用计数器永远不会变为 0，从而导致内存泄漏。</p>
+<p>性能开销：每次引用增加或减少都需要更新计数器，会带来一定的性能开销。</p>
+<p>GC 算法-分代收集</p>
+<p>分代收集基于对象的生命周期假设：大多数对象是短命的，少数对象是长命的。它将堆内存划分为两代：新生代和老年代。</p>
+<p>新生代：存放生命周期短的对象。垃圾回收器会频繁地检查并清理新生代，因为新对象的创建和销毁非常频繁。</p>
+<p>老年代：存放生命周期长的对象。垃圾回收器对老年代的检查和清理频率较低，因为这些对象大多长期存在。</p>
+<p>优点</p>
+<p>效率高：新生代对象的清理操作较为快速，整体垃圾回收效率高。</p>
+<p>减少暂停时间：新生代的清理操作时间较短，减少了程序暂停时间。</p>
+<p>缺点</p>
+<p>复杂性：实现和维护较为复杂，需要有效区分和管理新生代和老年代对象。</p>
+<p>内存占用：需要更多的内存来维护新生代和老年代的分代结构。</p>
+<p>V8 的垃圾回收机制</p>
+<p>V8 使用了分代垃圾回收，结合了标记-清除、标记-压缩和增量标记（Incremental Marking）等技术。</p>
+<p>标记-清除：对新生代对象进行快速标记和清除。</p>
+<p>标记-压缩：对老年代对象进行标记和压缩，以减少内存碎片。</p>
+<p>增量标记：将垃圾回收过程拆分成多个小步骤，穿插在正常的程序执行过程中，减少程序暂停时间。</p>
+<p>闲时收集: 垃圾收集器只会在 CPU 空闲时尝试运行，以减少可能对代码执行的影响。</p>
+<p>JS 闭包<br>闭包的定义</p>
+<p>在计算机科学中对闭包的定义(维基百科):</p>
+<p>闭包(英语:Closure)，又称词法闭包(LexicalClosure)或函数闭包(function closures);</p>
+<p>是在支持 头等函数 的编程语言中，实现词法绑定的一种技术;</p>
+<p>闭包在实现上是一个结构体，它存储了一个函数和一个关联的环境((相当于一个符号查找表):</p>
+<p>闭包跟函数最大的区别在于，当捕捉闭包的时候，它的 自由变量 会在捕捉时被确定，这样即使脱离了捕捉时的上下文，它也能照常运行。</p>
+<p>MDN 对 JavaScript 闭包的解释:</p>
+<p>一个函数和对其周围状态(lexical environment，词法环境)的引用捆绑在一起(或者说函数被引用包围)，这样的组合就是闭包(cosure)也就是说，闭包让你可以在一个内层函数中访问到其外层函数的作用域;在 JavaScript 中，每当创建一个函数，闭包就会在函数创建的同时被创建出来;</p>
+<p>一个普通函数 function，如果它可以访问外层作用域的自由变量，那么这个函数就是一个闭包;</p>
+<p>从广义的角度来说:Javascript 中的函数都是闭包;</p>
+<p>从狭义的角度来说:Javascript 中一个函数，如果访问了外层作用域的变量，那么它是一个闭包;</p>
+<p>闭包的访问过程</p>
+<p>作用域链（Scope Chain）</p>
+<p>定义：作用域链是 JavaScript 中变量查找的机制。每个函数在执行时都会创建一个作用域链，这个链由当前执行上下文的变量对象（Variable Object）和所有外层（父级）执行上下文的变量对象组成。</p>
+<p>作用：当访问一个变量时，JavaScript 引擎会沿着作用域链逐层向上查找变量，直到找到变量或到达全局作用域（若未找到则报错）。</p>
+<p>示例：</p>
+<p>function outer() {<br>const a &#x3D; 10;<br>function inner() {<br>console.log(a); &#x2F;&#x2F; 通过作用域链找到 outer 中的 a<br>}<br>inner();<br>}<br>outer(); &#x2F;&#x2F; 输出 10<br>在 <font style="color:rgb(64, 64, 64);">inner</font> 函数中访问 <font style="color:rgb(64, 64, 64);">a</font> 时，作用域链会依次查找 <font style="color:rgb(64, 64, 64);">inner</font> → <font style="color:rgb(64, 64, 64);">outer</font> → 全局作用域。</p>
+<ol start="2">
+<li>闭包（Closure）</li>
+</ol>
+<p>定义：闭包是函数能够访问其词法作用域外的变量的能力，即使这个函数在其词法作用域外被调用。闭包的实现依赖于作用域链。</p>
+<p>本质：闭包是作用域链的一种应用结果。当一个函数引用了外层作用域的变量，且该函数被传递到其他作用域执行时，闭包会保留对外层作用域的引用，从而避免变量被垃圾回收。</p>
+<p>示例：</p>
+<p>function outer() {<br>const a &#x3D; 10;<br>return function inner() {<br>console.log(a); &#x2F;&#x2F; 闭包保留了对外层 a 的引用<br>};<br>}<br>const innerFunc &#x3D; outer();<br>innerFunc(); &#x2F;&#x2F; 输出 10（即使 outer 已执行完毕，仍能访问 a）<br>这里，<font style="color:rgb(64, 64, 64);">inner</font> 函数通过闭包保留了 <font style="color:rgb(64, 64, 64);">outer</font> 的作用域，即使 <font style="color:rgb(64, 64, 64);">outer</font> 已经执行完毕。</p>
+<ol start="3">
+<li>区别与联系</li>
+</ol>
+<p>特性 作用域链 闭包<br>角色 变量查找的规则和路径 基于作用域链实现的一种现象（函数保留对外层作用域的引用）<br>存在时机 函数执行时自动创建 当函数引用了外层变量，并在其他作用域被调用时形成<br>内存管理 作用域链在函数执行完毕后通常会被销毁（除非有闭包） 闭包会导致外层作用域的变量对象无法被垃圾回收，可能引起内存泄漏<br>核心目的 确定变量的可访问性 让函数“记住”并访问其词法作用域外的变量<br>总结</p>
+<p>作用域链是底层机制，决定了变量如何被查找。</p>
+<p>闭包是上层现象，是作用域链在特定场景（函数跨作用域执行）下的表现。</p>
+<p>可以说，闭包的实现依赖于作用域链，但两者不是同一个概念。</p>
+<p>内存泄漏及释放内存</p>
+<p>内存泄漏（Memory Leak） 指的是程序运行过程中不再需要的内存没有被及时释放，导致内存占用持续增长，最终可能引发性能问题甚至程序崩溃。</p>
+<p>二、常见内存泄漏场景及解决方案</p>
+<p>以下是 JavaScript 中常见的内存泄漏场景及其解决方法：</p>
+<ol>
+<li>意外的全局变量</li>
+</ol>
+<p>问题：未使用 <font style="color:rgb(64, 64, 64);">var</font>&#x2F;<font style="color:rgb(64, 64, 64);">let</font>&#x2F;<font style="color:rgb(64, 64, 64);">const</font> 声明的变量会成为全局变量，无法被回收。</p>
+<p>function leak() {<br>globalVar &#x3D; “I am a global variable!”; &#x2F;&#x2F; 意外创建全局变量<br>}<br>解决：始终使用 <font style="color:rgb(64, 64, 64);">‘use strict’</font> 严格模式，或显式声明变量。</p>
+<ol start="2">
+<li>未清理的定时器（Timers）或回调函数</li>
+</ol>
+<p>问题：<font style="color:rgb(64, 64, 64);">setInterval</font> 或事件监听未及时清除，导致回调函数及其依赖的变量无法释放。</p>
+<p>const intervalId &#x3D; setInterval(() &#x3D;&gt; {<br>&#x2F;&#x2F; 长期运行的定时器<br>}, 1000);</p>
+<p>&#x2F;&#x2F; 未调用 clearInterval(intervalId) 会导致内存泄漏<br>解决：在不需要时手动清除定时器或事件监听。</p>
+<ol start="3">
+<li>闭包滥用</li>
+</ol>
+<p>问题：闭包保留了对外部变量的引用，导致外部作用域的变量无法释放。</p>
+<p>function createClosure() {<br>const largeData &#x3D; new Array(1000000).fill(“data”);<br>return function() {<br>&#x2F;&#x2F; 闭包引用了 largeData，即使不再需要，largeData 也无法被回收<br>};<br>}<br>const closure &#x3D; createClosure();<br>解决：在闭包中避免保留不必要的大对象，或在不需要时手动解除引用（如 <font style="color:rgb(64, 64, 64);">closure &#x3D; null</font>）。</p>
+<ol start="4">
+<li>未释放的 DOM 引用</li>
+</ol>
+<p>问题：保留对已移除 DOM 元素的引用，导致 DOM 元素无法被回收。</p>
+<p>const elements &#x3D; {<br>button: document.getElementById(“myButton”),<br>};</p>
+<p>&#x2F;&#x2F; 即使从页面移除了按钮，elements.button 仍保留引用<br>document.body.removeChild(document.getElementById(“myButton”));<br>解决：在移除 DOM 元素后，手动解除引用（如 <font style="color:rgb(64, 64, 64);">elements.button &#x3D; null</font>）。</p>
+<ol start="5">
+<li>事件监听未移除</li>
+</ol>
+<p>问题：为 DOM 元素添加事件监听后未移除，导致元素无法被回收。</p>
+<p>const button &#x3D; document.getElementById(“myButton”);<br>button.addEventListener(“click”, handleClick);</p>
+<p>&#x2F;&#x2F; 未调用 removeEventListener 会导致元素和事件处理函数无法释放<br>解决：在移除元素前手动移除事件监听。</p>
+<p>函数增强<br>函数的 arguments 和剩余参数</p>
+<p>在 JavaScript 中，**<font style="color:rgb(64, 64, 64);">arguments</font>** 是函数内部的一个特殊对象，用于表示函数被调用时传入的所有参数（无论是否在形参列表中声明）。</p>
+<p>类数组对象：<font style="color:rgb(64, 64, 64);">arguments</font> 是一个类数组对象（Array-like Object），具有数字索引和 <font style="color:rgb(64, 64, 64);">length</font> 属性，但不支持数组方法（如 <font style="color:rgb(64, 64, 64);">push</font>、<font style="color:rgb(64, 64, 64);">map</font> 等）。</p>
+<p>动态绑定：<font style="color:rgb(64, 64, 64);">arguments</font> 的内容会随着函数参数的变化而动态更新（非严格模式下）。</p>
+<p>非箭头函数独有：箭头函数（Arrow Function）没有自己的 <font style="color:rgb(64, 64, 64);">arguments</font> 对象。</p>
+<p>类数组转数组</p>
+<p>如果需要使用数组方法，需将 <font style="color:rgb(64, 64, 64);">arguments</font> 转换为真正的数组：</p>
+<p>function logArgs() {<br>&#x2F;&#x2F; 使用 slice 截取<br>&#x2F;&#x2F;const newArr&#x3D;Array.prototype.slice.apply(arguments)<br>&#x2F;&#x2F; 使用 Array.from() 或扩展运算符<br>const argsArray &#x3D; Array.from(arguments);<br>&#x2F;&#x2F; 或者 const argsArray &#x3D; […arguments];</p>
+<p>argsArray.forEach(arg &#x3D;&gt; console.log(arg));<br>}<br>logArgs(“a”, “b”); &#x2F;&#x2F; 输出 “a”, “b”<br>严格模式下的行为</p>
+<p>在严格模式（<font style="color:rgb(64, 64, 64);">‘use strict’</font>）中，<font style="color:rgb(64, 64, 64);">arguments</font> 与形参解耦，修改 <font style="color:rgb(64, 64, 64);">arguments</font> 不会影响形参，反之亦然：</p>
+<p>function strictExample(a, b) {<br>‘use strict’;<br>arguments[0] &#x3D; 100;<br>console.log(a); &#x2F;&#x2F; 输出原始的 a 值（非严格模式下会输出 100）<br>}<br>strictExample(1, 2);<br><font style="color:rgb(64, 64, 64);"></font><strong><font style="color:rgb(64, 64, 64);">arguments</font></strong> 与箭头函数</p>
+<p>箭头函数没有自己的 <font style="color:rgb(64, 64, 64);">arguments</font> 对象，但可以访问外层函数的 <font style="color:rgb(64, 64, 64);">arguments</font>：</p>
+<p>function outer() {<br>const inner &#x3D; () &#x3D;&gt; {<br>console.log(arguments); &#x2F;&#x2F; 输出 outer 的 arguments<br>};<br>inner();<br>}<br>outer(1, 2); &#x2F;&#x2F; 输出 { 0: 1, 1: 2 }<br>替代方案：剩余参数（Rest Parameters）</p>
+<p>ES6 引入了 剩余参数（**<font style="color:rgb(64, 64, 64);">…args</font>**），它是真正的数组，更推荐使用：</p>
+<p>function sum(…args) {<br>return args.reduce((acc, val) &#x3D;&gt; acc + val, 0);<br>}<br>console.log(sum(1, 2, 3)); &#x2F;&#x2F; 输出 6<br>优势对比：</p>
+<p>特性 <strong>arguments</strong> 剩余参数（**…args**<br>）<br>类型 类数组对象 真正的数组<br>与形参的绑定 动态绑定（非严格模式） 独立<br>箭头函数支持 不支持 支持<br>可读性 低（隐式传递参数） 高（显式声明参数）</p>
+<p>纯函数</p>
+<p>纯函数的维基百科定义:</p>
+<p>在程序设计中，若一个函数符合以下条件，那么这个函数被称为纯函数:</p>
+<p>此函数在相同的输入值时，需产生相同的输出。</p>
+<p>函数的输出和输入值以外的其他隐藏信息或状态无关，也和由 I&#x2F;0 设备产生的外部输出无关。</p>
+<p>该函数不能有语义上可观察的函数副作用，诸如“触发事件”，使输出设备输出，或更改输出值以外物件的内容等。</p>
+<p>:::tips<br>计算机科学中，也引用了副作用的概念，表示在执行一个函数时，除了返回函数值之外，还对调用函数产生了附加的影响,比如修改了全局变量，修改参数或者改变外部的存储;</p>
+<p>:::</p>
+<p>纯函数作用</p>
+<p>在写的时候保证了函数的纯度，只是单纯实现自己的业务逻辑即可，不需要关心传入的内容是如何获得的或者依赖其他的外部变量是否已经发生了修改;</p>
+<p>输入内容不会被任意篡改，并且确定的输入，一定会有确定的输出;</p>
+<p>:::tips<br>React 中就要求我们无论是函数还是 class 声明一个组件，这个组件都必须像纯函数一样，保护它们的 props 不被修改</p>
+<p>:::</p>
+<p>函数柯里化</p>
+<p>函数柯里化定义</p>
+<p>在计算机科学中，柯里化(英语:Currying)，又译为卡瑞化或加里化:</p>
+<p>是把接收多个参数的函数变成接受一个单一参数(最初函数的第一个参数)的函数，并且返回接受余下的参数，而且返回结果的新函数的技术;</p>
+<p>柯里化声称“如果你固定某些参数，你将得到接受余下参数的一个函数</p>
+<p>柯里化箭头函数写法:var foo&#x3D;x&#x3D;&gt;y&#x3D;&gt;z&#x3D;&gt;console.log(x + y + z)</p>
+<p>自动柯里化函数</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+
+    function foo(x, y, z) {
+      console.log(x + y + z)
+    }
+    
+    function sum(num1, num2) {
+      return num1 + num2
+    }
+    
+    function logInfo(date, type, message) {
+      console.log(`时间:${date} 类型:${type} 内容:${message}`)
+    }
+    
+    // 手动转化
+    
+    // 封装函数: 自动转化柯里化过程(有一点难度)
+    function hyCurrying(fn) {
+      function curryFn(...args) {
+        // 两类操作:
+        // 第一类操作: 继续返回一个新的函数, 继续接受参数
+        // 第二类操作: 直接执行fn的函数
+        if (args.length >= fn.length) { // 执行第二类
+          // return fn(...args)
+          return fn.apply(this, args)
+        } else { // 执行第一类
+          return function(...newArgs) {
+            // return curryFn(...args.concat(newArgs))
+            return curryFn.apply(this, args.concat(newArgs))
+          }
+        }
+      }
+    
+      return curryFn
+    }
+    
+    // 对其他的函数进行柯里化
+    var fooCurry = hyCurrying(foo)
+    fooCurry(10)(20)(30)
+    fooCurry(55, 12, 56)
+    
+    var sumCurry = hyCurrying(sum)
+    var sum5 = sumCurry(5)
+    console.log(sum5(10))
+    console.log(sum5(15))
+    console.log(sum5(18))
+    
+    var logInfoCurry = hyCurrying(logInfo)
+    logInfoCurry("2022-06-01")("DEBUG")("我发现一个bug, 哈哈哈哈")
+
+
+  </script>
+
+</body>
+</html>
+
+<p>组合函数</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    // 第一步对数字*2
+    function double(num) {
+      return num * 2
+    }
+
+    // 第二步对数字**2
+    function pow(num) {
+      return num ** 2
+    }
+    
+    // 封装的函数: 你传入多个函数, 我自动的将多个函数组合在一起挨个调用
+    function composeFn(...fns) {
+      // 1.边界判断(edge case)
+      var length = fns.length
+      if (length <= 0) return
+      for (var i = 0; i < length; i++) {
+        var fn = fns[i]
+        if (typeof fn !== "function") {
+          throw new Error(`index position ${i} must be function`)
+        }
+      }
+    
+      // 2.返回的新函数
+      return function(...args) {
+        var result = fns[0].apply(this, args)
+        for (var i = 1; i < length; i++) {
+          var fn = fns[i]
+          result = fn.apply(this, [result])
+        }
+        return result
+      }
+    }
+    
+    var newFn = composeFn(double, pow, console.log)
+    newFn(100)
+    newFn(55)
+    newFn(22)
+    // console.log(newFn(100))
+    // console.log(newFn(55))
+    // console.log(newFn(22))
+
+  </script>
+
+</body>
+</html>
+
+<p>严格模式</p>
+<p>JavaScript 的严格模式（Strict Mode）是 ES5 引入的重要特性，通过限制某些不安全或易出错的语法，提升代码的安全性和可维护性。以下是严格模式的核心要点：</p>
+<p>启用方式</p>
+<p>全局启用：在脚本或 <font style="color:rgb(64, 64, 64);"><script></font> 标签的最顶部添加 <font style="color:rgb(64, 64, 64);">"use strict";</font>。</p>
+<p>"use strict";<br>// 整个脚本遵循严格模式<br>函数作用域启用：在函数体的最顶部添加 <font style="color:rgb(64, 64, 64);">"use strict";</font>。</p>
+<p>function strictFunc() {<br>"use strict";<br>// 函数内部遵循严格模式<br>}</p>
+<p>核心变化与限制</p>
+<ol>
+<li>变量必须声明</li>
+</ol>
+<p>未声明的变量赋值会报错（非严格模式会隐式创建全局变量）。</p>
+<p>"use strict";<br>x = 10; // ReferenceError: x is not defined 2. 禁止重复参数</p>
+<p>函数参数名不可重复。</p>
+<p>"use strict";<br>function dupParam(a, a) { } // SyntaxError: Duplicate parameter name 3. 禁用 <strong><font style="color:rgb(64, 64, 64);">with</font></strong> 语句</p>
+<p><font style="color:rgb(64, 64, 64);">with</font> 会导致作用域混乱，严格模式直接禁用。</p>
+<p>"use strict";<br>with (obj) { } // SyntaxError: Strict mode code may not include a with statement 4. 只读属性不可修改</p>
+<p>对只读属性（如 <font style="color:rgb(64, 64, 64);">Object.prototype</font>）赋值会报错。</p>
+<p>"use strict";<br>Object.prototype = {}; // TypeError: Cannot assign to read-only property 5. 不可删除不可配置的属性</p>
+<p>删除变量、函数或不可配置的属性会报错。</p>
+<p>"use strict";<br>delete Object.prototype; // TypeError: Cannot delete property 'prototype' 6. <strong><font style="color:rgb(64, 64, 64);">arguments</font></strong> 对象限制</p>
+<p><font style="color:rgb(64, 64, 64);">arguments</font> 与形参解耦，修改互不影响。</p>
+<p>禁用 <font style="color:rgb(64, 64, 64);">arguments.callee</font> 和 <font style="color:rgb(64, 64, 64);">arguments.caller</font>。</p>
+<p>"use strict";<br>function func(a) {<br>arguments[0] = 100;<br>console.log(a); // 非严格模式输出 100，严格模式输出原值<br>} 7. <strong><font style="color:rgb(64, 64, 64);">this</font></strong> 的默认值为 <strong><font style="color:rgb(64, 64, 64);">undefined</font></strong></p>
+<p>普通函数调用时，<font style="color:rgb(64, 64, 64);">this</font> 不再指向全局对象。</p>
+<p>"use strict";<br>function test() {<br>console.log(this); // undefined（非严格模式为 window）<br>}<br>test();<br>test.apply('123') //'123' (非严格模式为对应的包装对象)<br>test() 8. 保留字限制</p>
+<p>不可使用 <font style="color:rgb(64, 64, 64);">implements</font>, <font style="color:rgb(64, 64, 64);">interface</font>, <font style="color:rgb(64, 64, 64);">let</font>, <font style="color:rgb(64, 64, 64);">yield</font> 等作为变量名。</p>
+<p>"use strict";<br>let interface = 10; // SyntaxError: Unexpected strict mode reserved word 9. <strong><font style="color:rgb(64, 64, 64);">eval</font></strong> 独立作用域</p>
+<p><font style="color:rgb(64, 64, 64);">eval</font> 内部声明的变量不会泄露到外部。</p>
+<p>"use strict";<br>eval("var x = 10;");<br>console.log(x); // ReferenceError: x is not defined 10. 八进制字面量语法</p>
+<p>禁止使用旧式 <font style="color:rgb(64, 64, 64);">0</font> 前缀的八进制，必须用 <font style="color:rgb(64, 64, 64);">0o</font>。</p>
+<p>"use strict";<br>let num = 0123; // SyntaxError: Octal literals are not allowed<br>let correct = 0o123; // 正确写法 11. 对象字面量重复属性</p>
+<p>ES5 严格模式禁止重复属性（ES6 已放宽此限制）。</p>
+<p>"use strict";<br>let obj = { a: 1, a: 2 }; // ES5 严格模式报错，ES6 不报错</p>
+<p>严格模式的优势</p>
+<p>减少隐藏错误：通过报错暴露潜在问题（如变量未声明）。</p>
+<p>优化代码：帮助引擎优化执行（如固定作用域）。</p>
+<p>兼容未来语法：保留关键字为 ES6+ 铺路（如 <font style="color:rgb(64, 64, 64);">class</font>, <font style="color:rgb(64, 64, 64);">let</font>）。</p>
+<p>注意事项</p>
+<p>旧代码启用严格模式需逐步迁移，避免报错。</p>
+<p>合并脚本时，若全局启用严格模式，需确保合并后的脚本开头无非严格代码。</p>
+<p>对象增强<br>属性描述符</p>
+<p>JavaScript 中的属性描述符用于定义或描述对象属性的特性，分为数据属性和访问器属性两种类型。以下是关键点总结：</p>
+<ol>
+<li>属性描述符的组成</li>
+</ol>
+<p>数据属性：包含以下特性：</p>
+<p><font style="color:rgb(64, 64, 64);">value</font>：属性的值。</p>
+<p><font style="color:rgb(64, 64, 64);">writable</font>：是否可修改值（默认为<font style="color:rgb(64, 64, 64);">false</font>，若通过赋值创建则默认为<font style="color:rgb(64, 64, 64);">true</font>）。</p>
+<p><font style="color:rgb(64, 64, 64);">enumerable</font>：是否可被枚举（如 <font style="color:rgb(64, 64, 64);">for...in</font> 或 <font style="color:rgb(64, 64, 64);">Object.keys</font>，默认为<font style="color:rgb(64, 64, 64);">false</font>）。</p>
+<p><font style="color:rgb(64, 64, 64);">configurable</font>：是否可删除属性或修改特性（默认为<font style="color:rgb(64, 64, 64);">false</font>）。</p>
+<p>访问器属性：包含 <font style="color:rgb(64, 64, 64);">get</font> 和 <font style="color:rgb(64, 64, 64);">set</font> 函数：</p>
+<p><font style="color:rgb(64, 64, 64);">get()</font>：读取属性时调用。</p>
+<p><font style="color:rgb(64, 64, 64);">set(value)</font>：写入属性时调用。</p>
+<p>不能与 <font style="color:rgb(64, 64, 64);">value</font> 或 <font style="color:rgb(64, 64, 64);">writable</font> 共存。</p>
+<ol start="2">
+<li>获取属性描述符</li>
+</ol>
+<p><font style="color:rgb(64, 64, 64);">Object.getOwnPropertyDescriptor(obj, 'prop')</font>：获取对象自身属性的描述符。</p>
+<p><font style="color:rgb(64, 64, 64);">Object.getOwnPropertyDescriptors(obj)</font>：获取对象所有自身属性的描述符。</p>
+<ol start="3">
+<li>定义/修改属性</li>
+</ol>
+<p><font style="color:rgb(64, 64, 64);">Object.defineProperty(obj, 'prop', descriptor)</font>：定义单个属性。</p>
+<p><font style="color:rgb(64, 64, 64);">Object.defineProperties(obj, descriptors)</font>：批量定义属性。</p>
+<p>默认值：若未显式设置，<font style="color:rgb(64, 64, 64);">writable</font>、<font style="color:rgb(64, 64, 64);">enumerable</font>、<font style="color:rgb(64, 64, 64);">configurable</font> 默认为 <font style="color:rgb(64, 64, 64);">false</font>。</p>
+<ol start="4">
+<li>特性规则</li>
+</ol>
+<p>**<font style="color:rgb(64, 64, 64);">configurable: false</font>**：</p>
+<p>禁止删除属性。</p>
+<p>禁止修改除 <font style="color:rgb(64, 64, 64);">writable</font> 以外的特性（<font style="color:rgb(64, 64, 64);">writable</font> 仅允许从 <font style="color:rgb(64, 64, 64);">true</font> 改为 <font style="color:rgb(64, 64, 64);">false</font>）。</p>
+<p>**<font style="color:rgb(64, 64, 64);">writable: false</font>**：禁止通过赋值修改值（严格模式报错）。</p>
+<p>**<font style="color:rgb(64, 64, 64);">enumerable: false</font>**：属性不会出现在 <font style="color:rgb(64, 64, 64);">for...in</font> 或 <font style="color:rgb(64, 64, 64);">Object.keys</font> 中。</p>
+<ol start="5">
+<li>示例</li>
+</ol>
+<p>数据属性</p>
+<p>const obj = {};<br>Object.defineProperty(obj, 'a', {<br>value: 1,<br>writable: true,<br>enumerable: true,<br>configurable: true<br>});</p>
+<p>// 修改为不可写<br>Object.defineProperty(obj, 'a', { writable: false });<br>obj.a = 2; // 静默失败（严格模式报错）<br>访问器属性</p>
+<p>Object.defineProperty(obj, 'fullName', {<br>get() { return <code>$&#123;this.firstName&#125; $&#123;this.lastName&#125;</code>; },<br>set(value) { [this.firstName, this.lastName] = value.split(' '); },<br>enumerable: true,<br>configurable: true<br>}); 6. 默认行为</p>
+<p>通过赋值创建的属性：<font style="color:rgb(64, 64, 64);">writable</font>、<font style="color:rgb(64, 64, 64);">enumerable</font>、<font style="color:rgb(64, 64, 64);">configurable</font> 默认为 <font style="color:rgb(64, 64, 64);">true</font>。</p>
+<p>const obj = { a: 1 };<br>const desc = Object.getOwnPropertyDescriptor(obj, 'a');<br>// { value: 1, writable: true, enumerable: true, configurable: true }<br>通过 <strong><font style="color:rgb(64, 64, 64);">defineProperty</font></strong> 创建的属性：未指定的特性默认为 <font style="color:rgb(64, 64, 64);">false</font>。</p>
+<p>Object.defineProperty(obj, 'b', { value: 2 });<br>const desc = Object.getOwnPropertyDescriptor(obj, 'b');<br>// { value: 2, writable: false, enumerable: false, configurable: false } 7. 实用方法</p>
+<p><font style="color:rgb(64, 64, 64);">Object.freeze(obj)</font>：设置所有属性为 <font style="color:rgb(64, 64, 64);">writable: false</font> 且 <font style="color:rgb(64, 64, 64);">configurable: false</font>。</p>
+<p><font style="color:rgb(64, 64, 64);">Object.seal(obj)</font>：设置所有属性为 <font style="color:rgb(64, 64, 64);">configurable: false</font>，但保留 <font style="color:rgb(64, 64, 64);">writable</font>。</p>
+<p><font style="color:rgb(64, 64, 64);">Object.preventExtensions(obj)</font>：不允许对象添加新属性(严格模式报错)</p>
+<p>总结</p>
+<p>属性描述符允许精确控制对象属性的行为，适用于实现不可变性、隐藏内部属性或定义动态计算的属性（如访问器）。使用时需注意特性之间的依赖关系（如 <font style="color:rgb(64, 64, 64);">configurable</font> 的限制），避免潜在错误。</p>
+<p>ES5<br>对象原型</p>
+<p>JavaScript 当中每个对象都有一个特殊的内置属性 [[prototype]]，这个特殊的对象可以指向另外一个对象。当我们通过引用对象的属性 key 来获取一个 value 时，它会触发[[Get]]的操作:这个操作会首先检查该对象是否有对应的属性，如果有的话就使用它;如果对象中没有该属性，那么会访问对象[[prototype]]内置属性指向的对象上的属性</p>
+<p>获取原型方式:</p>
+<p>方式一:通过对象的_proto 属性可以获取到(但是这个是早期浏览器自己添加的，存在一定的兼容性问题)</p>
+<p>方式二:通过 Object.getPrototypeOf 方法可以获取到;</p>
+<p>函数原型 prototype(显式原型)</p>
+<p>每个函数都有一个 prototype 属性，它是一个对象，用于实现基于构造函数的继承。使用 <font style="color:rgba(0, 0, 0, 0.85);">new</font> 关键字调用函数创建对象时，新对象的 <font style="color:rgba(0, 0, 0, 0.85);">[[Prototype]]</font> 会指向该函数的 <font style="color:rgba(0, 0, 0, 0.85);">prototype</font> 对象。</p>
+<p>// 方式一：使用对象字面量创建对象<br>const obj1 = {<br>name: 'John'<br>};</p>
+<p>// 方式二：使用构造函数创建对象<br>function Person() {<br>this.age = 30;<br>}<br>Person.prototype.runing=function(){}<br>const obj2 = new Person();<br>obj2.runing()</p>
+<p>// 查看对象的原型<br>console.log(obj1.<strong>proto</strong> === Object.prototype); // true<br>console.log(obj2.<strong>proto</strong> === Person.prototype); // true<br>函数原型上的 constructor</p>
+<p>事实上原型对象上面是有一个属性的:constructor ,默认情况下原型上都会添加一个属性叫做 constructor，这个 constructor 指向当前的函数对象;</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    // 非常重要的属性: constructor, 指向Person函数对象
+    function Person() {
+
+    }
+    
+    // 1.对constructor在prototype上的验证
+    var PersonPrototype = Person.prototype
+    console.log(PersonPrototype)
+    console.log(PersonPrototype.constructor)
+    console.log(PersonPrototype.constructor === Person)
+    
+    console.log(Person.name)
+    console.log(PersonPrototype.constructor.name)
+    
+    // 2.实例对象p
+    var p = new Person()
+    console.log(p.__proto__.constructor)
+    console.log(p.__proto__.constructor.name)
+
+  </script>
+
+
+
+
+<p>原型链<br>继承</p>
+<p>面向对象有三大特性:封装、继承、多态</p>
+<p>封装:我们前面将属性和方法封装到一个类中，可以称之为封装的过程;</p>
+<p>继承:继承是面向对象中非常重要的，不仅仅可以减少重复代码的数量，也是多态前提(纯面向对象中);</p>
+<p>多态:不同的对象在执行时表现出不同的形态;</p>
+<p>原型链</p>
+<p>首先，原型链是 JavaScript 实现继承的机制，对吧？每个对象都有一个原型对象，而原型对象也可能有它自己的原型，这样一层层链接起来就形成了原型链。当访问一个对象的属性时，如果对象本身没有这个属性，就会沿着原型链向上查找，直到找到或者到达原型链的末端（null）。这是原型链的基本概念。</p>
+<p>一、默认原型链</p>
+<p>对象字面量</p>
+<p>let obj = {};<br>// 原型链：obj -> Object.prototype -> null</p>
+<ul>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;obj.__proto__ === Object.prototype&lt;/font&gt;</code></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;Object.prototype.__proto__ === null&lt;/font&gt;</code><br>构造函数创建对象</li>
+</ul>
+<p>function Person() {}<br>let person = new Person();<br>// 原型链：person -> Person.prototype -> Object.prototype -> null</p>
+<ul>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;person.__proto__ === Person.prototype&lt;/font&gt;</code></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;Person.prototype.__proto__ === Object.prototype&lt;/font&gt;</code><br>函数的原型链</li>
+</ul>
+<p>function Foo() {}<br>// 原型链：Foo -> Function.prototype -> Object.prototype -> null</p>
+<ul>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;Foo.__proto__ === Function.prototype&lt;/font&gt;</code></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;Function.prototype.__proto__ === Object.prototype&lt;/font&gt;</code><br>二、自定义原型链</li>
+</ul>
+<p>使用 <strong><font style="color:rgb(64, 64, 64);">Object.create</font></strong></p>
+<p>Object.create() 方法创建一个新对象，该对象继承自指定的原型对象。通过这种方式，proto 对象就拥有了 Parent 构造函数原型上的所有属性和方法。</p>
+<p>const parent = { name: "parent" };<br>const child = Object.create(parent);<br>// 原型链：child -> parent -> Object.prototype -> null</p>
+<ul>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;child.__proto__ === parent&lt;/font&gt;</code><br>手动修改原型</li>
+</ul>
+<p>function Parent() {}<br>function Child() {}<br>Child.prototype = new Parent(); // 不推荐（可能调用父类构造函数两次）<br>Child.prototype.constructor = Child; // 修复 constructor<br>推荐方式：寄生组合继承</p>
+<p>call 方法允许在指定的 this 值和参数的情况下调用函数。通过这种方式，Child 对象可以继承 Parent 对象的属性。</p>
+<p>function inheritPrototype(Child, Parent) {<br>const proto = Object.create(Parent.prototype);<br>proto.constructor = Child;<br>Child.prototype = proto;<br>}<br>//或者使用 Object.defineProperty 设置 constructor<br>//function inheritPrototype(Child, Parent) {<br>// Child.prototype=Object.create(Parent.prototype)<br>// Object.defineProperty(Child.prototype,'constructor',{<br>// enumerable:false,<br>// configurable:true,<br>// writable:true,<br>// value:Child<br>// })<br>// }<br>三、继承的实现</p>
+<p>组合继承（借用构造函数 + 原型链）</p>
+<p>function Parent(name) {<br>this.name = name;<br>}<br>Parent.prototype.sayName = function() { console.log(this.name) };</p>
+<p>function Child(name, age) {<br>Parent.call(this, name); // 继承属性<br>this.age = age;<br>}<br>Child.prototype = new Parent(); // 继承方法（不推荐）<br>Child.prototype.constructor = Child;<br>寄生组合继承（优化版）</p>
+<p>function Child(name, age) {<br>Parent.call(this, name);<br>this.age = age;<br>}<br>inheritPrototype(Child, Parent); // 使用上述工具函数<br>ES6 <strong><font style="color:rgb(64, 64, 64);">class</font></strong> 语法</p>
+<p>class Parent {<br>constructor(name) { this.name = name; }<br>sayName() { console.log(this.name) }<br>}</p>
+<p>class Child extends Parent {<br>constructor(name, age) {<br>super(name); // 必须先调用 super()<br>this.age = age;<br>}<br>}</p>
+<hr>
+<p>对象原型判断方法</p>
+<p>hasOwnProperty:对象是否有某一个属于自己的属性(不是在原型上的属性)</p>
+<p>in/for in 操作符:判断某个属性是否在某个对象或者对象的原型上</p>
+<p>instanceof:用于检测构造函数(Person、Student 类)的 prototype 是否出现在某个实例对象的原型链上</p>
+<p>isPrototypeOf:用于检测某个对象，是否出现在某个实例对象的原型链上</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script src="./js/inherit_utils.js"></script>
+  <script>
+
+    var obj = {
+      name: "why",
+      age: 18
+    }
+    
+    var info = createObject(obj)
+    info.address = "中国"
+    info.intro = "中国大好河山"
+    
+    console.log(info.name, info.address)
+    console.log(info)
+    
+    // 1.hasOwnProperty
+    // console.log(info.hasOwnProperty("name")) // false
+    // console.log(info.hasOwnProperty("address")) // true
+    
+    // 2.in操作符
+    console.log("name" in info)
+    console.log("address" in info)
+    // 注意: for in遍历不仅仅是自己对象上的内容, 也包括原型对象上的内容
+    for (var key in info) {
+      console.log(key)
+    }
+    
+    // 3.instanceof
+    // instanceof用于判断对象和类(构造函数)之间的关系
+    function Person() {}
+    function Student() {}
+    inherit(Student, Person)
+    
+    // stu实例(instance)对象
+    var stu = new Student()
+    console.log(stu instanceof Student)
+    console.log(stu instanceof Person)
+    console.log(stu instanceof Object)
+    console.log(stu instanceof Array)
+    
+    // 4.isPrototypeOf
+    console.log(Student.prototype.isPrototypeOf(stu))
+    console.log(Person.prototype.isPrototypeOf(stu))
+    
+    // 可以用于判断对象之间的继承
+    console.log(obj.isPrototypeOf(info))
+
+  </script>
+
+</body>
+</html>
+
+<p>原型继承关系</p>
+<p>核心概念</p>
+<p>构造函数（如 <font style="color:rgb(64, 64, 64);">Foo</font>、<font style="color:rgb(64, 64, 64);">Object</font>）：通过 <font style="color:rgb(64, 64, 64);">new Function()</font> 创建的函数对象。</p>
+<p>原型对象（<font style="color:rgb(64, 64, 64);">prototype</font>）：每个构造函数都有一个 <font style="color:rgb(64, 64, 64);">prototype</font> 属性，指向其原型对象。</p>
+<p>实例对象（如 <font style="color:rgb(64, 64, 64);">f1</font>、<font style="color:rgb(64, 64, 64);">o1</font>）：通过 <font style="color:rgb(64, 64, 64);">new 构造函数()</font> 创建的对象。</p>
+<p>原型链：通过 <font style="color:rgb(64, 64, 64);"><strong>proto</strong></font> 属性连接，形成对象的继承链。</p>
+<p>关键关系</p>
+<p>构造函数与原型对象：</p>
+<p>构造函数的** ****<font style="color:rgb(64, 64, 64);">prototype</font>** 属性指向其原型对象（如 <font style="color:rgb(64, 64, 64);">Foo.prototype</font>）。</p>
+<p>原型对象的** ****<font style="color:rgb(64, 64, 64);">constructor</font>** 属性指回构造函数（如 <font style="color:rgb(64, 64, 64);">Foo.prototype.constructor === Foo</font>）。</p>
+<p>实例对象与原型链：</p>
+<p>实例的** ****<font style="color:rgb(64, 64, 64);"><strong>proto</strong></font>** 指向其构造函数的原型对象（如 <font style="color:rgb(64, 64, 64);">f1.<strong>proto</strong> === Foo.prototype</font>）。</p>
+<p>原型链终点：所有原型链最终指向 <font style="color:rgb(64, 64, 64);">Object.prototype</font>，其 <font style="color:rgb(64, 64, 64);"><strong>proto</strong></font> 为 <font style="color:rgb(64, 64, 64);">null</font>。</p>
+<p>函数对象的特殊链：</p>
+<p>构造函数的** ****<font style="color:rgb(64, 64, 64);"><strong>proto</strong></font>** 指向 <font style="color:rgb(64, 64, 64);">Function.prototype</font>（如 <font style="color:rgb(64, 64, 64);">Foo.<strong>proto</strong> === Function.prototype</font>）。</p>
+<p><strong><font style="color:rgb(64, 64, 64);">Function</font></strong> <strong>自身</strong>：<font style="color:rgb(64, 64, 64);">Function.<strong>proto</strong> === Function.prototype</font>（因为 <font style="color:rgb(64, 64, 64);">Function</font> 是自身的构造函数）。</p>
+<p><strong><font style="color:rgb(64, 64, 64);">Function.prototype</font></strong> <strong>的原型</strong>：<font style="color:rgb(64, 64, 64);">Function.prototype.<strong>proto</strong> === Object.prototype</font>。</p>
+<p>图示总结</p>
+<p><strong><font style="color:rgb(64, 64, 64);">Foo</font></strong> 的继承链：</p>
+<p>f1（实例） → Foo.prototype → Object.prototype → null<br>↑<br>Foo（构造函数） → Function.prototype → Object.prototype → null<br><strong><font style="color:rgb(64, 64, 64);">Object</font></strong> 的继承链：</p>
+<p>o1（实例） → Object.prototype → null<br>↑<br>Object（构造函数） → Function.prototype → Object.prototype → null<br><strong><font style="color:rgb(64, 64, 64);">Function</font></strong> <strong>的继承链</strong>：</p>
+<p>Function（构造函数） → Function.prototype → Object.prototype → null<br>总结</p>
+<p>构造函数** ****<font style="color:rgb(64, 64, 64);">prototype</font>**：定义原型，供实例继承。</p>
+<p>实例** ****<font style="color:rgb(64, 64, 64);"><strong>proto</strong></font>**：顺着链找，继承属性和方法。</p>
+<p>函数皆** <strong><font style="color:rgb(64, 64, 64);">Function</font></strong> *<strong>*生</strong>：所有构造函数的 <font style="color:rgb(64, 64, 64);"><strong>proto</strong></font> 指向 <font style="color:rgb(64, 64, 64);">Function.prototype</font>。</p>
+<p>终点 **<font style="color:rgb(64, 64, 64);">Object.prototype</font>**：万物归宗，原型链尽头是 <font style="color:rgb(64, 64, 64);">null</font>。</p>
+<p>通过这张图，可以清晰理解 JavaScript 中对象、构造函数、原型之间的层级关系与继承机制。</p>
+<p>ES6 新增特性<br>class 定义类</p>
+<p>ES6 引入了 <font style="color:rgb(64, 64, 64);">class</font> 关键字，提供了更清晰的语法糖来实现面向对象编程，其底层仍基于原型继承。</p>
+<ol>
+<li>类定义与构造函数</li>
+</ol>
+<p>定义类：使用 class 关键字，后跟类名和 {}。</p>
+<p>构造函数：constructor 方法用于初始化实例，未显式定义则默认生成空构造函数。</p>
+<p>class Person {<br>constructor(name) {<br>this.name = name; // 实例属性<br>}<br>sayHello() {<br>console.log(<code>Hello, $&#123;this.name&#125;!</code>);<br>}<br>}<br>const alice = new Person("Alice");<br>alice.sayHello(); // Hello, Alice!<br>当我们通过 new 关键字操作类的时候，会调用这个 constructor 函数，并且执行如下操作:</p>
+<p>1.在内存中创建一个新的对象(空对象);</p>
+<p>2.这个对象内部的[[prototype]]属性会被赋值为该类的 prototype 属性;</p>
+<p>3.构造函数内部的 this，会指向创建出来的新对象;</p>
+<p>4.执行构造函数的内部代码(函数体代码)</p>
+<p>5.如果构造函数没有返回非空对象，则返回创建出来的新对象;</p>
+<ol start="2">
+<li>继承（extends 和 super）</li>
+</ol>
+<p>继承父类：通过 extends 实现继承。</p>
+<p>调用父类构造函数：子类构造函数必须调用 super() 后才能使用 this。</p>
+<p>class Student extends Person {<br>constructor(name, grade) {<br>super(name);<br>this.grade = grade;<br>}<br>study() {<br>console.log(<code>$&#123;this.name&#125; is studying in grade $&#123;this.grade&#125;.</code>);<br>}<br>}<br>const bob = new Student("Bob", 10);<br>bob.study(); // Bob is studying in grade 10.</p>
+<ol start="3">
+<li>静态方法与属性（static）</li>
+</ol>
+<p>静态成员：属于类本身，通过类名访问，实例无法调用。</p>
+<p>class MathUtils {<br>static PI = 3.14159; // 静态属性（ES2022+）<br>static square(x) {<br>return x * x;<br>}<br>}<br>console.log(MathUtils.square(5)); // 25</p>
+<ol start="4">
+<li>Getter 和 Setter</li>
+</ol>
+<p>访问器属性：通过 get 和 set 定义，控制属性的读取和赋值。</p>
+<p>class Circle {<br>constructor(radius) {<br>this._radius = radius;<br>}<br>get area() {<br>return Math.PI * this._radius ** 2;<br>}<br>set radius(value) {<br>if (value > 0) this._radius = value;<br>}<br>}<br>const c = new Circle(5);<br>console.log(c.area); // 78.54...<br>c.radius = 10; // 调用 setter</p>
+<ol start="5">
+<li>私有字段（ES2022+）</li>
+</ol>
+<p>私有成员：以 # 开头，仅在类内部访问。</p>
+<p>class Counter {<br>#count = 0; // 私有字段<br>increment() {<br>this.#count++;<br>}<br>get value() {<br>return this.#count;<br>}<br>}<br>const counter = new Counter();<br>counter.increment();<br>console.log(counter.value); // 1</p>
+<ol start="6">
+<li>类表达式</li>
+</ol>
+<p>匿名类：类可作为表达式赋值给变量。</p>
+<p>const Animal = class {<br>constructor(name) {<br>this.name = name;<br>}<br>};</p>
+<ol start="7">
+<li>注意事项</li>
+</ol>
+<p>无函数提升：类声明不会提升，需先定义后使用。</p>
+<p>方法无逗号：类方法间无需逗号分隔。</p>
+<p>原型方法：类方法定义在原型上，实例共享方法以节省内存。</p>
+<p>总结对比（ES6 vs ES5）</p>
+<p>特性 ES6 Class ES5 实现方式<br>定义 class MyClass {} 构造函数 function MyClass() {}<br>继承 extends<br> 和 super prototype<br> 和 Object.create<br>静态方法 static<br> 关键字 直接赋值：MyClass.staticMethod<br>私有性（ES2022+） #<br> 前缀 闭包或约定（如 _name<br>）<br>ES6 类语法更简洁直观，但本质仍是基于原型的继承，熟悉原型链有助于深入理解类的工作机制。</p>
+<p>多态</p>
+<p>多态是面向对象编程中的一个概念,多态的定义应该是指同一个方法在不同对象中有不同的实现。也就是说，不同的对象可以对同一个方法调用做出不同的响应。JS 中的多态可以通过两种方式实现：基于原型链继承的方法重写，以及基于类型的方法调用。这两种方式都允许不同对象对同一方法调用做出不同响应，体现了多态性。</p>
+<ol>
+<li>基于原型链继承的方法重写（ES6 类语法）</li>
+</ol>
+<p>通过继承父类并重写方法，子类实例调用方法时执行自身的实现。</p>
+<p>class Animal {<br>speak() {<br>console.log('动物叫');<br>}<br>}</p>
+<p>class Dog extends Animal {<br>speak() {<br>console.log('汪汪'); // 重写父类方法<br>}<br>}</p>
+<p>class Cat extends Animal {<br>speak() {<br>console.log('喵喵'); // 重写父类方法<br>}<br>}</p>
+<p>const animals = [new Dog(), new Cat()];<br>animals.forEach(animal => animal.speak()); // 输出：汪汪 喵喵 2. 基于类型的灵活多态</p>
+<p>只要对象具有所需方法，无论是否继承同一父类，均可实现多态。</p>
+<p>const duck = {<br>speak() {<br>console.log('嘎嘎'); // 独立对象的方法<br>}<br>};</p>
+<p>const robot = {<br>speak() {<br>console.log('哔哔'); // 独立对象的方法<br>}<br>};</p>
+<p>function makeSound(entity) {<br>entity.speak(); // 依赖鸭子类型<br>}</p>
+<p>makeSound(duck); // 嘎嘎<br>makeSound(robot); // 哔哔<br>总结：</p>
+<p>继承与重写：子类覆盖父类方法，调用时根据实例类型执行对应方法。</p>
+<p>基于类型的灵活多态：关注对象是否具备方法而非继承关系，提升灵活性。</p>
+<p>动态特性：JavaScript 的动态类型系统天然支持多态，无需显式接口定义。</p>
+<p>优势：增强代码扩展性和复用性，新增类型时无需修改调用方代码，符合开闭原则。</p>
+<p>apply,call 和 bind 的实现和封装</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+
+    // new Function()
+    // foo.__proto__ === Function.prototype
+    function foo(name, age) {
+      console.log(this, name, age)
+    }
+    
+    // foo函数可以通过apply/call
+    // foo.apply("aaa", ["why", 18])
+    // foo.call("bbb", "kobe", 30)
+    
+    // 1.封装思想
+    // 1.1.封装到独立的函数中
+    function execFn(thisArg, otherArgs, fn) {
+      // 1.获取thisArg, 并且确保是一个对象类型
+      thisArg = (thisArg === null || thisArg === undefined)? window: Object(thisArg)
+    
+      // thisArg.fn = this
+      Object.defineProperty(thisArg, "fn", {
+        enumerable: false,
+        configurable: true,
+        value: fn
+      })
+    
+      // 执行代码
+      thisArg.fn(...otherArgs)
+    
+      delete thisArg.fn
+    }
+    
+    // 1.2. 封装原型中
+    Function.prototype.hyexec = function(thisArg, otherArgs) {
+      // 1.获取thisArg, 并且确保是一个对象类型
+      thisArg = (thisArg === null || thisArg === undefined)? window: Object(thisArg)
+    
+      // thisArg.fn = this
+      Object.defineProperty(thisArg, "fn", {
+        enumerable: false,
+        configurable: true,
+        value: this
+      })
+      thisArg.fn(...otherArgs)
+    
+      delete thisArg.fn
+    }
+
+
+    // 1.给函数对象添加方法: hyapply
+    Function.prototype.hyapply = function(thisArg, otherArgs) {
+      this.hyexec(thisArg, otherArgs)
+    }
+    // 2.给函数对象添加方法: hycall
+    Function.prototype.hycall = function(thisArg, ...otherArgs) {
+      this.hyexec(thisArg, otherArgs)
+    }
+    
+    foo.hyapply({ name: "why" }, ["james", 25])
+    foo.hyapply(123, ["why", 18])
+    foo.hyapply(null, ["kobe", 30])
+    
+    foo.hycall({ name: "why" }, "james", 25)
+    foo.hycall(123, "why", 18)
+    foo.hycall(null, "kobe", 30)
+
+
+  </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+
+    // apply/call
+    function foo(name, age, height, address) {
+      console.log(this, name, age, height, address)
+    }
+    
+    // Function.prototype
+    // var newFoo = foo.bind({ name: "why" }, "why", 18)
+    // newFoo(1.88)
+    
+    // 实现hybind函数
+    Function.prototype.hybind = function(thisArg, ...otherArgs) {
+      // console.log(this) // -> foo函数对象
+      thisArg = thisArg === null || thisArg === undefined ? window: Object(thisArg)
+      Object.defineProperty(thisArg, "fn", {
+        enumerable: false,
+        configurable: true,
+        writable: false,
+        value: this
+      })
+    
+      return (...newArgs) => {
+        // var allArgs = otherArgs.concat(newArgs)
+        var allArgs = [...otherArgs, ...newArgs]
+        thisArg.fn(...allArgs)
+      }
+    }
+    
+    var newFoo = foo.hybind("abc", "kobe", 30)
+    newFoo(1.88, "广州市")
+    newFoo(1.88, "广州市")
+    newFoo(1.88, "广州市")
+    newFoo(1.88, "广州市")
+
+  </script>
+
+</body>
+</html>
+
+<p>const 和 let</p>
+<p>在 JavaScript 中，<font style="color:rgb(64, 64, 64);">const</font>和<font style="color:rgb(64, 64, 64);">let</font>是 ES6 引入的两种变量声明方式，提供了更清晰的变量作用域和更严格的语法规则，取代了传统的<font style="color:rgb(64, 64, 64);">var</font>。</p>
+<ol>
+<li>作用域</li>
+</ol>
+<p><strong><font style="color:rgb(64, 64, 64);">let</font></strong> 和 <strong><font style="color:rgb(64, 64, 64);">const</font></strong> 是块级作用域：<br>在<font style="color:rgb(64, 64, 64);">{}</font>（如<font style="color:rgb(64, 64, 64);">if</font>、<font style="color:rgb(64, 64, 64);">for</font>、函数等代码块）内部声明的变量，仅在块内有效。</p>
+<p>if (true) {<br>let a = 10;<br>const b = 20;<br>}<br>console.log(a); // 报错：a 未定义<br>console.log(b); // 报错：b 未定义<br><strong><font style="color:rgb(64, 64, 64);">var</font></strong> <strong>是函数作用域</strong>：<br>变量在整个函数内有效，容易导致变量泄漏到外部作用域。</p>
+<ol start="2">
+<li>变量提升与暂时性死区（TDZ）</li>
+</ol>
+<p>变量提升存在，但存在暂时性死区：<br><font style="color:rgb(64, 64, 64);">let</font>和<font style="color:rgb(64, 64, 64);">const</font>声明的变量会提升到作用域顶部，但在声明前访问会触发 TDZ（报错）。</p>
+<p>console.log(a); // 报错（TDZ）<br>let a = 10;<br><strong><font style="color:rgb(64, 64, 64);">var</font></strong> 的变量提升：<br><font style="color:rgb(64, 64, 64);">var</font>声明的变量会初始化为<font style="color:rgb(64, 64, 64);">undefined</font>，无 TDZ。</p>
+<p>console.log(b); // 输出 undefined<br>var b = 10; 3. 重复声明</p>
+<p><strong><font style="color:rgb(64, 64, 64);">let</font></strong> 和 <strong><font style="color:rgb(64, 64, 64);">const</font></strong> 禁止重复声明：<br>同一作用域内不可重复声明同名变量。</p>
+<p>let x = 1;<br>let x = 2; // 报错：x 已声明<br><strong><font style="color:rgb(64, 64, 64);">var</font></strong> 允许重复声明：<br>后续声明会覆盖前者。</p>
+<p>var y = 1;<br>var y = 2; // 合法 4. <strong><font style="color:rgb(64, 64, 64);">const</font></strong> 的特殊性</p>
+<p>声明时必须初始化：</p>
+<p>const PI = 3.14; // 正确<br>const PI; // 报错：未初始化<br>不可重新赋值：<br>基本类型值不可变，引用类型（对象、数组）的属性可修改。</p>
+<p>const arr = [1, 2, 3];<br>arr.push(4); // 允许<br>arr = [5]; // 报错：不可重新赋值</p>
+<p>const obj = { name: "Alice" };<br>obj.name = "Bob"; // 允许 5. 使用场景</p>
+<p>优先使用** ****<font style="color:rgb(64, 64, 64);">const</font>**：<br>默认用<font style="color:rgb(64, 64, 64);">const</font>声明变量，除非需要重新赋值。</p>
+<p>const API_KEY = "abc123"; // 常量</p>
+<p>需要重新赋值时用 **<font style="color:rgb(64, 64, 64);">let</font>**：</p>
+<p>let count = 0;<br>count = 1; // 合法<br>避免使用** ****<font style="color:rgb(64, 64, 64);">var</font>**：<br><font style="color:rgb(64, 64, 64);">var</font>的作用域和提升行为容易导致错误。</p>
+<ol start="6">
+<li>循环中的表现</li>
+</ol>
+<p><strong><font style="color:rgb(64, 64, 64);">let</font></strong> 在循环中绑定每次迭代：<br>解决<font style="color:rgb(64, 64, 64);">var</font>在循环中共享变量的问题。</p>
+<p>for (let i = 0; i < 3; i++) {<br>setTimeout(() => console.log(i), 100); // 输出 0,1,2<br>}<br><strong><font style="color:rgb(64, 64, 64);">const</font></strong> 在循环中的特殊行为：<br>每次迭代创建一个新变量（适用于<font style="color:rgb(64, 64, 64);">for...of</font>/<font style="color:rgb(64, 64, 64);">for...in</font>）。</p>
+<p>for (const num of [1, 2, 3]) {<br>console.log(num); // 输出 1,2,3<br>}<br>总结</p>
+<p>**<font style="color:rgb(64, 64, 64);">const</font>**：声明常量，不可重新赋值，引用类型属性可变。</p>
+<p>**<font style="color:rgb(64, 64, 64);">let</font>**：声明可变的块级变量。</p>
+<p>块级作用域、TDZ、禁止重复声明使代码更安全、可维护。</p>
+<p>替代**<font style="color:rgb(64, 64, 64);">var</font>**：推荐始终使用<font style="color:rgb(64, 64, 64);">const</font>和<font style="color:rgb(64, 64, 64);">let</font>，避免<font style="color:rgb(64, 64, 64);">var</font>。</p>
+<p>ES6~ES13<br>模板字符串</p>
+<p>JavaScript 中的模板字符串和标签模板字符串是 ES6 引入的重要特性，极大提升了字符串处理的灵活性和功能性。</p>
+<p>模板字符串（Template Strings）</p>
+<p>基本语法：</p>
+<ul>
+<li><p><font style="color:rgb(64, 64, 64);">使用反引号（</font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt; &lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">）包裹字符串，支持多行内容和插值表达式。</font></p>
+</li>
+<li><p><font style="color:rgb(64, 64, 64);">插值通过 </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;$&#123;expression&#125;&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);"> 实现，表达式结果自动转换为字符串并嵌入。</font><br>const name = "Alice";<br>const greeting = <code>Hello, $&#123;name&#125;!</code>; // "Hello, Alice!"<br>多行字符串：</p>
+</li>
+<li><p><font style="color:rgb(64, 64, 64);">直接换行编写，保留换行符和缩进。</font><br>const html = `</p>
+<div>
+  <p>Welcome</p>
+</div>
+`;
+表达式求值：
+</li>
+<li><p><font style="color:rgb(64, 64, 64);">支持任意 JavaScript 表达式，包括函数调用、运算等。</font><br>const sum = 3 + 5 = ${3 + 5}; // "3 + 5 = 8"</p>
+</li>
+</ul>
+<p>标签模板字符串（Tagged Templates）</p>
+<p>基本概念：</p>
+<p>通过标签函数处理模板字符串，语法为：<font style="color:rgb(64, 64, 64);">tagFunction</font>string text ${expression}...``。</p>
+<p>标签函数接收字符串数组和插值参数，返回自定义结果。</p>
+<p>参数解析：</p>
+<p>第一个参数：字符串数组（按插值位置分割）。</p>
+<p>后续参数：按顺序传入插值表达式的计算结果。</p>
+<p>示例：</p>
+<p>function tag(strings, ...values) {<br>console.log(strings); // ["Hello ", ", age ", ""]<br>console.log(values); // ["Alice", 30]<br>}<br>tag<code>Hello $&#123;&quot;Alice&quot;&#125;, age $&#123;30&#125;</code>;<br>应用场景：</p>
+<p>HTML 转义：防止 XSS 攻击。</p>
+<p>function safeHtml(strings, ...values) {<br>let result = "";<br>for (let i = 0; i < strings.length; i++) {<br>result += strings[i];<br>if (i < values.length) {<br>result += String(values[i])<br>.replace(/&/g, "&amp;")<br>.replace(/}<br>}<br>return result;<br>}<br>const userInput = "<script>alert('xss')</script>“;<br>safeHtml<code>&lt;div&gt;$&#123;userInput&#125;&lt;/div&gt;</code>; &#x2F;&#x2F; 转义后输出<br>国际化（i18n）：动态翻译。</p>
+<p>i18nWelcome to ${siteName}. You have ${count} messages.;</p>
+<p>样式组件（如 styled-components）：</p>
+<p>const Button &#x3D; styled.button<code>  color: $&#123;props =&gt; props.primary ? &#39;white&#39; : &#39;black&#39;&#125;;</code>;<br>原始字符串：</p>
+<ul>
+<li><font style="color:rgb(64, 64, 64);">通过 </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;strings.raw&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);"> 获取未转义的原始内容（如保留 </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;\n&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);"> 而非换行）。</font><br>function showRaw(strings) {<br>return strings.raw[0];<br>}<br>showRaw<code>Hello\nWorld</code>; &#x2F;&#x2F; “Hello\nWorld”（实际输出包含两个反斜杠）<br>返回值灵活性：</li>
+</ul>
+<p>可返回任意类型（字符串、对象、组件等）。</p>
+<p>总结</p>
+<p>特性 模板字符串 标签模板字符串<br>语法 反引号包裹 <font style="color:rgb(64, 64, 64);">${}</font><br>插值 函数名后跟模板字符串<br>多行支持 是 是<br>插值处理 自动转换为字符串 由标签函数自定义处理<br>应用场景 动态字符串拼接、多行文本 HTML 转义、国际化、DSL、样式组件等<br>原始字符串访问 无 通过 <font style="color:rgb(64, 64, 64);">strings.raw</font><br>获取<br>返回值 字符串 任意类型（由标签函数决定）<br>总结：模板字符串简化了字符串拼接和多行处理，而标签模板字符串通过自定义函数扩展了其功能，适用于安全转义、国际化、DSL 等复杂场景。</p>
+<p>深浅拷贝理解</p>
+<p>在 JavaScript 中，对象的拷贝分为浅拷贝和深拷贝，主要区别在于对引用类型数据的处理方式。</p>
+<p>浅拷贝（Shallow Copy）</p>
+<p>特点：仅复制对象的顶层属性，若属性是引用类型（如对象、数组），则拷贝的是内存地址（新旧对象共享嵌套的引用类型数据）。</p>
+<p>实现方式：</p>
+<p>展开运算符 <strong><font style="color:rgb(64, 64, 64);">…</font></strong></p>
+<p>const obj &#x3D; { a: 1, b: { c: 2 } };<br>const shallowCopy &#x3D; { …obj };<br><strong><font style="color:rgb(64, 64, 64);">Object.assign()</font></strong></p>
+<p>const shallowCopy &#x3D; Object.assign({}, obj);<br>数组方法（如 <font style="color:rgb(64, 64, 64);">slice()</font>、<font style="color:rgb(64, 64, 64);">concat()</font>、展开运算符）：</p>
+<p>const arr &#x3D; [1, { x: 2 }];<br>const shallowArr &#x3D; arr.slice();<br>const shallowArr2 &#x3D; […arr];<br>注意事项：</p>
+<p>修改嵌套的引用类型数据会影响原对象：</p>
+<p>shallowCopy.b.c &#x3D; 3;<br>console.log(obj.b.c); &#x2F;&#x2F; 3（原对象被修改）</p>
+<p>深拷贝（Deep Copy）</p>
+<p>特点：完全复制对象及其嵌套的引用类型数据，新旧对象完全独立。</p>
+<p>实现方式：</p>
+<p><strong><font style="color:rgb(64, 64, 64);">JSON.parse(JSON.stringify(obj))</font></strong><br>局限：</p>
+<p>无法处理函数、<font style="color:rgb(64, 64, 64);">undefined</font>、<font style="color:rgb(64, 64, 64);">Symbol</font>。</p>
+<p>日期对象会被转为字符串。</p>
+<p>循环引用会报错。</p>
+<p>const deepCopy &#x3D; JSON.parse(JSON.stringify(obj));<br>递归实现<br>基础版本（未处理特殊对象和循环引用）：</p>
+<p>function deepClone(obj) {<br>if (obj &#x3D;&#x3D;&#x3D; null || typeof obj !&#x3D;&#x3D; “object”) return obj;<br>const clone &#x3D; Array.isArray(obj) ? [] : {}<br>for (const key in obj) {<br>if(obj.hasOwnProperty(key)){<br>clone[key] &#x3D; deepClone(obj[key])<br>}<br>}<br>return clone<br>}</p>
+<pre><code class="hljs">const info = &#123;
+  name: &#39;MirZ&#39;,
+  age: 18,
+  friend: &#123;
+    name: &#39;LadyJ&#39;,
+    address: &#123;
+      detail: &#39;郑州&#39;,
+      goHome: function () &#123;
+        console.log(&#39;go郑州&#39;);
+      &#125;
+    &#125;
+  &#125;
+&#125;
+const newInfo = deepClone(info)
+newInfo.friend.name = &#39;LadyY&#39;
+newInfo.friend.address.detail = &#39;安徽&#39;
+//此处函数未被深拷贝,而是指向了一个新的函数,所以不影响原函数的指向
+newInfo.friend.address.goHome = function () &#123;
+  console.log(&#39;go安徽&#39;);
+&#125;
+
+console.log(info);
+info.friend.address.goHome()
+console.log(newInfo);
+newInfo.friend.address.goHome()
+//如有set,map,symbol需进一步处理
+</code></pre>
+<p>function deepClone(obj) {<br>&#x2F;&#x2F; 如果值是 Symbol 的类型<br>if (typeof obj &#x3D;&#x3D;&#x3D; “symbol”) {<br>return Symbol(obj.description)<br>}<br>&#x2F;&#x2F; 如果是 set 类型,map 也进行类似处理<br>if (obj instanceof Set) {<br>const newSet &#x3D; new Set()<br>for (const setItem of obj) {<br>newSet.add(deepCopy(setItem))<br>}<br>return newSet<br>}<br>if (obj &#x3D;&#x3D;&#x3D; null || typeof obj !&#x3D;&#x3D; “object”) return obj;<br>const clone &#x3D; Array.isArray(obj) ? [] : {}<br>&#x2F;&#x2F;此处只会遍历 key,不会遍历 symbol[key]<br>for (const key in obj) {<br>if (obj.hasOwnProperty(key)) {<br>clone[key] &#x3D; deepClone(obj[key])<br>}<br>}<br>&#x2F;&#x2F; 单独遍历 symbol<br>const symbolKeys &#x3D; Object.getOwnPropertySymbols(obj)<br>for (const symbolKey of symbolKeys) {<br>clone[Symbol(symbolKey.description)] &#x3D; deepCopy(obj[symbolKey])<br>}</p>
+<pre><code class="hljs">  return clone
+&#125;
+
+const info = &#123;
+  name: &#39;MirZ&#39;,
+  age: 18,
+  friend: &#123;
+    name: &#39;LadyJ&#39;,
+    address: &#123;
+      detail: &#39;郑州&#39;,
+      goHome: function () &#123;
+        console.log(&#39;go郑州&#39;);
+      &#125;
+    &#125;
+  &#125;
+&#125;
+const newInfo = deepClone(info)
+newInfo.friend.name = &#39;LadyY&#39;
+newInfo.friend.address.detail = &#39;安徽&#39;
+//此处函数未被深拷贝,而是指向了一个新的函数,所以不影响原函数的指向
+newInfo.friend.address.goHome = function () &#123;
+  console.log(&#39;go安徽&#39;);
+&#125;
+
+console.log(info);
+info.friend.address.goHome()
+console.log(newInfo);
+newInfo.friend.address.goHome()
+</code></pre>
+<p>处理循环引用和特殊对象<br>使用 <font style="color:rgb(64, 64, 64);">WeakMap</font> 缓存已拷贝对象，并处理 <font style="color:rgb(64, 64, 64);">Date</font>、<font style="color:rgb(64, 64, 64);">RegExp</font> 等：</p>
+<p>function deepClone(obj, hash &#x3D; new WeakMap()) {<br>if (obj &#x3D;&#x3D;&#x3D; null || typeof obj !&#x3D;&#x3D; “object”) return obj;<br>&#x2F;&#x2F;判断此次深拷贝的对象是否在 hash 中存在,如果存在直接返回<br>if (hash.has(obj)) return hash.get(obj);</p>
+<pre><code class="hljs">  let clone;
+  if (obj instanceof Date) &#123;
+    clone = new Date(obj.getTime());
+  &#125; else if (obj instanceof RegExp) &#123;
+    clone = new RegExp(obj.source, obj.flags);
+  &#125; else &#123;
+    clone = Array.isArray(obj) ? [] : &#123;&#125;;
+  &#125;
+  //根据obj存储clone
+  hash.set(obj, clone);
+  for (let key in obj) &#123;
+    if (obj.hasOwnProperty(key)) &#123;
+      clone[key] = deepClone(obj[key], hash);
+    &#125;
+  &#125;
+  return clone;
+&#125;
+
+const info = &#123;
+  name: &#39;MirZ&#39;,
+  age: 18
+&#125;
+info.self = info
+console.log(info);
+const newInfo = deepClone(info)
+newInfo.name = &#39;MIRZ&#39;
+console.log(newInfo);
+</code></pre>
+<p>第三方库<br>使用 <font style="color:rgb(64, 64, 64);">lodash</font> 的 <font style="color:rgb(64, 64, 64);">_.cloneDeep()</font>：</p>
+<p>import _ from “lodash”;<br>const deepCopy &#x3D; _.cloneDeep(obj);<br>使用场景</p>
+<p>浅拷贝：适用于对象结构简单，无嵌套引用或明确无需隔离的场景。</p>
+<p>深拷贝：适用于对象结构复杂，需完全隔离新旧对象的场景（如状态管理、数据持久化）。</p>
+<p>注意事项</p>
+<p>循环引用：递归深拷贝需使用缓存（如 <font style="color:rgb(64, 64, 64);">WeakMap</font>）避免无限递归。</p>
+<p>特殊对象：如 <font style="color:rgb(64, 64, 64);">Date</font>、<font style="color:rgb(64, 64, 64);">RegExp</font>、<font style="color:rgb(64, 64, 64);">Set</font>、<font style="color:rgb(64, 64, 64);">Map</font> 等需单独处理。</p>
+<p>性能：深拷贝对大型对象可能有性能开销，需权衡使用。</p>
+<p>Symbol</p>
+<p>JavaScript 中的 Symbol 是 ES6 引入的一种新的原始数据类型，用于表示唯一的标识符。</p>
+<ol>
+<li>Symbol 的基本特性</li>
+</ol>
+<p>唯一性：每个 Symbol 都是唯一的，即使描述相同。</p>
+<p>let sym1 &#x3D; Symbol(‘key’);<br>let sym2 &#x3D; Symbol(‘key’);<br>console.log(sym1 &#x3D;&#x3D;&#x3D; sym2); &#x2F;&#x2F; false<br>原始类型：不能使用 <font style="color:rgb(64, 64, 64);">new</font> 创建，直接调用 <font style="color:rgb(64, 64, 64);">Symbol()</font>。</p>
+<p>let sym &#x3D; Symbol(); &#x2F;&#x2F; 正确<br>let err &#x3D; new Symbol(); &#x2F;&#x2F; TypeError<br>描述参数：用于调试，不影响唯一性。</p>
+<p>console.log(Symbol(‘desc’).toString()); &#x2F;&#x2F; Symbol(desc) 2. Symbol 作为对象属性</p>
+<p>定义属性：用方括号语法 <font style="color:rgb(64, 64, 64);">[]</font>。</p>
+<p>const sym &#x3D; Symbol(‘key’);<br>const obj &#x3D; {<br>[sym]: ‘value’<br>};<br>console.log(obj[sym]); &#x2F;&#x2F; ‘value’<br>不可枚举性：Symbol 属性不会被常规方法遍历（如 <font style="color:rgb(64, 64, 64);">for…in</font>、<font style="color:rgb(64, 64, 64);">Object.keys()</font>）。</p>
+<p>获取 Symbol 属性：使用 <font style="color:rgb(64, 64, 64);">Object.getOwnPropertySymbols()</font>。</p>
+<p>反射方法：<font style="color:rgb(64, 64, 64);">Reflect.ownKeys()</font> 返回所有键（包括 Symbol）。</p>
+<ol start="3">
+<li>全局 Symbol 注册表</li>
+</ol>
+<p>共享 Symbol：通过 <font style="color:rgb(64, 64, 64);">Symbol.for(key)</font> 创建或获取全局 Symbol。</p>
+<p>const sym1 &#x3D; Symbol.for(‘globalKey’);<br>const sym2 &#x3D; Symbol.for(‘globalKey’);<br>console.log(sym1 &#x3D;&#x3D;&#x3D; sym2); &#x2F;&#x2F; true<br>查询全局键：<font style="color:rgb(64, 64, 64);">Symbol.keyFor(sym)</font> 返回 Symbol 的全局键。</p>
+<p>console.log(Symbol.keyFor(sym1)); &#x2F;&#x2F; ‘globalKey’ 4. 内置 Symbol 值</p>
+<p>用于修改对象的默认行为，常见内置 Symbol：</p>
+<p>Symbol.iterator：定义对象的迭代器。</p>
+<p>const iterable &#x3D; {<br>[Symbol.iterator]: function* () { yield 1; yield 2; }<br>};<br>console.log([…iterable]); &#x2F;&#x2F; [1, 2]<br>Symbol.toStringTag：定制 <font style="color:rgb(64, 64, 64);">toString()</font> 输出。</p>
+<p>const obj &#x3D; { [Symbol.toStringTag]: ‘MyObject’ };<br>console.log(obj.toString()); &#x2F;&#x2F; [object MyObject]<br>Symbol.hasInstance：自定义 <font style="color:rgb(64, 64, 64);">instanceof</font> 行为。</p>
+<ol start="5">
+<li>应用场景</li>
+</ol>
+<p>唯一属性名：避免对象属性名冲突。</p>
+<p>const cacheKey &#x3D; Symbol(‘cache’);<br>function getData(obj) {<br>if (!obj[cacheKey]) {<br>obj[cacheKey] &#x3D; computeExpensiveValue();<br>}<br>return obj[cacheKey];<br>}<br>模拟私有属性：通过 Symbol 隐藏属性（非绝对私有，但需主动获取)</p>
+<p>const _private &#x3D; Symbol(‘private’);<br>class MyClass {<br>constructor() { this[_private] &#x3D; ‘secret’; }<br>getSecret() { return this[_private]; }<br>}<br>自定义语言行为：如迭代、类型转换等。</p>
+<ol start="6">
+<li>注意事项</li>
+</ol>
+<p>类型转换：</p>
+<p>Symbol 不能隐式转字符串（需显式调用 <font style="color:rgb(64, 64, 64);">.toString()</font> 或 <font style="color:rgb(64, 64, 64);">String()</font>）。</p>
+<p>可转换为布尔值（始终为 <font style="color:rgb(64, 64, 64);">true</font>）。</p>
+<p>序列化：Symbol 属性不会被 <font style="color:rgb(64, 64, 64);">JSON.stringify()</font> 处理。</p>
+<p>兼容性：ES6+ 支持，旧环境需通过 Babel 等工具转译。</p>
+<p>总结</p>
+<p>Symbol 的主要用途是提供唯一的标识符，解决命名冲突，并允许开发者介入 JavaScript 的内部行为。合理使用 Symbol 可以提升代码的健壮性和扩展性，但需注意其不可枚举性和转换规则。</p>
+<p>Set-Map</p>
+<p>Set 和 Map 都是 ES6 引入的，用来处理复杂的数据集合</p>
+<p>Set（集合）</p>
+<p>基本特性</p>
+<p>成员唯一性：自动去重，值不能重复（基于 <font style="color:rgb(64, 64, 64);">&#x3D;&#x3D;&#x3D;</font>，但 <font style="color:rgb(64, 64, 64);">NaN</font> 视为相等）。</p>
+<p>无序性：元素无插入顺序概念，但实际迭代时按插入顺序遍历。</p>
+<p>键与值相同：<font style="color:rgb(64, 64, 64);">Set</font> 的键和值相等，即 <font style="color:rgb(64, 64, 64);">key &#x3D;&#x3D;&#x3D; value</font>。</p>
+<p>创建与操作</p>
+<p>const set &#x3D; new Set();<br>set.add(1); &#x2F;&#x2F; 添加元素<br>set.add(2).add(3); &#x2F;&#x2F; 链式调用<br>set.delete(1); &#x2F;&#x2F; 删除元素，返回布尔值表示是否成功<br>set.has(2); &#x2F;&#x2F; 检查存在性，返回 true&#x2F;false<br>set.size; &#x2F;&#x2F; 获取元素数量<br>set.clear(); &#x2F;&#x2F; 清空集合<br>迭代方法</p>
+<p><font style="color:rgb(64, 64, 64);">keys()</font>、<font style="color:rgb(64, 64, 64);">values()</font>：返回迭代器（因为键值相同，两者等价）。</p>
+<p><font style="color:rgb(64, 64, 64);">entries()</font>：返回 <font style="color:rgb(64, 64, 64);">[value, value]</font> 的迭代器。</p>
+<p><font style="color:rgb(64, 64, 64);">forEach()</font>：遍历元素。</p>
+<p>for (const item of set) { &#x2F;_ 直接迭代 _&#x2F; }<br>set.forEach(v &#x3D;&gt; console.log(v));<br>应用场景</p>
+<p>数组去重：</p>
+<p>const arr &#x3D; [1, 2, 2, 3];<br>&#x2F;&#x2F;const uniqueArr &#x3D; Array.from(new Set(arr)) &#x2F;&#x2F; [1, 2, 3]<br>const uniqueArr &#x3D; […new Set(arr)]; &#x2F;&#x2F; [1, 2, 3]<br>集合运算（交集、并集、差集）：</p>
+<p>&#x2F;&#x2F; 交集<br>const intersection &#x3D; new Set([…setA].filter(x &#x3D;&gt; setB.has(x)));<br>&#x2F;&#x2F; 并集<br>const union &#x3D; new Set([…setA, …setB]);<br>&#x2F;&#x2F; 差集（A - B）<br>const difference &#x3D; new Set([…setA].filter(x &#x3D;&gt; !setB.has(x)));<br>临时存储唯一值：用于快速检查元素是否存在。</p>
+<ol start="2">
+<li>Map（映射）</li>
+</ol>
+<p>基本特性</p>
+<p>键值对结构：存储键值对的集合，键可以是任意类型（对象、函数等）。</p>
+<p>有序性：元素按插入顺序迭代。</p>
+<p>高效查找：基于哈希表实现，查找速度接近 O(1)。</p>
+<p>创建与操作</p>
+<p>const map &#x3D; new Map();<br>map.set(‘key1’, ‘value1’); &#x2F;&#x2F; 添加键值对<br>map.set({}, ‘objectKey’); &#x2F;&#x2F; 对象作为键<br>map.get(‘key1’); &#x2F;&#x2F; 获取值，若不存在返回 undefined<br>map.has(‘key1’); &#x2F;&#x2F; 检查键是否存在<br>map.delete(‘key1’); &#x2F;&#x2F; 删除键值对<br>map.size; &#x2F;&#x2F; 获取键值对数量<br>map.clear(); &#x2F;&#x2F; 清空映射<br>迭代方法</p>
+<p><font style="color:rgb(64, 64, 64);">keys()</font>：返回键的迭代器。</p>
+<p><font style="color:rgb(64, 64, 64);">values()</font>：返回值的迭代器。</p>
+<p><font style="color:rgb(64, 64, 64);">entries()</font>：返回 <font style="color:rgb(64, 64, 64);">[key, value]</font> 的迭代器（默认迭代方式）。</p>
+<p><font style="color:rgb(64, 64, 64);">forEach()</font>：遍历键值对。</p>
+<p>for (const [key, value] of map) { &#x2F;_ 迭代键值对 <em>&#x2F; }<br>map.forEach((value, key) &#x3D;&gt; { &#x2F;</em> … _&#x2F; });<br>应用场景</p>
+<p>复杂键存储：当键需要是非字符串类型时（如对象、函数）。</p>
+<p>const domNode &#x3D; document.getElementById(‘node’);<br>const map &#x3D; new Map();<br>map.set(domNode, { clickCount: 0 }); &#x2F;&#x2F; DOM 节点作为键<br>数据关联：维护键值对的动态关联关系（如缓存计算结果）。</p>
+<p>const cache &#x3D; new Map();<br>function computeExpensiveValue(key) {<br>if (cache.has(key)) return cache.get(key);<br>const result &#x3D; &#x2F;_ 复杂计算 _&#x2F;;<br>cache.set(key, result);<br>return result;<br>}<br>有序存储：需要保留插入顺序的键值对集合。</p>
+<ol start="3">
+<li>WeakSet 与 WeakMap</li>
+</ol>
+<p>WeakSet</p>
+<p>弱引用集合：元素必须是对象，且不计入引用计数（不影响垃圾回收）。</p>
+<p>不可迭代：没有 <font style="color:rgb(64, 64, 64);">size</font>、<font style="color:rgb(64, 64, 64);">clear()</font> 或迭代方法。</p>
+<p>用途：临时存储对象，避免内存泄漏。</p>
+<p>const weakSet &#x3D; new WeakSet();<br>let obj &#x3D; {};<br>weakSet.add(obj);<br>WeakMap</p>
+<p>弱引用键：键必须是对象，值可以是任意类型。</p>
+<p>不可迭代：同样没有 <font style="color:rgb(64, 64, 64);">size</font>、<font style="color:rgb(64, 64, 64);">clear()</font> 或迭代方法。</p>
+<p>用途：存储对象的私有数据或元数据。</p>
+<p>const weakMap &#x3D; new WeakMap();<br>const obj &#x3D; {};<br>weakMap.set(obj, ‘privateData’);</p>
+<ol start="4">
+<li>Set 和 Map 的对比</li>
+</ol>
+<p>特性 Set Map<br>存储内容 唯一值 键值对<br>键类型 值即键（任意类型） 键可以是任意类型<br>查找方式 直接检查值的存在性 通过键查找值<br>典型用途 去重、集合运算 复杂键存储、有序关联</p>
+<ol start="5">
+<li>注意事项</li>
+</ol>
+<p>引用类型键的陷阱：对象作为键时，引用不同则视为不同键。</p>
+<p>const map &#x3D; new Map();<br>map.set({}, ‘value’);<br>console.log(map.get({})); &#x2F;&#x2F; undefined（两个空对象引用不同）<br>性能优化：<font style="color:rgb(64, 64, 64);">Set</font> 和 <font style="color:rgb(64, 64, 64);">Map</font> 的查找速度（<font style="color:rgb(64, 64, 64);">has()</font>、<font style="color:rgb(64, 64, 64);">get()</font>）远快于数组的 <font style="color:rgb(64, 64, 64);">includes()</font>。</p>
+<p>序列化限制：<font style="color:rgb(64, 64, 64);">JSON.stringify()</font> 无法序列化 <font style="color:rgb(64, 64, 64);">Set</font> 和 <font style="color:rgb(64, 64, 64);">Map</font>，需手动转换。</p>
+<p>兼容性：ES6+ 支持，旧环境需使用 Babel 或 Polyfill（如 <font style="color:rgb(64, 64, 64);">core-js</font>）。</p>
+<p>总结</p>
+<p>Set：处理唯一值集合，适合去重、集合运算。</p>
+<p>Map：处理键值对，适合复杂键类型或需要有序的场景。</p>
+<p>WeakSet&#x2F;WeakMap：弱引用特性适合临时存储或避免内存泄漏。</p>
+<p>padStart 和 padEnd</p>
+<p><font style="color:rgb(64, 64, 64);">padStart</font> 和 <font style="color:rgb(64, 64, 64);">padEnd</font> 是 JavaScript 中用于字符串填充的方法，允许在字符串的开头或结尾添加字符，直到达到指定长度。以下是它们的详细说明和示例：</p>
+<ol>
+<li><strong><font style="color:rgb(64, 64, 64);">padStart(targetLength, padString)</font></strong></li>
+</ol>
+<p>作用：在字符串开头填充字符，直到字符串达到目标长度。</p>
+<p>参数：</p>
+<p><font style="color:rgb(64, 64, 64);">targetLength</font>：填充后的目标长度。</p>
+<p><font style="color:rgb(64, 64, 64);">padString</font>（可选）：用于填充的字符串，默认为空格。</p>
+<p>规则：</p>
+<p>若原字符串长度 ≥ <font style="color:rgb(64, 64, 64);">targetLength</font>，直接返回原字符串。</p>
+<p>填充字符串 <font style="color:rgb(64, 64, 64);">padString</font> 会被重复使用，超出部分被截断。</p>
+<p>示例：</p>
+<p>‘5’.padStart(3, ‘0’); &#x2F;&#x2F; ‘005’（填充到开头）<br>‘hi’.padStart(5, ‘ab’); &#x2F;&#x2F; ‘abahi’（填充 ‘aba’）<br>‘abc’.padStart(6, ‘123’); &#x2F;&#x2F; ‘123abc’（填充 ‘123’）<br>‘7’.padStart(4, ‘ab’); &#x2F;&#x2F; ‘aba7’（填充 ‘aba’）<br>‘test’.padStart(6); &#x2F;&#x2F; ‘ test’（默认用空格填充） 2. <strong><font style="color:rgb(64, 64, 64);">padEnd(targetLength, padString)</font></strong></p>
+<p>作用：在字符串结尾填充字符，直到字符串达到目标长度。</p>
+<p>参数：同 <font style="color:rgb(64, 64, 64);">padStart</font>。</p>
+<p>规则：与 <font style="color:rgb(64, 64, 64);">padStart</font> 类似，但填充方向相反。</p>
+<p>示例：</p>
+<p>‘5’.padEnd(3, ‘0’); &#x2F;&#x2F; ‘500’（填充到结尾）<br>‘hi’.padEnd(5, ‘ab’); &#x2F;&#x2F; ‘hiaba’（填充 ‘aba’）<br>‘abc’.padEnd(6, ‘123’); &#x2F;&#x2F; ‘abc123’（填充 ‘123’）<br>‘7’.padEnd(4, ‘ab’); &#x2F;&#x2F; ‘7aba’（填充 ‘aba’）<br>‘test’.padEnd(6); &#x2F;&#x2F; ‘test ‘（默认用空格填充）<br>关键注意事项：</p>
+<p>填充字符串的重复与截断：<br>若 <font style="color:rgb(64, 64, 64);">padString</font> 长度不足，会重复拼接直到满足目标长度，超出部分被截断。</p>
+<p>‘12’.padStart(5, ‘abc’); &#x2F;&#x2F; ‘abc12’（填充 ‘abc’）<br>‘12’.padEnd(5, ‘abc’); &#x2F;&#x2F; ‘12abc’（填充 ‘abc’）<br>空字符串或省略参数：</p>
+<ul>
+<li><font style="color:rgb(64, 64, 64);">省略</font><font style="color:rgb(64, 64, 64);"> </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;padString&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);"> </font><font style="color:rgb(64, 64, 64);">时，默认用空格填充。</font></li>
+<li><font style="color:rgb(64, 64, 64);">若 </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;padString&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);"> 为空字符串，无法填充，直接返回原字符串。</font><br>‘5’.padStart(3); &#x2F;&#x2F; ‘ 5’（默认空格）<br>‘5’.padStart(3, ‘’); &#x2F;&#x2F; ‘5’（无填充）<br>目标长度小于原字符串：<br>直接返回原字符串。</li>
+</ul>
+<p>‘hello’.padStart(3, ‘0’); &#x2F;&#x2F; ‘hello’<br>应用场景</p>
+<p>场景 1：隐藏手机号中间四位</p>
+<p>将手机号 <font style="color:rgb(64, 64, 64);">13812341234</font> 转换为 <font style="color:rgb(64, 64, 64);">138*<strong>*1234</strong></font>，保留前 3 位和后 4 位，中间填充 <font style="color:rgb(64, 64, 64);">**</font>。</p>
+<p>function desensitizePhone(phone) {<br>const visiblePrefix &#x3D; 3; &#x2F;&#x2F; 显示前 3 位<br>const visibleSuffix &#x3D; 4; &#x2F;&#x2F; 显示后 4 位<br>const prefix &#x3D; phone.slice(0, visiblePrefix);<br>const suffix &#x3D; phone.slice(-visibleSuffix);<br>&#x2F;&#x2F; 中间填充 <em>，总长度与原手机号一致<br>return prefix + suffix.padStart(phone.length - visiblePrefix, ‘</em>‘);<br>}</p>
+<p>desensitizePhone(‘13812341234’); &#x2F;&#x2F; ‘138****1234’<br>场景 2：隐藏身份证号前 14 位</p>
+<p>将身份证号 <font style="color:rgb(64, 64, 64);">110101199003077654</font> 转换为 <font style="color:rgb(64, 64, 64);">************7654</font>，只显示后 4 位。</p>
+<p>function desensitizeID(id) {<br>const visibleDigits &#x3D; 4; &#x2F;&#x2F; 显示后 4 位<br>const suffix &#x3D; id.slice(-visibleDigits);<br>&#x2F;&#x2F; 前部填充 <em>，总长度与原身份证号一致<br>return suffix.padStart(id.length, ‘</em>‘);<br>}</p>
+<p>desensitizeID(‘110101199003077654’); &#x2F;&#x2F; ‘************7654’<br>场景 3：隐藏银行卡号中间部分</p>
+<p>将银行卡号 <font style="color:rgb(64, 64, 64);">6225880134567890</font> 转换为 <font style="color:rgb(64, 64, 64);">622588******7890</font>，保留前 6 位和后 4 位。</p>
+<p>function desensitizeBankCard(card) {<br>const visiblePrefix &#x3D; 6; &#x2F;&#x2F; 显示前 6 位<br>const visibleSuffix &#x3D; 4; &#x2F;&#x2F; 显示后 4 位<br>const prefix &#x3D; card.slice(0, visiblePrefix);<br>const suffix &#x3D; card.slice(-visibleSuffix);<br>&#x2F;&#x2F; 中间填充 <em>，总长度与原卡号一致<br>return prefix + ‘</em>‘.repeat(card.length - visiblePrefix - visibleSuffix) + suffix;<br>}</p>
+<p>desensitizeBankCard(‘6225880134567890’); &#x2F;&#x2F; ‘622588******7890’<br>场景 4：格式化短文本敏感信息</p>
+<p>将用户昵称 <font style="color:rgb(64, 64, 64);">Alice</font> 转换为 <font style="color:rgb(64, 64, 64);">**ice</font>，隐藏前 2 位。</p>
+<p>function desensitizeShortText(text, hideLength &#x3D; 2) {<br>const visiblePart &#x3D; text.slice(hideLength);<br>return visiblePart.padStart(text.length, ‘*‘);<br>}</p>
+<p>desensitizeShortText(‘Alice’, 2); &#x2F;&#x2F; ‘**ice’<br>关键逻辑总结</p>
+<p>截取保留部分：通过 <font style="color:rgb(64, 64, 64);">slice</font> 截取需要显示的头&#x2F;尾部分。</p>
+<p>填充敏感符号：使用 <font style="color:rgb(64, 64, 64);">padStart</font> 或 <font style="color:rgb(64, 64, 64);">padEnd</font> 填充 <font style="color:rgb(64, 64, 64);">*</font>，确保总长度与原数据一致。</p>
+<p>动态适配长度：根据输入数据的实际长度动态计算填充位数，避免硬编码。</p>
+<p>注意事项</p>
+<p>输入合法性校验：需确保输入是字符串且长度合法（如身份证 18 位、手机号 11 位）。</p>
+<p>边界处理：若保留位数超过原数据长度，直接返回全隐藏（如 <font style="color:rgb(64, 64, 64);">‘*‘.repeat(text.length)</font>）。</p>
+<p>扩展性：可通过参数控制隐藏的位数和填充符号，适配不同场景。</p>
+<p>总结</p>
+<p>**<font style="color:rgb(64, 64, 64);">padStart</font>**：向前填充，适用于左对齐或补前置字符（如日期补零）。</p>
+<p>**<font style="color:rgb(64, 64, 64);">padEnd</font>**：向后填充，适用于右对齐或补后缀字符（如固定格式文本）。</p>
+<p>处理填充字符串时，注意重复和截断逻辑，避免结果与预期不符。</p>
+<p>flat 和 flatMap</p>
+<p><font style="color:rgb(64, 64, 64);">flat()</font> 和 <font style="color:rgb(64, 64, 64);">flatMap()</font> 是 JavaScript 中用于处理数组的两种方法，专门用于简化嵌套数组的结构或结合映射（<font style="color:rgb(64, 64, 64);">map</font>）与扁平化（<font style="color:rgb(64, 64, 64);">flat</font>）操作。</p>
+<ol>
+<li><strong><font style="color:rgb(64, 64, 64);">flat(depth)</font></strong></li>
+</ol>
+<p>作用：将嵌套的数组“扁平化”，返回一个包含所有子数组元素的新数组。<br>参数：</p>
+<p><font style="color:rgb(64, 64, 64);">depth</font>（可选）：指定要扁平化的嵌套层数，默认值为 <font style="color:rgb(64, 64, 64);">1</font>。若需完全扁平化，可设为 <font style="color:rgb(64, 64, 64);">Infinity</font>。<br>返回值：新数组（原数组不会被修改）。</p>
+<p>示例：</p>
+<p>&#x2F;&#x2F; 默认扁平化一层<br>const arr1 &#x3D; [1, [2, 3], [4, [5]]];<br>console.log(arr1.flat()); &#x2F;&#x2F; [1, 2, 3, 4, [5]]</p>
+<p>&#x2F;&#x2F; 完全扁平化（无限层）<br>console.log(arr1.flat(Infinity)); &#x2F;&#x2F; [1, 2, 3, 4, 5]</p>
+<p>&#x2F;&#x2F; 处理空位（自动跳过空值）<br>const arr2 &#x3D; [1, , 3];<br>console.log(arr2.flat()); &#x2F;&#x2F; [1, 3] 2. <strong><font style="color:rgb(64, 64, 64);">flatMap(callback)</font></strong></p>
+<p>作用：先对数组的每个元素执行 <font style="color:rgb(64, 64, 64);">map</font> 操作，然后对结果扁平化一层。<br>参数：</p>
+<p><font style="color:rgb(64, 64, 64);">callback</font>：一个函数，用于处理每个元素，返回一个数组（或其他可迭代对象）。<br>返回值：新数组（原数组不会被修改）。</p>
+<p>示例：</p>
+<p>&#x2F;&#x2F; 基本用法（等效于 map + flat(1)）<br>const arr &#x3D; [1, 2, 3];<br>const result &#x3D; arr.flatMap((x) &#x3D;&gt; [x, x * 2]);<br>console.log(result); &#x2F;&#x2F; [1, 2, 2, 4, 3, 6]</p>
+<p>&#x2F;&#x2F; 处理非数组返回值（自动包装为数组）<br>const words &#x3D; [“hello”, “world”];<br>console.log(words.flatMap(word &#x3D;&gt; word.split(“”)));<br>&#x2F;&#x2F; [‘h’, ‘e’, ‘l’, ‘l’, ‘o’, ‘w’, ‘o’, ‘r’, ‘l’, ‘d’]</p>
+<p>&#x2F;&#x2F; 过滤并展开数据<br>const data &#x3D; [<br>{ id: 1, values: [10, 20] },<br>{ id: 2, values: [30] },<br>];<br>console.log(data.flatMap(item &#x3D;&gt; item.values)); &#x2F;&#x2F; [10, 20, 30]<br>对比 <strong><font style="color:rgb(64, 64, 64);">flatMap</font></strong> 与 <strong><font style="color:rgb(64, 64, 64);">map + flat</font></strong></p>
+<p>以下两种写法等价，但 <font style="color:rgb(64, 64, 64);">flatMap</font> 更简洁高效：</p>
+<p>&#x2F;&#x2F; 使用 flatMap<br>arr.flatMap((x) &#x3D;&gt; [x, x * 2]);</p>
+<p>&#x2F;&#x2F; 等效于 map + flat<br>arr.map((x) &#x3D;&gt; [x, x * 2]).flat();<br>关键注意事项</p>
+<p>扁平化层级：</p>
+<p><font style="color:rgb(64, 64, 64);">flat()</font> 可指定层级，默认 <font style="color:rgb(64, 64, 64);">1</font>；<font style="color:rgb(64, 64, 64);">flatMap()</font> 仅扁平化一层。</p>
+<p>若需完全扁平化 <font style="color:rgb(64, 64, 64);">flatMap</font> 的结果，需额外调用 <font style="color:rgb(64, 64, 64);">flat()</font>：</p>
+<ul>
+<li><code>arr.flatMap(fn).flat(Infinity);</code><br>空值处理：</li>
+</ul>
+<p><font style="color:rgb(64, 64, 64);">flat()</font> 会自动跳过数组中的空位（如 <font style="color:rgb(64, 64, 64);">[1, , 3]</font>）。</p>
+<p><font style="color:rgb(64, 64, 64);">flatMap()</font> 的回调函数若返回空数组 <font style="color:rgb(64, 64, 64);">[]</font>，会直接过滤该元素：</p>
+<ul>
+<li><code>[1, 2, 3].flatMap(x =&gt; x % 2 === 0 ? [] : [x]); // [1, 3]</code><br>性能优化：</li>
+</ul>
+<p><font style="color:rgb(64, 64, 64);">flatMap()</font> 比先 <font style="color:rgb(64, 64, 64);">map</font> 后 <font style="color:rgb(64, 64, 64);">flat</font> 更高效，因为它减少了一次完整数组遍历。</p>
+<p>使用场景</p>
+<p>方法 适用场景<br><font style="color:rgb(64, 64, 64);">flat()</font> 多层嵌套数组的扁平化（如树形结构数据、API 返回的嵌套结果）。<br><font style="color:rgb(64, 64, 64);">flatMap()</font> 需要同时映射并扁平化的场景（如展开子数组、过滤后展开、拆分字符串等）。<br>总结</p>
+<p>**<font style="color:rgb(64, 64, 64);">flat()</font>**：专为简化嵌套数组设计，支持指定层级。</p>
+<p>**<font style="color:rgb(64, 64, 64);">flatMap()</font>**：结合 <font style="color:rgb(64, 64, 64);">map</font> 和 <font style="color:rgb(64, 64, 64);">flat</font>，适合需要“映射后立即扁平化”的场景。</p>
+<p>两者均返回新数组，不会修改原数组。</p>
+<p>FinalizationRegistry</p>
+<p>FinalizationRegistry 对象可以让你在对象被垃圾回收时请求一个回调。</p>
+<p>FinalizationRegistry 提供了这样的一种方法:当一个在注册表中注册的对象被回收时，请求在某个时间点上调用一个清理回调。(清理回调有时被称为-fnalizer);</p>
+<p>你可以通过调用 register 方法，注册任何你想要清理回调的对象传入该对象和所含的值</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    let obj = { name: "why", age: 18 }
+    let info = { name: "kobe", age: 30 }
+
+    const finalRegistry = new FinalizationRegistry((value) => {
+      console.log("某一个对象被回收了:", value)
+    })
+    
+    finalRegistry.register(obj, "why")
+    finalRegistry.register(info, "kobe")
+    
+    // obj = null
+    info = null
+
+  </script>
+
+</body>
+</html>
+
+<p>WeakRefs</p>
+<p>如果我们默认将一个对象赋值给另外一个引用，那么这个引用是一个强引用:</p>
+<p>如果我们希望是一个弱引用的话可以使用 WeakRef;</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+
+    let info = { name: "why", age: 18 }
+    let obj = new WeakRef(info)
+    let obj2 = new WeakRef(info)
+    
+    const finalRegistry = new FinalizationRegistry(() => {
+      console.log("对象被回收~")
+    })
+    
+    finalRegistry.register(info, "info")
+    
+    setTimeout(() => {
+      info = null
+    }, 2000)
+    
+    setTimeout(() => {
+      console.log(obj.deref().name, obj.deref().age)
+    }, 8000)
+
+  </script>
+
+</body>
+</html>
+
+<p>Proxy-Reflect</p>
+<p>Proxy 和 Reflect 是 ES6 引入的元编程工具，允许开发者拦截和自定义对象的基本操作。</p>
+<p>监听对象属性操作方法</p>
+<p>使用 Object.defineProperty(vue2 响应式原理),存储数据描述符设计的初衷并不是为了去监听一个完整的对象</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <h2 class="name"></h2>
+
+  <script>
+
+    const obj = {
+      name: "why",
+      age: 18,
+      height: 1.88
+    }
+    
+    // 需求: 监听对象属性的所有操作
+    // 监听属性的操作
+    // 1.针对一个属性
+    // let _name = obj.name
+    // Object.defineProperty(obj, "name", {
+    //   set: function(newValue) {
+    //     console.log("监听: 给name设置了新的值:", newValue)
+    //     _name = newValue
+    //   },
+    //   get: function() {
+    //     console.log("监听: 获取name的值")
+    //     return _name
+    //   }
+    // })
+    
+    // 2.监听所有的属性: 遍历所有的属性, 对每一个属性使用defineProperty
+    const keys = Object.keys(obj)
+    for (const key of keys) {
+      let value = obj[key]
+      Object.defineProperty(obj, key, {
+        set: function(newValue) {
+          console.log(`监听: 给${key}设置了新的值:`, newValue)
+          value = newValue
+        },
+        get: function() {
+          console.log(`监听: 获取${key}的值`)
+          return value
+        }
+      })
+    }
+    
+    // console.log(obj.name)
+    // obj.name = "kobe"
+    console.log(obj.age)
+    obj.age = 17
+    console.log(obj.age)
+
+
+
+    // 什么是响应式?
+    // const nameEl = document.querySelector(".name")
+    // nameEl.textContent = obj.name
+    // obj.name = "kobe"
+    // obj.name = "james"
+
+
+
+  </script>
+
+</body>
+</html>
+创建一个代理对象(Proxy对象)之后对该对象的所有操作，都通过代理对象来完成,代理对象可以监听我们想要对原对象进行哪些操作
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    const obj = {
+      name: "why",
+      age: 18,
+      height: 1.88
+    }
+
+
+    // 1.创建一个Proxy对象
+    const objProxy = new Proxy(obj, {
+      set: function(target, key, newValue) {
+        console.log(`监听: 监听${key}的设置值: `, newValue)
+        target[key] = newValue
+      },
+      get: function(target, key) {
+        console.log(`监听: 监听${key}的获取`)
+        return target[key]
+      }
+    })
+    
+    // 2.对obj的所有操作, 应该去操作objProxy
+    // console.log(objProxy.name)
+    // objProxy.name = "kobe"
+    // console.log(objProxy.name)
+    // objProxy.name = "james"
+    
+    objProxy.address = "广州市"
+    console.log(objProxy.address)
+
+  </script>
+
+</body>
+</html>
+
+<p>Proxy</p>
+<p>Proxy 用于创建一个对象的代理，拦截并重新定义对象的底层操作（如属性读取、赋值等）。</p>
+<p>基本语法</p>
+<p>const newProxy&#x3D;new Proxy(target,handler)</p>
+<p>target：被代理的目标对象。</p>
+<p>handler：定义拦截行为的对象，包含一组“陷阱”（trap）方法。</p>
+<p>常用拦截方法</p>
+<p>方法 触发场景<br><font style="color:rgb(64, 64, 64);">get(target, prop, receiver)</font> 读取属性时（如 <font style="color:rgb(64, 64, 64);">proxy.prop</font>）<br><font style="color:rgb(64, 64, 64);">set(target, prop, value, receiver)</font> 设置属性时（如 <font style="color:rgb(64, 64, 64);">proxy.prop &#x3D; value</font>）<br><font style="color:rgb(64, 64, 64);">has(target, prop)</font> <font style="color:rgb(64, 64, 64);">in</font>操作符（如 <font style="color:rgb(64, 64, 64);">‘prop’ in proxy</font>）<br><font style="color:rgb(64, 64, 64);">deleteProperty(target, prop)</font> <font style="color:rgb(64, 64, 64);">delete</font> 操作符（如 <font style="color:rgb(64, 64, 64);">delete proxy.prop</font>）<br><font style="color:rgb(64, 64, 64);">apply(target, thisArg, args)</font> 函数调用（如 <font style="color:rgb(64, 64, 64);">proxy()</font>）<br><font style="color:rgb(64, 64, 64);">construct(target, args, newTarget)</font> <font style="color:rgb(64, 64, 64);">new</font>操作符（如 <font style="color:rgb(64, 64, 64);">new Proxy()</font>）<br>示例</p>
+<p>const target &#x3D; { name: “Alice” };<br>const handler &#x3D; {<br>get(target, prop) {<br>console.log(<code>读取属性：$&#123;prop&#125;</code>);<br>return target[prop];<br>},<br>set(target, prop, value) {<br>console.log(<code>设置属性：$&#123;prop&#125; = $&#123;value&#125;</code>);<br>target[prop] &#x3D; value;<br>return true; &#x2F;&#x2F; 表示成功<br>}<br>};<br>const proxy &#x3D; new Proxy(target, handler);</p>
+<p>proxy.name; &#x2F;&#x2F; 输出 “读取属性：name”，返回 “Alice”<br>proxy.age &#x3D; 30; &#x2F;&#x2F; 输出 “设置属性：age &#x3D; 30”</p>
+<p>Reflect</p>
+<p>Reflect 是一个内置对象，提供与 Proxy 方法一一对应的方法，用于执行对象的默认行为。它的设计目的是简化 Proxy 的实现，并提供更规范的底层操作。</p>
+<p>常用方法</p>
+<p>Reflect 方法 对应 Proxy 陷阱<br><font style="color:rgb(64, 64, 64);">Reflect.get(target, prop, receiver)</font> <font style="color:rgb(64, 64, 64);">get</font><br><font style="color:rgb(64, 64, 64);">Reflect.set(target, prop, value, receiver)</font> <font style="color:rgb(64, 64, 64);">set</font><br><font style="color:rgb(64, 64, 64);">Reflect.has(target, prop)</font> <font style="color:rgb(64, 64, 64);">has</font><br><font style="color:rgb(64, 64, 64);">Reflect.deleteProperty(target, prop)</font> <font style="color:rgb(64, 64, 64);">deleteProperty</font><br><font style="color:rgb(64, 64, 64);">Reflect.apply(func, thisArg, args)</font> <font style="color:rgb(64, 64, 64);">apply</font><br><font style="color:rgb(64, 64, 64);">Reflect.construct(target, args)</font> <font style="color:rgb(64, 64, 64);">construct</font><br>示例</p>
+<p>const obj &#x3D; { a: 1 };<br>&#x2F;&#x2F; 通过 Reflect 操作对象<br>Reflect.set(obj, “b”, 2); &#x2F;&#x2F; obj 变为 { a: 1, b: 2 }<br>console.log(Reflect.get(obj, “a”)); &#x2F;&#x2F; 输出 1</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    function Person(name, age) {
+      this.name = name
+      this.age = age
+    }
+
+    function Student(name, age) {
+      // Person.call(this, name, age)
+    
+    }
+    // 属于Student类,实现自Person
+    const stu = Reflect.construct(Person, ['MirZ', 18], Student)
+    console.log(stu)
+    console.log(stu.__proto__ === Student.prototype)
+
+  </script>
+
+</body>
+
+</html>
+
+<p>Proxy 和 Reflect 的配合</p>
+<p>在 Proxy 的方法中调用 Reflect 的对应方法，可确保保留对象的默认行为，同时添加自定义逻辑。</p>
+<p>不去直接操作原对象</p>
+<p>reflect 会返回 boolean 判断操作是否成功</p>
+<p>reflect 可以使用<font style="color:rgb(64, 64, 64);">receiver</font>正确传递 this</p>
+<p>典型模式</p>
+<p>const handler &#x3D; {<br>get(target, prop, receiver) {<br>console.log(<code>读取属性：$&#123;prop&#125;</code>);<br>return Reflect.get(…arguments); &#x2F;&#x2F; 等效于 Reflect.get(target, prop, receiver)<br>}<br>};</p>
+<p>this 绑定问题</p>
+<p>直接操作 <font style="color:rgb(64, 64, 64);">target[prop]</font> 可能导致 <font style="color:rgb(64, 64, 64);">this</font> 指向错误，而 <font style="color:rgb(64, 64, 64);">Reflect.get(target, prop, receiver)</font> 能正确传递 <font style="color:rgb(64, 64, 64);">receiver</font>（通常是代理对象）。</p>
+<p>const target &#x3D; {<br>name: “Alice”,<br>greet() {<br>console.log(<code>Hello, $&#123;this.name&#125;!</code>);<br>}<br>};<br>const handler &#x3D; {<br>get(target, prop, receiver) {<br>return Reflect.get(target, prop, receiver); &#x2F;&#x2F; 确保 this 指向代理<br>}<br>};<br>const proxy &#x3D; new Proxy(target, handler);<br>proxy.greet(); &#x2F;&#x2F; Hello, Alice!（若 name 被代理修改，此处会反映变化）</p>
+<p>应用场景</p>
+<p>数据校验：拦截 <font style="color:rgb(64, 64, 64);">set</font> 操作，验证属性值。</p>
+<p>日志记录：跟踪对象的读写操作。</p>
+<p>自动填充属性：访问不存在的属性时返回默认值。</p>
+<p>观察者模式：属性变化时触发回调。</p>
+<p>函数调用劫持：统计函数执行时间。</p>
+<p>数据校验示例</p>
+<p>const validator &#x3D; {<br>set(target, prop, value) {<br>if (prop &#x3D;&#x3D;&#x3D; “age” &amp;&amp; typeof value !&#x3D;&#x3D; “number”) {<br>throw new TypeError(“Age must be a number!”);<br>}<br>return Reflect.set(target, prop, value);<br>}<br>};<br>const proxy &#x3D; new Proxy({}, validator);<br>proxy.age &#x3D; 30; &#x2F;&#x2F; 成功<br>proxy.age &#x3D; “30”; &#x2F;&#x2F; 抛出错误<br>注意事项</p>
+<p>性能：频繁拦截可能影响性能，需谨慎使用。</p>
+<p>兼容性：现代浏览器支持良好，旧环境可能需要 polyfill。</p>
+<p>可撤销代理：通过 <font style="color:rgb(64, 64, 64);">Proxy.revocable()</font> 创建可取消的代理。</p>
+<p>const { proxy, revoke } &#x3D; Proxy.revocable(target, handler);<br>revoke(); &#x2F;&#x2F; 后续操作 proxy 将报错<br>通过结合 Proxy 和 Reflect，开发者可以实现高度灵活的对象操作，增强代码的可控性和可维护性。</p>
+<p>Promise</p>
+<p>Promise 是 JavaScript 中处理异步操作的核心机制。</p>
+<ol>
+<li>三种状态</li>
+</ol>
+<p>Pending（待定）：初始状态，未完成或被拒绝。</p>
+<p>Fulfilled（已兑现）：操作成功完成，调用 <font style="color:rgb(64, 64, 64);">resolve(value)</font>。</p>
+<p>Rejected（已拒绝）：操作失败，调用 <font style="color:rgb(64, 64, 64);">reject(error)</font>。</p>
+<p>状态不可逆：一旦状态变为 Fulfilled 或 Rejected，将不再改变。</p>
+<p>基本用法</p>
+<p>通过 new 创建 Promise 对象时，我们需要传入一个回调函数，我们称之为 executor,这个回调函数会被立即执行，并且给传入另外两个回调函数(resolve、reject)当我们调用 resolve 回调函数时，会执行 Promise 对象的 then 方法传入的回调函数:当我们调用 reject 回调函数时，会执行 Promise 对象的 catch 方法传入的回调函数;</p>
+<p>const promise &#x3D; new Promise((resolve, reject) &#x3D;&gt; {<br>&#x2F;&#x2F; 异步操作（如 API 请求、定时器等）<br>if (&#x2F;_ 成功 _&#x2F;) {<br>resolve(value); &#x2F;&#x2F; 状态变为 Fulfilled<br>} else {<br>reject(error); &#x2F;&#x2F; 状态变为 Rejected<br>}<br>});</p>
+<script>
+    const p = new Promise((resolve) => {
+      // setTimeout(resolve, 2000)
+      setTimeout(() => {
+        resolve("p的resolve")
+      }, 2000)
+    })
+
+    const promise = new Promise((resolve, reject) => {
+      // 1.普通值
+      // resolve([
+      //   {name: "macbook", price: 9998, intro: "有点贵"},
+      //   {name: "iPhone", price: 9.9, intro: "有点便宜"},
+      // ])
+    
+      // 2.resolve(promise)
+      // 如果resolve的值本身Promise对象, 那么当前的Promise的状态会有传入的Promise来决定
+      // resolve(p)
+    
+      // 3.resolve(thenable对象)
+      resolve({
+        name: "kobe",
+        //由then来决定
+        then: function(resolve) {
+          resolve(11111)
+        }
+      })
+    })
+    
+    promise.then(res => {
+      console.log("then中拿到结果:", res)
+    })
+
+  </script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+
+    const promise = new Promise((resolve, reject) => {
+      resolve("aaaaaaa")
+      // reject()
+    })
+    
+    // 1.then方法是返回一个新的Promise, 这个新Promise的决议是等到then方法传入的回调函数有返回值时, 进行决议
+    // Promise本身就是支持链式调用
+    // then方法是返回一个新的Promise, 链式中的then是在等待这个新的Promise有决议之后执行的
+    // promise.then(res => {
+    //   console.log("第一个then方法:", res)
+    //   return "bbbbbbbb"
+    // }).then(res => {
+    //   console.log("第二个then方法:", res)
+    //   return "cccccccc"
+    // }).then(res => {
+    //   console.log("第三个then方法:", res)
+    // })
+    
+    // promise.then(res => {
+    //   console.log("添加第二个then方法:", res)
+    // })
+    
+    // 2.then方法传入回调函数的返回值类型
+    const newPromise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve("why")
+      }, 3000)
+    })
+    
+    promise.then(res => {
+      console.log("第一个Promise的then方法:", res)
+      // 1.普通值
+      // return "bbbbbbb"
+      // 2.新的Promise
+      // return newPromise
+      // 3.thenable的对象
+      return {
+        then: function(resolve) {
+          resolve("thenable")
+        }
+      }
+    }).then(res => {
+      console.log("第二个Promise的then方法:", res) 
+    })
+
+  </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+
+    const promise = new Promise((resolve, reject) => {
+      // reject("error: aaaaa")
+      resolve("aaaaaa")
+    })
+    
+    // 1.catch方法也会返回一个新的Promise
+    // promise.catch(err => {
+    //   console.log("catch回调:", err)
+    //   return "bbbbb"
+    // }).then(res => {
+    //   console.log("then第一个回调:", res)
+    //   return "ccccc"
+    // }).then(res => {
+    //   console.log("then第二个回调:", res)
+    // })
+    
+    // 2.catch方法的执行时机
+    promise.then(res => {
+      console.log("then第一次回调:", res)
+      // throw new Error("第二个Promise的异常error") 
+      return "bbbbbb"
+    }).then(res => {
+      console.log("then第二次回调:", res)
+      throw new Error("第三个Promise的异常error")
+    }).then(res => {
+      console.log("then第三次回调:", res)
+    }).catch(err => {
+      console.log("catch回调被执行:", err)
+    })
+    
+    // 中断函数继续执行:
+    // 方式一: return
+    // 方式二: throw new Error()
+    // 方式三: yield 暂停(暂时性的中断)
+
+  </script>
+
+</body>
+</html>
+2. 链式调用
+
+<p>**<font style="color:rgb(64, 64, 64);">.then()</font>**：处理成功结果，可返回新值或 Promise。</p>
+<p>**<font style="color:rgb(64, 64, 64);">.catch()</font>**：捕获链中所有错误。</p>
+<p>**<font style="color:rgb(64, 64, 64);">.finally()</font>**：无论成功或失败都会执行，通常用于清理。</p>
+<p>doSomething()<br>.then(result &#x3D;&gt; doSomethingElse(result))<br>.then(newResult &#x3D;&gt; doThirdThing(newResult))<br>.catch(error &#x3D;&gt; console.error(error))<br>.finally(() &#x3D;&gt; stopLoading()); 3. 静态方法</p>
+<p>**<font style="color:rgb(64, 64, 64);">Promise.resolve(value)</font>**：返回一个已解决的 Promise。</p>
+<p>**<font style="color:rgb(64, 64, 64);">Promise.reject(error)</font>**：返回一个已拒绝的 Promise。</p>
+<p>**<font style="color:rgb(64, 64, 64);">Promise.all([p1, p2, …])</font>**：所有成功时返回结果数组；任一失败立即拒绝。</p>
+<p>**<font style="color:rgb(64, 64, 64);">Promise.race([p1, p2, …])</font>**：采用第一个完成（成功或失败）的 Promise 结果。</p>
+<p>**<font style="color:rgb(64, 64, 64);">Promise.allSettled([p1, p2, …])</font>**：等待所有完成，返回状态和结果数组。</p>
+<p>**<font style="color:rgb(64, 64, 64);">Promise.any([p1, p2, …])</font>**：任一成功则返回其值，全部失败则抛出 <font style="color:rgb(64, 64, 64);">AggregateError</font>。</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+
+    // 创建三个Promise
+    const p1 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        // resolve("p1 resolve")
+        reject("p1 reject error")
+      }, 3000)
+    })
+    
+    const p2 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve("p2 resolve")
+      }, 2000)
+    })
+    
+    const p3 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve("p3 resolve")
+      }, 5000)
+    })
+    
+    // all:全部/所有 所有成功时返回结果数组；任一失败立即拒绝。
+    Promise.all([p1, p2, p3]).then(res => {
+      console.log("all promise res:", res)
+    }).catch(err => {
+      console.log("all promise err:", err)
+    })
+
+
+​    
+    //allSettled 等待所有完成，返回状态和结果数组。
+    Promise.allSettled([p1, p2, p3]).then(res => {
+      console.log("all settled:", res)
+    })
+    
+    // 类方法: race方法
+    // 特点: 会等到一个Promise有结果(无论这个结果是fulfilled还是rejected)
+    Promise.race([p1, p2, p3]).then(res => {
+      console.log("race promise:", res)
+    }).catch(err => {
+      console.log("race promise err:", err)
+    })
+
+
+​    
+   // 类方法: any方法 任一成功则返回其值，全部失败则抛出 AggregateError。
+​    Promise.any([p1, p2, p3]).then(res => {
+​      console.log("any promise res:", res)
+​    }).catch(err => {
+​      console.log("any promise err:", err)
+​    })
+
+  </script>
+
+</body>
+</html>
+4. 错误处理
+
+<p>隐式冒泡：链中未处理的错误会传递到最近的 <font style="color:rgb(64, 64, 64);">.catch()</font>。</p>
+<p>同步错误捕获：执行器函数中的同步错误自动触发拒绝。</p>
+<p>异步错误需显式拒绝：在异步回调（如 <font style="color:rgb(64, 64, 64);">setTimeout</font>）中需手动调用 <font style="color:rgb(64, 64, 64);">reject()</font>。</p>
+<p>&#x2F;&#x2F; 正确捕获异步错误<br>new Promise((resolve, reject) &#x3D;&gt; {<br>setTimeout(() &#x3D;&gt; {<br>reject(new Error(“Async error”));<br>}, 1000);<br>}).catch(error &#x3D;&gt; console.log(error)); 5. 常见陷阱</p>
+<p>返回值缺失：<font style="color:rgb(64, 64, 64);">.then()</font> 中未 <font style="color:rgb(64, 64, 64);">return</font> 将导致后续接收 <font style="color:rgb(64, 64, 64);">undefined</font>。</p>
+<p>嵌套 Promise：避免嵌套，改用链式调用。</p>
+<p>未处理的拒绝：始终添加 <font style="color:rgb(64, 64, 64);">.catch()</font> 防止未捕获错误。</p>
+<ol start="6">
+<li>与 async&#x2F;await 结合</li>
+</ol>
+<p><strong><font style="color:rgb(64, 64, 64);">async</font></strong> <strong>函数</strong>：返回 Promise，可用 <font style="color:rgb(64, 64, 64);">await</font> 等待异步操作。</p>
+<p>错误处理：结合 <font style="color:rgb(64, 64, 64);">try&#x2F;catch</font> 捕获异常。</p>
+<p>async function fetchData() {<br>try {<br>const data &#x3D; await apiCall();<br>const processed &#x3D; await processData(data);<br>console.log(processed);<br>} catch (error) {<br>console.error(“Fetch failed:”, error);<br>}<br>} 7. 应用场景</p>
+<p>并行任务：<font style="color:rgb(64, 64, 64);">Promise.all</font> 处理多个独立异步操作。</p>
+<p>竞速请求：<font style="color:rgb(64, 64, 64);">Promise.race</font> 实现超时控制。</p>
+<p>顺序执行：链式调用逐个处理依赖任务的结果。</p>
+<p>掌握 Promise 的关键在于理解状态流转、链式调用机制及错误处理策略。结合 <font style="color:rgb(64, 64, 64);">async&#x2F;await</font> 可进一步提升代码可读性，有效管理异步流程。</p>
+<p><font style="color:rgb(64, 64, 64);"></font></p>
+<p>Iterator-Generator(迭代器-生成器)</p>
+<p>在 JavaScript 中，迭代器（Iterator）、生成器（Generator）和可迭代对象（Iterable）是处理数据集合和异步编程的重要概念。</p>
+<p>迭代器(Iterator)</p>
+<p>迭代器_(iteratbr)，使用户在容器对象(container，例如链表或数组)上遍访的对象，使用该接口无需关心对象的内部实现细节。</p>
+<p>定义<br>一个对象，必须实现 <strong><font style="color:rgb(64, 64, 64);">next()</font></strong> 方法，返回 <font style="color:rgb(64, 64, 64);">{ value: any, done: boolean }</font>。</p>
+<p>手动创建迭代器</p>
+<dl><dt>function createCounter(max) {<br>let count &#x3D; 0;<br>return {<br>next() {<br>return count &lt; max<br>? { value: count++, done: false }</dt><dd>{ done: true };<br>}<br>};<br>}</dd></dl><p>const counter &#x3D; createCounter(3);<br>console.log(counter.next().value); &#x2F;&#x2F; 0<br>console.log(counter.next().value); &#x2F;&#x2F; 1<br>迭代器协议<br>任何对象只要实现了 <font style="color:rgb(64, 64, 64);">next()</font> 方法，符合返回 <font style="color:rgb(64, 64, 64);">{value, done}</font> 的规则，就是一个迭代器。</p>
+<p>可迭代对象(Iterable)</p>
+<p>定义<br>实现了 <strong><font style="color:rgb(64, 64, 64);"><a href>Symbol.iterator</a></font></strong> 方法的对象，该方法返回一个迭代器。可被 <font style="color:rgb(64, 64, 64);">for…of</font> 遍历。</p>
+<p>常见内置可迭代对象</p>
+<p><font style="color:rgb(64, 64, 64);">Array, String, Map, Set, TypedArray, arguments, NodeList 等</font></p>
+<p>手动实现可迭代对象</p>
+<p>const obj &#x3D; {<br>fri: [‘1’, ‘2’, ‘3’, ‘4’],<br><a href>Symbol.iterator</a> {<br>let num &#x3D; 0;<br>return {<br>next: () &#x3D;&gt; {<br>&#x2F;&#x2F;使用箭头函数,无 this,上层作用域找 this,找到顶层<br>return num &lt;&#x3D; this.fri.length ? { done: false, value: this.fri[num++] } : { done: true }<br>}<br>}<br>}<br>}<br>for (const o of obj) {<br>console.log(o);<br>}<br>console.log(obj[Symbol.iterator]);<br>console.log(obj<a href>Symbol.iterator</a>);</p>
+<pre><code class="hljs">const iterFun = obj[Symbol.iterator]()
+console.log(iterFun.next());
+console.log(iterFun.next());
+console.log(iterFun.next());
+console.log(iterFun.next());
+console.log(iterFun.next());
+console.log(iterFun.next());
+</code></pre>
+<p>const obj&#x3D;{<br>name:’MirZ’,<br>age:’18’,<br>address:’河南’,<br><a href>Symbol.iterator</a>{<br>&#x2F;&#x2F; const keys&#x3D;Object.keys(this)<br>&#x2F;&#x2F; const values&#x3D;Object.values(this)<br>const entries&#x3D;Object.entries(this)<br>let count&#x3D;0<br>return{<br>next:()&#x3D;&gt;{<br>return count&lt;entries.length?{done:false,value:entries[count++]}:{done:true}<br>}<br>}<br>}<br>}<br>for (const element of obj) {<br>console.log(element);</p>
+<p>}<br>class Person {<br>constructor(name, age, height, friends) {<br>this.name &#x3D; name<br>this.age &#x3D; age<br>this.height &#x3D; height<br>this.friends &#x3D; friends<br>}</p>
+<pre><code class="hljs">  // 实例方法
+  running() &#123;&#125;
+  [Symbol.iterator]() &#123;
+    let index = 0
+    const iterator = &#123;
+      next: () =&gt; &#123;
+        if (index &lt; this.friends.length) &#123;
+          return &#123; done: false, value: this.friends[index++] &#125;
+        &#125; else &#123;
+          return &#123; done: true &#125;
+        &#125;
+      &#125;
+    &#125;
+    return iterator
+  &#125;
+&#125;
+
+const p1 = new Person(&quot;why&quot;, 18, 1.88, [&quot;curry&quot;, &quot;kobe&quot;, &quot;james&quot;, &quot;tatumu&quot;])
+const p2 = new Person(&quot;kobe&quot;, 30, 1.98, [&quot;curry&quot;, &quot;james&quot;, &quot;aonier&quot;, &quot;weide&quot;])
+
+for (const item of p2) &#123;
+  console.log(item)
+&#125;
+</code></pre>
+<p>class Person {<br>constructor(name, age, height, friends) {<br>this.name &#x3D; name<br>this.age &#x3D; age<br>this.height &#x3D; height<br>this.friends &#x3D; friends<br>}</p>
+<pre><code class="hljs">  // 实例方法
+  running() &#123;&#125;
+  [Symbol.iterator]() &#123;
+    let index = 0
+    const iterator = &#123;
+      next: () =&gt; &#123;
+        if (index &lt; this.friends.length) &#123;
+          return &#123; done: false, value: this.friends[index++] &#125;
+        &#125; else &#123;
+          return &#123; done: true &#125;
+        &#125;
+      &#125;,
+      return: () =&gt; &#123;
+        console.log(&quot;监听到迭代器中断了&quot;)
+        return &#123; done: true &#125;
+      &#125;
+    &#125;
+    return iterator
+  &#125;
+&#125;
+</code></pre>
+<p>​<br> const p1 &#x3D; new Person(“why”, 18, 1.88, [“curry”, “kobe”, “james”, “tatumu”])</p>
+<pre><code class="hljs">for (const item of p1) &#123;
+  console.log(item)
+  if (item === &quot;kobe&quot;) &#123;
+    break
+  &#125;
+&#125;
+</code></pre>
+<p>生成器</p>
+<p>定义</p>
+<p>生成器是 ES6 中新增的一种函数控制、使用的方案，它可以让我们更加灵活的控制函数什么时候继续执行、暂停执行等<br> 通过 <strong><font style="color:rgb(64, 64, 64);">function*</font></strong> 定义的函数，返回一个生成器对象（既是迭代器又是可迭代对象）。</p>
+<p>生成器和普通的函数区别:</p>
+<p>首先，生成器函数需要在 function 的后面加一个符号:*</p>
+<p>其次，生成器函数可以通过 yield 关键字来控制函数的执行流程</p>
+<p>最后，生成器函数的返回值是一个 Generator(生成器)</p>
+<p>生成器是一种特殊的迭代器</p>
+<p><strong><font style="color:rgb(64, 64, 64);">yield</font></strong> <strong>关键字</strong></p>
+<ul>
+<li><font style="color:rgb(64, 64, 64);">暂停函数执行并返回一个值。</font></li>
+<li><font style="color:rgb(64, 64, 64);">通过 </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;next()&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);"> 恢复执行，可传递参数给生成器。</font><br>function* gen() {<br>yield 1;<br>yield 2;<br>return 3;<br>}</li>
+</ul>
+<p>const generator &#x3D; gen();<br>console.log(generator.next()); &#x2F;&#x2F; { value: 1, done: false }<br>console.log(generator.next());<br>console.log(generator.next());<br>console.log(generator.next());<br>生成器的惰性求值<br>生成器按需生成值，适合处理大数据或无限序列：</p>
+<p>function* fibonacci() {<br>let a &#x3D; 0, b &#x3D; 1;<br>while (true) {<br>yield a;<br>[a, b] &#x3D; [b, a + b];<br>}<br>}<br>生成器的高级用法</p>
+<p>传参给 **<font style="color:rgb(64, 64, 64);">next()</font>**：向生成器内部传递值。</p>
+<p>function* fibonacci() {<br>let a &#x3D; 0, b &#x3D; 1;<br>while (true) {<br>yield a;<br>[a, b] &#x3D; [b, a + b];<br>}<br>}<br>const gen&#x3D;fibonacci()<br>console.log(gen.next());<br>console.log(gen.next());<br>console.log(gen.next());<br>console.log(gen.next());<br>console.log(gen.next());<br>console.log(gen.next());<br>console.log(gen.next());<br>&#x2F;&#x2F; console.log(gen.return());<br>&#x2F;&#x2F; console.log(gen.throw(new Error(‘结束’)));<br>console.log(gen.next());<br>console.log(gen.next());<br>console.log(gen.next());</p>
+<ul>
+<li><strong><font style="color:rgb(64, 64, 64);">错误处理</font></strong><font style="color:rgb(64, 64, 64);">：使用</font><font style="color:rgb(64, 64, 64);"> </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;generator.throw(err)&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);"> </font><font style="color:rgb(64, 64, 64);">抛出错误。</font></li>
+<li><strong><font style="color:rgb(64, 64, 64);">提前终止</font></strong><font style="color:rgb(64, 64, 64);">：使用 </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;generator.return()&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);"> 结束生成器。</font></li>
+</ul>
+<p>总结</p>
+<p>迭代器和生成器的关系</p>
+<p>生成器是迭代器的语法糖<br>生成器自动实现 <font style="color:rgb(64, 64, 64);"><a href>Symbol.iterator</a></font> 和 <font style="color:rgb(64, 64, 64);">next()</font>，简化迭代器创建。</p>
+<p>const obj&#x3D;{<br>names:[‘李卓’,’叶茂华’,’MirZ’]<br>}<br>function* creatItera(obj){<br>for (let index &#x3D; 0; index &lt; obj.names.length; index++) {<br>yield obj.names[index]<br> }<br>}<br>const objItera&#x3D;creatItera(obj)<br>console.log(objItera.next());<br>console.log(objItera.next());<br>console.log(objItera.next());<br>console.log(objItera.next());</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+   class Person {
+      constructor(name, age, height, friends) {
+        this.name = name
+        this.age = age
+        this.height = height
+        this.friends = friends
+      }
+
+      // 实例方法
+      *[Symbol.iterator]() {
+        //yield* 用于委托给另一个可迭代对象。它会遍历这个可迭代对象，并逐个 yield 其中的元素，而不是将整个可迭代对象作为一个元素返回。
+      yield* this.friends
+      }
+    }
+    
+    const p = new Person("why", 18, 1.88, ["curry", "kobe", "james", "tatumu"])
+    
+    for (const item of p) {
+      console.log(item)
+    }
+    // const pItera=p[Symbol.iterator]()
+    // console.log(pItera.next());
+    // console.log(pItera.next());
+    // console.log(pItera.next());
+    // console.log(pItera.next());
+
+  </script>
+
+</body>
+
+</html>
+生成器对象的特性
+
+<p>const genObj &#x3D; gen();<br>console.log(genObj<a href>Symbol.iterator</a> &#x3D;&#x3D;&#x3D; genObj); &#x2F;&#x2F; true<br>应用场景</p>
+<p><strong><font style="color:rgb(64, 64, 64);">for…of</font></strong> 循环<br>遍历可迭代对象：</p>
+<p>for (const char of ‘Hello’) console.log(char); &#x2F;&#x2F; H, e, l, l, o</p>
+<p>解构赋值与扩展运算符</p>
+<p>const [a, b] &#x3D; [10, 20]; &#x2F;&#x2F; 解构<br>const arr &#x3D; […’abc’]; &#x2F;&#x2F; [‘a’, ‘b’, ‘c’]<br>异步迭代器（Async Iterators）<br>与 <font style="color:rgb(64, 64, 64);">for await…of</font> 配合处理异步数据流：</p>
+<p>async function* asyncGen() {<br>yield await Promise.resolve(1);<br>yield await Promise.resolve(2);<br>}</p>
+<p>(async () &#x3D;&gt; {<br>for await (const num of asyncGen()) console.log(num); &#x2F;&#x2F; 1, 2<br>})();<br>概念 关键点<br>可迭代对象 必须实现 <font style="color:rgb(64, 64, 64);"><a href>Symbol.iterator</a></font>，返回迭代器。<br>迭代器 必须实现 <font style="color:rgb(64, 64, 64);">next()</font>，返回 <font style="color:rgb(64, 64, 64);">{ value, done }</font>。<br>生成器 通过 <font style="color:rgb(64, 64, 64);">function*</font>定义，简化迭代器创建，支持暂停&#x2F;恢复执行和双向通信。</p>
+<p>异步处理<br>异步处理方式</p>
+<p>最早的异步处理方式可能是回调函数，比如在 setTimeout 或者事件监听中使用回调。但回调的问题在于容易导致回调地狱，代码难以维护。</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+
+    // 封装请求的方法: url -> promise(result)
+    function requestData(url) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(url)
+        }, 2000)
+      })
+    }
+    
+    // 1.发送一次网络请求
+    // requestData("http://why").then(res => {
+    //   console.log("res:", res)
+    // })
+    
+    /*
+      需求: 
+        1.发送一次网络请求, 等到这次网络请求的结果
+        2.发送第二次网络请求, 等待这次网络请求的结果
+        3.发送第三次网络请求, 等待这次网络请求的结果
+    */
+    // 方式一: 层层嵌套(回调地狱 callback hell)
+    // function getData() {
+    //   // 1.第一次请求
+    //   requestData("why").then(res1 => {
+    //     console.log("第一次结果:", res1)
+    
+    //     // 2.第二次请求
+    //     requestData(res1 + "kobe").then(res2 => {
+    //       console.log("第二次结果:", res2)
+    
+    //       // 3.第三次请求
+    //       requestData(res2 + "james").then(res3 => {
+    //         console.log("第三次结果:", res3)
+    //       })
+    //     })
+    //   })
+    // }
+    
+    // 方式二: 使用Promise进行重构(解决回调地狱)
+    // 链式调用
+    // function getData() {
+    //   requestData("why").then(res1 => {
+    //     console.log("第一次结果:", res1)
+    //     return requestData(res1 + "kobe")
+    //   }).then(res2 => {
+    //     console.log("第二次结果:", res2)
+    //     return requestData(res2 + "james")
+    //   }).then(res3 => {
+    //     console.log("第三次结果:", res3)
+    //   })
+    // }
+    
+    // 方式三: 最终代码
+    // function* getData() {
+    //   const res1 = yield requestData("why")
+    //   console.log("res1:", res1)
+    
+    //   const res2 = yield requestData(res1 + "kobe")
+    //   console.log("res2:", res2)
+    
+    //   const res3 = yield requestData(res2 + "james")
+    //   console.log("res3:", res3)
+    // }
+    
+    // const generator = getData()
+    // generator.next().value.then(res1 => {
+    //   generator.next(res1).value.then(res2 => {
+    //     generator.next(res2).value.then(res3 => {
+    //       generator.next(res3)
+    //     })
+    //   })
+    // })
+    
+    // 方式四: async/await的解决方案
+    async function getData() {
+      const res1 = await requestData("why")
+      console.log("res1:", res1)
+    
+      const res2 = await requestData(res1 + "kobe")
+      console.log("res2:", res2)
+    
+      const res3 = await requestData(res2 + "james")
+      console.log("res3:", res3)
+    }
+    
+    const generator = getData()
+
+  </script>
+
+</body>
+</html>
+
+<pre><code class="hljs">// 封装请求的方法: url -&gt; promise(result)
+function requestData(url) &#123;
+  return new Promise((resolve, reject) =&gt; &#123;
+    setTimeout(() =&gt; &#123;
+      resolve(url)
+    &#125;, 2000)
+  &#125;)
+&#125;
+
+// 生成器的处理方案
+function* getData() &#123;
+  const res1 = yield requestData(&quot;why&quot;)
+  console.log(&quot;res1:&quot;, res1)
+
+  const res2 = yield requestData(res1 + &quot;kobe&quot;)
+  console.log(&quot;res2:&quot;, res2)
+
+  const res3 = yield requestData(res2 + &quot;james&quot;)
+  console.log(&quot;res3:&quot;, res3)
+
+  const res4 = yield requestData(res3 + &quot;curry&quot;)
+  console.log(&quot;res4:&quot;, res4)
+
+  const res5 = yield requestData(res4 + &quot;tatumu&quot;)
+  console.log(&quot;res5:&quot;, res5)
+&#125;
+
+// const generator = getData()
+// generator.next().value.then(res1 =&gt; &#123;
+//   generator.next(res1).value.then(res2 =&gt; &#123;
+//     generator.next(res2).value.then(res3 =&gt; &#123;
+//       generator.next(res3).value.then(res4 =&gt; &#123;
+//         generator.next(res4)
+//       &#125;)
+//     &#125;)
+//   &#125;)
+// &#125;)
+
+// 自动化执行生成器函数(了解)
+function execGenFn(genFn) &#123;
+  // 1.获取对应函数的generator
+  const generator = genFn()
+  // 2.定义一个递归函数
+  function exec(res) &#123;
+    // result -&gt; &#123; done: true/false, value: 值/undefined &#125;
+    const result = generator.next(res)
+    if (result.done) return
+    result.value.then(res =&gt; &#123;
+      exec(res)
+    &#125;)
+  &#125;
+  // 3.执行递归函数
+  exec()
+&#125;
+
+execGenFn(getData)
+</code></pre>
+<p>异步函数</p>
+<p>异步函数基础</p>
+<p>定义：通过 <font style="color:rgb(64, 64, 64);">async</font> 关键字声明的函数，内部可使用 <font style="color:rgb(64, 64, 64);">await</font> 等待 Promise 完成。</p>
+<p>返回值：<font style="color:rgb(64, 64, 64);">async</font> 函数始终返回一个 Promise：</p>
+<p>若函数返回非 Promise 值，会被隐式转换为 <font style="color:rgb(64, 64, 64);">Promise.resolve(值)</font>。</p>
+<p>若抛出错误（<font style="color:rgb(64, 64, 64);">throw</font>），返回 <font style="color:rgb(64, 64, 64);">Promise.reject(错误)</font>。</p>
+<p>async function getData() {<br>return 42; &#x2F;&#x2F; 等价于 Promise.resolve(42)<br>}<br>getData().then(console.log); &#x2F;&#x2F; 输出 42<br><font style="color:rgb(64, 64, 64);"></font><strong><font style="color:rgb(64, 64, 64);">await</font></strong> 关键字的核心规则</p>
+<p>作用：暂停 <font style="color:rgb(64, 64, 64);">async</font> 函数执行，等待右侧的 Promise 完成。</p>
+<p>若 Promise 成功，<font style="color:rgb(64, 64, 64);">await</font> 返回解析后的值。</p>
+<p>若 Promise 失败，<font style="color:rgb(64, 64, 64);">await</font> 抛出拒绝原因（可用 <font style="color:rgb(64, 64, 64);">try&#x2F;catch</font> 捕获）。</p>
+<p>限制：<font style="color:rgb(64, 64, 64);">await</font> 只能在 <strong><font style="color:rgb(64, 64, 64);">async</font></strong> 函数内部使用，否则报语法错误。</p>
+<p>async function fetchUser() {<br>const response &#x3D; await fetch(‘&#x2F;api&#x2F;user’); &#x2F;&#x2F; 等待网络请求完成<br>const user &#x3D; await response.json(); &#x2F;&#x2F; 等待 JSON 解析<br>return user;<br>}<br>错误处理</p>
+<p><strong><font style="color:rgb(64, 64, 64);">try&#x2F;catch</font></strong> <strong>捕获错误</strong>：同步风格处理异步错误。</p>
+<p><strong><font style="color:rgb(64, 64, 64);">.catch()</font></strong> 兜底：<font style="color:rgb(64, 64, 64);">async</font> 函数返回的 Promise 可链式调用 <font style="color:rgb(64, 64, 64);">.catch()</font>。</p>
+<p>&#x2F;&#x2F; 方式 1: try&#x2F;catch<br>async function loadData() {<br>try {<br>const data &#x3D; await fetchApi();<br>} catch (error) {<br>console.error(‘加载失败:’, error);<br>}<br>}</p>
+<p>&#x2F;&#x2F; 方式 2: .catch()<br>loadData().catch(error &#x3D;&gt; console.error(‘兜底捕获:’, error));</p>
+<p>事件循环<br>线程和进程</p>
+<p>线程和进程是操作系统中的两个概念:</p>
+<p>进程(process):计算机已经运行的程序，是操作系统管理程序的一种方式:</p>
+<p>线程(thread):操作系统能够运行运算调度的最小单位，通常情况下它被包含在进程中;</p>
+<p>:::tips<br>听起来很抽象，这里还是给出我的解释:</p>
+<p>进程:我们可以认为，启动一个应用程序，就会默认启动一个进程(也可能是多个进程):</p>
+<p>线程:每一个进程中，都会启动至少一个线程用来执行程序中的代码，这个线程被称之为主线程</p>
+<p>所以我们也可以说进程是线程的容器</p>
+<p>:::</p>
+<p>事件队列</p>
+<p>JavaScript 是单线程(可以开启 workers)的，但是 JavaScript 的线程有自己的容器进程:浏览器或者 Node.</p>
+<p>目前多数的浏览器其实都是多进程的，当我们打开一个 tab 页面时就会开启一个新的进程，这是为了防止一个页面卡死而造成所有页面无法响应，整个浏览器需要强制退出,每个进程中又有很多的线程，其中包括执行 JavaScript 代码的线程</p>
+<p>JavaScript 的代码执行是在一个单独的线程中执行的,这就意味着 JavaScript 的代码在同一个时刻只能做一件事,如果这件事是非常耗时的，就意味着当前的线程就会被阻塞</p>
+<p>事件循环</p>
+<p>宏任务和微任务</p>
+<p>但是事件循环中并非只维护着一个队列，事实上是有两个队列:</p>
+<p>宏任务队列(macrotask queue):ajax、setTimeout、setlnterval、DOM 监听、Ul Rendering 等</p>
+<p>微任务队列(microtask queue):Promise 的 then 回调、Mutation Observer APl、queueMicrotask()等</p>
+<p>那么事件循环对于两个队列的优先级是怎么样的呢?</p>
+<p>1.main script 中的代码优先执行(编写的顶层 script 代码);</p>
+<p>2.在执行任何一个宏任务之前(不是队列，是一个宏任务)，都会先查看微任务队列中是否有任务需要执行, 也就是宏任务执行之前，必须保证微任务队列是空的;如果不为空，那么就优先执行微任务队列中的任务(回调):</p>
+<p>面试题</p>
+<p>console.log(“script start”) &#x2F;&#x2F;1</p>
+<p>setTimeout(function () {<br>console.log(“setTimeout1”); &#x2F;&#x2F;8<br>new Promise(function (resolve) {<br>resolve();<br>}).then(function () {<br>new Promise(function (resolve) {<br>resolve();<br>}).then(function () {<br>console.log(“then4”); &#x2F;&#x2F;10<br>});<br>console.log(“then2”); &#x2F;&#x2F;9<br>});<br>});</p>
+<p>new Promise(function (resolve) {<br>console.log(“promise1”); &#x2F;&#x2F;2<br>resolve();<br>}).then(function () {<br>console.log(“then1”); &#x2F;&#x2F;5<br>});</p>
+<p>setTimeout(function () {<br>console.log(“setTimeout2”); &#x2F;&#x2F;11<br>});</p>
+<p>console.log(2); &#x2F;&#x2F;3<br>&#x2F;&#x2F;直接将一个函数加入微队列<br>queueMicrotask(() &#x3D;&gt; {<br>console.log(“queueMicrotask1”) &#x2F;&#x2F;6<br>});</p>
+<p>new Promise(function (resolve) {<br>resolve();<br>}).then(function () {<br>console.log(“then3”); &#x2F;&#x2F;7<br>});</p>
+<p>console.log(“script end”) &#x2F;&#x2F;4</p>
+<p>console.log(“script start”)</p>
+<p>function requestData(url) {<br>console.log(“requestData”)<br>return new Promise((resolve) &#x3D;&gt; {<br>setTimeout(() &#x3D;&gt; {<br>console.log(“setTimeout”)<br>resolve(url)<br>}, 2000);<br>})<br>}</p>
+<p>&#x2F;&#x2F; 2.await&#x2F;async<br>async function getData() {<br>console.log(“getData start”)<br>&#x2F;&#x2F;await 只有等到 promise 的结果返回才会执行后续代码<br>const res &#x3D; await requestData(“why”)</p>
+<p>console.log(“then1-res:”, res)<br>console.log(“getData end”)<br>}</p>
+<p>getData()</p>
+<p>console.log(“script end”)</p>
+<p>&#x2F;&#x2F; script start<br>&#x2F;&#x2F; getData start<br>&#x2F;&#x2F; requestData<br>&#x2F;&#x2F; script end</p>
+<p>&#x2F;&#x2F; setTimeout</p>
+<p>&#x2F;&#x2F; then1-res: why<br>&#x2F;&#x2F; getData end</p>
+<p>async function async1 () {<br>console.log(‘async1 start’) &#x2F;&#x2F;2<br>await async2();<br>&#x2F;&#x2F; async2()执行完后会 return undefined &#x3D;&#x3D;&gt; Promise.resolve(undefined) ,下面代码放入微任务队列<br>console.log(‘async1 end’) &#x2F;&#x2F; 6<br>}</p>
+<pre><code class="hljs">async function async2 () &#123;
+  console.log(&#39;async2&#39;)  //3
+&#125;
+
+console.log(&#39;script start&#39;)  //1
+
+setTimeout(function () &#123;
+  console.log(&#39;setTimeout&#39;)   //8
+&#125;, 0)
+
+async1();
+
+new Promise (function (resolve) &#123;
+  console.log(&#39;promise1&#39;)  //4
+  resolve();
+&#125;).then (function () &#123;
+  console.log(&#39;promise2&#39;)  //7
+&#125;)
+
+console.log(&#39;script end&#39;)   //5
+</code></pre>
+<p>Storage</p>
+<p>Storage 用于在客户端存储数据，主要包括 <font style="color:rgb(64, 64, 64);">localStorage</font> 和 <font style="color:rgb(64, 64, 64);">sessionStorage</font>，属于 Web Storage API。</p>
+<ol>
+<li>类型与区别</li>
+</ol>
+<p>localStorage</p>
+<p>生命周期：永久存储，需手动删除（代码或浏览器清除）。</p>
+<p>作用域：同源（协议、域名、端口相同）的所有标签页和窗口共享。</p>
+<p>sessionStorage</p>
+<p>生命周期：仅限当前会话，关闭标签页或浏览器后清除。</p>
+<p>作用域：仅在当前标签页有效，同源其他标签页无法访问。</p>
+<ol start="2">
+<li>常用方法</li>
+</ol>
+<p>存储数据：<font style="color:rgb(64, 64, 64);">setItem(key, value)</font></p>
+<p>localStorage.setItem(‘username’, ‘Alice’);</p>
+<p>读取数据：<font style="color:rgb(64, 64, 64);">getItem(key)</font></p>
+<p>const user &#x3D; localStorage.getItem(‘username’); &#x2F;&#x2F; ‘Alice’</p>
+<p>删除数据：<font style="color:rgb(64, 64, 64);">removeItem(key)</font></p>
+<p>localStorage.removeItem(‘username’);</p>
+<p>清空所有数据：<font style="color:rgb(64, 64, 64);">clear()</font></p>
+<p>localStorage.clear();</p>
+<ol start="3">
+<li>数据格式</li>
+</ol>
+<p>仅支持字符串：存储对象需序列化，读取时反序列化。</p>
+<p>const obj &#x3D; { name: ‘Bob’ };<br>localStorage.setItem(‘user’, JSON.stringify(obj));<br>const data &#x3D; JSON.parse(localStorage.getItem(‘user’)); 4. 存储事件（storage Event）</p>
+<p>触发条件：同源其他标签页修改 Storage 时触发。</p>
+<p>事件对象属性：<font style="color:rgb(64, 64, 64);">key</font>、<font style="color:rgb(64, 64, 64);">oldValue</font>、<font style="color:rgb(64, 64, 64);">newValue</font>、<font style="color:rgb(64, 64, 64);">url</font> 等。</p>
+<p>window.addEventListener(‘storage’, (e) &#x3D;&gt; {<br>console.log(<code>$&#123;e.key&#125; 值从 $&#123;e.oldValue&#125; 变为 $&#123;e.newValue&#125;</code>);<br>}); 5. 容量限制</p>
+<p>大小：约 5MB（不同浏览器可能不同）。</p>
+<p>错误处理：超出限制会抛出 <font style="color:rgb(64, 64, 64);">QuotaExceededError</font>，需使用 <font style="color:rgb(64, 64, 64);">try…catch</font>处理。</p>
+<p>try {<br>localStorage.setItem(‘bigData’, new Array(5 _ 1024 _ 1024).join(‘a’));<br>} catch (e) {<br>console.error(‘存储失败：’, e);<br>} 6. 安全性与兼容性</p>
+<p>明文存储：避免保存敏感信息（如密码）。</p>
+<p>XSS 风险：若网站存在 XSS 漏洞，攻击者可读取 Storage 数据。</p>
+<p>兼容性：现代浏览器均支持，IE8+ 支持，但隐私模式可能受限。</p>
+<p>检测支持：</p>
+<p>function isStorageSupported() {<br>try {<br>const testKey &#x3D; ‘<strong>test</strong>‘;<br>localStorage.setItem(testKey, testKey);<br>localStorage.removeItem(testKey);<br>return true;<br>} catch (e) {<br>return false;<br>}<br>} 7. 注意事项</p>
+<p>类型转换：非字符串数据会被自动转换（如 <font style="color:rgb(64, 64, 64);">true</font> 转为 <font style="color:rgb(64, 64, 64);">“true”</font>）。</p>
+<p>遍历键值：通过 <font style="color:rgb(64, 64, 64);">length</font> 和 <font style="color:rgb(64, 64, 64);">key(index)</font>。</p>
+<p>for (let i &#x3D; 0; i &lt; localStorage.length; i++) {<br>const key &#x3D; localStorage.key(i);<br>console.log(key, localStorage.getItem(key));<br>}<br>隐私模式：部分浏览器在隐身模式下禁用 Storage，需异常处理。</p>
+<ol start="8">
+<li>与 Cookie 对比</li>
+</ol>
+<p>特性 Cookie Web Storage<br>容量 ~4KB ~5MB<br>请求是否携带 每次 HTTP 请求自动携带 不参与通信<br>生命周期 可设置过期时间 永久或会话级 9. 封装工具函数</p>
+<p>const storage &#x3D; {<br>set(key, value) {<br>localStorage.setItem(key, JSON.stringify(value));<br>},<br>get(key) {<br>const data &#x3D; localStorage.getItem(key);<br>return data ? JSON.parse(data) : null;<br>},<br>remove(key) {<br>localStorage.removeItem(key);<br>}<br>};</p>
+<p>正则表达式</p>
+<p>正则表达式是一种用于匹配和操作文本的强大工具，它是由一系列字符和特殊字符组成的模式，用于描述要匹配的文本模式。正则表达式可以在文本中查找、替换、提取和验证特定的模式。</p>
+<p>正则表达式的创建</p>
+<p>在 JavaScript 中有两种方式创建正则表达式：</p>
+<p>字面量方式</p>
+<p>使用斜杠（&#x2F;）来界定正则表达式模式。</p>
+<p>const pattern &#x3D; &#x2F;abc&#x2F;;</p>
+<p>构造函数方式</p>
+<p>使用 RegExp 构造函数，传入模式字符串作为参数。</p>
+<p><font style="color:rgb(28, 31, 35);">const pattern &#x3D; new RegExp(‘abc’);</font></p>
+<p>正则表达式标志</p>
+<p>标志可以改变正则表达式的匹配行为，标志可以单个使用，也可以组合使用。常用标志如下：</p>
+<p>i：忽略大小写。(global)</p>
+<p>const pattern &#x3D; &#x2F;abc&#x2F;i;<br>console.log(pattern.test(‘ABC’)); &#x2F;&#x2F; true<br>g：全局匹配，找到所有匹配项，而不是在找到第一个匹配项后停止。(ignore)</p>
+<p>const str &#x3D; ‘abc abc’;<br>const pattern &#x3D; &#x2F;abc&#x2F;g;<br>const matches &#x3D; str.match(pattern);<br>console.log(matches); &#x2F;&#x2F; [‘abc’, ‘abc’]<br>m：多行匹配，使 ^ 和 $ 可以匹配每行的开头和结尾。(multiple)</p>
+<p>const str &#x3D; ‘abc\nabc’;<br>const pattern &#x3D; &#x2F;^abc&#x2F;m;<br>const matches &#x3D; str.match(pattern);<br>console.log(matches); &#x2F;&#x2F; [‘abc’, ‘abc’]</p>
+<p>常用的正则表达式元字符<br>概览</p>
+<p>元字符</p>
+<p>基础：<font style="color:rgb(64, 64, 64);">^</font>（开头）、<font style="color:rgb(64, 64, 64);">$</font>（结尾）、<font style="color:rgb(64, 64, 64);">.</font>（任意字符，除换行符）、<font style="color:rgb(64, 64, 64);">|</font>（或）。</p>
+<p>转义字符：<font style="color:rgb(64, 64, 64);">\d</font>（数字）、<font style="color:rgb(64, 64, 64);">\D</font>（非数字）、<font style="color:rgb(64, 64, 64);">\w</font>（单词字符）、<font style="color:rgb(64, 64, 64);">\W</font>（非单词字符）、<font style="color:rgb(64, 64, 64);">\s</font>（空白符）、<font style="color:rgb(64, 64, 64);">\S</font>（非空白符）。**<font style="color:rgb(64, 64, 64);background-color:rgb(236, 236, 236);">. * ?</font>** (转义特殊字符,如 . * ? [ ] \ &#x2F; ^ $ | + ( ))</p>
+<p>边界：<font style="color:rgb(64, 64, 64);">\b</font>（单词边界）、<font style="color:rgb(64, 64, 64);">\B</font>（非单词边界）。</p>
+<p>量词</p>
+<p><font style="color:rgb(64, 64, 64);">*</font>（0 次或多次）、<font style="color:rgb(64, 64, 64);">+</font>（1 次或多次）、<font style="color:rgb(64, 64, 64);">?</font>（0 或 1 次）。</p>
+<p><font style="color:rgb(64, 64, 64);">{n}</font>（n 次）、<font style="color:rgb(64, 64, 64);">{n,}</font>（至少 n 次）、<font style="color:rgb(64, 64, 64);">{n,m}</font>（n 到 m 次）。</p>
+<p>非贪婪模式：在量词后加 <font style="color:rgb(64, 64, 64);">?</font>（如 <font style="color:rgb(64, 64, 64);">*?</font>、<font style="color:rgb(64, 64, 64);">+?</font>）。</p>
+<p>字符集合</p>
+<p><font style="color:rgb(64, 64, 64);">[abc]</font>：匹配 a、b、c 中的任意一个。</p>
+<p><font style="color:rgb(64, 64, 64);">[^abc]</font>：匹配不在集合中的字符。</p>
+<p><font style="color:rgb(64, 64, 64);">[a-z]</font>：匹配范围（如小写字母）。</p>
+<p>分组与捕获</p>
+<p><font style="color:rgb(64, 64, 64);">(abc)</font>：捕获组，通过 <font style="color:rgb(64, 64, 64);">\1</font> 或 <font style="color:rgb(64, 64, 64);">$1</font> 引用。</p>
+<p><font style="color:rgb(64, 64, 64);">(?:abc)</font>：非捕获组，不保存匹配项。</p>
+<p>前瞻：<font style="color:rgb(64, 64, 64);">(?&#x3D;…)</font>（正向肯定）、<font style="color:rgb(64, 64, 64);">(?!&#x3D;…)</font>（正向否定）。</p>
+<p>元字符示例</p>
+<p>.：匹配除换行符之外的任意单个字符。</p>
+<p>const pattern &#x3D; &#x2F;a.c&#x2F;;<br>console.log(pattern.test(‘abc’)); &#x2F;&#x2F; true<br>^：匹配字符串的开头。</p>
+<p>const pattern &#x3D; &#x2F;^abc&#x2F;;<br>console.log(pattern.test(‘abcdef’)); &#x2F;&#x2F; true<br>$：匹配字符串的结尾。</p>
+<p>const pattern &#x3D; &#x2F;abc$&#x2F;;<br>console.log(pattern.test(‘defabc’)); &#x2F;&#x2F; true *：匹配前面的元素零次或多次。{0,}</p>
+<p>const pattern &#x3D; &#x2F;ab*c&#x2F;;<br>console.log(pattern.test(‘ac’)); &#x2F;&#x2F; true<br>console.log(pattern.test(‘abc’)); &#x2F;&#x2F; true<br>console.log(pattern.test(‘abbbc’)); &#x2F;&#x2F; true +：匹配前面的元素一次或多次。{1,}</p>
+<p>const pattern &#x3D; &#x2F;ab+c&#x2F;;<br>console.log(pattern.test(‘ac’)); &#x2F;&#x2F; false<br>console.log(pattern.test(‘abc’)); &#x2F;&#x2F; true<br>console.log(pattern.test(‘abbbc’)); &#x2F;&#x2F; true<br>?：匹配前面的元素零次或一次。{0,1}</p>
+<p>const pattern &#x3D; &#x2F;ab?c&#x2F;;<br>console.log(pattern.test(‘ac’)); &#x2F;&#x2F; true<br>console.log(pattern.test(‘abc’)); &#x2F;&#x2F; true<br>console.log(pattern.test(‘abbbc’)); &#x2F;&#x2F; false<br>{n,m}：匹配前面的元素至少 n 次，最多 m 次。{n}：匹配前面的元素恰好 n 次。{n,}：匹配前面的元素至少 n 次。</p>
+<p>&#x2F;&#x2F; 匹配 2 到 4 个连续的数字<br>const pattern &#x3D; &#x2F;\d{2,4}&#x2F;;<br>console.log(pattern.test(‘123’)); &#x2F;&#x2F; true<br>[]：匹配方括号内的任意一个字符。</p>
+<p>const pattern &#x3D; &#x2F;[abc]&#x2F;;<br>console.log(pattern.test(‘a’)); &#x2F;&#x2F; true<br>console.log(pattern.test(‘d’)); &#x2F;&#x2F; false<br>()：用于分组，将多个元素视为一个整体。</p>
+<p>const pattern &#x3D; &#x2F;(ab)+&#x2F;;<br>console.log(pattern.test(‘abab’)); &#x2F;&#x2F; true<br>| : 用于表示 or , 或者</p>
+<p>const message &#x3D; “1239891238732136321”<br>const pattern&#x3D;&#x2F;(123|321)&#x2F;ig<br>const res&#x3D;message.match(pattern)<br>console.log(res);<br>\d：匹配任意一个数字，等价于 [0-9]。(digit)</p>
+<p>const str &#x3D; ‘cca2bc4af5cab12b’;<br>&#x2F;&#x2F;\d+匹配数字,将多个连续的数字也视为一个整体<br>const pattern &#x3D; &#x2F;\d+&#x2F;ig;<br>const newArr &#x3D; str.match(pattern);<br>console.log(newArr); &#x2F;&#x2F; [‘2’,’4’,’5’,’12’]<br>\D：匹配任意非数字字符，等价于 [^0-9]</p>
+<p>const str &#x3D; ‘cca2bc4af5cab12b’;<br>const pattern &#x3D; &#x2F;\D+&#x2F;ig;<br>const newArr &#x3D; str.match(pattern);<br>console.log(newArr); &#x2F;&#x2F;[‘cca’, ‘bc’, ‘af’, ‘cab’, ‘b’]<br>\s：匹配任意空白字符，包括空格、制表符、换行符等。(space)</p>
+<p>const pattern &#x3D; &#x2F;\s&#x2F;;<br>console.log(pattern.test(‘ ‘)); &#x2F;&#x2F; true<br>\S：匹配任意非空白字符。</p>
+<p>const pattern &#x3D; &#x2F;\S&#x2F;;<br>console.log(pattern.test(‘a’)); &#x2F;&#x2F; true<br>\w：匹配任意字母、数字或下划线，等价于 [a-zA-Z0-9_]。(word)</p>
+<p>const pattern &#x3D; &#x2F;\w&#x2F;;<br>console.log(pattern.test(‘x’)); &#x2F;&#x2F; true<br>\W：匹配任意非字母、数字或下划线的字符，等价于 [^a-zA-Z0-9_]。</p>
+<p>const pattern &#x3D; &#x2F;\W&#x2F;;<br>console.log(pattern.test(‘!’)); &#x2F;&#x2F; true<br><font style="color:rgb(64, 64, 64);">\b</font>: 单词边界 , 匹配的单词两边必须是边界(不匹配\w)</p>
+<p>const message &#x3D; ‘My name is MirZ’<br>const pattern &#x3D; &#x2F;\bis\b&#x2F;<br>if (pattern.test(message)) {<br>console.log(‘is 有边界’);<br>} else {<br>console.log(‘is 无边界’);<br>}<br><font style="color:rgb(64, 64, 64);">\B</font>: 单词边界 , 匹配的单词两边必须非边界</p>
+<p>const message &#x3D; ‘My name is MirZ’<br>const pattern &#x3D; &#x2F;\Bis\B&#x2F;<br>if (pattern.test(message)) {<br>console.log(‘is 有边界’);<br>} else {<br>console.log(‘is 无边界’);<br>}</p>
+<p>正则表达式方法</p>
+<p>test()</p>
+<p>用于测试字符串中是否存在匹配的模式，返回 true 或 false。</p>
+<p>const pattern &#x3D; &#x2F;abc&#x2F;;<br>const str &#x3D; ‘abcdef’;<br>console.log(pattern.test(str)); &#x2F;&#x2F; true<br><strong>exec()</strong></p>
+<p>用于字符串中执行匹配操作，返回一个数组，包含匹配的结果和相关信息。没有匹配到，则返回 null</p>
+<p>const pattern &#x3D; &#x2F;abc&#x2F;;<br>const str &#x3D; ‘abcdef’;<br>const result &#x3D; pattern.exec(str);<br>console.log(result); &#x2F;&#x2F; [‘abc’, index: 0, input: ‘abcdef’, groups: undefined]<br><strong>match()</strong></p>
+<p>在字符串中查找匹配的模式，返回一个数组，包含所有匹配的结果。如果没有使用 g 标志，则只返回第一个匹配结果。</p>
+<p>const str &#x3D; ‘abc abc’;<br>const pattern1 &#x3D; &#x2F;abc&#x2F;;<br>const pattern2 &#x3D; &#x2F;abc&#x2F;g;<br>console.log(str.match(pattern1)); &#x2F;&#x2F; [‘abc’, index: 0, input: ‘abc abc’, groups: undefined]<br>console.log(str.match(pattern2)); &#x2F;&#x2F; [‘abc’, ‘abc’]<br><strong>matchAll()</strong></p>
+<p>在字符串中查找匹配的模式，返回一个迭代器。必须使用 g 标志</p>
+<p>const str &#x3D; ‘abc abc’;<br>const pattern1 &#x3D; &#x2F;abc&#x2F;;<br>const pattern2 &#x3D; &#x2F;abc&#x2F;g;<br>console.log(str.match(pattern1)); &#x2F;&#x2F; [‘abc’, index: 0, input: ‘abc abc’, groups: undefined]<br>console.log(str.match(pattern2)); &#x2F;&#x2F; [‘abc’, ‘abc’]<br><strong>replace()</strong></p>
+<p>用于替换字符串中匹配的模式，返回一个新的字符串。如果不加 g 标识符,则只替换搜索到的第一个符合的字符串,加 g 替换结果等同于<strong>replaceAll()</strong></p>
+<p>const str &#x3D; ‘abc abc’;<br>const pattern &#x3D; &#x2F;abc&#x2F;g;<br>const newStr &#x3D; str.replace(pattern, ‘def’);<br>console.log(newStr); &#x2F;&#x2F; ‘def def’<br><strong>split()</strong></p>
+<p>用于使用字符串中匹配的字符串进行分割字符串，返回一个新的数组。</p>
+<p>const str &#x3D; ‘ccabcabacafbcab12b’;<br>const pattern &#x3D; &#x2F;ab&#x2F;;<br>const newArr &#x3D; str.split(pattern);<br>console.log(newArr); &#x2F;&#x2F; [‘cc’,’c’,’acefhc’,’12b’]<br><strong>search()</strong></p>
+<p>用于查找字符串中第一个匹配的模式的索引，如果没有找到，则返回 -1。</p>
+<p>const str &#x3D; ‘abc def’;<br>const pattern &#x3D; &#x2F;abc&#x2F;;<br>console.log(str.search(pattern)); &#x2F;&#x2F; 0</p>
+<p>贪婪模式和惰性模式</p>
+<p>贪婪匹配，它会从第一个匹配项开始，尽可能多地匹配字符，直到遇到最后一个匹配项 ，所以最终匹配的是整个字符串</p>
+<p>惰性模式也称为非贪婪模式，通过在量词后面加上问号 <font style="color:rgba(0, 0, 0, 0.85);">?</font> 来开启。在惰性模式下，量词会尽可能少地匹配符合条件的字符，一旦找到第一个匹配项就会停止匹配。</p>
+<p>&#x2F;&#x2F; 1.贪婪模式&#x2F;惰性模式<br>const message &#x3D; “我最喜欢的两本书: 《黄金时代》和《沉默的大多数》、《一只特立独行的猪》”</p>
+<pre><code class="hljs">// 默认.+采用贪婪模式
+// const nameRe = /《.+》/ig
+
+// const result1 = message.match(nameRe)
+// console.log(result1)
+
+// 使用惰性模式
+const nameRe = /《.+?》/ig
+
+const result1 = message.match(nameRe)
+console.log(result1)
+</code></pre>
+<p>捕获组</p>
+<p><font style="color:rgba(0, 0, 0, 0.85);">()</font> 不单单可以当作一个整体 , 也可以定义捕获组。每一对括号就定义了一个捕获组，从左到右，括号的顺序决定了捕获组的编号，编号从 1 开始。第 0 个捕获组始终代表整个正则表达式匹配的内容。</p>
+<p>const str &#x3D; ‘John Smith’;<br>const pattern &#x3D; &#x2F;(\w+) (\w+)&#x2F;;<br>const result &#x3D; str.match(pattern);</p>
+<p>console.log(result[0]); &#x2F;&#x2F; 输出整个匹配结果：John Smith<br>console.log(result[1]); &#x2F;&#x2F; 输出第一个捕获组：John<br>console.log(result[2]); &#x2F;&#x2F; 输出第二个捕获组：Smith<br>const str &#x3D; ‘Doe, John’;<br>const pattern &#x3D; &#x2F;(\w+), (\w+)&#x2F;;<br>const newStr &#x3D; str.replace(pattern, ‘$2 $1’);</p>
+<p>console.log(newStr); &#x2F;&#x2F; 输出：John Doe<br>&#x2F;&#x2F;这里，$1 和 $2 分别代表第一个和第二个捕获组的内容，通过 replace 方法将它们的顺序进行了交换。<br>const str &#x3D; ‘2023-10-15’;<br>const pattern &#x3D; &#x2F;(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})&#x2F;;<br>const result &#x3D; str.match(pattern);</day></month></year></p>
+<p>console.log(result.groups.year); &#x2F;&#x2F; 输出：2023<br>console.log(result.groups.month); &#x2F;&#x2F; 输出：10<br>console.log(result.groups.day); &#x2F;&#x2F; 输出：15<br>非捕获组</p>
+<p>有时候，你可能只想使用括号来对正则表达式的一部分进行分组，但不想捕获匹配的内容，这时可以使用非捕获组，语法是 (?:pattern)。</p>
+<pre><code class="hljs">const message = &quot;我最喜欢的两本书: 《黄金时代》和《沉默的大多数》、《一只特立独行的猪》&quot;
+
+  //捕获组
+// const nameRe = /(《)(?&lt;group&gt;.+?)(》)/ig
+  //非捕获组
+const nameRe = /(?:《)(?&lt;group&gt;.+?)(?:》)/ig
+const iterator = message.matchAll(nameRe)
+for (const item of iterator) &#123;
+  console.log(item)
+&#125;
+</code></pre>
+<p>应用场景举例</p>
+<p>手机号码验证</p>
+<p>const phone &#x3D; ‘13800138000’;<br>const phonePattern &#x3D; &#x2F;^1[3-9]\d{9}$&#x2F;;<br>console.log(phonePattern.test(phone)); &#x2F;&#x2F; true<br>HTML 标签匹配</p>
+<p>const htmlEle&#x3D;’<div><span></span><h1></h1></div>‘<br>const pattern&#x3D;&#x2F;&lt;/?[a-z][a-z0-9]*&gt;&#x2F;ig<br>const res&#x3D;htmlEle.match(pattern)<br>console.log(res);<br>HTML 标签内容匹配</p>
+<p>const html &#x3D; ‘</p><p>Hello, World!</p>‘;<br>const pattern &#x3D; &#x2F;&lt;[^&gt;]+&gt;([^&lt;]+)&lt;/[^&gt;]+&gt;&#x2F;;<br>const result &#x3D; html.match(pattern);<br>if (result) {<br>console.log(result[1]); &#x2F;&#x2F; ‘Hello, World!’<br>}<br>格式化日期</font></p>
+<p>const dateStr &#x3D; ‘2023-10-15’;<br>const pattern &#x3D; &#x2F;(\d{4})-(\d{2})-(\d{2})&#x2F;;<br>const newDateStr &#x3D; dateStr.replace(pattern, ‘$2&#x2F;$3&#x2F;$1’);<br>console.log(newDateStr); &#x2F;&#x2F; ‘10&#x2F;15&#x2F;2023’<br>时间戳格式化时间</p>
+<pre><code class="hljs">// yyyy/MM/dd hh:mm:ss
+// yyyy*MM*dd hh-mm-ss
+// dayjs/moment
+function formatTime(timestamp, fmtString) &#123;
+  // 1.将时间戳转成Date
+  const date = new Date(timestamp)
+
+  // // 2.获取到值
+  // const year = date.getFullYear()
+  // const month = date.getMonth() + 1
+  // const day = date.getDate()
+  // const hour = date.getHours()
+  // const minute = date.getMinutes()
+  // const second = date.getSeconds()
+
+  // 2.正则和值匹配起来
+  const dateO = &#123;
+    &quot;y+&quot;: date.getFullYear(),
+    &quot;M+&quot;: date.getMonth() + 1,
+    &quot;d+&quot;: date.getDate(),
+    &quot;h+&quot;: date.getHours(),
+    &quot;m+&quot;: date.getMinutes(),
+    &quot;s+&quot;: date.getSeconds()
+  &#125;
+
+  // 3.for循环进行替换
+  for (const key in dateO) &#123;
+    const keyRe = new RegExp(key)
+    if (keyRe.test(fmtString)) &#123;
+      const value = (dateO[key] + &quot;&quot;).padStart(2, &quot;0&quot;)
+      fmtString = fmtString.replace(keyRe, value)
+    &#125;
+  &#125;
+
+  return fmtString
+&#125;
+
+// 某一个商品上架时间, 活动的结束时间
+const timeEl = document.querySelector(&quot;.time&quot;)
+const productJSON = &#123;
+  name: &quot;iPhone16e&quot;,
+  newPrice: 4999,
+  oldPrice: 5999,
+  endTime: Date.now()
+&#125;
+
+timeEl.textContent = formatTime(productJSON.endTime, &quot;hh:mm:ss yyyy:MM:dd&quot;)
+</code></pre>
+<p>防抖节流</p>
+<p>在 JavaScript 中，防抖（Debounce） 和 节流（Throttle） 是两种常用的性能优化技术，用于控制高频事件的触发频率，避免过多的资源消耗（如频繁的 DOM 操作、网络请求等）。</p>
+<p>防抖（Debounce）</p>
+<p>当事件被频繁触发时，只有在事件停止触发一段时间后，才会执行目标函数。如果在此期间再次触发事件，则重新计时。</p>
+<pre><code class="hljs">function MyDebounce(fn, delay) &#123;
+  //定义timer记录定时器
+  let timer = null
+  //返回一个防抖处理后新的函数,不能使用箭头函数(箭头函数无this,this会指向window)
+  return function (...arg) &#123;
+    //每次触发清除上一次定时器
+    clearTimeout(timer)
+    //延迟执行函数,...args事件触发时传递的参数
+    timer = setTimeout(() =&gt; &#123;
+      //找到被防抖处理的函数应该绑定的this,进行绑定
+      fn.apply(this, args)
+    &#125;, delay)
+  &#125;
+&#125;
+</code></pre>
+<p>function MyDebounce(fn, delay) {<br>let timer &#x3D; null<br>const _debounce&#x3D;function(…args){<br>clearTimeout(timer)<br>timer &#x3D; setTimeout(() &#x3D;&gt; {<br>fn.apply(this, args)<br>}, delay)<br>}<br>&#x2F;&#x2F;在返回的_debounce 函数上绑定一个取消函数<br>_debounce.cancel&#x3D;function(){<br>if(timer) clearTimeout(timer)<br>}<br>return _debounce<br>}<br>const inputEle &#x3D; document.querySelector(‘input’)<br>const buttonEle&#x3D;document.querySelector(‘button’)<br>const MyDebounceFn &#x3D; MyDebounce(function () {<br>console.log(this.value);<br>}, 5000)<br>inputEle.oninput&#x3D;MyDebounceFn<br>buttonEle.onclick&#x3D;function(){<br>MyDebounceFn.cancel()<br>}<br>&#x2F;&#x2F;immediate 判断是否立即执行一次<br>function MyDebounce(fn, delay, immediate &#x3D; false) {<br>let timer &#x3D; null<br>&#x2F;&#x2F;定义变量记录是否已经立即执行过<br>let isInvoke &#x3D; false<br>const _debounce &#x3D; function (…args) {<br>clearTimeout(timer)<br>if (immediate &amp;&amp; !isInvoke){<br>fn.apply(this,args)<br>isInvoke&#x3D;true<br>return<br>}<br>timer &#x3D; setTimeout(() &#x3D;&gt; {<br>fn.apply(this, args)<br>}, delay)<br>}<br>&#x2F;&#x2F;在返回的_debounce 函数上绑定一个取消函数<br>_debounce.cancel &#x3D; function () {<br>if (timer) clearTimeout(timer)<br>}<br>return _debounce<br>}</p>
+<pre><code class="hljs">const inputEle = document.querySelector(&#39;input&#39;)
+const buttonEle = document.querySelector(&#39;button&#39;)
+const MyDebounceFn = MyDebounce(function () &#123;
+  console.log(this.value);
+&#125;, 2000,true)
+inputEle.oninput = MyDebounceFn
+buttonEle.onclick = function () &#123;
+  MyDebounceFn.cancel()
+&#125;
+</code></pre>
+<p>&#x2F;&#x2F;immediate 判断是否立即执行一次<br>function MyDebounce(fn, delay, immediate &#x3D; false) {<br>let timer &#x3D; null<br>&#x2F;&#x2F;定义变量记录是否已经立即执行过<br>let isInvoke &#x3D; false<br>&#x2F;&#x2F;记录返回的结果<br>let res &#x3D; undefined<br>const _debounce &#x3D; function (…args) {<br>return new Promise((resolve, reject) &#x3D;&gt; {<br>clearTimeout(timer)<br>if (immediate &amp;&amp; !isInvoke) {<br>&#x2F;&#x2F;获取返回的值,通过回调函数回调出去<br>res &#x3D; fn.apply(this, args)<br>resolve(res)<br>isInvoke &#x3D; true<br>return<br>}<br>timer &#x3D; setTimeout(() &#x3D;&gt; {<br>&#x2F;&#x2F;获取返回的值,通过回调函数回调出去<br>res &#x3D; fn.apply(this, args)<br>resolve(res)<br>}, delay)<br>})</p>
+<pre><code class="hljs">  &#125;
+  //在返回的_debounce函数上绑定一个取消函数
+  _debounce.cancel = function () &#123;
+    if (timer) clearTimeout(timer)
+  &#125;
+  return _debounce
+&#125;
+
+const MyFn = MyDebounce(function (name) &#123;
+  console.log(name);
+  return &#39;promise返回值&#39;
+&#125;, 2000, false)
+MyFn(&#39;Mir&#39;).then((res)=&gt;&#123;
+  console.log(res);
+&#125;)
+</code></pre>
+<p>应用场景</p>
+<p>搜索框输入联想（用户停止输入后再发送请求）。</p>
+<p>窗口大小调整（停止调整后再计算布局）。</p>
+<p>表单验证（输入完成后验证一次）。</p>
+<p>节流（Throttle）</p>
+<p>当事件被频繁触发时，每隔固定的时间间隔，执行一次目标函数。无论事件触发多频繁，函数的执行频率都会被限制。</p>
+<p>时间戳实现</p>
+<p>function throttle(func, delay) {<br>let lastTime &#x3D; 0;<br>return function (…args) {<br>const now &#x3D; Date.now();<br>&#x2F;&#x2F;第一次立即执行,后续 lastTime &#x3D; now,等待每次间隔达到 delay 执行<br>if (now - lastTime &gt;&#x3D; delay) {<br>func.apply(this, args);<br>lastTime &#x3D; now;<br>}<br>};<br>}<br>function MyThrottle(fn, delay, immediate &#x3D; true) {<br>let startTime &#x3D; 0<br>const _throttle &#x3D; function (…arys) {<br>const nowTime &#x3D; Date.now();<br>&#x2F;&#x2F;第一次 startTime 和 now 相等,不立即执行<br>if (!immediate &amp;&amp; startTime &#x3D;&#x3D;&#x3D; 0) startTime &#x3D; nowTime<br>if (nowTime - startTime &gt;&#x3D; delay) {<br>fn.apply(this, arys)<br>startTime &#x3D; nowTime<br>}<br>}<br>return _throttle<br>}</p>
+<pre><code class="hljs">const inputEle = document.querySelector(&#39;input&#39;)
+inputEle.oninput = MyThrottle(function () &#123;
+  console.log(this.value);
+&#125;, 1000, false)
+function MyThrottle(fn, delay, leading = true, trailing = false) &#123;
+  let startTime = 0
+  let timer = null
+  const _throttle = function (...arys) &#123;
+    const nowTime = Date.now();
+    //定时器判断是否尾部执行
+    //第一次startTime和now相等,不立即执行
+    if (!leading &amp;&amp; startTime === 0) startTime = nowTime
+    if (nowTime - startTime &gt;= delay) &#123;
+      //极限情况,在这里执行完,清除定时器,防止下面重复执行
+      if (timer) &#123;
+        clearTimeout(timer)
+        timer = null
+      &#125;
+      fn.apply(this, arys)
+      startTime = nowTime
+      //满足条件结束本次函数,nowTime - startTime不能达到delay,进入trailing的定时器判断
+      return
+    &#125;
+    //存在误差,大多执行下面函数
+    if (trailing &amp;&amp; !timer) &#123;
+      //在下次该执行函数的时间执行函数
+      timer = setTimeout(() =&gt; &#123;
+        fn.apply(this, arys)
+        // startTime = nowTime 不能使用nowTime作为下次开始,保存的为上次定义的nowTime,不是最新时间
+        startTime=Date.now()
+        timer = null
+      &#125;, delay-(nowTime-startTime))
+    &#125;
+  &#125;
+  return _throttle
+&#125;
+
+const inputEle = document.querySelector(&#39;input&#39;)
+inputEle.oninput = MyThrottle(function () &#123;
+  console.log(this.value);
+&#125;, 3000, false, true)
+</code></pre>
+<p>function MyThrottle(fn, delay, leading &#x3D; true, trailing &#x3D; false) {<br>let startTime &#x3D; 0<br>let timer &#x3D; null<br>&#x2F;&#x2F;如果想获取返回值,使用回调函数,或者返回 promise 对象<br>const _throttle &#x3D; function (…arys) {<br>const nowTime &#x3D; Date.now();<br>&#x2F;&#x2F;定时器判断是否尾部执行<br>&#x2F;&#x2F;第一次 startTime 和 now 相等,不立即执行<br>if (!leading &amp;&amp; startTime &#x3D;&#x3D;&#x3D; 0) startTime &#x3D; nowTime<br>if (nowTime - startTime &gt;&#x3D; delay) {<br>&#x2F;&#x2F;极限情况,在这里执行完,清除定时器,防止下面重复执行<br>if (timer) {<br>clearTimeout(timer)<br>timer &#x3D; null<br>}<br>fn.apply(this, arys)<br>startTime &#x3D; nowTime<br>&#x2F;&#x2F;满足条件结束本次函数,nowTime - startTime 不能达到 delay,进入 trailing 的定时器判断<br>return<br>}<br>&#x2F;&#x2F;存在误差,大多执行下面函数<br>if (trailing &amp;&amp; !timer) {<br>&#x2F;&#x2F;在下次该执行函数的时间执行函数<br>timer &#x3D; setTimeout(() &#x3D;&gt; {<br>fn.apply(this, arys)<br>&#x2F;&#x2F; startTime &#x3D; nowTime 不能使用 nowTime 作为下次开始,保存的为上次定义的 nowTime,不是最新时间<br>startTime&#x3D;Date.now()<br>timer &#x3D; null<br>}, delay-(nowTime-startTime))<br>}<br>}<br>_throttle.cancel &#x3D; function() {<br>if (timer) clearTimeout(timer)<br>startTime &#x3D; 0<br>timer &#x3D; null<br>}<br>return _throttle<br>}</p>
+<pre><code class="hljs">const inputEle = document.querySelector(&#39;input&#39;)
+const buttonEle=document.querySelector(&#39;button&#39;)
+const MyThrottleFn=MyThrottle(function () &#123;
+  console.log(this.value);
+&#125;, 3000, false, true)
+inputEle.oninput = MyThrottleFn
+buttonEle.onclick=function()&#123;
+  MyThrottleFn.cancel()
+&#125;
+</code></pre>
+<p>定时器实现</p>
+<p>function throttle(func, delay) {<br>let timer &#x3D; null;<br>return function (…args) {<br>&#x2F;&#x2F;定时器状态为 null 重新注册定时器<br>if (!timer) {<br>timer &#x3D; setTimeout(() &#x3D;&gt; {<br>func.apply(this, args);<br>&#x2F;&#x2F;当到达节流时间将 timer 赋值为 null,才能开启下次定时<br>timer &#x3D; null;<br>}, delay);<br>}<br>};<br>}<br>两种实现的区别</p>
+<p>时间戳版：立即执行，停止触发后不再执行最后一次。</p>
+<p>定时器版：延迟执行，停止触发后会执行最后一次。</p>
+<p>应用场景</p>
+<p>页面滚动事件（如无限加载）。</p>
+<p>鼠标移动事件（如拖拽）。</p>
+<p>高频点击按钮（如提交表单）。</p>
+<p>对比</p>
+<p>特性 防抖（Debounce） 节流（Throttle）<br>执行时机 事件停止触发后执行 固定时间间隔执行<br>是否保留最后一次 是（重新计时） 取决于实现方式<br>适用场景 输入联想、窗口调整 滚动事件、高频点击</p>
+<p>事件总线</p>
+<p>事件总线是一种基于发布-订阅模式的通信机制，用于组件或模块间的解耦</p>
+<p>核心概念</p>
+<p>发布-订阅模型：发布者（Publisher）触发事件，订阅者（Subscriber）监听并响应事件，二者通过事件总线通信，无需直接依赖。</p>
+<p>事件中心：统一管理事件与回调函数，提供注册、触发、销毁等能力。</p>
+<p>核心 API</p>
+<p>on(event, callback)：订阅事件。</p>
+<p>once(event, callback)：订阅事件（仅触发一次）。</p>
+<p>emit(event, …args)：触发事件，传递参数。</p>
+<p>off(event, callback)：取消事件订阅。</p>
+<p>实现原理</p>
+<p>事件存储：使用对象或 <font style="color:rgb(64, 64, 64);">Map</font> 存储事件名与回调函数列表的映射。</p>
+<p>class EventBus {<br>constructor() {<br>this.events &#x3D; new Map(); &#x2F;&#x2F; { eventName: [callback1, callback2] }<br>}<br>}<br>订阅事件：将回调添加到对应事件的数组中。</p>
+<p>on(event, callback) {<br>if (!this.events.has(event)) {<br>this.events.set(event, []);<br>}<br>this.events.get(event).push(callback);<br>}<br>触发事件：遍历执行事件对应的所有回调。</p>
+<p>emit(event, …args) {<br>const callbacks &#x3D; this.events.get(event) || [];<br>callbacks.forEach(cb &#x3D;&gt; cb(…args)); &#x2F;&#x2F; 注意复制数组避免循环时修改<br>}<br>一次性订阅：包装回调，执行后自动取消。</p>
+<p>once(event, callback) {<br>const wrapper &#x3D; (…args) &#x3D;&gt; {<br>callback(…args);<br>this.off(event, wrapper);<br>};<br>this.on(event, wrapper);<br>}<br>取消订阅：从回调数组中移除指定函数。</p>
+<p>off(event, callback) {<br>const callbacks &#x3D; this.events.get(event) || [];<br>const filtered &#x3D; callbacks.filter(cb &#x3D;&gt; cb !&#x3D;&#x3D; callback);<br>this.events.set(event, filtered);<br>}<br>注意事项</p>
+<p>内存泄漏：未及时调用 <font style="color:rgb(64, 64, 64);">off</font> 可能导致回调堆积。</p>
+<p>命名冲突：全局事件名需统一管理（如使用前缀）。</p>
+<p>执行顺序：多个回调按注册顺序执行，但不应依赖此顺序。</p>
+<p>错误处理：使用 <font style="color:rgb(64, 64, 64);">try-catch</font> 避免单个回调崩溃影响整体。</p>
+<p>应用场景</p>
+<p>组件通信：Vue&#x2F;React 中非父子组件通信。</p>
+<p>模块解耦：插件间通信或异步任务完成通知。</p>
+<p>简易状态管理：小型项目中替代 Redux&#x2F;Vuex。</p>
+<p>常见库与框架</p>
+<p>Node.js：内置 <font style="color:rgb(64, 64, 64);">EventEmitter</font> 模块。</p>
+<p>Vue：利用 <font style="color:rgb(64, 64, 64);">Vue.prototype.$bus &#x3D; new Vue()</font> 实现。</p>
+<p>第三方库：<font style="color:rgb(64, 64, 64);">mitt</font>（轻量）、<font style="color:rgb(64, 64, 64);">PubSubJS</font>（跨平台）。</p>
+<p>封装简易事件总线</p>
+<p>class MyEventBus {<br>constructor() {<br>this.events &#x3D; new Map()<br>}<br>&#x2F;&#x2F;订阅函数<br>on(event, callback) {<br>&#x2F;&#x2F;第一次执行,初始化为{event,[]}的 Map 结构<br>if (!this.events.has(event)) {<br>this.events.set(event, []);<br>}<br>&#x2F;&#x2F;每次订阅,添加到对应保存事件的[]中<br>this.events.get(event).push(callback);<br>}<br>&#x2F;&#x2F;触发函数<br>emit(event, …args) {<br>&#x2F;&#x2F;取出事件总线中对应的[],依次执行<br>const callbacks &#x3D; this.events.get(event) || [];<br>callbacks.forEach(cb &#x3D;&gt; cb(…args)); &#x2F;&#x2F; 注意复制数组避免循环时修改<br>}<br>&#x2F;&#x2F;仅订阅一次<br>once(event, callback) {<br>&#x2F;&#x2F;创建包装函数,执行代码体,执行完后,执行 off 函数,取消订阅<br>const wrapper &#x3D; (…args) &#x3D;&gt; {<br>callback(…args);<br>this.off(event, wrapper);<br>};<br>&#x2F;&#x2F;进行订阅<br>this.on(event, wrapper);<br>}<br>&#x2F;&#x2F;取消订阅<br>off(event, callback) {<br>const callbacks &#x3D; this.events.get(event) || [];<br>&#x2F;&#x2F;filter 过滤出要取消订阅的 callback 函数,将得到的数组重新设置 set(event, filtered)<br>const filtered &#x3D; callbacks.filter(cb &#x3D;&gt; cb !&#x3D;&#x3D; callback);<br>this.events.set(event, filtered);<br>}<br>}</p>
+<pre><code class="hljs">const myEventBus = new MyEventBus()
+myEventBus.on(&#39;myClick&#39;, () =&gt; &#123;
+  console.log(&#39;myClick,001&#39;);
+&#125;)
+myEventBus.on(&#39;myClick&#39;, () =&gt; &#123;
+  console.log(&#39;myClick,002&#39;);
+&#125;)
+myEventBus.on(&#39;youClick&#39;, () =&gt; &#123;
+  console.log(&#39;youClick,001&#39;);
+&#125;)
+const buttonEle = document.querySelector(&#39;button&#39;)
+buttonEle.onclick = () =&gt; &#123;
+  console.log(&#39;自己监听&#39;);
+  myEventBus.emit(&#39;myClick&#39;)
+&#125;
+</code></pre>
+<p>网络请求</p>
+<p>前端网络</p>
+<p>一、HTTP 基础</p>
+<p>请求方法</p>
+<p><font style="color:rgb(64, 64, 64);">GET</font>：获取资源（幂等，参数在 URL 中）</p>
+<p><font style="color:rgb(64, 64, 64);">POST</font>：提交数据（非幂等，参数在请求体）</p>
+<p><font style="color:rgb(64, 64, 64);">PUT</font>：更新资源（幂等）</p>
+<p><font style="color:rgb(64, 64, 64);">DELETE</font>：删除资源（幂等）</p>
+<p><font style="color:rgb(64, 64, 64);">PATCH</font>：部分更新资源</p>
+<p>状态码</p>
+<p><font style="color:rgb(64, 64, 64);">200 OK</font>：请求成功</p>
+<p><font style="color:rgb(64, 64, 64);">301&#x2F;302</font>：重定向</p>
+<p><font style="color:rgb(64, 64, 64);">400 Bad Request</font>：客户端错误</p>
+<p><font style="color:rgb(64, 64, 64);">401 Unauthorized</font>：未认证</p>
+<p><font style="color:rgb(64, 64, 64);">403 Forbidden</font>：无权限</p>
+<p><font style="color:rgb(64, 64, 64);">404 Not Found</font>：资源不存在</p>
+<p><font style="color:rgb(64, 64, 64);">500 Internal Server Error</font>：服务端错误</p>
+<p>Header 常见字段</p>
+<p><font style="color:rgb(64, 64, 64);">Content-Type</font>：数据类型（如 <font style="color:rgb(64, 64, 64);">application&#x2F;json</font>）</p>
+<p><font style="color:rgb(64, 64, 64);">Authorization</font>：身份验证（如 <font style="color:rgb(64, 64, 64);">Bearer Token</font>）</p>
+<p><font style="color:rgb(64, 64, 64);">Cache-Control</font>：缓存策略（如 <font style="color:rgb(64, 64, 64);">max-age&#x3D;3600</font>）</p>
+<p><font style="color:rgb(64, 64, 64);">Accept-Encoding</font>：压缩方式（如 <font style="color:rgb(64, 64, 64);">gzip</font>）</p>
+<p>二、AJAX（Asynchronous JavaScript and XML）</p>
+<p>核心对象 <strong><font style="color:rgb(64, 64, 64);">XMLHttpRequest</font></strong></p>
+<p>const xhr &#x3D; new XMLHttpRequest();<br>xhr.open(‘GET’, ‘<a target="_blank" rel="noopener" href="https://api.example.com/data">https://api.example.com/data</a>‘);<br>&#x2F;&#x2F;监听状态的改变<br>xhr.onreadystatechange &#x3D; function() {<br>if (xhr.readyState &#x3D;&#x3D;&#x3D; 4 &amp;&amp; xhr.status &#x3D;&#x3D;&#x3D; 200) {<br>console.log(JSON.parse(xhr.responseText));<br>}<br>};<br>xhr.send();<br>&#x2F;&#x2F; function myAjax({<br>&#x2F;&#x2F; url,<br>&#x2F;&#x2F; method &#x3D; ‘get’,<br>&#x2F;&#x2F; timeout &#x3D; 5000,<br>&#x2F;&#x2F; headers &#x3D; {},<br>&#x2F;&#x2F; data &#x3D; {},<br>&#x2F;&#x2F; success,<br>&#x2F;&#x2F; failure<br>&#x2F;&#x2F; } &#x3D; {}) {<br>&#x2F;&#x2F; const xhr &#x3D; new XMLHttpRequest()<br>&#x2F;&#x2F; xhr.onload &#x3D; function () {<br>&#x2F;&#x2F; &#x2F;&#x2F;使用回调函数获取响应结果<br>&#x2F;&#x2F; if (xhr.status &#x3D;&#x3D; 200) {<br>&#x2F;&#x2F; success &amp;&amp; success(xhr.response)<br>&#x2F;&#x2F; } else {<br>&#x2F;&#x2F; failure &amp;&amp; failure({ status: xhr.status, message: xhr.statusText })<br>&#x2F;&#x2F; }<br>&#x2F;&#x2F; }<br>&#x2F;&#x2F; xhr.responseType &#x3D; ‘json’<br>&#x2F;&#x2F; if (method.toUpperCase() &#x3D;&#x3D;&#x3D; ‘GET’) {<br>&#x2F;&#x2F; const queryStrings &#x3D; []<br>&#x2F;&#x2F; for (const key in data) {<br>&#x2F;&#x2F; queryStrings.push(<code>$&#123;key&#125;=$&#123;data[key]&#125;</code>)<br>&#x2F;&#x2F; }<br>&#x2F;&#x2F; url &#x3D; url + ‘?’ + queryStrings.join(‘&amp;’)<br>&#x2F;&#x2F; xhr.open(method, url)<br>&#x2F;&#x2F; xhr.send()<br>&#x2F;&#x2F; } else {<br>&#x2F;&#x2F; xhr.open(method, url)<br>&#x2F;&#x2F; xhr.setRequestHeader(‘Content-type’, ‘application&#x2F;json’)<br>&#x2F;&#x2F; xhr.send(JSON.stringify(data))<br>&#x2F;&#x2F; }<br>&#x2F;&#x2F; }</p>
+<pre><code class="hljs">function myAjax(&#123;
+  url,
+  method = &#39;get&#39;,
+  timeout = 5000,
+  headers = &#123;&#125;,
+  data = &#123;&#125;,
+&#125; = &#123;&#125;) &#123;
+  return new Promise((resolve, reject) =&gt; &#123;
+    //使用Promise获取响应结果
+    const xhr = new XMLHttpRequest()
+    xhr.onload = function () &#123;
+      if (xhr.status == 200) &#123;
+        resolve(xhr.response)
+      &#125; else &#123;
+        reject(&#123; status: xhr.status, message: xhr.statusText &#125;)
+      &#125;
+    &#125;
+    xhr.responseType = &#39;json&#39;
+    xhr.timeout = timeout
+    if (method.toUpperCase() === &#39;GET&#39;) &#123;
+      const queryStrings = []
+      for (const key in data) &#123;
+        queryStrings.push(`$&#123;key&#125;=$&#123;data[key]&#125;`)
+      &#125;
+      url = url + &#39;?&#39; + queryStrings.join(&#39;&amp;&#39;)
+      xhr.open(method, url)
+      xhr.send()
+    &#125; else &#123;
+      xhr.open(method, url)
+      xhr.setRequestHeader(&#39;Content-type&#39;, &#39;application/json&#39;)
+      xhr.send(JSON.stringify(data))
+    &#125;
+  &#125;)
+&#125;
+
+myAjax(&#123;
+  url: &#39;your url&#39;,
+  method: &#39;get&#39;,
+  data: &#123;
+    name: &#39;Mir&#39;,
+    age: 18
+  &#125;
+&#125;)
+</code></pre>
+<p>const uploadBtn &#x3D; document.querySelector(“.upload”)<br>uploadBtn.onclick &#x3D; function() {<br>&#x2F;&#x2F; 1.创建对象<br>const xhr &#x3D; new XMLHttpRequest()</p>
+<pre><code class="hljs">  // 2.监听结果
+  xhr.onload = function() &#123;
+    console.log(xhr.response)
+  &#125;
+
+  xhr.onprogress = function(event) &#123;
+    console.log(event)
+  &#125;
+
+
+  xhr.responseType = &quot;json&quot;
+  xhr.open(&quot;post&quot;, &quot;http://123.207.32.32:1888/02_param/upload&quot;)
+
+  const fileEl = document.querySelector(&quot;.file&quot;)
+  const file = fileEl.files[0]
+
+  const formData = new FormData()
+  formData.append(&quot;avatar&quot;, file)
+
+  xhr.send(formData)
+&#125;
+</code></pre>
+<p>优缺点</p>
+<ul>
+<li><font style="color:rgb(64, 64, 64);">优点：兼容性好，支持老浏览器。</font></li>
+<li><font style="color:rgb(64, 64, 64);">缺点：回调地狱，API 设计繁琐。</font></li>
+</ul>
+<ol>
+<li>基本用法</li>
+</ol>
+<p>创建对象：<font style="color:rgb(64, 64, 64);">const xhr &#x3D; new XMLHttpRequest();</font></p>
+<p>初始化请求：<font style="color:rgb(64, 64, 64);">xhr.open(method, url, async);</font></p>
+<p><font style="color:rgb(64, 64, 64);">method</font>：请求方法（<font style="color:rgb(64, 64, 64);">GET</font>、<font style="color:rgb(64, 64, 64);">POST</font> 等）。</p>
+<p><font style="color:rgb(64, 64, 64);">url</font>：请求地址。</p>
+<p><font style="color:rgb(64, 64, 64);">async</font>：是否异步（默认 <font style="color:rgb(64, 64, 64);">true</font>）。</p>
+<p>发送请求：<font style="color:rgb(64, 64, 64);">xhr.send(body);</font></p>
+<p><font style="color:rgb(64, 64, 64);">body</font>：POST 请求的数据（如 <font style="color:rgb(64, 64, 64);">FormData</font> 或字符串）。</p>
+<ol start="2">
+<li>事件监听</li>
+</ol>
+<p>响应完成：<font style="color:rgb(64, 64, 64);">xhr.onload &#x3D; () &#x3D;&gt; { … }</font></p>
+<p>错误处理：<font style="color:rgb(64, 64, 64);">xhr.onerror &#x3D; () &#x3D;&gt; { … }</font></p>
+<p>进度监控：<font style="color:rgb(64, 64, 64);">xhr.onprogress &#x3D; (event) &#x3D;&gt; { … }</font>（上传&#x2F;下载进度）。</p>
+<p>状态变化：<font style="color:rgb(64, 64, 64);">xhr.onreadystatechange</font>（通过 <font style="color:rgb(64, 64, 64);">xhr.readyState</font> 跟踪状态）。</p>
+<ol start="3">
+<li>状态与响应</li>
+</ol>
+<p><strong><font style="color:rgb(64, 64, 64);">readyState</font></strong> <strong>值</strong>：</p>
+<p><font style="color:rgb(64, 64, 64);">0</font>：未初始化(代理被创建,未调用 open())</p>
+<p><font style="color:rgb(64, 64, 64);">1</font>：已打开连接(open 被调用)</p>
+<p><font style="color:rgb(64, 64, 64);">2</font>：已接收请求头(send 被调用)</p>
+<p><font style="color:rgb(64, 64, 64);">3</font>：正在接收响应体(loading)</p>
+<p><font style="color:rgb(64, 64, 64);">4</font>：请求完成</p>
+<p>状态码：<font style="color:rgb(64, 64, 64);">xhr.status</font>（如 200、404）。</p>
+<p>响应数据：</p>
+<p><font style="color:rgb(64, 64, 64);">xhr.responseText</font>：文本格式。</p>
+<p><font style="color:rgb(64, 64, 64);">xhr.response</font>：根据 <font style="color:rgb(64, 64, 64);">responseType</font> 解析（如 <font style="color:rgb(64, 64, 64);">json</font>、<font style="color:rgb(64, 64, 64);">blob</font>）。</p>
+<ol start="4">
+<li>其他特性</li>
+</ol>
+<p>设置请求头：<font style="color:rgb(64, 64, 64);">xhr.setRequestHeader(‘Content-Type’, ‘application&#x2F;json’);</font></p>
+<p>超时设置：<font style="color:rgb(64, 64, 64);">xhr.timeout &#x3D; 5000;</font>，通过 <font style="color:rgb(64, 64, 64);">xhr.ontimeout</font> 处理。</p>
+<p>中止请求：<font style="color:rgb(64, 64, 64);">xhr.abort();</font></p>
+<p>三、Fetch API</p>
+<p>基于 Promise 的现代方法</p>
+<p>fetch(‘<a target="_blank" rel="noopener" href="https://api.example.com/data">https://api.example.com/data</a>‘)<br>.then(response &#x3D;&gt; {<br>if (!response.ok) throw new Error(‘Network error’);<br>return response.json();<br>})<br>.then(data &#x3D;&gt; console.log(data))<br>.catch(error &#x3D;&gt; console.error(error));<br>const uploadBtn &#x3D; document.querySelector(“.upload”)<br>uploadBtn.onclick &#x3D; async function() {<br>const fileEl &#x3D; document.querySelector(“.file”)<br>const file &#x3D; fileEl.files[0]</p>
+<pre><code class="hljs">  const formData = new FormData()
+  formData.append(&quot;avatar&quot;, file)
+
+  // 发送fetch请求
+  const response = await fetch(&quot;http://123.207.32.32:1888/02_param/upload&quot;, &#123;
+    method: &quot;post&quot;,
+    body: formData
+  &#125;)
+  const res = await response.json()
+  console.log(&quot;res:&quot;, res)
+&#125;
+</code></pre>
+<p>关键特性</p>
+<ul>
+<li><font style="color:rgb(64, 64, 64);">默认不携带 Cookie（需设置</font><font style="color:rgb(64, 64, 64);"> </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;credentials: &#39;include&#39;&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">）</font></li>
+<li><font style="color:rgb(64, 64, 64);">支持流式数据处理（如</font><font style="color:rgb(64, 64, 64);"> </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;response.body&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">）</font></li>
+<li><font style="color:rgb(64, 64, 64);">可通过</font><font style="color:rgb(64, 64, 64);"> </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;AbortController&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);"> </font><font style="color:rgb(64, 64, 64);">中止请求。</font></li>
+</ul>
+<ol>
+<li>基本用法</li>
+</ol>
+<p>发起请求：<font style="color:rgb(64, 64, 64);">fetch(url, options)</font></p>
+<ul>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;options&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：配置对象（方法、头、体等）。</font><br>fetch(url, {<br>method: ‘POST’,<br>headers: { ‘Content-Type’: ‘application&#x2F;json’ },<br>body: JSON.stringify(data),<br>});<br>返回 Promise：处理响应或错误。</li>
+</ul>
+<ol start="2">
+<li>响应处理</li>
+</ol>
+<p>解析数据：</p>
+<p><font style="color:rgb(64, 64, 64);">response.json()</font>：解析为 JS ON。</p>
+<p><font style="color:rgb(64, 64, 64);">response.text()</font>：解析为文本。</p>
+<p><font style="color:rgb(64, 64, 64);">response.blob()</font>：解析为二进制数据。</p>
+<p>状态检查：</p>
+<p>if (response.ok) { &#x2F;&#x2F; 状态码 200-299<br>&#x2F;&#x2F; 处理成功<br>} 3. 错误处理</p>
+<p>网络错误：自动触发 <font style="color:rgb(64, 64, 64);">catch</font>。</p>
+<p>HTTP 错误（如 404）：需手动检查 <font style="color:rgb(64, 64, 64);">response.ok</font>。</p>
+<ol start="4">
+<li>高级功能</li>
+</ol>
+<p>中止请求：使用 <font style="color:rgb(64, 64, 64);">AbortController</font>。</p>
+<p>const controller &#x3D; new AbortController();<br>fetch(url, { signal: controller.signal });<br>controller.abort(); &#x2F;&#x2F; 中止请求<br>跨域请求：默认不携带凭据，需设置 <font style="color:rgb(64, 64, 64);">credentials: ‘include’</font>。</p>
+<p>四、Axios（第三方库）</p>
+<p>功能丰富的 HTTP 客户端</p>
+<p>axios.get(‘<a target="_blank" rel="noopener" href="https://api.example.com/data">https://api.example.com/data</a>‘)<br>.then(response &#x3D;&gt; console.log(response.data))<br>.catch(error &#x3D;&gt; console.error(error));</p>
+<p>&#x2F;&#x2F; POST 请求示例<br>axios.post(‘&#x2F;api&#x2F;post’, { data: ‘value’ }, {<br>headers: { ‘X-Custom-Header’: ‘value’ }<br>});<br>核心优势</p>
+<p>自动转换 JSON 数据。</p>
+<p>拦截器（请求&#x2F;响应拦截）。</p>
+<p>客户端防御 XSRF。</p>
+<p>取消请求（通过 <font style="color:rgb(64, 64, 64);">CancelToken</font> 或 <font style="color:rgb(64, 64, 64);">AbortController</font>）。</p>
+<p>五、跨域问题（CORS）</p>
+<p>同源策略<br>协议、域名、端口一致才允许请求。</p>
+<p>解决方案</p>
+<p>CORS（跨域资源共享）<br>服务端设置响应头（如 <font style="color:rgb(64, 64, 64);">Access-Control-Allow-Origin: *</font>）。</p>
+<p>JSONP<br>利用 <font style="color:rgb(64, 64, 64);"><script></font> 标签跨域（仅支持 GET）。</p>
+<p>function handleResponse(data) { console.log(data); }<br>const script = document.createElement('script');<br>script.src = '<a target="_blank" rel="noopener" href="https://api.example.com/data?callback=handleResponse">https://api.example.com/data?callback=handleResponse</a>';<br>document.body.appendChild(script);</p>
+<ul>
+<li><strong><font style="color:rgb(64, 64, 64);">代理服务器</font></strong><font style="color:rgb(64, 64, 64);"><br></font>通过后端或工具（如 Webpack DevServer）转发请求。</li>
+</ul>
+<p>总结</p>
+<p>XHR vs Fetch 对比</p>
+<p>特性 XHR Fetch<br>语法 回调/事件驱动，较冗长 Promise 链式调用，更简洁<br>错误处理 需监听 <font style="color:rgb(64, 64, 64);">onerror</font><br/>和状态码 网络错误触发 <font style="color:rgb(64, 64, 64);">catch</font><br/>，HTTP 错误需手动检查<br>中止请求 <font style="color:rgb(64, 64, 64);">xhr.abort()</font> <font style="color:rgb(64, 64, 64);">AbortController</font><br>进度监控 支持（<font style="color:rgb(64, 64, 64);">onprogress</font><br/>） 不直接支持，需通过 Stream 处理<br>默认携带 Cookie 是 需设置 <font style="color:rgb(64, 64, 64);">credentials: 'include'</font><br>兼容性 广泛支持（包括旧浏览器） 不支持 IE，需 polyfill<br>传统 AJAX 适合兼容性要求高的场景。</p>
+<p>Fetch API 是现代化、轻量的选择。</p>
+<p>Axios 提供更全面的功能和企业级支持。</p>
+<p>跨域问题 需服务端配合或使用代理。</p>
+<p>WebSocket 实现实时双向通信。</p>
+</script></font></p>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>JavaScript高级</div>
+      <div>http://example.com/2025/02/25/JavaScript高级/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>MrZ</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年2月25日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/02/25/JavaScript%E5%9F%BA%E7%A1%80/" title="JavaScript基础">
+                        <span class="hidden-mobile">JavaScript基础</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
