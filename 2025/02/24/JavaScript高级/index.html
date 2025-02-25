@@ -30,7 +30,7 @@
 <meta property="og:image" content="http://example.com/2025/02/24/JavaScript%E9%AB%98%E7%BA%A7/1739109824352-f8b3988e-849b-4b9c-a57f-4e235b002cfb.png">
 <meta property="og:image" content="http://example.com/2025/02/24/JavaScript%E9%AB%98%E7%BA%A7/1739111638539-e85b5bdb-11ca-4ee9-ab9f-fcbcd1d9680d.png">
 <meta property="article:published_time" content="2025-02-24T15:03:32.000Z">
-<meta property="article:modified_time" content="2025-02-24T15:04:52.792Z">
+<meta property="article:modified_time" content="2025-02-25T14:14:21.907Z">
 <meta property="article:author" content="MrZ">
 <meta property="article:tag" content="JavaScript高级">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          39k 字
+          40k 字
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          326 分钟
+          338 分钟
         
       </span>
     
@@ -2309,115 +2309,205 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs plain">class MyEventBus &#123;<br>     constructor() &#123;<br>       this.events = new Map()<br>     &#125;<br>     //订阅函数<br>     on(event, callback) &#123;<br>       //第一次执行,初始化为&#123;event,[]&#125;的Map结构<br>       if (!this.events.has(event)) &#123;<br>         this.events.set(event, []);<br>       &#125;<br>       //每次订阅,添加到对应保存事件的[]中<br>       this.events.get(event).push(callback);<br>     &#125;<br>     //触发函数<br>     emit(event, ...args) &#123;<br>       //取出事件总线中对应的[],依次执行<br>       const callbacks = this.events.get(event) || [];<br>       callbacks.forEach(cb =&gt; cb(...args)); // 注意复制数组避免循环时修改<br>     &#125;<br>     //仅订阅一次<br>     once(event, callback) &#123;<br>       //创建包装函数,执行代码体,执行完后,执行off函数,取消订阅<br>       const wrapper = (...args) =&gt; &#123;<br>         callback(...args);<br>         this.off(event, wrapper);<br>       &#125;;<br>       //进行订阅<br>       this.on(event, wrapper);<br>     &#125;<br>     //取消订阅<br>     off(event, callback) &#123;<br>       const callbacks = this.events.get(event) || [];<br>       //filter过滤出要取消订阅的callback函数,将得到的数组重新设置set(event, filtered)<br>       const filtered = callbacks.filter(cb =&gt; cb !== callback);<br>       this.events.set(event, filtered);<br>     &#125;<br>   &#125;<br><br><br>   const myEventBus = new MyEventBus()<br>   myEventBus.on(&#x27;myClick&#x27;, () =&gt; &#123;<br>     console.log(&#x27;myClick,001&#x27;);<br>   &#125;)<br>   myEventBus.on(&#x27;myClick&#x27;, () =&gt; &#123;<br>     console.log(&#x27;myClick,002&#x27;);<br>   &#125;)<br>   myEventBus.on(&#x27;youClick&#x27;, () =&gt; &#123;<br>     console.log(&#x27;youClick,001&#x27;);<br>   &#125;)<br>   const buttonEle = document.querySelector(&#x27;button&#x27;)<br>   buttonEle.onclick = () =&gt; &#123;<br>     console.log(&#x27;自己监听&#x27;);<br>     myEventBus.emit(&#x27;myClick&#x27;)<br>   &#125;<br></code></pre></td></tr></table></figure>
 
 <h4 id="网络请求"><a href="#网络请求" class="headerlink" title="网络请求"></a>网络请求</h4><p><a target="_blank" rel="noopener" href="https://www.yuque.com/wudibawanglong-gbppc/gbvyr0">前端网络</a></p>
-<h6 id="一、HTTP-基础"><a href="#一、HTTP-基础" class="headerlink" title="一、HTTP 基础"></a>一、HTTP 基础</h6><ol>
-<li><strong>请求方法</strong><ul>
-<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;GET&lt;/font&gt;</code>：获取资源（幂等，参数在 URL 中）</li>
-<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;POST&lt;/font&gt;</code>：提交数据（非幂等，参数在请求体）</li>
-<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;PUT&lt;/font&gt;</code>：更新资源（幂等）</li>
-<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;DELETE&lt;/font&gt;</code>：删除资源（幂等）</li>
-<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;PATCH&lt;/font&gt;</code>：部分更新资源</li>
+<h5 id="一、HTTP-基础"><a href="#一、HTTP-基础" class="headerlink" title="一、HTTP 基础"></a><font style="color:rgb(64, 64, 64);">一、HTTP 基础</font></h5><ol>
+<li><strong><font style="color:rgb(64, 64, 64);">请求方法</font></strong><ul>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;GET&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：获取资源（幂等，参数在 URL 中）</font></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;POST&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：提交数据（非幂等，参数在请求体）</font></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;PUT&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：更新资源（幂等）</font></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;DELETE&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：删除资源（幂等）</font></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;PATCH&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：部分更新资源</font></li>
 </ul>
 </li>
-<li><strong>状态码</strong><ul>
-<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;200 OK&lt;/font&gt;</code>：请求成功</li>
-<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;301/302&lt;/font&gt;</code>：重定向</li>
-<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;400 Bad Request&lt;/font&gt;</code>：客户端错误</li>
-<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;401 Unauthorized&lt;/font&gt;</code>：未认证</li>
-<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;403 Forbidden&lt;/font&gt;</code>：无权限</li>
-<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;404 Not Found&lt;/font&gt;</code>：资源不存在</li>
-<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;500 Internal Server Error&lt;/font&gt;</code>：服务端错误</li>
+<li><strong><font style="color:rgb(64, 64, 64);">状态码</font></strong><ul>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;200 OK&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：请求成功</font></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;301/302&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：重定向</font></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;400 Bad Request&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：客户端错误</font></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;401 Unauthorized&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：未认证</font></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;403 Forbidden&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：无权限</font></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;404 Not Found&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：资源不存在</font></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;500 Internal Server Error&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：服务端错误</font></li>
 </ul>
 </li>
-<li><strong>Header 常见字段</strong><ul>
-<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;Content-Type&lt;/font&gt;</code>：数据类型（如 <code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;application/json&lt;/font&gt;</code>）</li>
-<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;Authorization&lt;/font&gt;</code>：身份验证（如 <code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;Bearer Token&lt;/font&gt;</code>）</li>
-<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;Cache-Control&lt;/font&gt;</code>：缓存策略（如 <code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;max-age=3600&lt;/font&gt;</code>）</li>
-<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;Accept-Encoding&lt;/font&gt;</code>：压缩方式（如 <code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;gzip&lt;/font&gt;</code>）</li>
+<li><strong><font style="color:rgb(64, 64, 64);">Header 常见字段</font></strong><ul>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;Content-Type&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：数据类型（如</font><font style="color:rgb(64, 64, 64);"> </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;application/json&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">）</font></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;Authorization&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：身份验证（如</font><font style="color:rgb(64, 64, 64);"> </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;Bearer Token&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">）</font></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;Cache-Control&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：缓存策略（如</font><font style="color:rgb(64, 64, 64);"> </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;max-age=3600&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">）</font></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;Accept-Encoding&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：压缩方式（如 </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;gzip&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">）</font></li>
 </ul>
 </li>
 </ol>
-<h6 id="二、AJAX（Asynchronous-JavaScript-and-XML）"><a href="#二、AJAX（Asynchronous-JavaScript-and-XML）" class="headerlink" title="二、AJAX（Asynchronous JavaScript and XML）"></a>二、AJAX（Asynchronous JavaScript and XML）</h6><p><strong>核心对象</strong> <code>**&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;XMLHttpRequest&lt;/font&gt;**</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plain">const xhr = new XMLHttpRequest();<br>xhr.open(&#x27;GET&#x27;, &#x27;https://api.example.com/data&#x27;);<br>xhr.onreadystatechange = function() &#123;<br>  if (xhr.readyState === 4 &amp;&amp; xhr.status === 200) &#123;<br>    console.log(JSON.parse(xhr.responseText));<br>  &#125;<br>&#125;;<br>xhr.send();<br></code></pre></td></tr></table></figure>
+<h5 id="二、AJAX（Asynchronous-JavaScript-and-XML）"><a href="#二、AJAX（Asynchronous-JavaScript-and-XML）" class="headerlink" title="二、AJAX（Asynchronous JavaScript and XML）"></a><font style="color:rgb(64, 64, 64);">二、AJAX（Asynchronous JavaScript and XML）</font></h5><p><strong><font style="color:rgb(64, 64, 64);">核心对象 </font></strong><code>**&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;XMLHttpRequest&lt;/font&gt;**</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs plain">const xhr = new XMLHttpRequest();<br>xhr.open(&#x27;GET&#x27;, &#x27;https://api.example.com/data&#x27;);<br>//监听状态的改变<br>xhr.onreadystatechange = function() &#123;<br>  if (xhr.readyState === 4 &amp;&amp; xhr.status === 200) &#123;<br>    console.log(JSON.parse(xhr.responseText));<br>  &#125;<br>&#125;;<br>xhr.send();<br></code></pre></td></tr></table></figure>
 
-<ol>
-<li><strong>优缺点</strong><ul>
-<li>优点：兼容性好，支持老浏览器。</li>
-<li>缺点：回调地狱，API 设计繁琐。</li>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs html">// function myAjax(&#123; // url, // method = &#x27;get&#x27;, // timeout = 5000, // headers =<br>&#123;&#125;, // data = &#123;&#125;, // success, // failure // &#125; = &#123;&#125;) &#123; // const xhr = new<br>XMLHttpRequest() // xhr.onload = function () &#123; // //使用回调函数获取响应结果 //<br>if (xhr.status == 200) &#123; // success &amp;&amp; success(xhr.response) // &#125; else &#123; //<br>failure &amp;&amp; failure(&#123; status: xhr.status, message: xhr.statusText &#125;) // &#125; // &#125; //<br>xhr.responseType = &#x27;json&#x27; // if (method.toUpperCase() === &#x27;GET&#x27;) &#123; // const<br>queryStrings = [] // for (const key in data) &#123; //<br>queryStrings.push(`$&#123;key&#125;=$&#123;data[key]&#125;`) // &#125; // url = url + &#x27;?&#x27; +<br>queryStrings.join(&#x27;&amp;&#x27;) // xhr.open(method, url) // xhr.send() // &#125; else &#123; //<br>xhr.open(method, url) // xhr.setRequestHeader(&#x27;Content-type&#x27;,<br>&#x27;application/json&#x27;) // xhr.send(JSON.stringify(data)) // &#125; // &#125; function<br>myAjax(&#123; url, method = &#x27;get&#x27;, timeout = 5000, headers = &#123;&#125;, data = &#123;&#125;, &#125; = &#123;&#125;) &#123;<br>return new Promise((resolve, reject) =&gt; &#123; //使用Promise获取响应结果 const xhr =<br>new XMLHttpRequest() xhr.onload = function () &#123; if (xhr.status == 200) &#123;<br>resolve(xhr.response) &#125; else &#123; reject(&#123; status: xhr.status, message:<br>xhr.statusText &#125;) &#125; &#125; xhr.responseType = &#x27;json&#x27; xhr.timeout = timeout if<br>(method.toUpperCase() === &#x27;GET&#x27;) &#123; const queryStrings = [] for (const key in<br>data) &#123; queryStrings.push(`$&#123;key&#125;=$&#123;data[key]&#125;`) &#125; url = url + &#x27;?&#x27; +<br>queryStrings.join(&#x27;&amp;&#x27;) xhr.open(method, url) xhr.send() &#125; else &#123;<br>xhr.open(method, url) xhr.setRequestHeader(&#x27;Content-type&#x27;, &#x27;application/json&#x27;)<br>xhr.send(JSON.stringify(data)) &#125; &#125;) &#125; myAjax(&#123; url: &#x27;your url&#x27;, method: &#x27;get&#x27;,<br>data: &#123; name: &#x27;Mir&#x27;, age: 18 &#125; &#125;)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs html">const uploadBtn = document.querySelector(&quot;.upload&quot;) uploadBtn.onclick =<br>function() &#123; // 1.创建对象 const xhr = new XMLHttpRequest() // 2.监听结果<br>xhr.onload = function() &#123; console.log(xhr.response) &#125; xhr.onprogress =<br>function(event) &#123; console.log(event) &#125; xhr.responseType = &quot;json&quot;<br>xhr.open(&quot;post&quot;, &quot;http://123.207.32.32:1888/02_param/upload&quot;) const fileEl =<br>document.querySelector(&quot;.file&quot;) const file = fileEl.files[0] const formData =<br>new FormData() formData.append(&quot;avatar&quot;, file) xhr.send(formData) &#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong><font style="color:rgb(64, 64, 64);">优缺点</font></strong></p>
+<pre><code class="hljs">- &lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;优点：兼容性好，支持老浏览器。&lt;/font&gt;
+- &lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;缺点：回调地狱，API 设计繁琐。&lt;/font&gt;
+</code></pre>
+<p><strong><font style="color:rgb(64, 64, 64);">1. 基本用法</font></strong></p>
+<ul>
+<li><strong><font style="color:rgb(64, 64, 64);">创建对象</font></strong><font style="color:rgb(64, 64, 64);">：</font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;const xhr = new XMLHttpRequest();&lt;/font&gt;</code></li>
+<li><strong><font style="color:rgb(64, 64, 64);">初始化请求</font></strong><font style="color:rgb(64, 64, 64);">：</font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;xhr.open(method, url, async);&lt;/font&gt;</code><ul>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;method&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：请求方法（</font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;GET&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">、</font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;POST&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);"> </font><font style="color:rgb(64, 64, 64);">等）。</font></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;url&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：请求地址。</font></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;async&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：是否异步（默认</font><font style="color:rgb(64, 64, 64);"> </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;true&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">）。</font></li>
 </ul>
 </li>
-</ol>
-<h6 id="三、Fetch-API"><a href="#三、Fetch-API" class="headerlink" title="三、Fetch API"></a>三、Fetch API</h6><p><strong>基于 Promise 的现代方法</strong></p>
+<li><strong><font style="color:rgb(64, 64, 64);">发送请求</font></strong><font style="color:rgb(64, 64, 64);">：</font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;xhr.send(body);&lt;/font&gt;</code><ul>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;body&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：POST 请求的数据（如</font><font style="color:rgb(64, 64, 64);"> </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;FormData&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);"> </font><font style="color:rgb(64, 64, 64);">或字符串）。</font></li>
+</ul>
+</li>
+</ul>
+<p><strong><font style="color:rgb(64, 64, 64);">2. 事件监听</font></strong></p>
+<ul>
+<li><strong><font style="color:rgb(64, 64, 64);">响应完成</font></strong><font style="color:rgb(64, 64, 64);">：</font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;xhr.onload = () =&gt; &#123; ... &#125;&lt;/font&gt;</code></li>
+<li><strong><font style="color:rgb(64, 64, 64);">错误处理</font></strong><font style="color:rgb(64, 64, 64);">：</font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;xhr.onerror = () =&gt; &#123; ... &#125;&lt;/font&gt;</code></li>
+<li><strong><font style="color:rgb(64, 64, 64);">进度监控</font></strong><font style="color:rgb(64, 64, 64);">：</font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;xhr.onprogress = (event) =&gt; &#123; ... &#125;&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">（上传&#x2F;下载进度）。</font></li>
+<li><strong><font style="color:rgb(64, 64, 64);">状态变化</font></strong><font style="color:rgb(64, 64, 64);">：</font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;xhr.onreadystatechange&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">（通过</font><font style="color:rgb(64, 64, 64);"> </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;xhr.readyState&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);"> </font><font style="color:rgb(64, 64, 64);">跟踪状态）。</font></li>
+</ul>
+<p><strong><font style="color:rgb(64, 64, 64);">3. 状态与响应</font></strong></p>
+<ul>
+<li><code>**&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;readyState&lt;/font&gt;**</code><strong><font style="color:rgb(64, 64, 64);"> </font>**</strong><font style="color:rgb(64, 64, 64);">值</font>**<font style="color:rgb(64, 64, 64);">：</font><ul>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;0&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：未初始化(代理被创建,未调用 open())</font></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;1&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：已打开连接(open 被调用)</font></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;2&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：已接收请求头(send 被调用)</font></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;3&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：正在接收响应体(loading)</font></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;4&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：请求完成</font></li>
+</ul>
+</li>
+<li><strong><font style="color:rgb(64, 64, 64);">状态码</font></strong><font style="color:rgb(64, 64, 64);">：</font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;xhr.status&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">（如 200、404）。</font></li>
+<li><strong><font style="color:rgb(64, 64, 64);">响应数据</font></strong><font style="color:rgb(64, 64, 64);">：</font><ul>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;xhr.responseText&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：文本格式。</font></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;xhr.response&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：根据</font><font style="color:rgb(64, 64, 64);"> </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;responseType&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);"> </font><font style="color:rgb(64, 64, 64);">解析（如</font><font style="color:rgb(64, 64, 64);"> </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;json&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">、</font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;blob&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">）。</font></li>
+</ul>
+</li>
+</ul>
+<p><strong><font style="color:rgb(64, 64, 64);">4. 其他特性</font></strong></p>
+<ul>
+<li><strong><font style="color:rgb(64, 64, 64);">设置请求头</font></strong><font style="color:rgb(64, 64, 64);">：</font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;xhr.setRequestHeader(&#39;Content-Type&#39;, &#39;application/json&#39;);&lt;/font&gt;</code></li>
+<li><strong><font style="color:rgb(64, 64, 64);">超时设置</font></strong><font style="color:rgb(64, 64, 64);">：</font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;xhr.timeout = 5000;&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">，通过</font><font style="color:rgb(64, 64, 64);"> </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;xhr.ontimeout&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);"> </font><font style="color:rgb(64, 64, 64);">处理。</font></li>
+<li><strong><font style="color:rgb(64, 64, 64);">中止请求</font></strong><font style="color:rgb(64, 64, 64);">：</font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;xhr.abort();&lt;/font&gt;</code></li>
+</ul>
+<hr>
+<h5 id="三、Fetch-API"><a href="#三、Fetch-API" class="headerlink" title="三、Fetch API"></a><font style="color:rgb(64, 64, 64);">三、Fetch API</font></h5><p><strong><font style="color:rgb(64, 64, 64);">基于 Promise 的现代方法</font></strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs plain">fetch(&#x27;https://api.example.com/data&#x27;)<br>  .then(response =&gt; &#123;<br>    if (!response.ok) throw new Error(&#x27;Network error&#x27;);<br>    return response.json();<br>  &#125;)<br>  .then(data =&gt; console.log(data))<br>  .catch(error =&gt; console.error(error));<br></code></pre></td></tr></table></figure>
 
-<ol>
-<li><strong>关键特性</strong><ul>
-<li>默认不携带 Cookie（需设置 <code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;credentials: &#39;include&#39;&lt;/font&gt;</code>）</li>
-<li>支持流式数据处理（如 <code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;response.body&lt;/font&gt;</code>）</li>
-<li>可通过 <code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;AbortController&lt;/font&gt;</code> 中止请求。</li>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs html">const uploadBtn = document.querySelector(&quot;.upload&quot;) uploadBtn.onclick = async<br>function() &#123; const fileEl = document.querySelector(&quot;.file&quot;) const file =<br>fileEl.files[0] const formData = new FormData() formData.append(&quot;avatar&quot;, file)<br>// 发送fetch请求 const response = await<br>fetch(&quot;http://123.207.32.32:1888/02_param/upload&quot;, &#123; method: &quot;post&quot;, body:<br>formData &#125;) const res = await response.json() console.log(&quot;res:&quot;, res) &#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong><font style="color:rgb(64, 64, 64);">关键特性</font></strong></p>
+<pre><code class="hljs">- &lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;默认不携带 Cookie（需设置&lt;/font&gt;&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt; &lt;/font&gt;`&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;credentials: &#39;include&#39;&lt;/font&gt;`&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;）&lt;/font&gt;
+- &lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;支持流式数据处理（如&lt;/font&gt;&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt; &lt;/font&gt;`&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;response.body&lt;/font&gt;`&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;）&lt;/font&gt;
+- &lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;可通过&lt;/font&gt;&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt; &lt;/font&gt;`&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;AbortController&lt;/font&gt;`&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt; &lt;/font&gt;&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;中止请求。&lt;/font&gt;
+</code></pre>
+<p><strong><font style="color:rgb(64, 64, 64);">1. 基本用法</font></strong></p>
+<p><strong><font style="color:rgb(64, 64, 64);">发起请求</font></strong><font style="color:rgb(64, 64, 64);">：</font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;fetch(url, options)&lt;/font&gt;</code></p>
+<pre><code class="hljs">- `&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;options&lt;/font&gt;`&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;：配置对象（方法、头、体等）。&lt;/font&gt;
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plain">fetch(url, &#123;<br>  method: &#x27;POST&#x27;,<br>  headers: &#123; &#x27;Content-Type&#x27;: &#x27;application/json&#x27; &#125;,<br>  body: JSON.stringify(data),<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong><font style="color:rgb(64, 64, 64);">返回 Promise</font></strong><font style="color:rgb(64, 64, 64);">：处理响应或错误。</font></li>
+</ul>
+<p><strong><font style="color:rgb(64, 64, 64);">2. 响应处理</font></strong></p>
+<ul>
+<li><strong><font style="color:rgb(64, 64, 64);">解析数据</font></strong><font style="color:rgb(64, 64, 64);">：</font><ul>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;response.json()&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：解析为 JS ON。</font></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;response.text()&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：解析为文本。</font></li>
+<li><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;response.blob()&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">：解析为二进制数据。</font></li>
 </ul>
 </li>
-<li><strong>与 AJAX 对比</strong><ul>
-<li>更简洁的语法，但错误处理需手动判断 <code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;response.ok&lt;/font&gt;</code>。</li>
 </ul>
-</li>
-</ol>
-<h6 id="四、Axios（第三方库）"><a href="#四、Axios（第三方库）" class="headerlink" title="四、Axios（第三方库）"></a>四、Axios（第三方库）</h6><p><strong>功能丰富的 HTTP 客户端</strong></p>
+<p><strong><font style="color:rgb(64, 64, 64);">状态检查</font></strong><font style="color:rgb(64, 64, 64);">：</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plain">if (response.ok) &#123; // 状态码 200-299<br>  // 处理成功<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong><font style="color:rgb(64, 64, 64);">3. 错误处理</font></strong></p>
+<ul>
+<li><strong><font style="color:rgb(64, 64, 64);">网络错误</font></strong><font style="color:rgb(64, 64, 64);">：自动触发</font><font style="color:rgb(64, 64, 64);"> </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;catch&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">。</font></li>
+<li><strong><font style="color:rgb(64, 64, 64);">HTTP 错误（如 404）</font></strong><font style="color:rgb(64, 64, 64);">：需手动检查</font><font style="color:rgb(64, 64, 64);"> </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;response.ok&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">。</font></li>
+</ul>
+<p><strong><font style="color:rgb(64, 64, 64);">4. 高级功能</font></strong></p>
+<p><strong><font style="color:rgb(64, 64, 64);">中止请求</font></strong><font style="color:rgb(64, 64, 64);">：使用 </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;AbortController&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">。</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plain">const controller = new AbortController();<br>fetch(url, &#123; signal: controller.signal &#125;);<br>controller.abort(); // 中止请求<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong><font style="color:rgb(64, 64, 64);">跨域请求</font></strong><font style="color:rgb(64, 64, 64);">：默认不携带凭据，需设置 </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;credentials: &#39;include&#39;&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">。</font></li>
+</ul>
+<h5 id="四、Axios（第三方库）"><a href="#四、Axios（第三方库）" class="headerlink" title="四、Axios（第三方库）"></a><font style="color:rgb(64, 64, 64);">四、Axios（第三方库）</font></h5><p><strong><font style="color:rgb(64, 64, 64);">功能丰富的 HTTP 客户端</font></strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plain">axios.get(&#x27;https://api.example.com/data&#x27;)<br>  .then(response =&gt; console.log(response.data))<br>  .catch(error =&gt; console.error(error));<br><br>// POST 请求示例<br>axios.post(&#x27;/api/post&#x27;, &#123; data: &#x27;value&#x27; &#125;, &#123;<br>  headers: &#123; &#x27;X-Custom-Header&#x27;: &#x27;value&#x27; &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
 
 <ol>
-<li><strong>核心优势</strong><ul>
-<li>自动转换 JSON 数据。</li>
-<li>拦截器（请求&#x2F;响应拦截）。</li>
-<li>客户端防御 XSRF。</li>
-<li>取消请求（通过 <code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;CancelToken&lt;/font&gt;</code> 或 <code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;AbortController&lt;/font&gt;</code>）。</li>
+<li><strong><font style="color:rgb(64, 64, 64);">核心优势</font></strong><ul>
+<li><font style="color:rgb(64, 64, 64);">自动转换 JSON 数据。</font></li>
+<li><font style="color:rgb(64, 64, 64);">拦截器（请求&#x2F;响应拦截）。</font></li>
+<li><font style="color:rgb(64, 64, 64);">客户端防御 XSRF。</font></li>
+<li><font style="color:rgb(64, 64, 64);">取消请求（通过</font><font style="color:rgb(64, 64, 64);"> </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;CancelToken&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);"> </font><font style="color:rgb(64, 64, 64);">或</font><font style="color:rgb(64, 64, 64);"> </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;AbortController&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">）。</font></li>
 </ul>
 </li>
 </ol>
-<h6 id="五、跨域问题（CORS）"><a href="#五、跨域问题（CORS）" class="headerlink" title="五、跨域问题（CORS）"></a>五、跨域问题（CORS）</h6><ol>
-<li><strong>同源策略</strong> 协议、域名、端口一致才允许请求。</li>
-<li><strong>解决方案</strong><ul>
-<li><strong>CORS（跨域资源共享）</strong> 服务端设置响应头（如 <code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;Access-Control-Allow-Origin: *&lt;/font&gt;</code>）。</li>
+<hr>
+<h5 id="五、跨域问题（CORS）"><a href="#五、跨域问题（CORS）" class="headerlink" title="五、跨域问题（CORS）"></a><font style="color:rgb(64, 64, 64);">五、跨域问题（CORS）</font></h5><ol>
+<li><strong><font style="color:rgb(64, 64, 64);">同源策略</font></strong><font style="color:rgb(64, 64, 64);"><br></font><font style="color:rgb(64, 64, 64);">协议、域名、端口一致才允许请求。</font></li>
+<li><strong><font style="color:rgb(64, 64, 64);">解决方案</font></strong><ul>
+<li><strong><font style="color:rgb(64, 64, 64);">CORS（跨域资源共享）</font></strong><font style="color:rgb(64, 64, 64);"><br></font><font style="color:rgb(64, 64, 64);">服务端设置响应头（如</font><font style="color:rgb(64, 64, 64);"> </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;Access-Control-Allow-Origin: *&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);">）。</font></li>
 </ul>
 </li>
 </ol>
-<p><strong>JSONP</strong> 利用 <code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;&lt;script&gt;&lt;/font&gt;</code> 标签跨域（仅支持 GET）。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plain">function handleResponse(data) &#123; console.log(data); &#125;<br>const script = document.createElement(&#x27;script&#x27;);<br>script.src = &#x27;https://api.example.com/data?callback=handleResponse&#x27;;<br>document.body.appendChild(script);<br>- **&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;代理服务器&lt;/font&gt;**&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;<br></code></pre></td></tr></table></figure>
+<p><strong><font style="color:rgb(64, 64, 64);">JSONP</font></strong><font style="color:rgb(64, 64, 64);"><br></font><font style="color:rgb(64, 64, 64);">利用 </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;&lt;script&gt;&lt;/font&gt;</code><font style="color:rgb(64, 64, 64);"> 标签跨域（仅支持 GET）。</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plain">function handleResponse(data) &#123; console.log(data); &#125;<br>const script = document.createElement(&#x27;script&#x27;);<br>script.src = &#x27;https://api.example.com/data?callback=handleResponse&#x27;;<br>document.body.appendChild(script);<br></code></pre></td></tr></table></figure>
 
-<p>通过后端或工具（如 Webpack DevServer）转发请求。</p>
-<h6 id="六、WebSocket"><a href="#六、WebSocket" class="headerlink" title="六、WebSocket"></a>六、WebSocket</h6><p><strong>双向实时通信</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plain">const socket = new WebSocket(&#x27;wss://api.example.com/ws&#x27;);<br>socket.onopen = () =&gt; socket.send(&#x27;Hello Server!&#x27;);<br>socket.onmessage = (event) =&gt; console.log(event.data);<br></code></pre></td></tr></table></figure>
-
-<ol>
-<li><strong>适用场景</strong> 实时聊天、股票行情推送等高频数据交互。</li>
-</ol>
-<h6 id="七、性能优化与安全"><a href="#七、性能优化与安全" class="headerlink" title="七、性能优化与安全"></a>七、性能优化与安全</h6><ol>
-<li><strong>优化策略</strong><ul>
-<li>减少请求次数（合并文件、使用雪碧图）。</li>
-<li>使用 HTTP&#x2F;2 多路复用。</li>
-<li>合理设置缓存（强缓存 <code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;Cache-Control&lt;/font&gt;</code>，协商缓存 <code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;ETag&lt;/font&gt;</code>）。</li>
-</ul>
-</li>
-<li><strong>安全防护</strong><ul>
-<li><strong>CSRF 防御</strong>：Token 验证、SameSite Cookie。</li>
-<li><strong>XSS 防御</strong>：输入过滤、避免 <code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;innerHTML&lt;/font&gt;</code> 直接渲染。</li>
-<li><strong>HTTPS</strong>：加密传输，防止中间人攻击。</li>
-</ul>
-</li>
-</ol>
-<h6 id="八、工具与调试"><a href="#八、工具与调试" class="headerlink" title="八、工具与调试"></a>八、工具与调试</h6><ol>
-<li><strong>开发者工具（Network 面板）</strong><ul>
-<li>查看请求详情、响应时间、状态码。</li>
-<li>模拟慢速网络（Throttling）。</li>
-</ul>
-</li>
-<li><strong>API 测试工具</strong> Postman、Insomnia、curl。</li>
-</ol>
-<h6 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h6><ul>
-<li><strong>传统 AJAX</strong> 适合兼容性要求高的场景。</li>
-<li><strong>Fetch API</strong> 是现代化、轻量的选择。</li>
-<li><strong>Axios</strong> 提供更全面的功能和企业级支持。</li>
-<li><strong>跨域问题</strong> 需服务端配合或使用代理。</li>
-<li><strong>WebSocket</strong> 实现实时双向通信。</li>
+<pre><code class="hljs">- **&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;代理服务器&lt;/font&gt;**&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;
+</code></pre>
+<p><font style="color:rgb(64, 64, 64);">通过后端或工具（如 Webpack DevServer）转发请求。</font></p>
+<hr>
+<h5 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a><font style="color:rgb(64, 64, 64);">总结</font></h5><p><strong><font style="color:rgb(64, 64, 64);">XHR vs Fetch 对比</font></strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>特性</strong></th>
+<th><strong>XHR</strong></th>
+<th><strong>Fetch</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><font style="color:rgb(64, 64, 64);">语法</font></strong></td>
+<td><font style="color:rgb(64, 64, 64);">回调&#x2F;事件驱动，较冗长</font></td>
+<td><font style="color:rgb(64, 64, 64);">Promise 链式调用，更简洁</font></td>
+</tr>
+<tr>
+<td><strong><font style="color:rgb(64, 64, 64);">错误处理</font></strong></td>
+<td><font style="color:rgb(64, 64, 64);">需监听</font><font style="color:rgb(64, 64, 64);"> </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;onerror&lt;/font&gt;</code><br><font style="color:rgb(64, 64, 64);"> </font><font style="color:rgb(64, 64, 64);">和状态码</font></td>
+<td><font style="color:rgb(64, 64, 64);">网络错误触发</font><font style="color:rgb(64, 64, 64);"> </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;catch&lt;/font&gt;</code><br><font style="color:rgb(64, 64, 64);">，HTTP 错误需手动检查</font></td>
+</tr>
+<tr>
+<td><strong><font style="color:rgb(64, 64, 64);">中止请求</font></strong></td>
+<td><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;xhr.abort()&lt;/font&gt;</code></td>
+<td><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;AbortController&lt;/font&gt;</code></td>
+</tr>
+<tr>
+<td><strong><font style="color:rgb(64, 64, 64);">进度监控</font></strong></td>
+<td><font style="color:rgb(64, 64, 64);">支持（</font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;onprogress&lt;/font&gt;</code><br><font style="color:rgb(64, 64, 64);">）</font></td>
+<td><font style="color:rgb(64, 64, 64);">不直接支持，需通过 Stream 处理</font></td>
+</tr>
+<tr>
+<td><strong><font style="color:rgb(64, 64, 64);">默认携带 Cookie</font></strong></td>
+<td><font style="color:rgb(64, 64, 64);">是</font></td>
+<td><font style="color:rgb(64, 64, 64);">需设置</font><font style="color:rgb(64, 64, 64);"> </font><code>&lt;font style=&quot;color:rgb(64, 64, 64);&quot;&gt;credentials: &#39;include&#39;&lt;/font&gt;</code></td>
+</tr>
+<tr>
+<td><strong><font style="color:rgb(64, 64, 64);">兼容性</font></strong></td>
+<td><font style="color:rgb(64, 64, 64);">广泛支持（包括旧浏览器）</font></td>
+<td><font style="color:rgb(64, 64, 64);">不支持 IE，需 polyfill</font></td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong><font style="color:rgb(64, 64, 64);">传统 AJAX</font></strong><font style="color:rgb(64, 64, 64);"> </font><font style="color:rgb(64, 64, 64);">适合兼容性要求高的场景。</font></li>
+<li><strong><font style="color:rgb(64, 64, 64);">Fetch API</font></strong><font style="color:rgb(64, 64, 64);"> </font><font style="color:rgb(64, 64, 64);">是现代化、轻量的选择。</font></li>
+<li><strong><font style="color:rgb(64, 64, 64);">Axios</font></strong><font style="color:rgb(64, 64, 64);"> </font><font style="color:rgb(64, 64, 64);">提供更全面的功能和企业级支持。</font></li>
+<li><strong><font style="color:rgb(64, 64, 64);">跨域问题</font></strong><font style="color:rgb(64, 64, 64);"> </font><font style="color:rgb(64, 64, 64);">需服务端配合或使用代理。</font></li>
+<li><strong><font style="color:rgb(64, 64, 64);">WebSocket</font></strong><font style="color:rgb(64, 64, 64);"> 实现实时双向通信。</font></li>
 </ul>
 
                 
@@ -2513,7 +2603,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/02/24/JavaScript%E5%9F%BA%E7%A1%80/" title="JavaScript基础">
+                      <a href="/2025/02/22/JavaScript%E5%9F%BA%E7%A1%80/" title="JavaScript基础">
                         <span class="hidden-mobile">JavaScript基础</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
