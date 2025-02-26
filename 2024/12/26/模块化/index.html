@@ -1,0 +1,777 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/baike.png">
+  <link rel="icon" href="/img/baike.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="MrZ">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content=":::infoNode.js 有两个模块系统：CommonJS 模块和 ECMAScript 模块。 官方文档解释:CommonJS 模块 | Node.js v22 文档 ::: 1.模块化概述 1.1.什么是模块化?  ·将程序文件依据一定规则拆分成多个文件，这种编码方式就是模块化的编码方式。 ·拆分出来每个文件就是一个模块，模块中的数据都是私有的，模块之间互相隔离。 ·同时也能通过一些手段，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模块化">
+<meta property="og:url" content="http://example.com/2024/12/26/%E6%A8%A1%E5%9D%97%E5%8C%96/index.html">
+<meta property="og:site_name" content="MrZ的个人博客">
+<meta property="og:description" content=":::infoNode.js 有两个模块系统：CommonJS 模块和 ECMAScript 模块。 官方文档解释:CommonJS 模块 | Node.js v22 文档 ::: 1.模块化概述 1.1.什么是模块化?  ·将程序文件依据一定规则拆分成多个文件，这种编码方式就是模块化的编码方式。 ·拆分出来每个文件就是一个模块，模块中的数据都是私有的，模块之间互相隔离。 ·同时也能通过一些手段，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/12/26/%E6%A8%A1%E5%9D%97%E5%8C%96/1732441087666-54ed39f5-ac50-4e4d-9131-cc0364d8f20d.png">
+<meta property="og:image" content="http://example.com/2024/12/26/%E6%A8%A1%E5%9D%97%E5%8C%96/1732441386700-3e730de2-0fba-4dc2-869d-1955d601a1c2.png">
+<meta property="og:image" content="http://example.com/2024/12/26/%E6%A8%A1%E5%9D%97%E5%8C%96/1732441612377-01f04a62-0267-4e1f-a941-7e7c70dddf1a.png">
+<meta property="og:image" content="http://example.com/2024/12/26/%E6%A8%A1%E5%9D%97%E5%8C%96/1732441825498-393438c3-6bfe-4df0-9c20-2435b70ea902.png">
+<meta property="og:image" content="http://example.com/2024/12/26/%E6%A8%A1%E5%9D%97%E5%8C%96/1732441843282-43a9d501-736c-42b1-b707-5a95d576b747.png">
+<meta property="og:image" content="http://example.com/2024/12/26/%E6%A8%A1%E5%9D%97%E5%8C%96/1732442709794-bf57fc0c-3c29-48ad-abe2-2c549ad8d18b.png">
+<meta property="og:image" content="http://example.com/2024/12/26/%E6%A8%A1%E5%9D%97%E5%8C%96/1732442845102-91cfab20-27e3-411d-a691-0bc29ec24f4a.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732442993864-4554b76e-d71c-417d-8fea-8d4694ca46e8.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732443152991-776590d0-1832-43ba-a4ce-78d6a18dfbee.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732443420385-81559b38-200e-4e4e-971f-2f0deb490c60.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732443640826-434b4d2c-4cb3-46ce-a07a-8251131dc957.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732443933115-a97d93ec-3e8a-489e-af6a-718e6d3fb276.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732443989604-02785e06-71ff-44cb-be35-a981feeafd4f.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732444086381-b1df32dd-f894-45ca-8eff-abab0d414f46.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732444201803-f0f85408-4af4-49b2-94f1-113e071985a7.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732444277761-42890bd8-79e6-4958-bf00-40fa94c983e3.png">
+<meta property="og:image" content="http://example.com/2024/12/26/%E6%A8%A1%E5%9D%97%E5%8C%96/1732932495501-3ed374b2-a1ee-40bb-a5e7-35d36fb3697f.png">
+<meta property="article:published_time" content="2024-12-26T12:24:59.000Z">
+<meta property="article:modified_time" content="2025-02-26T12:26:23.378Z">
+<meta property="article:author" content="MrZ">
+<meta property="article:tag" content="模块化">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2024/12/26/%E6%A8%A1%E5%9D%97%E5%8C%96/1732441087666-54ed39f5-ac50-4e4d-9131-cc0364d8f20d.png">
+  
+  
+  
+  <title>模块化 - MrZ的个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>MirZ Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="模块化"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-12-26 20:24" pubdate>
+          2024年12月26日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          10 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">模块化</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>:::info<br><font style="color:rgb(51, 51, 51);">Node.js 有两个模块系统：CommonJS 模块和 </font><a target="_blank" rel="noopener" href="https://nodejs.cn/api/esm.html">ECMAScript 模块</a><font style="color:rgb(51, 51, 51);">。</font></p>
+<p><font style="color:rgb(51, 51, 51);">官方文档解释:</font><a target="_blank" rel="noopener" href="https://nodejs.cn/api/modules.html#%E8%AE%BF%E9%97%AE%E4%B8%BB%E6%A8%A1%E5%9D%97">CommonJS 模块 | Node.js v22 文档</a></p>
+<p>:::</p>
+<h3 id="EE1YO">1.模块化概述</h3>
+<h4 id="uTPmG">1.1.什么是模块化?</h4>
+
+<p>·将程序文件依据一定规则拆分成多个文件，这种编码方式就是模块化的编码方式。</p>
+<p>·拆分出来每个文件就是一个模块，模块中的数据都是私有的，模块之间互相隔离。</p>
+<p>·同时也能通过一些手段，可以把模块内的指定数据“交出去”，供其他模块使用。</p>
+<h4 id="HzSas">1.2.为什么需要模块化?</h4>
+
+<p>随着应用的复杂度越来越高，其代码量和文件数量都会急剧增加，会逐渐引发以下问题:</p>
+<p>1.全局污染问题(命名冲突)</p>
+<p>2.依赖混乱问题</p>
+<p>3.数据安全问题</p>
+<h3 id="GgblI">2.有哪些模块化规范</h3>
+
+<p>随着时间的批移，针对 JavaScript 的不同运行环境，相出现了多种模块化规范，按时间排序，分别为:</p>
+<p>:::info<br><strong>1.CommonJs– 服务端应用广泛</strong></p>
+<p>2.AMD</p>
+<p>3.CMD</p>
+<p><strong>4.ES6 模块化 – 浏览器端应用广泛</strong></p>
+<p>:::</p>
+<h3 id="uppk4">3.导入和导出的概念</h3>
+
+<p>模块化的核心思想就是:模块之间是隔离的，通过导入和导出进行数据和功能的共享</p>
+<p>:::info<br><strong>导出</strong>:模块公开其内部的一部分(如变量、函数等)，使这些内容可以被其他模块使用。</p>
+<p><strong>导入</strong>:模块引用和使用其他模块导出的内容，以重用代码和功能。</p>
+<p>:::</p>
+<h3 id="R6Lgy">4.CommonJs规范</h3>
+<h4 id="YXqNW">导出数据</h4>
+
+<p>在 CommonJs 标准中，导出数据有两种方式</p>
+<p>:::info<br>第一种方式:module.exports &#x3D;value</p>
+<p>第二种方式:exports.name &#x3D;value</p>
+<p><img src="1732441087666-54ed39f5-ac50-4e4d-9131-cc0364d8f20d.png" srcset="/img/loading.gif" lazyload></p>
+<p>:::</p>
+<p>:::success 1.每个模块内部的:this、exports、modules.exports 在初始时，都指向同一个空对象，该</p>
+<p>空对象就是当前模块导出的数据，如下图</p>
+<p><img src="1732441386700-3e730de2-0fba-4dc2-869d-1955d601a1c2.png" srcset="/img/loading.gif" lazyload></p>
+<p>2.无论如何修改导出对象，最终导出的都是 module.exports 的值</p>
+<p>3.exports 是对 module.exports 的初始引用，仅为了方便给导出象添加属性，所以不能使用 exports &#x3D; value 的形式导出数据，但是可以使用 module.exports &#x3D; xxxx 导出数据</p>
+<p>:::</p>
+<h4 id="ydDTs">导入数据</h4>
+
+<p><img src="1732441612377-01f04a62-0267-4e1f-a941-7e7c70dddf1a.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="pbR63">拓展理解</h4>
+
+<p>一个 JS 模块在执行时，是被包裹在一个内置函数中执行的，所以每个模块都有自己的作用域，我们可以通</p>
+<p>过如下方式验证这一说法:</p>
+<p><img src="1732441825498-393438c3-6bfe-4df0-9c20-2435b70ea902.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="1732441843282-43a9d501-736c-42b1-b707-5a95d576b747.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="VTjje">浏览器端使用CommonJS</h4>
+
+<p>Node.js 默认是支持 CommonJS 规范的，但浏览器端不支持，所以需要经过编译，步骤如下:</p>
+<p><strong>第一步:全局安装 browserify</strong></p>
+<p>:::tips<br><strong>pm i browserify -g</strong></p>
+<p>:::</p>
+<p><strong>第二步:编译</strong></p>
+<p>:::tips<br><strong>browserify index.js -o build.js</strong></p>
+<p>:::</p>
+<p>:::color1<br><strong>备注: index.js 是源文件 build.js 是输出的目标文件</strong></p>
+<p>:::</p>
+<p><strong>第三步:页面中引入使用</strong></p>
+<p>:::tips<br><strong><script type="text/javascript" src="./build.js"></script></strong></p>
+<p>:::</p>
+<h3 id="LccGf">5.ES6 模块化规范</h3>
+
+<p>ES6 模块化规范是一个<font style="color:#DF2A3F;">官方标准</font>的规范，它是在语言标准的层面上实现了模块化功能，是目前最流行的模</p>
+<p>块化规范，且<font style="color:#DF2A3F;">浏览器与服务端</font>均支持该规范。</p>
+<p>1.ESM 自动采用严格模式，忽路 use strict’</p>
+<p>2.每个 ES Module 都是运行在单独的<strong>私有作用域</strong>中</p>
+<p>3.ESM 是通过 CORS 的方式请求外部 JS 模块的</p>
+<p>4.ESM 的 script 标签会延迟执行脚本</p>
+<p><strong>ESM 对外暴露的是引用关系,且只读</strong></p>
+<h4 id="whNbE">浏览器端和Node中运行ES6模块化</h4>
+
+<p>:::tips<br><strong>浏览器端引入时,type 应为”mouule”</strong></p>
+<p><img src="1732442709794-bf57fc0c-3c29-48ad-abe2-2c549ad8d18b.png" srcset="/img/loading.gif" lazyload></p>
+<p>:::</p>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs tsx"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;./module.js&quot;</span>; <span class="hljs-comment">//加载模块,不引用</span><br><span class="hljs-comment">//动态加载模块</span><br><span class="hljs-keyword">import</span>(<span class="hljs-string">&quot;./module.js&quot;</span>).<span class="hljs-title function_">then</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">moduie</span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">module</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://unpkg.com/browser-es-module-loader@0.4.1/dist/babel-browser-build.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://unpkg.com/browse/browser-es-module-loader@0.4.1/dist/browser-es-module-loader.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://unpkg.com/promise-polyfill@8.3.0/dist/polyfill.min.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>:::tips</p>
+<h4 id="GnEcg">Node中运行ES6模块化两种方式.</h4>
+
+<p><strong>方法一:</strong> 将 js 后缀更改为 mjs</p>
+<p>**方法二:**在 package.json 中配置</p>
+<p><img src="1732442845102-91cfab20-27e3-411d-a691-0bc29ec24f4a.png" srcset="/img/loading.gif" lazyload></p>
+<p>:::</p>
+<h4 id="HWqgM">导出数据</h4>
+
+<p>ES6 模块化提供 3 种导出方式:① 分别导出、② 统一导出、③ 默认导出</p>
+<details class="lake-collapse"><summary id="u1e499fe6"><span class="ne-text">1.分别导出</span></summary><p id="u551fe6ab" class="ne-p"><img src="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732442993864-4554b76e-d71c-417d-8fea-8d4694ca46e8.png" srcset="/img/loading.gif" lazyload width="668.8" id="u039f2504" class="ne-image"></p></details>
+<details class="lake-collapse"><summary id="u7a5f255d"><span class="ne-text">2.统一导出</span></summary><p id="u095f783a" class="ne-p"><img src="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732443152991-776590d0-1832-43ba-a4ce-78d6a18dfbee.png" srcset="/img/loading.gif" lazyload width="479.2" id="u63906098" class="ne-image"></p><div data-type="info" class="ne-alert"><p id="u6b2df77b" class="ne-p"><span class="ne-text">export { }   中{ }并非对象,而是一种类对象的形式</span></p></div></details>
+<details class="lake-collapse"><summary id="u866502a7"><span class="ne-text">3.默认导出</span></summary><p id="u7cd8a108" class="ne-p"><img src="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732443420385-81559b38-200e-4e4e-971f-2f0deb490c60.png" srcset="/img/loading.gif" lazyload width="652" id="ue072e7f1" class="ne-image"></p><div data-type="info" class="ne-alert"><p id="u32e23588" class="ne-p"><span class="ne-text">export default { }   中导出的 { }是一个对象</span></p></div></details>
+
+<p>:::info<br>tip:3 种导出方式可以混用</p>
+<p>:::</p>
+<h4 id="vHT1G">导入数据</h4>
+<details class="lake-collapse"><summary id="u11a43170"><span class="ne-text">1.导入全部(通用)</span></summary><p id="ueadea418" class="ne-p"><span class="ne-text">可以将模块中的所有导出内容整合到一个对象中，</span></p><p id="ub8efff36" class="ne-p"><img src="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732443640826-434b4d2c-4cb3-46ce-a07a-8251131dc957.png" srcset="/img/loading.gif" lazyload width="296" id="u911b1939" class="ne-image"></p></details>
+<details class="lake-collapse"><summary id="uc8caac1c"><span class="ne-text">2.命名导入(对应导出方式:分别导出,统一导出)</span></summary><p id="u5af2b95b" class="ne-p"><img src="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732443933115-a97d93ec-3e8a-489e-af6a-718e6d3fb276.png" srcset="/img/loading.gif" lazyload width="654.4" id="u500fdc7d" class="ne-image"></p></details>
+<details class="lake-collapse"><summary id="ueca5e983"><span class="ne-text">3.默认导入(对应导出方式:默认导出)</span></summary><p id="u88e7ba7c" class="ne-p"><img src="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732443989604-02785e06-71ff-44cb-be35-a981feeafd4f.png" srcset="/img/loading.gif" lazyload width="427.2" id="u85a34562" class="ne-image"></p></details>
+<details class="lake-collapse"><summary id="ufc5fdf6d"><span class="ne-text">4.命名导入 与 默认导入可以混合使用</span></summary><p id="u2c0f5645" class="ne-p"><img src="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732444086381-b1df32dd-f894-45ca-8eff-abab0d414f46.png" srcset="/img/loading.gif" lazyload width="577.6" id="uda19e02d" class="ne-image"></p></details>
+<details class="lake-collapse"><summary id="u10623e12"><span class="ne-text">5.「动态导入」(通用)</span></summary><p id="ufc1b0a1d" class="ne-p"><img src="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732444201803-f0f85408-4af4-49b2-94f1-113e071985a7.png" srcset="/img/loading.gif" lazyload width="628" id="uc2bc9444" class="ne-image"></p></details>
+<details class="lake-collapse"><summary id="u461c8c34"><span class="ne-text">6.import 可以不接收任何数据</span></summary><p id="u3e6512b1" class="ne-p"><img src="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732444277761-42890bd8-79e6-4958-bf00-40fa94c983e3.png" srcset="/img/loading.gif" lazyload width="379.2" id="u59a2bd64" class="ne-image"></p></details>
+
+<h3 id="BR8jO">6.ESM和CommonJs的交互</h3>
+
+<p>:::tips<br><img src="1732932495501-3ed374b2-a1ee-40bb-a5e7-35d36fb3697f.png" srcset="/img/loading.gif" lazyload></p>
+<p>:::</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%A8%A1%E5%9D%97%E5%8C%96/" class="category-chain-item">模块化</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/" class="print-no-link">#模块化</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>模块化</div>
+      <div>http://example.com/2024/12/26/模块化/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>MrZ</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年12月26日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/02/24/JavaScript%E5%9F%BA%E7%A1%80/" title="JavaScript基础">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JavaScript基础</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/12/26/%E9%83%A8%E5%88%86%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/" title="部分知识记录">
+                        <span class="hidden-mobile">部分知识记录</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
