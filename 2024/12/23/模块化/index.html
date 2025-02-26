@@ -22,33 +22,33 @@
     <meta name="description" content=":::infoNode.js 有两个模块系统：CommonJS 模块和 ECMAScript 模块。 官方文档解释:CommonJS 模块 | Node.js v22 文档 ::: 1.模块化概述 1.1.什么是模块化?  ·将程序文件依据一定规则拆分成多个文件，这种编码方式就是模块化的编码方式。 ·拆分出来每个文件就是一个模块，模块中的数据都是私有的，模块之间互相隔离。 ·同时也能通过一些手段，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="模块化">
-<meta property="og:url" content="http://example.com/2024/12/26/%E6%A8%A1%E5%9D%97%E5%8C%96/index.html">
+<meta property="og:url" content="http://example.com/2024/12/23/%E6%A8%A1%E5%9D%97%E5%8C%96/index.html">
 <meta property="og:site_name" content="MrZ的个人博客">
 <meta property="og:description" content=":::infoNode.js 有两个模块系统：CommonJS 模块和 ECMAScript 模块。 官方文档解释:CommonJS 模块 | Node.js v22 文档 ::: 1.模块化概述 1.1.什么是模块化?  ·将程序文件依据一定规则拆分成多个文件，这种编码方式就是模块化的编码方式。 ·拆分出来每个文件就是一个模块，模块中的数据都是私有的，模块之间互相隔离。 ·同时也能通过一些手段，">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2024/12/26/%E6%A8%A1%E5%9D%97%E5%8C%96/1732441087666-54ed39f5-ac50-4e4d-9131-cc0364d8f20d.png">
-<meta property="og:image" content="http://example.com/2024/12/26/%E6%A8%A1%E5%9D%97%E5%8C%96/1732441386700-3e730de2-0fba-4dc2-869d-1955d601a1c2.png">
-<meta property="og:image" content="http://example.com/2024/12/26/%E6%A8%A1%E5%9D%97%E5%8C%96/1732441612377-01f04a62-0267-4e1f-a941-7e7c70dddf1a.png">
-<meta property="og:image" content="http://example.com/2024/12/26/%E6%A8%A1%E5%9D%97%E5%8C%96/1732441825498-393438c3-6bfe-4df0-9c20-2435b70ea902.png">
-<meta property="og:image" content="http://example.com/2024/12/26/%E6%A8%A1%E5%9D%97%E5%8C%96/1732441843282-43a9d501-736c-42b1-b707-5a95d576b747.png">
-<meta property="og:image" content="http://example.com/2024/12/26/%E6%A8%A1%E5%9D%97%E5%8C%96/1732442709794-bf57fc0c-3c29-48ad-abe2-2c549ad8d18b.png">
-<meta property="og:image" content="http://example.com/2024/12/26/%E6%A8%A1%E5%9D%97%E5%8C%96/1732442845102-91cfab20-27e3-411d-a691-0bc29ec24f4a.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732442993864-4554b76e-d71c-417d-8fea-8d4694ca46e8.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732443152991-776590d0-1832-43ba-a4ce-78d6a18dfbee.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732443420385-81559b38-200e-4e4e-971f-2f0deb490c60.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732443640826-434b4d2c-4cb3-46ce-a07a-8251131dc957.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732443933115-a97d93ec-3e8a-489e-af6a-718e6d3fb276.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732443989604-02785e06-71ff-44cb-be35-a981feeafd4f.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732444086381-b1df32dd-f894-45ca-8eff-abab0d414f46.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732444201803-f0f85408-4af4-49b2-94f1-113e071985a7.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732444277761-42890bd8-79e6-4958-bf00-40fa94c983e3.png">
-<meta property="og:image" content="http://example.com/2024/12/26/%E6%A8%A1%E5%9D%97%E5%8C%96/1732932495501-3ed374b2-a1ee-40bb-a5e7-35d36fb3697f.png">
-<meta property="article:published_time" content="2024-12-26T12:24:59.000Z">
-<meta property="article:modified_time" content="2025-02-26T12:26:23.378Z">
+<meta property="og:image" content="http://example.com/2024/12/23/%E6%A8%A1%E5%9D%97%E5%8C%96/1732441087666-54ed39f5-ac50-4e4d-9131-cc0364d8f20d.png">
+<meta property="og:image" content="http://example.com/2024/12/23/%E6%A8%A1%E5%9D%97%E5%8C%96/1732441386700-3e730de2-0fba-4dc2-869d-1955d601a1c2.png">
+<meta property="og:image" content="http://example.com/2024/12/23/%E6%A8%A1%E5%9D%97%E5%8C%96/1732441612377-01f04a62-0267-4e1f-a941-7e7c70dddf1a.png">
+<meta property="og:image" content="http://example.com/2024/12/23/%E6%A8%A1%E5%9D%97%E5%8C%96/1732441825498-393438c3-6bfe-4df0-9c20-2435b70ea902.png">
+<meta property="og:image" content="http://example.com/2024/12/23/%E6%A8%A1%E5%9D%97%E5%8C%96/1732441843282-43a9d501-736c-42b1-b707-5a95d576b747.png">
+<meta property="og:image" content="http://example.com/2024/12/23/%E6%A8%A1%E5%9D%97%E5%8C%96/1732442709794-bf57fc0c-3c29-48ad-abe2-2c549ad8d18b.png">
+<meta property="og:image" content="http://example.com/2024/12/23/%E6%A8%A1%E5%9D%97%E5%8C%96/1732442845102-91cfab20-27e3-411d-a691-0bc29ec24f4a.png">
+<meta property="og:image" content="http://example.com/2024/12/23/%E6%A8%A1%E5%9D%97%E5%8C%96/1732442993864-4554b76e-d71c-417d-8fea-8d4694ca46e8.png">
+<meta property="og:image" content="http://example.com/2024/12/23/%E6%A8%A1%E5%9D%97%E5%8C%96/1732443152991-776590d0-1832-43ba-a4ce-78d6a18dfbee.png">
+<meta property="og:image" content="http://example.com/2024/12/23/%E6%A8%A1%E5%9D%97%E5%8C%96/1732443420385-81559b38-200e-4e4e-971f-2f0deb490c60.png">
+<meta property="og:image" content="http://example.com/2024/12/23/%E6%A8%A1%E5%9D%97%E5%8C%96/1732443640826-434b4d2c-4cb3-46ce-a07a-8251131dc957.png">
+<meta property="og:image" content="http://example.com/2024/12/23/%E6%A8%A1%E5%9D%97%E5%8C%96/1732443933115-a97d93ec-3e8a-489e-af6a-718e6d3fb276.png">
+<meta property="og:image" content="http://example.com/2024/12/23/%E6%A8%A1%E5%9D%97%E5%8C%96/1732443989604-02785e06-71ff-44cb-be35-a981feeafd4f.png">
+<meta property="og:image" content="http://example.com/2024/12/23/%E6%A8%A1%E5%9D%97%E5%8C%96/1732444086381-b1df32dd-f894-45ca-8eff-abab0d414f46.png">
+<meta property="og:image" content="http://example.com/2024/12/23/%E6%A8%A1%E5%9D%97%E5%8C%96/1732444201803-f0f85408-4af4-49b2-94f1-113e071985a7.png">
+<meta property="og:image" content="http://example.com/2024/12/23/%E6%A8%A1%E5%9D%97%E5%8C%96/1732444277761-42890bd8-79e6-4958-bf00-40fa94c983e3.png">
+<meta property="og:image" content="http://example.com/2024/12/23/%E6%A8%A1%E5%9D%97%E5%8C%96/1732932495501-3ed374b2-a1ee-40bb-a5e7-35d36fb3697f.png">
+<meta property="article:published_time" content="2024-12-23T12:31:05.000Z">
+<meta property="article:modified_time" content="2025-02-26T12:39:11.741Z">
 <meta property="article:author" content="MrZ">
 <meta property="article:tag" content="模块化">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/2024/12/26/%E6%A8%A1%E5%9D%97%E5%8C%96/1732441087666-54ed39f5-ac50-4e4d-9131-cc0364d8f20d.png">
+<meta name="twitter:image" content="http://example.com/2024/12/23/%E6%A8%A1%E5%9D%97%E5%8C%96/1732441087666-54ed39f5-ac50-4e4d-9131-cc0364d8f20d.png">
   
   
   
@@ -229,8 +229,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-12-26 20:24" pubdate>
-          2024年12月26日 晚上
+        <time datetime="2024-12-23 20:31" pubdate>
+          2024年12月23日 晚上
         </time>
       </span>
     
@@ -331,11 +331,11 @@
 <p>第二种方式:exports.name &#x3D;value</p>
 <p><img src="1732441087666-54ed39f5-ac50-4e4d-9131-cc0364d8f20d.png" srcset="/img/loading.gif" lazyload></p>
 <p>:::</p>
-<p>:::success 1.每个模块内部的:this、exports、modules.exports 在初始时，都指向同一个空对象，该</p>
+<p>:::success<br>1.每个模块内部的:this、exports、modules.exports 在初始时，都指向同一个空对象，该</p>
 <p>空对象就是当前模块导出的数据，如下图</p>
 <p><img src="1732441386700-3e730de2-0fba-4dc2-869d-1955d601a1c2.png" srcset="/img/loading.gif" lazyload></p>
-<p>2.无论如何修改导出对象，最终导出的都是 module.exports 的值</p>
-<p>3.exports 是对 module.exports 的初始引用，仅为了方便给导出象添加属性，所以不能使用 exports &#x3D; value 的形式导出数据，但是可以使用 module.exports &#x3D; xxxx 导出数据</p>
+<p>2.无论如何修改导出对象，最终导出的都是 module.exports的值</p>
+<p>3.exports 是对 module.exports 的初始引用，仅为了方便给导出象添加属性，所以不能使用exports &#x3D; value 的形式导出数据，但是可以使用 module.exports &#x3D; xxxx 导出数据</p>
 <p>:::</p>
 <h4 id="ydDTs">导入数据</h4>
 
@@ -355,7 +355,7 @@
 <p><strong>第二步:编译</strong></p>
 <p>:::tips<br><strong>browserify index.js -o build.js</strong></p>
 <p>:::</p>
-<p>:::color1<br><strong>备注: index.js 是源文件 build.js 是输出的目标文件</strong></p>
+<p>:::color1<br><strong>备注:  index.js 是源文件   build.js 是输出的目标文件</strong></p>
 <p>:::</p>
 <p><strong>第三步:页面中引入使用</strong></p>
 <p>:::tips<br><strong><script type="text/javascript" src="./build.js"></script></strong></p>
@@ -364,44 +364,75 @@
 
 <p>ES6 模块化规范是一个<font style="color:#DF2A3F;">官方标准</font>的规范，它是在语言标准的层面上实现了模块化功能，是目前最流行的模</p>
 <p>块化规范，且<font style="color:#DF2A3F;">浏览器与服务端</font>均支持该规范。</p>
-<p>1.ESM 自动采用严格模式，忽路 use strict’</p>
+<p>1.ESM 自动采用严格模式，忽路use strict’</p>
 <p>2.每个 ES Module 都是运行在单独的<strong>私有作用域</strong>中</p>
-<p>3.ESM 是通过 CORS 的方式请求外部 JS 模块的</p>
+<p>3.ESM 是通过 CORS 的方式请求外部JS 模块的</p>
 <p>4.ESM 的 script 标签会延迟执行脚本</p>
 <p><strong>ESM 对外暴露的是引用关系,且只读</strong></p>
 <h4 id="whNbE">浏览器端和Node中运行ES6模块化</h4>
 
-<p>:::tips<br><strong>浏览器端引入时,type 应为”mouule”</strong></p>
+<p>:::tips<br><strong>浏览器端引入时,type应为”mouule”</strong></p>
 <p><img src="1732442709794-bf57fc0c-3c29-48ad-abe2-2c549ad8d18b.png" srcset="/img/loading.gif" lazyload></p>
 <p>:::</p>
-<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs tsx"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;./module.js&quot;</span>; <span class="hljs-comment">//加载模块,不引用</span><br><span class="hljs-comment">//动态加载模块</span><br><span class="hljs-keyword">import</span>(<span class="hljs-string">&quot;./module.js&quot;</span>).<span class="hljs-title function_">then</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">moduie</span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">module</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs tsx"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./module.js&#x27;</span>   <span class="hljs-comment">//加载模块,不引用</span><br><span class="hljs-comment">//动态加载模块</span><br><span class="hljs-keyword">import</span>(<span class="hljs-string">&#x27;./module.js&#x27;</span>).<span class="hljs-title function_">then</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">moduie</span>)&#123;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">module</span>)<br>&#125;)<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://unpkg.com/browser-es-module-loader@0.4.1/dist/babel-browser-build.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://unpkg.com/browse/browser-es-module-loader@0.4.1/dist/browser-es-module-loader.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://unpkg.com/promise-polyfill@8.3.0/dist/polyfill.min.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&#x27;https://unpkg.com/browser-es-module-loader@0.4.1/dist/babel-browser-build.js&#x27;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>	<br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&#x27;https://unpkg.com/browse/browser-es-module-loader@0.4.1/dist/browser-es-module-loader.js&#x27;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>	<br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&#x27;https://unpkg.com/promise-polyfill@8.3.0/dist/polyfill.min.js&#x27;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>	<br></code></pre></td></tr></table></figure>
 
 <p>:::tips</p>
 <h4 id="GnEcg">Node中运行ES6模块化两种方式.</h4>
 
-<p><strong>方法一:</strong> 将 js 后缀更改为 mjs</p>
-<p>**方法二:**在 package.json 中配置</p>
+<p><strong>方法一:</strong> 将js后缀更改为mjs</p>
+<p>**方法二:**在package.json中配置</p>
 <p><img src="1732442845102-91cfab20-27e3-411d-a691-0bc29ec24f4a.png" srcset="/img/loading.gif" lazyload></p>
 <p>:::</p>
 <h4 id="HWqgM">导出数据</h4>
 
-<p>ES6 模块化提供 3 种导出方式:① 分别导出、② 统一导出、③ 默认导出</p>
-<details class="lake-collapse"><summary id="u1e499fe6"><span class="ne-text">1.分别导出</span></summary><p id="u551fe6ab" class="ne-p"><img src="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732442993864-4554b76e-d71c-417d-8fea-8d4694ca46e8.png" srcset="/img/loading.gif" lazyload width="668.8" id="u039f2504" class="ne-image"></p></details>
-<details class="lake-collapse"><summary id="u7a5f255d"><span class="ne-text">2.统一导出</span></summary><p id="u095f783a" class="ne-p"><img src="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732443152991-776590d0-1832-43ba-a4ce-78d6a18dfbee.png" srcset="/img/loading.gif" lazyload width="479.2" id="u63906098" class="ne-image"></p><div data-type="info" class="ne-alert"><p id="u6b2df77b" class="ne-p"><span class="ne-text">export { }   中{ }并非对象,而是一种类对象的形式</span></p></div></details>
-<details class="lake-collapse"><summary id="u866502a7"><span class="ne-text">3.默认导出</span></summary><p id="u7cd8a108" class="ne-p"><img src="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732443420385-81559b38-200e-4e4e-971f-2f0deb490c60.png" srcset="/img/loading.gif" lazyload width="652" id="ue072e7f1" class="ne-image"></p><div data-type="info" class="ne-alert"><p id="u32e23588" class="ne-p"><span class="ne-text">export default { }   中导出的 { }是一个对象</span></p></div></details>
-
-<p>:::info<br>tip:3 种导出方式可以混用</p>
+<p>ES6 模块化提供 3 种导出方式:①分别导出、②统一导出、③默认导出</p>
+<blockquote>
+<p>1.分别导出</p>
+<p><img src="1732442993864-4554b76e-d71c-417d-8fea-8d4694ca46e8.png" srcset="/img/loading.gif" lazyload></p>
+</blockquote>
+<blockquote>
+<p>2.统一导出</p>
+<p><img src="1732443152991-776590d0-1832-43ba-a4ce-78d6a18dfbee.png" srcset="/img/loading.gif" lazyload></p>
+<p>:::info<br>export { }   中{ }并非对象,而是一种类对象的形式</p>
+<p>:::</p>
+</blockquote>
+<blockquote>
+<p>3.默认导出</p>
+<p><img src="1732443420385-81559b38-200e-4e4e-971f-2f0deb490c60.png" srcset="/img/loading.gif" lazyload></p>
+<p>:::info<br>export default { }   中导出的 { }是一个对象</p>
+<p>:::</p>
+</blockquote>
+<p>:::info<br> tip:3 种导出方式可以混用</p>
 <p>:::</p>
 <h4 id="vHT1G">导入数据</h4>
-<details class="lake-collapse"><summary id="u11a43170"><span class="ne-text">1.导入全部(通用)</span></summary><p id="ueadea418" class="ne-p"><span class="ne-text">可以将模块中的所有导出内容整合到一个对象中，</span></p><p id="ub8efff36" class="ne-p"><img src="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732443640826-434b4d2c-4cb3-46ce-a07a-8251131dc957.png" srcset="/img/loading.gif" lazyload width="296" id="u911b1939" class="ne-image"></p></details>
-<details class="lake-collapse"><summary id="uc8caac1c"><span class="ne-text">2.命名导入(对应导出方式:分别导出,统一导出)</span></summary><p id="u5af2b95b" class="ne-p"><img src="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732443933115-a97d93ec-3e8a-489e-af6a-718e6d3fb276.png" srcset="/img/loading.gif" lazyload width="654.4" id="u500fdc7d" class="ne-image"></p></details>
-<details class="lake-collapse"><summary id="ueca5e983"><span class="ne-text">3.默认导入(对应导出方式:默认导出)</span></summary><p id="u88e7ba7c" class="ne-p"><img src="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732443989604-02785e06-71ff-44cb-be35-a981feeafd4f.png" srcset="/img/loading.gif" lazyload width="427.2" id="u85a34562" class="ne-image"></p></details>
-<details class="lake-collapse"><summary id="ufc5fdf6d"><span class="ne-text">4.命名导入 与 默认导入可以混合使用</span></summary><p id="u2c0f5645" class="ne-p"><img src="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732444086381-b1df32dd-f894-45ca-8eff-abab0d414f46.png" srcset="/img/loading.gif" lazyload width="577.6" id="uda19e02d" class="ne-image"></p></details>
-<details class="lake-collapse"><summary id="u10623e12"><span class="ne-text">5.「动态导入」(通用)</span></summary><p id="ufc1b0a1d" class="ne-p"><img src="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732444201803-f0f85408-4af4-49b2-94f1-113e071985a7.png" srcset="/img/loading.gif" lazyload width="628" id="uc2bc9444" class="ne-image"></p></details>
-<details class="lake-collapse"><summary id="u461c8c34"><span class="ne-text">6.import 可以不接收任何数据</span></summary><p id="u3e6512b1" class="ne-p"><img src="https://cdn.nlark.com/yuque/0/2024/png/35307424/1732444277761-42890bd8-79e6-4958-bf00-40fa94c983e3.png" srcset="/img/loading.gif" lazyload width="379.2" id="u59a2bd64" class="ne-image"></p></details>
 
+<blockquote>
+<p>1.导入全部(通用)</p>
+</blockquote>
+<p>可以将模块中的所有导出内容整合到一个对象中，</p>
+<p><img src="1732443640826-434b4d2c-4cb3-46ce-a07a-8251131dc957.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>2.命名导入(对应导出方式:分别导出,统一导出)</p>
+<p><img src="1732443933115-a97d93ec-3e8a-489e-af6a-718e6d3fb276.png" srcset="/img/loading.gif" lazyload></p>
+</blockquote>
+<blockquote>
+<p>3.默认导入(对应导出方式:默认导出)</p>
+<p><img src="1732443989604-02785e06-71ff-44cb-be35-a981feeafd4f.png" srcset="/img/loading.gif" lazyload></p>
+</blockquote>
+<blockquote>
+<p>4.命名导入 与 默认导入可以混合使用</p>
+<p><img src="1732444086381-b1df32dd-f894-45ca-8eff-abab0d414f46.png" srcset="/img/loading.gif" lazyload></p>
+</blockquote>
+<blockquote>
+<p>5.「动态导入」(通用)</p>
+<p><img src="1732444201803-f0f85408-4af4-49b2-94f1-113e071985a7.png" srcset="/img/loading.gif" lazyload></p>
+</blockquote>
+<blockquote>
+<p>6.import 可以不接收任何数据</p>
+<p><img src="1732444277761-42890bd8-79e6-4958-bf00-40fa94c983e3.png" srcset="/img/loading.gif" lazyload></p>
+</blockquote>
 <h3 id="BR8jO">6.ESM和CommonJs的交互</h3>
 
 <p>:::tips<br><img src="1732932495501-3ed374b2-a1ee-40bb-a5e7-35d36fb3697f.png" srcset="/img/loading.gif" lazyload></p>
@@ -452,7 +483,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>模块化</div>
-      <div>http://example.com/2024/12/26/模块化/</div>
+      <div>http://example.com/2024/12/23/模块化/</div>
     </div>
     <div class="license-meta">
       
@@ -464,7 +495,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年12月26日</div>
+          <div>2024年12月23日</div>
         </div>
       
       
@@ -496,9 +527,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/02/24/JavaScript%E5%9F%BA%E7%A1%80/" title="JavaScript基础">
+                      <a href="/2024/12/26/%E9%83%A8%E5%88%86%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/" title="部分知识记录">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">JavaScript基础</span>
+                        <span class="hidden-mobile">部分知识记录</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -506,8 +537,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/12/26/%E9%83%A8%E5%88%86%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/" title="部分知识记录">
-                        <span class="hidden-mobile">部分知识记录</span>
+                      <a href="/2024/12/20/CSS%E4%B8%AD%E7%9A%84%E5%BD%A2%E5%8F%98%E3%80%81%E8%BF%87%E6%B8%A1%E3%80%81%E5%8A%A8%E7%94%BB%E5%B1%9E%E6%80%A7/" title="CSS的形变,过渡,动画">
+                        <span class="hidden-mobile">CSS的形变,过渡,动画</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
