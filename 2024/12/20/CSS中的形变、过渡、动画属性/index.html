@@ -19,15 +19,15 @@
   <meta name="author" content="MrZ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="形变-transform CSS transform属性允许对某一个元素进行某些形变,包括旋转，缩放，倾斜或平移等  注意事项，并非所有的盒子都可以进行transform的转换(通常行内级元素不能进行形变) :::infoWarning: Only elements that are positioned by the box model, i.e., all elements whose lay">
+    <meta name="description" content="形变-transform CSS transform属性允许对某一个元素进行某些形变,包括旋转，缩放，倾斜或平移等  注意事项，并非所有的盒子都可以进行transform的转换(通常行内级元素不能进行形变) :::info** Warning: **  Only elements that are positioned by the box model, i.e., all elements wh">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSS的形变,过渡,动画">
 <meta property="og:url" content="http://example.com/2024/12/20/CSS%E4%B8%AD%E7%9A%84%E5%BD%A2%E5%8F%98%E3%80%81%E8%BF%87%E6%B8%A1%E3%80%81%E5%8A%A8%E7%94%BB%E5%B1%9E%E6%80%A7/index.html">
 <meta property="og:site_name" content="MrZ的个人博客">
-<meta property="og:description" content="形变-transform CSS transform属性允许对某一个元素进行某些形变,包括旋转，缩放，倾斜或平移等  注意事项，并非所有的盒子都可以进行transform的转换(通常行内级元素不能进行形变) :::infoWarning: Only elements that are positioned by the box model, i.e., all elements whose lay">
+<meta property="og:description" content="形变-transform CSS transform属性允许对某一个元素进行某些形变,包括旋转，缩放，倾斜或平移等  注意事项，并非所有的盒子都可以进行transform的转换(通常行内级元素不能进行形变) :::info** Warning: **  Only elements that are positioned by the box model, i.e., all elements wh">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-12-20T07:01:28.000Z">
-<meta property="article:modified_time" content="2024-12-22T07:28:16.967Z">
+<meta property="article:modified_time" content="2025-02-28T15:41:01.834Z">
 <meta property="article:author" content="MrZ">
 <meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary_large_image">
@@ -280,18 +280,18 @@
 CSS transform属性允许对某一个元素进行某些形变,包括旋转，缩放，倾斜或平移等
 
 <p>注意事项，并非所有的盒子都可以进行transform的转换(通常行内级元素不能进行形变)</p>
-<p>:::info<br><strong><font style="color:rgb(78, 78, 78);">Warning:</font></strong><font style="color:rgb(78, 78, 78);"> Only elements that are positioned by the box model, i.e., all elements whose layout is managed by the CSS box model, except: </font><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/Inline-level_content"><font style="color:rgb(78, 78, 78);">non-replacing in-row boxes</font></a><font style="color:rgb(78, 78, 78);">, </font><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/col"><font style="color:rgb(78, 78, 78);">table columns</font></a><font style="color:rgb(78, 78, 78);">, and </font><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/colgroup"><font style="color:rgb(78, 78, 78);">table column groups</font></a><font style="color:rgb(78, 78, 78);">.</font><code>transform</code></p>
-<p><strong><font style="color:rgb(78, 78, 78);">警告：</font></strong><font style="color:rgb(78, 78, 78);"> 只能 由盒模型定位的元素，也就是所有布局由 CSS 盒模型管理的元素，除了：</font><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/Inline-level_content"><font style="color:rgb(78, 78, 78);">非替换的行内盒子</font></a><font style="color:rgb(78, 78, 78);">、</font><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/col"><font style="color:rgb(78, 78, 78);">表格列</font></a><font style="color:rgb(78, 78, 78);">和</font><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/colgroup"><font style="color:rgb(78, 78, 78);">表格列组</font></a><font style="color:rgb(78, 78, 78);">。</font><code>transform</code></p>
+<p>:::info<br>** Warning: **  Only elements that are positioned by the box model, i.e., all elements whose layout is managed by the CSS box model, except:  <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/Inline-level_content"> non-replacing in-row boxes </a> ,  <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/col"> table columns </a> , and  <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/colgroup"> table column groups </a> . <code>transform</code></p>
+<p>** 警告： **  只能 由盒模型定位的元素，也就是所有布局由 CSS 盒模型管理的元素，除了： <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/Inline-level_content"> 非替换的行内盒子 </a> 、 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/col"> 表格列 </a> 和 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/colgroup"> 表格列组 </a> 。 <code>transform</code></p>
 <p>:::</p>
 <p>所以，transform对于行内级非替换元素是无效的  比如对span、a元素等:</p>
-<p><font style="color:#DF2A3F;">常见的函数transform function有</font>:</p>
+<p> 常见的函数transform function有 :</p>
 <ul>
 <li>平移:translate(x, y)</li>
 <li>缩放:scale(x,y) </li>
 <li>旋转:rotate(deg)</li>
 <li>倾斜:skew(deg, deg)</li>
 </ul>
-<p><strong><font style="color:#DF2A3F;">transform可以设置多个值</font></strong></p>
+<p>** transform可以设置多个值 **</p>
 <p><code>transform:translate(188px) scale(0.5) rotate(45deg);</code></p>
 <h6 id="BmQiH">translate</h6>
 **平移:translate(x,y)**
@@ -318,7 +318,7 @@ CSS transform属性允许对某一个元素进行某些形变,包括旋转，缩
 <p>值个数</p>
 <ul>
 <li>一个值时，设置x轴上的缩放</li>
-<li>二个值时，设置x轴和y<font style="color:#DF2A3F;"></font>轴上的缩放</li>
+<li>二个值时，设置x轴和y  轴上的缩放</li>
 </ul>
 <p>**值类型:**数字:</p>
 <ul>
@@ -387,7 +387,7 @@ CSS transform属性允许对某一个元素进行某些形变,包括旋转，缩
 <li>持续多久(设置 duration)</li>
 <li>效何动画(定义timing function，比如匀速地或先快后慢)。</li>
 </ul>
-<p><font style="color:#DF2A3F;">transition CSS属性是 </font><strong><font style="color:#DF2A3F;">transition-property, transition-duration, transition-timing-function 和transition-delay</font></strong><font style="color:#DF2A3F;"> 的一个简写属性。</font></p>
+<p> transition CSS属性是  ** transition-property, transition-duration, transition-timing-function 和transition-delay **  的一个简写属性。 </p>
 <p><code>transition-property:all  //动画生效的属性</code></p>
 <p><code>transition-duration:1s  //动画持续的时间</code></p>
 <p><code>transition-timing-function:ease //动画执行曲线</code></p>
@@ -418,8 +418,8 @@ CSS transform属性允许对某一个元素进行某些形变,包括旋转，缩
 **CSS Animation的使用分成两个步骤:**
 
 <ul>
-<li><font style="color:#DF2A3F;">步骤一</font>:使用keyframes定义动画序列(每一帧动画如何执行)</li>
-<li><font style="color:#DF2A3F;">步骤二</font>:配置动画执行的名称、持续时间、动画曲线、延迟、执行次数、方向等等</li>
+<li>步骤一 :使用keyframes定义动画序列(每一帧动画如何执行)</li>
+<li>步骤二 :配置动画执行的名称、持续时间、动画曲线、延迟、执行次数、方向等等</li>
 </ul>
 <p>可以使用@keyframes来定义多个变化状态，并且使用animation-name来声明匹配</p>
 <ul>
@@ -432,13 +432,13 @@ CSS transform属性允许对某一个元素进行某些形变,包括旋转，缩
 <p><code>animation-fill-mode: forwards; //动画停留位置</code></p>
 <p><code>animation-play-state:paused;  //js动态修改</code></p>
 <p><strong>CSS animation 属性是 animation-name, animation-duration, animation-timing-function, animation-delay,animation-iteration-count,animation-direction,animation-fill-mode属性的一个简写属性</strong></p>
-<p><font style="color:#DF2A3F;">animation-name</font>:指定执行哪一个关键帧动画</p>
-<p><font style="color:#DF2A3F;">animation-duration</font>:指定动画的持续时间</p>
-<p><font style="color:#DF2A3F;">animation-timing-function</font>:指定动画的变化曲线</p>
-<p><font style="color:#DF2A3F;">animation-delay</font>:指定延迟执行的时间</p>
-<p><font style="color:#DF2A3F;">animation-iteration-count</font>:指定动画执行的次数，执行infinite表示无限动画</p>
-<p><font style="color:#DF2A3F;">animation-direction</font>:指定方向，常用值normal和reverse</p>
-<p><font style="color:#DF2A3F;">animation-fill-mode</font>:执行动画最后保留哪一个值</p>
+<p> animation-name :指定执行哪一个关键帧动画</p>
+<p> animation-duration :指定动画的持续时间</p>
+<p> animation-timing-function :指定动画的变化曲线</p>
+<p> animation-delay :指定延迟执行的时间</p>
+<p> animation-iteration-count :指定动画执行的次数，执行infinite表示无限动画</p>
+<p> animation-direction :指定方向，常用值normal和reverse</p>
+<p> animation-fill-mode :执行动画最后保留哪一个值</p>
 <ul>
 <li>none:回到没有执行动画的位置</li>
 <li>forwards:动画最后一帧的位置</li>

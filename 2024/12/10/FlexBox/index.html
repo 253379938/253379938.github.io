@@ -19,15 +19,15 @@
   <meta name="author" content="MrZ">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Flexbox 翻译为弹性盒子 弹性盒子是一种用于按行或按列布同元素的一维布局方法  元素可以膨胀以填充额外的空间，收缩以适应更小的空间, 通常我们使用 Flexbox 来进行布局的方案称之为 flex 布局(flexlayout);  两个重要的概念:  开启了 flex 布局的元素叫 flex container flex container 里面的直接子元素叫做 flex item  当 f">
+    <meta name="description" content="Flexbox 翻译为弹性盒子  弹性盒子 是一种用于按行或按列布同元素的一维布局方法  元素可以膨胀以填充额外的空间，收缩以适应更小的空间, 通常我们使用 Flexbox 来进行布局的方案称之为 flex 布局(flexlayout);  两个重要的概念:  开启了 flex 布局的元素叫 flex container flex container 里面的直接子元素叫做 flex item  当">
 <meta property="og:type" content="article">
 <meta property="og:title" content="FlexBox">
 <meta property="og:url" content="http://example.com/2024/12/10/FlexBox/index.html">
 <meta property="og:site_name" content="MrZ的个人博客">
-<meta property="og:description" content="Flexbox 翻译为弹性盒子 弹性盒子是一种用于按行或按列布同元素的一维布局方法  元素可以膨胀以填充额外的空间，收缩以适应更小的空间, 通常我们使用 Flexbox 来进行布局的方案称之为 flex 布局(flexlayout);  两个重要的概念:  开启了 flex 布局的元素叫 flex container flex container 里面的直接子元素叫做 flex item  当 f">
+<meta property="og:description" content="Flexbox 翻译为弹性盒子  弹性盒子 是一种用于按行或按列布同元素的一维布局方法  元素可以膨胀以填充额外的空间，收缩以适应更小的空间, 通常我们使用 Flexbox 来进行布局的方案称之为 flex 布局(flexlayout);  两个重要的概念:  开启了 flex 布局的元素叫 flex container flex container 里面的直接子元素叫做 flex item  当">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-12-10T13:56:52.000Z">
-<meta property="article:modified_time" content="2024-12-21T13:58:35.343Z">
+<meta property="article:modified_time" content="2025-02-28T15:41:21.409Z">
 <meta property="article:author" content="MrZ">
 <meta property="article:tag" content="布局">
 <meta name="twitter:card" content="summary_large_image">
@@ -277,7 +277,7 @@
               <div class="markdown-body">
                 
                 <p><strong>Flexbox 翻译为弹性盒子</strong></p>
-<p><font style="color:#DF2A3F;">弹性盒子</font>是一种用于按行或按列布同元素的一维布局方法</p>
+<p> 弹性盒子 是一种用于按行或按列布同元素的一维布局方法</p>
 <ul>
 <li>元素可以膨胀以填充额外的空间，收缩以适应更小的空间,</li>
 <li>通常我们使用 Flexbox 来进行布局的方案称之为 flex 布局(flexlayout);</li>
@@ -298,9 +298,9 @@
 <li>flex:flex container 以 block-level 形式存在</li>
 <li>inline-flex: flex container 以 inline-level 形式存在</li>
 </ul>
-<h5 id="flex-container-上的-css-属性"><a href="#flex-container-上的-css-属性" class="headerlink" title="flex container 上的 css 属性"></a>flex container 上的 css 属性</h5><h6 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a>flex-direction</h6><p>flex items 默认都是沿着 main axis(<font style="color:#DF2A3F;">主轴</font>)从 main start 开始往 main end 方向排布</p>
-<p><font style="color:#DF2A3F;">flex-direction</font> 决定了 main axis 的方向，有 4 个取值</p>
-<p><font style="color:#DF2A3F;">row</font>(默认值)、row-reverse、<font style="color:#DF2A3F;">column</font>、column-reverse</p>
+<h5 id="flex-container-上的-css-属性"><a href="#flex-container-上的-css-属性" class="headerlink" title="flex container 上的 css 属性"></a>flex container 上的 css 属性</h5><h6 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a>flex-direction</h6><p>flex items 默认都是沿着 main axis( 主轴 )从 main start 开始往 main end 方向排布</p>
+<p> flex-direction  决定了 main axis 的方向，有 4 个取值</p>
+<p> row (默认值)、row-reverse、 column 、column-reverse</p>
 <h6 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h6><p>flex-wrap 决定了 flex container 是单行还是多行</p>
 <ul>
 <li>nowrap(默认):单行</li>
@@ -311,48 +311,48 @@
 <ul>
 <li>顺序任何,并且都可以省略;</li>
 </ul>
-<h6 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a>justify-content</h6><p><strong>justify-content 决定了 flex items 在 main axis 上的**</strong><font style="color:#DF2A3F;">对齐方式</font>**</p>
-<p><font style="color:#DF2A3F;">flex-start</font>(默认值):与 main start 对齐</p>
-<p><font style="color:#DF2A3F;">flex-end</font>:与 main end 对齐</p>
-<p><font style="color:#DF2A3F;">center</font>:居中对齐</p>
-<p><font style="color:#DF2A3F;">space-between</font></p>
+<h6 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a>justify-content</h6><p><strong>justify-content 决定了 flex items 在 main axis 上的**</strong> 对齐方式 **</p>
+<p> flex-start (默认值):与 main start 对齐</p>
+<p> flex-end :与 main end 对齐</p>
+<p> center :居中对齐</p>
+<p> space-between </p>
 <ul>
 <li>flex items 之间的距离相等</li>
 <li>与 main start、main end 两端对齐</li>
 </ul>
-<p><font style="color:#DF2A3F;">space-around</font></p>
+<p> space-around </p>
 <ul>
 <li>flex items 之间的距离相等</li>
 <li>flex items 与 main start、main end 之间的距离是 flex items 之间距离的一半</li>
 </ul>
-<p><font style="color:#DF2A3F;">space-evenly</font></p>
+<p> space-evenly </p>
 <ul>
 <li>flexitems 之间的距离相等</li>
 <li>flex items 与 main start、main end 之间的距离 等于 fex items 之间的距离</li>
 </ul>
-<h6 id="align-item"><a href="#align-item" class="headerlink" title="align-item"></a>align-item</h6><p><strong>align-items 决定了**</strong><font style="color:#DF2A3F;">flex items</font>*<strong>*在**</strong><font style="color:#DF2A3F;"> cross axis(交叉轴)</font>*<strong>* 上的对齐方式</strong></p>
-<p><font style="color:#DF2A3F;">normal</font>:在弹性布局中，效果和 stretch 一样</p>
-<p><font style="color:#DF2A3F;">stretch</font>:当 flexitems 在 cross axis 方向的 size 为 auto 时，会自动拉伸至填充 flex container</p>
-<p><font style="color:#DF2A3F;">flex-start</font>:与 cross start 对齐</p>
-<p><font style="color:#DF2A3F;">flex-end:</font>与 cross end 对齐</p>
-<p><font style="color:#DF2A3F;">center</font>:居中对齐</p>
-<p><font style="color:#DF2A3F;">baseline</font>:与基准线对齐</p>
-<h6 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content<font style="color:#DF2A3F;"></font></h6><p><strong>align-content 决定了**</strong><font style="color:#DF2A3F;">多行 fexitems</font>*<strong>*在 **</strong><font style="color:#DF2A3F;">cross axis</font>*<strong>* 上的对齐方式，用法与 justify-content 相似</strong></p>
+<h6 id="align-item"><a href="#align-item" class="headerlink" title="align-item"></a>align-item</h6><p><strong>align-items 决定了**</strong> flex items *<strong>*在**</strong>  cross axis(交叉轴) *<strong>* 上的对齐方式</strong></p>
+<p> normal :在弹性布局中，效果和 stretch 一样</p>
+<p> stretch :当 flexitems 在 cross axis 方向的 size 为 auto 时，会自动拉伸至填充 flex container</p>
+<p> flex-start :与 cross start 对齐</p>
+<p> flex-end: 与 cross end 对齐</p>
+<p> center :居中对齐</p>
+<p> baseline :与基准线对齐</p>
+<h6 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h6><p><strong>align-content 决定了**</strong> 多行 fexitems *<strong>*在 **</strong> cross axis *<strong>* 上的对齐方式，用法与 justify-content 相似</strong></p>
 <p>stretch(默认值):与 align-items 的 stretch 类似</p>
-<p><font style="color:#DF2A3F;">flex-start</font>:与 cross start 对齐</p>
-<p><font style="color:#DF2A3F;">flex-end</font>:与 cross end 对齐</p>
-<p><font style="color:#DF2A3F;">center</font>:居中对齐</p>
-<p><font style="color:#DF2A3F;">space-between</font>:</p>
+<p> flex-start :与 cross start 对齐</p>
+<p> flex-end :与 cross end 对齐</p>
+<p> center :居中对齐</p>
+<p> space-between :</p>
 <ul>
 <li>flexitems 之间的距离相等</li>
 <li>与 cross start、cross end 两端对齐</li>
 </ul>
-<p><font style="color:#DF2A3F;">space-around</font></p>
+<p> space-around </p>
 <ul>
 <li>√flex items 之间的距离相等</li>
 <li>√flexitems 与 cross start、cross end 之间的距离是 flex items 之间距离的一半</li>
 </ul>
-<p><font style="color:#DF2A3F;">space-evenly:</font></p>
+<p> space-evenly: </p>
 <ul>
 <li>flex items 之间的距离相等</li>
 <li>flexitems 与 cross start、cross end 之间的距离 等于 flex items 之间的距离</li>
