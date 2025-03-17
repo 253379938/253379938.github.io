@@ -27,7 +27,7 @@
 <meta property="og:description" content="认识Vue 认识Vue  Vue  是一款用于构建用户界面的 JavaScript 框架。它基于标准 HTML、CSS 和 JavaScript 构建，并提供了一套声明式的、组件化的编程模型 。  无需构建步骤，渐进式增强静态的 HTML 在任何页面中作为 Web Components 嵌入 单页应用 (SPA) 全栈 &#x2F; 服务端渲染 (SSR) Jamstack &#x2F; 静态站点">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-10T05:24:44.000Z">
-<meta property="article:modified_time" content="2025-03-10T05:36:37.881Z">
+<meta property="article:modified_time" content="2025-03-17T05:54:06.494Z">
 <meta property="article:author" content="MrZ">
 <meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8.6k 字
+          23k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          72 分钟
+          196 分钟
         
       </span>
     
@@ -415,7 +415,7 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs html">import &#123; ref, computed &#125; from &#x27;vue&#x27;;<br>const firstName = ref(&#x27;John&#x27;);<br>const lastName = ref(&#x27;Doe&#x27;);<br>const fullName = computed(() =&gt; firstName.value + &#x27; &#x27; + lastName.value);<br></code></pre></td></tr></table></figure>
 
 <p><strong>核心特点</strong></p>
-<p><strong>1. 缓存机制</strong></p>
+<p>**1. 缓存机制 **</p>
 <ul>
 <li><strong>缓存结果</strong>：只有依赖的响应式数据变化时才会重新计算。</li>
 <li><strong>对比方法（Methods）</strong>：方法每次调用都会执行逻辑。</li>
@@ -802,6 +802,13 @@
 </li>
 </ul>
 <hr>
+<p><strong>自定义组件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;!-- 自定义组件：CustomInput.vue --&gt;<br>&lt;template&gt;<br>  &lt;input :value=&quot;modelValue&quot; @input=&quot;$emit(&#x27;update:modelValue&#x27;, $event.target.value)&quot;&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>export default &#123;<br>  props: [&#x27;modelValue&#x27;],<br>  emits: [&#x27;update:modelValue&#x27;]<br>&#125;;<br>&lt;/script&gt;<br><br>&lt;!-- 使用自定义组件 --&gt;<br>&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;CustomInput v-model=&quot;customInputValue&quot;&gt;&lt;/CustomInput&gt;<br>    &lt;!-- 等价于 --&gt;<br>    &lt;CustomInput :modelValue=&quot;customInputValue&quot; @update:modelValue=&quot;customInputValue=$event&quot;&gt;&lt;/CustomInput&gt;<br>    &lt;p&gt;自定义组件输入的值是：&#123;&#123; customInputValue &#125;&#125;&lt;/p&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>import CustomInput from &#x27;./CustomInput.vue&#x27;;<br><br>export default &#123;<br>  components: &#123;<br>    CustomInput<br>  &#125;,<br>  data() &#123;<br>    return &#123;<br>      customInputValue: &#x27;&#x27;<br>    &#125;;<br>  &#125;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>在自定义组件中，通过 <code>props</code> 接收 <code>modelValue</code> 属性，通过 <code>$emit(&#39;update:modelValue&#39;, ...)</code> 触发 <code>update:modelValue</code> 事件来更新父组件中的值。</li>
+<li>在父组件中，使用 <code>v-model</code> 绑定自定义组件，实际上是将 <code>customInputValue</code> 传递给子组件的 <code>modelValue</code> 属性，并监听子组件的 <code>update:modelValue</code> 事件。</li>
+</ul>
 <h3 id="JKQ3q">组件化开发</h3>
 <h4 id="aSmqm">组件化</h4>
 
@@ -883,7 +890,7 @@
 
 <hr>
 <p><strong>vite创建vue</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plain">#默认安装vue-create,使用vue-create初始化vue项目<br>npm create vue@latest<br>#使用vite初始化项目,指定为vue模板<br>npm create npm create vue@latestvue@latest<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plain">#默认安装vue-create,使用vue-create初始化vue项目<br>npm create vue@latest<br>#使用vite初始化项目,指定为vue模板<br>npm create vite@latest my-vue-app -- --template vue<br></code></pre></td></tr></table></figure>
 
 <ul>
 <li><code>my-vue-project</code> 是你要创建的项目名称，你可以根据需要进行修改。</li>
@@ -1075,18 +1082,800 @@
 </ul>
 <hr>
 <p><strong>Vue 3 的变化</strong></p>
+<p><strong>组合式 API 的钩子</strong></p>
+<pre><code class="hljs">- 钩子名称前加 `on`，如 `onMounted`、`onUpdated`。
+- `beforeCreate` 和 `created` 被 `setup()` 替代。
+</code></pre>
+<hr>
+<h4 id="l0zN5">ref</h4>
+
+<p>在 Vue 中，<code>ref</code> 提供了一种直接访问 DOM 元素或子组件实例的方式。<code>ref</code> 是一个特殊的属性，可以被添加到 DOM 元素或子组件上。当在模板中使用 <code>ref</code> 为元素或组件指定一个名称后，Vue 会在实例的 <code>$refs</code> 对象中创建一个对应的属性，该属性的值就是对应的 DOM 元素或子组件实例。</p>
+<hr>
+<ul>
+<li><strong>操作 DOM 元素</strong>：当你需要直接对 DOM 元素执行一些操作，如获取元素的尺寸、滚动位置，或者调用元素的原生方法（如 <code>focus()</code>、<code>scrollIntoView()</code> 等）时，可以使用 <code>ref</code>。</li>
+<li><strong>调用子组件方法</strong>：在父组件中，如果需要调用子组件的方法或访问子组件的数据，<code>ref</code> 可以帮助你实现这一需求。</li>
+<li><strong>动态生成元素时</strong>，<code>this.$refs</code>（Vue 2）或引用变量（Vue 3）会返回一个数组。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;!-- 为 input 元素添加 ref 属性 --&gt;<br>    &lt;input ref=&quot;myInput&quot; type=&quot;text&quot; /&gt;<br>    &lt;button @click=&quot;focusInput&quot;&gt;聚焦输入框&lt;/button&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>export default &#123;<br>  methods: &#123;<br>    focusInput() &#123;<br>      // 通过 $refs 访问 input 元素并调用 focus 方法<br>      this.$refs.myInput.focus();<br>    &#125;<br>  &#125;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;!-- ChildComponent.vue --&gt;<br>&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;p&gt;&#123;&#123; message &#125;&#125;&lt;/p&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>export default &#123;<br>  data() &#123;<br>    return &#123;<br>      message: &#x27;这是子组件的消息&#x27;<br>    &#125;;<br>  &#125;,<br>  methods: &#123;<br>    showMessage() &#123;<br>      alert(this.message);<br>    &#125;<br>  &#125;<br>&#125;;<br>&lt;/script&gt;<br><br>&lt;!-- ParentComponent.vue --&gt;<br>&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;!-- 为子组件添加 ref 属性 --&gt;<br>    &lt;ChildComponent ref=&quot;childRef&quot; /&gt;<br>    &lt;button @click=&quot;callChildMethod&quot;&gt;调用子组件方法&lt;/button&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>import ChildComponent from &#x27;./ChildComponent.vue&#x27;;<br><br>export default &#123;<br>  components: &#123;<br>    ChildComponent<br>  &#125;,<br>  methods: &#123;<br>    callChildMethod() &#123;<br>      // 通过 $refs 获取组件实例  this.$refs.childRef<br>      // 通过 $refs 访问子组件实例并调用其方法<br>      this.$refs.childRef.showMessage();<br>      // this.$refs.childRef.$el 子组件的元素<br>    &#125;<br>  &#125;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div v-for=&quot;item in list&quot; :key=&quot;item.id&quot; ref=&quot;items&quot;&gt;&#123;&#123; item.text &#125;&#125;&lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br>import &#123; ref, onMounted &#125; from &#x27;vue&#x27;;<br><br>const items = ref([]); // 存储所有 div 元素的引用<br><br>onMounted(() =&gt; &#123;<br>  console.log(items.value); // 所有 div 的 DOM 对象数组<br>&#125;);<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<ul>
+<li>$parent	获取父元素</li>
+<li>$root	获取根元素</li>
+</ul>
+<hr>
+<h4 id="gOrxq">动态组件</h4>
+
+<p>在 Vue 中，<strong>动态组件</strong> 允许根据数据的变化动态切换不同的组件，常用于实现标签页、步骤向导、条件渲染不同 UI 等场景。</p>
+<hr>
+<p><strong>基本用法</strong></p>
+<ul>
+<li>通过 <code>:is</code> 属性绑定组件名或组件选项对象</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;component :is=&quot;currentComponent&quot;&gt;&lt;/component&gt;<br><br> data() &#123;<br>  return &#123;<br>    currentComponent: &#x27;ComponentA&#x27; // 可以是注册的组件名或导入的组件对象<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>修改 <code>currentComponent</code> 的值即可切换组件：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;button @click=&quot;currentComponent = &#x27;ComponentA&#x27;&quot;&gt;显示 A&lt;/button&gt;<br>&lt;button @click=&quot;currentComponent = &#x27;ComponentB&#x27;&quot;&gt;显示 B&lt;/button&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>keep-alive</strong></p>
+<p>在切换动态组件时，默认情况下，组件会被销毁并重新创建，这可能会导致一些状态丢失。为了避免这种情况，可以使用 <code>&lt;keep-alive&gt;</code> 组件来缓存动态组件。</p>
+<ul>
+<li><code>&lt;keep-alive&gt;</code> 是 Vue 提供的一个内置组件，用于缓存包裹在其中的动态组件。</li>
+<li>当组件被 <code>&lt;keep-alive&gt;</code> 包裹时，切换组件时不会销毁组件实例，而是将其缓存起来，下次再显示时直接从缓存中取出，从而保留组件的状态。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;keep-alive&gt;<br>  &lt;component :is=&quot;currentComponent&quot;&gt;&lt;/component&gt;<br>&lt;/keep-alive&gt;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>**include**</code>：只缓存指定组件（组件名或正则）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;keep-alive :include=&quot;[&#x27;ComponentA&#x27;, /ComponentB/]&quot; :max=&quot;3&quot;&gt;<br>  &lt;component :is=&quot;currentComponent&quot;&gt;&lt;/component&gt;<br>&lt;/keep-alive&gt;<br><br>//组件名来自子组件导出时的name<br>  export default &#123;<br>   name:&#x27;ComponentA&#x27;<br>  data() &#123;<br>    return &#123;<br>      currentComponent: &#x27;ComponentA&#x27;<br>    &#125;;<br>  &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>**exclude**</code>：排除指定组件</li>
+<li><code>**max**</code>：最大缓存实例数（LRU 策略）</li>
+</ul>
+<hr>
+<ul>
+<li><strong>生命周期钩子</strong>：被 <code>&lt;keep-alive&gt;</code> 包裹的组件会有额外的生命周期钩子 <code>activated</code> 和 <code>deactivated</code>，分别在组件被激活和失活时触发。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;<br>    这是组件 A<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>export default &#123;<br>  activated() &#123;<br>    console.log(&#x27;组件 A 被激活&#x27;);<br>  &#125;,<br>  deactivated() &#123;<br>    console.log(&#x27;组件 A 失活&#x27;);<br>  &#125;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<ul>
+<li>结合 <code>defineAsyncComponent</code>（Vue 3）实现按需加载</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs vue">//使用异步组件加载会进行分包<br>const ComponentA = defineAsyncComponent(() =&gt; <br>  import(&#x27;./ComponentA.vue&#x27;)<br>);<br><br>  data() &#123;<br>  return &#123;<br>    currentComponent: ComponentA // 直接绑定组件对象<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;component :is=&quot;currentComponent&quot; v-if=&quot;isComponentLoaded&quot;&gt;&lt;/component&gt;<br>//确保异步组件加载完成后再渲染<br>data() &#123;<br>  return &#123;<br>    currentComponent: null,<br>    isComponentLoaded: false<br>  &#125;<br>&#125;,<br>async created() &#123;<br>  this.currentComponent = await import(&#x27;./AsyncComponent.vue&#x27;);<br>  this.isComponentLoaded = true;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="bZ7jd">组件绑定v-model</h4>
+
+<p><strong>基本用法</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;!-- 自定义组件：CustomInput.vue --&gt;<br>&lt;template&gt;<br>  &lt;input :value=&quot;modelValue&quot; @input=&quot;$emit(&#x27;update:modelValue&#x27;, $event.target.value)&quot;&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>export default &#123;<br>  props: [&#x27;modelValue&#x27;],<br>  emits: [&#x27;update:modelValue&#x27;]<br>&#125;;<br>&lt;/script&gt;<br><br>&lt;!-- 使用自定义组件 --&gt;<br>&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;CustomInput v-model=&quot;customInputValue&quot;&gt;&lt;/CustomInput&gt;<br>    &lt;!-- 等价于 --&gt;<br>    &lt;CustomInput :modelValue=&quot;customInputValue&quot; @update:modelValue=&quot;customInputValue=$event&quot;&gt;&lt;/CustomInput&gt;<br>    &lt;p&gt;自定义组件输入的值是：&#123;&#123; customInputValue &#125;&#125;&lt;/p&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>import CustomInput from &#x27;./CustomInput.vue&#x27;;<br><br>export default &#123;<br>  components: &#123;<br>    CustomInput<br>  &#125;,<br>  data() &#123;<br>    return &#123;<br>      customInputValue: &#x27;&#x27;<br>    &#125;;<br>  &#125;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>在自定义组件中，通过 <code>props</code> 接收 <code>modelValue</code> 属性，通过 <code>$emit(&#39;update:modelValue&#39;, ...)</code> 触发 <code>update:modelValue</code> 事件来更新父组件中的值。</li>
+<li>在父组件中，使用 <code>v-model</code> 绑定自定义组件，实际上是将 <code>customInputValue</code> 传递给子组件的 <code>modelValue</code> 属性，并监听子组件的 <code>update:modelValue</code> 事件。</li>
+</ul>
+<hr>
+<p><strong>自定义 <strong><code>**v-model**</code></strong> 的参数</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;!-- 子组件：CustomSelect.vue --&gt;<br>&lt;template&gt;<br>  &lt;select <br>    :value=&quot;selected&quot;<br>    @change=&quot;$emit(&#x27;update:selected&#x27;, $event.target.value)&quot;<br>  &gt;<br>    &lt;option value=&quot;A&quot;&gt;选项A&lt;/option&gt;<br>    &lt;option value=&quot;B&quot;&gt;选项B&lt;/option&gt;<br>  &lt;/select&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>export default &#123;<br>  props: &#123;<br>    selected: &#123;<br>      type: String,<br>      default: &#x27;A&#x27;<br>    &#125;<br>  &#125;<br>&#125;;<br>&lt;/script&gt;<br><br>&lt;!-- 父组件使用自定义组件 --&gt;<br>&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;!-- 使用自定义参数 `selected` --&gt;<br>    &lt;CustomSelect v-model:selected=&quot;parentOption&quot; /&gt;<br>    &lt;p&gt;父组件选项：&#123;&#123; parentOption &#125;&#125;&lt;/p&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<h4 id="Fd01y">混入Mixin</h4>
+
+<p>混入（mixin）提供了一种灵活的方式，来分发组件中的可复用功能。一个混入对象可以包含任意组件选项，例如 <code>data</code>、<code>methods</code>、<code>computed</code> 等。当一个组件使用混入对象时，混入对象的选项会被合并到组件本身的选项中。	</p>
+<hr>
+<p><strong>全局混入</strong></p>
+<p>全局混入会影响每一个之后创建的 Vue 实例。使用 <code>Vue.mixin()</code> 来全局注册混入对象。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs vue">// main.js<br>import Vue from &#x27;vue&#x27;;<br>import App from &#x27;./App.vue&#x27;;<br><br>// 定义混入对象<br>const myMixin = &#123;<br>  created() &#123;<br>    console.log(&#x27;混入对象的 created 钩子被调用&#x27;);<br>  &#125;<br>&#125;;<br><br>// 全局注册混入<br>Vue.mixin(myMixin);<br><br>new Vue(&#123;<br>  render: h =&gt; h(App)<br>&#125;).$mount(&#x27;#app&#x27;);<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>局部混入</strong></p>
+<p>局部混入只会影响使用该混入对象的组件。在组件中使用 <code>mixins</code> 选项来引入混入对象。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;p&gt;&#123;&#123; message &#125;&#125;&lt;/p&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>// 定义混入对象<br>const myMixin = &#123;<br>  data() &#123;<br>    return &#123;<br>      message: &#x27;这是混入对象的数据&#x27;<br>    &#125;;<br>  &#125;,<br>  methods: &#123;<br>    showMessage() &#123;<br>      console.log(this.message);<br>    &#125;<br>  &#125;,<br>  created() &#123;<br>    this.showMessage();<br>  &#125;<br>&#125;;<br><br>export default &#123;<br>  // 局部引入混入对象<br>  mixins: [myMixin]<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>当组件和混入对象包含同名选项时，会根据选项类型进行不同的合并规则：</strong></p>
+<ul>
+<li>如果数据对象在组件和混入对象中都存在，它们会进行递归合并，并且组件的数据会覆盖混入对象的数据</li>
+<li>同名的钩子函数会被合并成一个数组，因此都会被调用。混入对象的钩子函数会在组件自身钩子函数之前调用。</li>
+<li>值为对象的选项，如 <code>methods</code>、<code>computed</code>、<code>watch</code> 等，会进行合并。如果键名冲突，组件的选项会覆盖混入对象的选项。</li>
+</ul>
+<h3 id="wXDB1">组合式 API (Composition API)</h3>
+
+<p>Vue 3 引入了组合式 API（Composition API），它是一种新的组织和复用代码的方式，相较于选项式 API 提供了更灵活、更高效的代码组织方式。</p>
+<p>组合式 API 允许你使用函数来组织逻辑，而不是像选项式 API 那样将逻辑分散在不同的选项（如 <code>data</code>、<code>methods</code>、<code>computed</code> 等）中。主要通过 <code>setup</code> 函数来使用组合式 API，<code>setup</code> 函数在组件初始化时执行，在 <code>data</code> 和 <code>props</code> 被解析之后，<code>beforeCreate</code> 钩子之前调用。</p>
+<h4 id="R6efM">setup函数</h4>
+
+<p><code>**setup**</code>** 函数**</p>
+<p><code>setup</code>函数是一个新的组件选项，它在组件初始化时，<code>props</code>解析之后，<code>data</code>和<code>computed</code>等选项之前执行。该函数接收两个参数：<code>props</code>和<code>context</code>，并且可以返回一个对象，对象中的属性和方法可以在模板中使用。</p>
+<ul>
+<li><strong>注意</strong>：<code>setup</code> 内无法访问 <code>this</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs vue">export default &#123;<br>  setup(props, context) &#123;<br>    // 逻辑代码<br>    return &#123; /* 暴露给模板的数据和方法 */ &#125;;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><code>props</code>是一个响应式对象，包含了父组件传递给子组件的所有属性。需要注意的是，不能使用 ES6 解构，因为解构会破坏<code>props</code>的响应式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;p&gt;&#123;&#123; title &#125;&#125;&lt;/p&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>export default &#123;<br>  props: &#123;<br>    title: String<br>  &#125;,<br>  setup(props) &#123;<br>    // 直接使用props对象<br>    console.log(props.title);<br><br>    return &#123;&#125;;<br>  &#125;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><code>context</code>是一个普通对象，包含了三个属性：<code>attrs</code>、<code>slots</code>和<code>emit</code>。</p>
+<ul>
+<li><code>attrs</code>：包含了所有未在<code>props</code>选项中声明的属性。</li>
+<li><code>slots</code>：用于访问组件的插槽内容。</li>
+<li><code>emit</code>：用于触发自定义事件。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;button @click=&quot;handleClick&quot;&gt;Click me&lt;/button&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>export default &#123;<br>  setup(props, context) &#123;<br>    const handleClick = () =&gt; &#123;<br>      // 触发自定义事件<br>      context.emit(&#x27;custom-event&#x27;);<br>    &#125;;<br><br>    return &#123;<br>      handleClick<br>    &#125;;<br>  &#125;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><code>setup</code>函数可以返回一个对象，对象中的属性和方法可以在模板中直接使用。此外，<code>setup</code>函数还可以返回一个渲染函数，用于手动创建虚拟 DOM。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;!-- 此模板不会被使用，因为返回了渲染函数 --&gt;<br>  &lt;div&gt;&lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>import &#123; h &#125; from &#x27;vue&#x27;;<br><br>export default &#123;<br>  setup() &#123;<br>    return () =&gt; h(&#x27;div&#x27;, &#x27;This is a render function&#x27;);<br>  &#125;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<ul>
+<li><code>**this**</code><strong>的使用</strong>：在<code>setup</code>函数中，<code>this</code>不会指向当前组件实例，因此不能使用<code>this</code>来访问组件的属性和方法。</li>
+<li><strong>执行时机</strong>：<code>setup</code>函数在组件实例初始化之前执行，因此不能在<code>setup</code>函数中访问<code>data</code>、<code>computed</code>等选项。</li>
+<li><strong>生命周期钩子</strong>：如果需要使用生命周期钩子，可以在<code>setup</code>函数中使用组合式 API 提供的生命周期函数，如<code>onMounted</code>、<code>onUpdated</code>等。</li>
+</ul>
+<h4 id="CGeL0">响应式数据</h4>
+<h5 id="IuCiS">reactive 函数</h5>
+
+<p><code>reactive</code> 函数用于创建一个响应式的对象或数组。它基于 ES6 的 Proxy 实现，能够深度监听对象属性的变化。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;p&gt;&#123;&#123; state.count &#125;&#125;&lt;/p&gt;<br>        &lt;button @click=&quot;increment&quot;&gt;Increment&lt;/button&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br>&lt;script&gt;<br>import &#123; reactive &#125; from &#x27;vue&#x27;<br>export default &#123;<br>    setup() &#123;<br>        const state = reactive(&#123;<br>            count: 0<br>        &#125;);<br>        const increment = () =&gt; &#123;<br>            state.count++;<br>        &#125;;<br>        return &#123;<br>            state, increment<br>        &#125;<br>    &#125;<br>&#125;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>只能用于对象和数组</strong>：<code>reactive</code> 只能处理对象和数组，不能处理基本数据类型（如 <code>number</code>、<code>string</code>、<code>boolean</code> 等）。</li>
+<li><strong>深层响应式</strong>：<code>reactive</code> 会递归地将对象的所有属性转换为响应式的，因此可以深度监听对象的变化。</li>
+</ul>
+<h5 id="GVtZc">ref 函数</h5>
+
+<p><code>ref</code> 函数用于创建一个响应式的引用，它可以处理基本数据类型和对象。<code>ref</code> 创建的对象有一个 <code>.value</code> 属性，用于访问和修改其内部的值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;p&gt;&#123;&#123; count &#125;&#125;&lt;/p&gt;<br>        &lt;button @click=&quot;increment&quot;&gt;Increment&lt;/button&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br>&lt;script&gt;<br>import &#123; reactive,ref &#125; from &#x27;vue&#x27;<br>export default &#123;<br>    setup() &#123;<br>        const count = ref(0);<br><br>        const increment = () =&gt; &#123;<br>            count.value++;<br>        &#125;;<br>        return &#123;<br>            count, increment<br>        &#125;<br>    &#125;<br><br>&#125;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>在模板中自动解包</strong>：在模板中使用 <code>ref</code> 对象时，不需要手动访问 <code>.value</code> 属性，Vue 会自动解包。但在 JavaScript 代码中，需要使用 <code>.value</code> 来访问和修改其值。</li>
+<li><strong>可以处理基本数据类型</strong>：<code>ref</code> 可以处理基本数据类型，这是它与 <code>reactive</code> 的主要区别之一。</li>
+</ul>
+<h5 id="O3GrY">响应式原理</h5>
+
+<p>**Vue 3 使用 Proxy 替代 Vue 2 的 **<code>**Object.defineProperty**</code><strong>，解决了以下问题：</strong></p>
 <ol>
-<li><strong>组合式 API 的钩子</strong><ul>
-<li>钩子名称前加 <code>on</code>，如 <code>onMounted</code>、<code>onUpdated</code>。</li>
-<li><code>beforeCreate</code> 和 <code>created</code> 被 <code>setup()</code> 替代。</li>
-</ul>
-</li>
-<li><strong>新增钩子</strong><ul>
-<li><code>onRenderTracked</code> &#x2F; <code>onRenderTriggered</code>：用于调试渲染依赖。</li>
-</ul>
-</li>
+<li><strong>对数组的深度监听</strong>：无需重写数组方法（如 <code>push</code>, <code>pop</code>）。</li>
+<li><strong>动态新增&#x2F;删除属性</strong>：直接通过 <code>obj.newProp = value</code> 即可触发响应。</li>
+<li><strong>更细粒度的依赖追踪</strong>：基于属性的依赖收集，而非整个对象。</li>
+</ol>
+<p><strong>响应式流程：</strong></p>
+<ol>
+<li><strong>依赖收集</strong>：当访问响应式数据时，触发 <code>getter</code>，将当前副作用（<code>effect</code>）收集为依赖。</li>
+<li><strong>触发更新</strong>：当修改数据时，触发 <code>setter</code>，通知所有关联的副作用重新执行。</li>
+</ol>
+<h5 id="Ie8CF">toRef和 toRefs </h5>
+
+<p><code>**t**oRef</code> 和 <code>toRefs</code> 用于从响应式对象中创建单独的响应式引用。</p>
+<h6 id="u8mo9">`toRef`</h6>
+
+<p><code>toRef</code> 用于创建一个指向响应式对象某个属性的单独引用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;p&gt;&#123;&#123; countRef &#125;&#125;&lt;/p&gt;<br>    &lt;button @click=&quot;increment&quot;&gt;Increment&lt;/button&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br>import &#123; reactive, toRef &#125; from &#x27;vue&#x27;;<br><br>const state = reactive(&#123;<br>  count: 0<br>&#125;);<br><br>// 创建一个指向 state.count 的单独引用<br>const countRef = toRef(state, &#x27;count&#x27;);<br><br>const increment = () =&gt; &#123;<br>  countRef.value++;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<p>在上述代码中，我们使用 <code>toRef</code> 函数创建了一个指向 <code>state.count</code> 的单独引用 <code>countRef</code>，修改 <code>countRef.value</code> 会同步更新 <code>state.count</code> 的值。</p>
+<h6 id="Sa3Pq">`toRefs`</h6>
+
+<p><code>toRefs</code> 用于将一个响应式对象的所有属性转换为单独的响应式引用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;p&gt;&#123;&#123; count &#125;&#125;&lt;/p&gt;<br>    &lt;button @click=&quot;increment&quot;&gt;Increment&lt;/button&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br>import &#123; reactive, toRefs &#125; from &#x27;vue&#x27;;<br><br>const state = reactive(&#123;<br>  count: 0<br>&#125;);<br><br>// 将 state 的所有属性转换为单独的响应式引用<br>const &#123; count &#125; = toRefs(state);<br><br>const increment = () =&gt; &#123;<br>  count.value++;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<p>在上述代码中，我们使用 <code>toRefs</code> 函数将 <code>state</code> 的所有属性转换为单独的响应式引用，然后通过解构赋值获取 <code>count</code> 引用，修改 <code>count.value</code> 会同步更新 <code>state.count</code> 的值。</p>
+<h5 id="JxGDl">readonly函数</h5>
+
+<p><code>readonly</code> 函数用于创建一个只读的响应式对象，对该对象的修改操作会被忽略，并且不会触发更新。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;p&gt;&#123;&#123; readonlyState.count &#125;&#125;&lt;/p&gt;<br>    &lt;button @click=&quot;tryUpdate&quot;&gt;Try Update&lt;/button&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br>import &#123; reactive, readonly &#125; from &#x27;vue&#x27;;<br><br>const state = reactive(&#123;<br>  count: 0<br>&#125;);<br><br>// 创建一个只读的响应式对象<br>const readonlyState = readonly(state);<br><br>const tryUpdate = () =&gt; &#123;<br>  readonlyState.count++; // 这行代码不会生效<br>  console.log(readonlyState.count); // 仍然输出 0<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<p>在上述代码中，我们使用 <code>readonly</code> 函数创建了一个只读的响应式对象 <code>readonlyState</code>，尝试修改 <code>readonlyState.count</code> 的值不会生效。</p>
+<h5 id="hXkOf">单项数据流</h5>
+
+<p>单项数据流指的是数据的流动是单向的，数据的状态只能通过一个明确的方向进行传递和修改。在 Vue 应用中，数据通常是从父组件流向子组件，子组件不能直接修改从父组件接收到的数据，而是应该通过触发自定义事件通知父组件进行修改。</p>
+<hr>
+<p>Vue 的单项数据流基于组件化的架构实现。每个组件都有自己独立的状态（数据），父组件可以通过 <code>props</code> 向子组件传递数据。当父组件的数据发生变化时，传递给子组件的 <code>props</code> 也会相应更新，从而触发子组件的重新渲染。但子组件对 <code>props</code> 的修改不会直接影响父组件的数据，这样就保证了数据流动的单向性。</p>
+<hr>
+<ol>
+<li><strong>避免数据混乱</strong><br>如果子组件可以直接修改父组件数据，多个子组件可能同时修改同一数据源，导致状态难以追踪。</li>
+<li><strong>明确数据所有权</strong><br>数据由父组件管理，子组件仅负责展示或触发操作，职责清晰。</li>
+<li><strong>提高可维护性</strong><br>数据流向单一，调试时更容易定位问题。</li>
 </ol>
 <hr>
+<p>Vue 的单向数据流通过 <code>props</code> 和 <code>emit</code> 的强制约束，确保了组件之间的数据流动清晰可控。遵循这一原则可以大幅提升代码的可维护性，减少不可预知的副作用。在复杂场景中，合理使用状态管理工具（如 Pinia）是更好的选择。</p>
+<h4 id="ufRV7">computed</h4>
+
+<p>在 Vue 3 的组合式 API 中，<code>computed</code> 函数从 <code>vue</code> 包中导入，它接收一个 getter 函数作为参数，返回一个只读的响应式引用对象。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;p&gt;First name: &#123;&#123; firstName &#125;&#125;&lt;/p&gt;<br>    &lt;p&gt;Last name: &#123;&#123; lastName &#125;&#125;&lt;/p&gt;<br>    &lt;p&gt;Full name: &#123;&#123; fullName &#125;&#125;&lt;/p&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>import &#123; ref, computed &#125; from &#x27;vue&#x27;;<br><br>export default &#123;<br>  setup() &#123;<br>    // 使用 ref 创建响应式数据<br>    const firstName = ref(&#x27;John&#x27;);<br>    const lastName = ref(&#x27;Doe&#x27;);<br><br>    // 使用 computed 创建计算属性<br>    const fullName = computed(() =&gt; &#123;<br>      return `$&#123;firstName.value&#125; $&#123;lastName.value&#125;`;<br>    &#125;);<br><br>    return &#123;<br>      firstName,<br>      lastName,<br>      fullName<br>    &#125;;<br>  &#125;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<p><code>fullName</code> 是一个计算属性，它依赖于 <code>firstName</code> 和 <code>lastName</code>。当 <code>firstName</code> 或 <code>lastName</code> 的值发生变化时，<code>fullName</code> 会自动更新。</p>
+<hr>
+<p><code>computed</code> 不仅可以只有一个 getter 函数，还可以传入一个包含 <code>get</code> 和 <code>set</code> 方法的对象，从而创建一个可读写的计算属性。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;p&gt;First name: &#123;&#123; firstName &#125;&#125;&lt;/p&gt;<br>    &lt;p&gt;Last name: &#123;&#123; lastName &#125;&#125;&lt;/p&gt;<br>    &lt;p&gt;Full name: &#123;&#123; fullName &#125;&#125;&lt;/p&gt;<br>    &lt;button @click=&quot;updateFullName&quot;&gt;Update Full Name&lt;/button&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>import &#123; ref, computed &#125; from &#x27;vue&#x27;;<br><br>export default &#123;<br>  setup() &#123;<br>    const firstName = ref(&#x27;John&#x27;);<br>    const lastName = ref(&#x27;Doe&#x27;);<br><br>    const fullName = computed(&#123;<br>      get() &#123;<br>        return `$&#123;firstName.value&#125; $&#123;lastName.value&#125;`;<br>      &#125;,<br>      set(newValue) &#123;<br>        const names = newValue.split(&#x27; &#x27;);<br>        firstName.value = names[0];<br>        lastName.value = names[1];<br>      &#125;<br>    &#125;);<br><br>    const updateFullName = () =&gt; &#123;<br>      fullName.value = &#x27;Jane Smith&#x27;;<br>    &#125;;<br><br>    return &#123;<br>      firstName,<br>      lastName,<br>      fullName,<br>      updateFullName<br>    &#125;;<br>  &#125;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<p>当调用 <code>fullName.value = &#39;Jane Smith&#39;</code> 时，会触发 <code>set</code> 方法，更新 <code>firstName</code> 和 <code>lastName</code> 的值。</p>
+<hr>
+<h4 id="lT3LU">watch</h4>
+
+<p><code>watch</code> 函数用于监听一个或多个响应式数据源的变化，并在数据变化时执行回调函数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;p&gt;&#123;&#123; count &#125;&#125;&lt;/p&gt;<br>    &lt;button @click=&quot;increment&quot;&gt;Increment&lt;/button&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>import &#123; ref, watch &#125; from &#x27;vue&#x27;;<br><br>export default &#123;<br>  setup() &#123;<br>    const count = ref(0);<br>    const increment = () =&gt; &#123;<br>      count.value++;<br>    &#125;;<br><br>    // 监听 count 的变化<br>    watch(count, (newValue, oldValue) =&gt; &#123;<br>      console.log(`Count changed from $&#123;oldValue&#125; to $&#123;newValue&#125;`);<br>    &#125;);<br><br>    return &#123;<br>      count,<br>      increment<br>    &#125;;<br>  &#125;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script&gt;<br>import &#123; ref, watch &#125; from &#x27;vue&#x27;;<br><br>export default &#123;<br>  setup() &#123;<br>    const firstName = ref(&#x27;John&#x27;);<br>    const lastName = ref(&#x27;Doe&#x27;);<br><br>    // 监听多个数据源<br>    watch([firstName, lastName], ([newFirstName, newLastName], [oldFirstName, oldLastName]) =&gt; &#123;<br>      console.log(`Name changed from $&#123;oldFirstName&#125; $&#123;oldLastName&#125; to $&#123;newFirstName&#125; $&#123;newLastName&#125;`);<br>    &#125;);<br><br>    return &#123;<br>      firstName,<br>      lastName<br>    &#125;;<br>  &#125;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>immediate</code>：设置为 <code>true</code> 时，回调函数会在 <code>watch</code> 被创建时立即执行一次。</li>
+<li><code>deep</code>：设置为 <code>true</code> 时，会深度监听对象内部属性的变化。</li>
+</ul>
+<hr>
+<p><code>watchEffect</code> 会立即执行传入的回调函数，并响应式地追踪回调函数中使用的所有响应式数据源，当这些数据源中的任何一个发生变化时，回调函数会再次执行。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>      &lt;p&gt;&#123;&#123; count &#125;&#125;&lt;/p&gt;<br>      &lt;button @click=&quot;increment&quot;&gt;Increment&lt;/button&gt;<br>    &lt;/div&gt;<br>  &lt;/template&gt;<br>  <br>  &lt;script&gt;<br>  import &#123; ref, watchEffect &#125; from &#x27;vue&#x27;;<br>  <br>  export default &#123;<br>    setup() &#123;<br>      const count = ref(0);<br>      const increment = () =&gt; &#123;<br>        count.value++;<br>      &#125;;<br>  <br>      // 立即执行回调函数，并追踪 count 的变化<br>      watchEffect(() =&gt; &#123;<br>        console.log(`Count is now $&#123;count.value&#125;`);<br>      &#125;);<br>  <br>      return &#123;<br>        count,<br>        increment<br>      &#125;;<br>    &#125;<br>  &#125;;<br>  &lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<p><code>watchEffect</code> 会返回一个停止监听的函数，调用该函数可以停止对响应式数据源的监听。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script&gt;<br>import &#123; ref, watchEffect &#125; from &#x27;vue&#x27;;<br><br>export default &#123;<br>  setup() &#123;<br>    const count = ref(0);<br><br>    const stop = watchEffect(() =&gt; &#123;<br>      console.log(`Count is now $&#123;count.value&#125;`);<br>    &#125;);<br><br>    // 停止监听<br>    stop();<br><br>    return &#123;<br>      count<br>    &#125;;<br>  &#125;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><code>**watch**</code>** 和 <strong><code>**watchEffect**</code></strong> 的区别**</p>
+<ul>
+<li><strong>触发时机</strong>：<code>watch</code> 默认不会立即执行回调函数，除非设置了 <code>immediate: true</code>；而 <code>watchEffect</code> 会立即执行回调函数。</li>
+<li><strong>依赖追踪方式</strong>：<code>watch</code> 需要明确指定要监听的数据源；而 <code>watchEffect</code> 会自动追踪回调函数中使用的所有响应式数据源。</li>
+<li><strong>回调参数</strong>：<code>watch</code> 的回调函数会接收新值和旧值作为参数；而 <code>watchEffect</code> 的回调函数不接收任何参数。</li>
+</ul>
+<h4 id="fytVv">setup语法糖</h4>
+
+<p>Vue 3 的 <code>setup</code> 语法糖（即 <code>&lt;script setup&gt;</code>）是 Composition API 的一种更简洁的写法，它让组件的逻辑组织更加灵活，同时减少了模板代码。</p>
+<ul>
+<li>在单文件组件（SFC）中，通过 <code>&lt;script setup&gt;</code> 替代传统的 <code>&lt;script&gt;</code>，可以直接编写 Composition API 代码，无需显式导出 <code>setup</code> 函数。</li>
+<li>使用 <code>ref</code> 或 <code>reactive</code> 声明响应式数据，无需手动返回。</li>
+<li>导入的子组件无需在 <code>components</code> 选项中注册，直接在模板中使用。</li>
+<li>使用 <code>defineProps</code> 和 <code>defineEmits</code> 定义属性和事件：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script setup&gt;<br>// 定义 Props<br>const props = defineProps(&#123;<br>  title: String,<br>  value: &#123; type: Number, default: 0 &#125;<br>&#125;);<br><br>// 定义 Emits<br>const emit = defineEmits([&#x27;update&#x27;]);<br><br>const handleClick = () =&gt; &#123;<br>  emit(&#x27;update&#x27;, props.value + 1);<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>通过 <code>defineExpose</code> 暴露子组件的属性或方法，供父组件通过 <code>ref</code> 调用：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs vue">//子组件<br>&lt;script setup&gt;<br>const childMethod = () =&gt; console.log(&#x27;Child method called&#x27;);<br>defineExpose(&#123; childMethod &#125;);<br>&lt;/script&gt;<br><br>//父组件<br>&lt;template&gt;<br>  &lt;ChildComponent ref=&quot;childRef&quot; /&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br>import &#123; ref &#125; from &#x27;vue&#x27;;<br>const childRef = ref(null);<br><br>const callChildMethod = () =&gt; &#123;<br>  childRef.value.childMethod(); // 调用子组件方法<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="lovk5">Vue Router</h3>
+
+<p>Vue Router是Vue.js官方的路由管理器，用于构建单页面应用（SPA）。它允许通过不同的URL映射到不同的组件，实现页面间的无刷新切换。</p>
+<h4 id="oRs3B">基本使用</h4>
+
+<p><strong>安装</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vue">npm install vue-router<br># 或者<br>yarn add vue-router<br></code></pre></td></tr></table></figure>
+
+<ol>
+<li>首先，你需要创建一个路由实例，并定义路由配置。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs plain">// src/router/index.js<br>import &#123; createRouter, createWebHistory &#125; from &#x27;vue-router&#x27;;<br>import Home from &#x27;../views/Home.vue&#x27;;<br>import About from &#x27;../views/About.vue&#x27;;<br><br>const routes = [<br>  &#123;<br>    path: &#x27;/&#x27;,<br>    name: &#x27;Home&#x27;,<br>    component: Home<br>  &#125;,<br>  &#123;<br>    path: &#x27;/about&#x27;,<br>    name: &#x27;About&#x27;,<br>    component: About<br>  &#125;<br>];<br><br>const router = createRouter(&#123;<br>  history: createWebHistory(),<br>  routes<br>&#125;);<br><br>export default router;<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>在 <code>main.js</code> 中引入并使用路由实例</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plain">// src/main.js<br>import &#123; createApp &#125; from &#x27;vue&#x27;;<br>import App from &#x27;./App.vue&#x27;;<br>import router from &#x27;./router&#x27;;<br><br>const app = createApp(App);<br>app.use(router);<br>app.mount(&#x27;#app&#x27;);<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在 <code>App.vue</code> 中使用 <code>&lt;router-link&gt;</code> 组件来创建导航链接，使用 <code>&lt;router-view&gt;</code> 组件来显示当前路由对应的组件</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;router-link to=&quot;/&quot;&gt;Home&lt;/router-link&gt;<br>    &lt;router-link to=&quot;/about&quot;&gt;About&lt;/router-link&gt;<br>    &lt;router-view&gt;&lt;/router-view&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<h4 id="eKYHC">路由配置</h4>
+
+<p><code>**path**</code></p>
+<p>路由的路径，用于匹配 URL。可以使用动态路径参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plain">&#123;<br>  path: &#x27;/user/:id&#x27;,<br>  name: &#x27;User&#x27;,<br>  component: () =&gt; import(&#x27;../views/User.vue&#x27;)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><code>**name**</code></p>
+<p>路由的名称，用于通过名称来导航	</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">&lt;router-link :to=&quot;&#123; name: &#x27;User&#x27;, params: &#123; id: 1 &#125; &#125;&quot;&gt;User 1&lt;/router-link&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><code>**component**</code></p>
+<p>路由对应的组件。可以使用静态导入或动态导入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs plain">// 静态导入<br>import User from &#x27;../views/User.vue&#x27;;<br>&#123;<br>  path: &#x27;/user&#x27;,<br>  component: User<br>&#125;<br><br>// 动态导入（懒加载）<br>&#123;<br>  path: &#x27;/user&#x27;,<br>  component: () =&gt; import(&#x27;../views/User.vue&#x27;)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>使用路由懒加载 , 提升首屏加载速度，动态导入组件(动态导入,会进行分包处理)</p>
+<hr>
+<p><code>**redirect**</code></p>
+<p>用于重定向路由</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plain">&#123;<br>  path: &#x27;/&#x27;,<br>  redirect: &#x27;/home&#x27;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><code>meta</code> </p>
+<p>添加路由元数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plain">&#123;<br>  path: &#x27;/dashboard&#x27;,<br>  component: Dashboard,<br>  meta: &#123; requiresAuth: true, title: &#x27;控制台&#x27; &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>to属性</strong></p>
+<p>路由跳转链接,可以是oath,也可以是对象</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">&lt;router-link :to=&quot;&#123; name:&#x27;User&#x27;, path:&#x27;/user&#x27;,params: &#123; id: 1 &#125; &#125;&quot;&gt;User 1&lt;/router-link&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>replace属性</strong></p>
+<p>路由跳转链接配置,调用router.replace,不会记录历史,直接替换</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plain">// 调用router.replace,不会记录历史,直接替换(一般不使用)<br>&lt;router-link to=&quot;/home&quot; replace&gt;Home&lt;/router-link&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>active-class属性</strong></p>
+<p>设置激活元素后应用的class，默认是router-link-active</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plain">&lt;router-link to=&quot;/&quot; active-class=&quot;active&quot;&gt;Home&lt;/router-link&gt;<br>&lt;router-link to=&quot;/about&quot; active-class=&quot;active&quot;&gt;About&lt;/router-link&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>exact-active-class属性</strong></p>
+<p>链接精准激活时，应用于渲染元素的 class，默认是router-link-exact-active</p>
+<hr>
+<p><strong>Not Found</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plain">// 	输入notfound/notfound<br>//	[&#x27;notfound&#x27;,&#x27;notfound&#x27;]<br>&#123; path: &#x27;/:pathMatch(.*)*&#x27;, name: &#x27;NotFound&#x27;, component: NotFound &#125;,<br>//  notfound/notfound<br>&#123; path: &#x27;/:pathMatch(.*)&#x27;, name: &#x27;NotFound&#x27;, component: NotFound &#125;,<br></code></pre></td></tr></table></figure>
+
+<h4 id="hS90y">路由模式</h4>
+
+<p><strong>Hash 模式（</strong><code>**createWebHashHistory**</code><strong>）</strong></p>
+<p>Hash 模式使用 URL 的哈希值（<code>#</code> 后面的部分）来模拟一个完整的 URL，当哈希值发生变化时，浏览器不会向服务器发送请求，而是触发 <code>hashchange</code> 事件，Vue Router 监听这个事件并根据哈希值的变化来渲染相应的组件。</p>
+<ul>
+<li><strong>优点</strong>：兼容性好，支持所有浏览器，不需要服务器端进行任何配置。</li>
+<li><strong>缺点</strong>：URL 中带有 <code>#</code> 符号，不够美观，而且在一些需要使用锚点功能的场景下可能会产生冲突。</li>
+</ul>
+<hr>
+<p><strong>History 模式（</strong><code>**createWebHistory**</code><strong>）</strong></p>
+<p>History 模式使用 HTML5 的 <code>History API</code> 来实现路由功能，通过 <code>pushState</code> 和 <code>replaceState</code> 方法改变浏览器的历史记录，从而实现无刷新的页面切换。当用户访问不同的 URL 时，浏览器会向服务器发送请求，因此需要服务器端进行相应的配置，以确保所有请求都能正确返回单页面应用的 HTML 文件。</p>
+<ul>
+<li><strong>优点</strong>：URL 更加美观，没有 <code>#</code> 符号，符合传统的 URL 格式。</li>
+<li><strong>缺点</strong>：需要服务器端进行配置，否则在刷新页面时可能会出现 404 错误。</li>
+</ul>
+<hr>
+<p><strong>3. Abstract 模式（</strong><code>**createMemoryHistory**</code><strong>）</strong></p>
+<p>Abstract 模式不依赖于浏览器的历史记录，它适用于非浏览器环境，如 Node.js 服务器端渲染（SSR）或小程序开发。在这种模式下，路由的切换通过内存中的历史记录来管理。</p>
+<ul>
+<li><strong>优点</strong>：适用于非浏览器环境，提供了一种通用的路由管理方式。</li>
+<li><strong>缺点</strong>：不能在浏览器中直接使用，主要用于特定的开发场景。</li>
+</ul>
+<h4 id="OZVip">动态路由</h4>
+
+<p><strong>通过 : 定义动态参数</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plain">routes: [<br>  &#123; path: &#x27;/user/:id&#x27;, component: User &#125;<br>]<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>获取路由信息</strong></p>
+<p>使用useRoute获取当前路由中的信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vue">import &#123; useRoute &#125; from &#x27;vue-router&#x27;;<br>const route = useRoute()<br>console.log(route.params);<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p>在当前路由改变，但是该组件被复用时调用 , 获取路由信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs plain">//选项式<br> beforeRouteUpdate(to, from) &#123;<br>    // 在当前路由改变，但是该组件被复用时调用<br>    // 举例来说，对于一个带有动态参数的路径 `/users/:id`，在 `/users/1` 和 `/users/2` 之间跳转的时候，<br>    // 由于会渲染同样的 `UserDetails` 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。<br>    // 因为在这种情况发生的时候，组件已经挂载好了，导航守卫可以访问组件实例 `this`<br>  &#125;,<br>//组合式<br>onBeforeUpdate((to,from) =&gt; &#123;<br>        console.log(to.params);<br>        console.log(from.params);<br>    &#125;)<br></code></pre></td></tr></table></figure>
+
+<h4 id="tep9g">嵌套路由</h4>
+
+<p>使用 <code>children</code> 定义子路由，父组件需包含 <code>&lt;router-view&gt;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs plain">const routes = [<br>  &#123;<br>    path: &#x27;/user&#x27;,<br>    component: User,<br>    children: [<br>      &#123; path: &#x27;profile&#x27;, component: Profile &#125;, // 匹配 /user/profile<br>      &#123; path: &#x27;posts&#x27;, component: Posts &#125;      // 匹配 /user/posts<br>    ]<br>  &#125;<br>]<br></code></pre></td></tr></table></figure>
+
+<h4 id="YAVml">命名视图</h4>
+
+<p>在路由配置中，使用 <code>components</code>（注意是复数形式）选项来定义多个命名视图，每个视图对应一个组件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs plain">// router/index.js<br>import &#123; createRouter, createWebHistory &#125; from &#x27;vue-router&#x27;;<br>import Home from &#x27;../views/Home.vue&#x27;;<br>import Sidebar from &#x27;../views/Sidebar.vue&#x27;;<br>import MainContent from &#x27;../views/MainContent.vue&#x27;;<br><br>const routes = [<br>  &#123;<br>    path: &#x27;/&#x27;,<br>    components: &#123;<br>      default: Home,<br>      sidebar: Sidebar,<br>      main: MainContent<br>    &#125;<br>  &#125;<br>];<br><br>const router = createRouter(&#123;<br>  history: createWebHistory(),<br>  routes<br>&#125;);<br><br>export default router;<br></code></pre></td></tr></table></figure>
+
+<p>在上述代码中，<code>default</code> 是默认的命名视图，当没有指定视图名称时，会渲染这个组件。<code>sidebar</code> 和 <code>main</code> 是自定义的命名视图，分别对应 <code>Sidebar</code> 和 <code>MainContent</code> 组件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs plain">&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;!-- 默认视图 --&gt;<br>    &lt;router-view&gt;&lt;/router-view&gt;<br>    &lt;!-- 侧边栏视图 --&gt;<br>    &lt;router-view name=&quot;sidebar&quot;&gt;&lt;/router-view&gt;<br>    &lt;!-- 主内容视图 --&gt;<br>    &lt;router-view name=&quot;main&quot;&gt;&lt;/router-view&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br></code></pre></td></tr></table></figure>
+
+<h4 id="qCKnP">编程式路由跳转</h4>
+
+<p>编程式导航通过调用 Vue Router 实例的方法来实现路由跳转，常用于在事件处理函数或生命周期钩子中进行导航。</p>
+<p><strong>创建useRouter实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plain">import &#123; useRouter &#125; from &#x27;vue-router&#x27;<br>const router = useRouter()<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><code>**router.push**</code></p>
+<p>跳转到新页面，保留历史记录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs plain">// 路径字符串<br>router.push(&#x27;/about&#x27;)<br><br>// 对象形式（推荐）<br>router.push(&#123; path: &#x27;/user/123&#x27; &#125;)<br><br>// 命名路由 + 参数<br>router.push(&#123;<br>  name: &#x27;user&#x27;,<br>  params: &#123; id: 123 &#125;, // 动态参数<br>  query: &#123; name: &#x27;John&#x27; &#125; // URL 查询参数 ?name=John<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<p><code>**router.replace**</code></p>
+<p>替换当前页面，不保留历史记录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">router.replace(&#x27;/login&#x27;) // 替换当前路由<br></code></pre></td></tr></table></figure>
+
+<p><code>**router.go**</code></p>
+<p>在历史记录中前进&#x2F;后退指定步数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plain">router.go(1)  // 前进一步<br>router.go(-1) // 后退一步<br></code></pre></td></tr></table></figure>
+
+<p><code>**router.back()**</code>** 和 **<code>**router.forward()**</code></p>
+<p>直接后退&#x2F;前进一步</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plain">router.back()    // 等价于 router.go(-1)<br>router.forward() // 等价于 router.go(1)<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>示例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs plain">&lt;script setup&gt;<br>import &#123; useRouter &#125; from &#x27;vue-router&#x27;<br><br>const router = useRouter()<br><br>const navigateToUser = () =&gt; &#123;<br>// 使用 path 时，params 会被忽略，需用 name<br>// URL 结果: /user/456?role=role<br>  router.push(&#123;<br>    name: &#x27;user&#x27;,<br>    params: &#123; id: 456 &#125;,<br>    query: &#123; role: &#x27;role&#x27; &#125;<br>  &#125;)<br>&#125;<br>&lt;/script&gt;<br><br>&lt;template&gt;<br>  &lt;button @click=&quot;navigateToUser&quot;&gt;跳转到用户页&lt;/button&gt;<br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
+
+<h4 id="qUwVD">动态添加路由</h4>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs plain">// 用户登录后调用<br>async function generateRoutes() &#123;<br>  try &#123;<br>    // 从接口获取菜单数据<br>    const &#123; data &#125; = await axios.get(&#x27;/api/getRoutes&#x27;)<br>    <br>    // 转换数据格式（示例结构）<br>    const asyncRoutes = [<br>      &#123;<br>        path: &#x27;/dashboard&#x27;,<br>        component: () =&gt; import(&#x27;@/views/dashboard&#x27;),<br>        meta: &#123; title: &#x27;控制台&#x27;, icon: &#x27;dashboard&#x27; &#125;,<br>        children: [<br>          &#123;<br>            path: &#x27;analysis&#x27;,<br>            component: () =&gt; import(&#x27;@/views/analysis&#x27;),<br>            meta: &#123; title: &#x27;分析页&#x27; &#125;<br>          &#125;<br>        ]<br>      &#125;<br>    ]<br>    <br>    return asyncRoutes<br>  &#125; catch (error) &#123;<br>    console.error(&#x27;获取路由失败&#x27;, error)<br>    return []<br>  &#125;<br>&#125;<br><br><br>// 在权限验证后调用<br>async function addRoutes() &#123;<br>  // 获取动态路由配置<br>  const accessRoutes = await generateRoutes()<br>  <br>  // 逐个添加路由<br>  accessRoutes.forEach(route =&gt; &#123;<br>    router.addRoute(route) <br>  &#125;)<br>  <br>  // 最后添加404通配路由<br>  router.addRoute(&#123; path: &#x27;/:pathMatch(.*&#x27;, redirect: &#x27;/404&#x27;, hidden: true &#125;)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>添加路由</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs plain">//添加顶层路由<br>router.addRoute(&#123;<br>    path: &#x27;&#x27;, name: &#x27;&#x27;, component: &#x27;&#x27;<br>&#125;)<br>//添加user/a<br>router.addRoute(&#x27;user&#x27;,&#123;<br>    path: &#x27;a&#x27;, name: &#x27;&#x27;, component: &#x27;&#x27;<br>&#125;)<br>//添加RouteData<br>const RouteData = &#123;<br>    &quot;path&quot;: &quot;/system&quot;,<br>      &quot;component&quot;: &quot;Layout&quot;,<br>      &quot;meta&quot;: &#123;<br>        &quot;title&quot;: &quot;系统管理&quot;,<br>        &quot;icon&quot;: &quot;system&quot;<br>      &#125;,<br>      &quot;children&quot;: [<br>        &#123;<br>          &quot;path&quot;: &quot;user&quot;,<br>          &quot;component&quot;: &quot;system/user&quot;,<br>          &quot;meta&quot;: &#123;<br>            &quot;title&quot;: &quot;用户管理&quot;,<br>            &quot;permissions&quot;: [&quot;admin&quot;]<br>          &#125;<br>        &#125;<br>      ]<br>&#125;<br>router.addRoute(RouteData)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>删除路由</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs plain">//添加一个name同名路由会覆盖上一个<br>router.addRoute(&#123;<br>    path: &#x27;/user1&#x27;, name: &#x27;user&#x27;, component: &#x27;&#x27;<br>&#125;)<br>router.addRoute(&#123;<br>    path: &#x27;user2&#x27;, name: &#x27;user&#x27;, component: &#x27;&#x27;<br>&#125;)<br>// 传入name<br>router.removeRoute(&#x27;user&#x27;)<br>// router.addRoute会返回一个删除函数<br>const removeRoute= router.addRoute(&#123;<br>    path: &#x27;user2&#x27;, name: &#x27;user&#x27;, component: &#x27;&#x27;<br>&#125;)<br>removeRoute()<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>检查路由是否存在<code>router.hasRoute()</code></li>
+<li>获取一个包含所有路由记录的数组<code>router.getRouters()</code></li>
+</ul>
+<h4 id="EMynj">路由导航 </h4>
+
+<p>路由导航守卫是 Vue Router 提供的一种机制，用于在路由切换前后进行一些控制和处理，比如身份验证、权限检查、页面加载前的数据预获取等。Vue Router 提供了全局守卫、路由独享守卫和组件内守卫三种类型的导航守卫。</p>
+<h5 id="h7yFD">全局守卫</h5>
+
+<p><strong>全局前置守卫</strong></p>
+<p>在路由跳转之前执行，可用于身份验证、权限检查等。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// src/router/index.js</span><br><span class="hljs-keyword">import</span> &#123; createRouter, createWebHistory &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue-router&#x27;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Home</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../views/Home.vue&#x27;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Login</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../views/Login.vue&#x27;</span>;<br><br><span class="hljs-keyword">const</span> routes = [<br>  &#123;<br>    <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/&#x27;</span>,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Home&#x27;</span>,<br>    <span class="hljs-attr">component</span>: <span class="hljs-title class_">Home</span>,<br>    <span class="hljs-attr">meta</span>: &#123; <span class="hljs-attr">requiresAuth</span>: <span class="hljs-literal">true</span> &#125; <span class="hljs-comment">// 标记该路由需要身份验证</span><br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/login&#x27;</span>,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Login&#x27;</span>,<br>    <span class="hljs-attr">component</span>: <span class="hljs-title class_">Login</span><br>  &#125;<br>];<br><br><span class="hljs-keyword">const</span> router = <span class="hljs-title function_">createRouter</span>(&#123;<br>  <span class="hljs-attr">history</span>: <span class="hljs-title function_">createWebHistory</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>.<span class="hljs-property">env</span>.<span class="hljs-property">BASE_URL</span>),<br>  routes<br>&#125;);<br><br><span class="hljs-comment">// 全局前置守卫</span><br>router.<span class="hljs-title function_">beforeEach</span>(<span class="hljs-function">(<span class="hljs-params">to, <span class="hljs-keyword">from</span>, next</span>) =&gt;</span> &#123;<br>  <span class="hljs-comment">// to: 即将要进入的目标路由对象</span><br>  <span class="hljs-comment">// from: 当前导航正要离开的路由对象</span><br>  <span class="hljs-keyword">if</span> (to.<span class="hljs-property">meta</span>.<span class="hljs-property">requiresAuth</span>) &#123;<br>    <span class="hljs-keyword">const</span> isAuthenticated = <span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">getItem</span>(<span class="hljs-string">&#x27;isAuthenticated&#x27;</span>);<br>    <span class="hljs-keyword">if</span> (isAuthenticated) &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-comment">// 允许访问</span><br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-keyword">return</span> (<span class="hljs-string">&#x27;/login&#x27;</span>); <span class="hljs-comment">// 重定向到登录页</span><br>    &#125;<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-comment">// 不需要身份验证，直接放行</span><br>  &#125;<br>&#125;);<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> router;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>to</code>：即将要进入的目标路由对象。</li>
+<li><code>from</code>：当前导航正要离开的路由对象。</li>
+<li><code>next</code>：一个函数，用于控制路由的跳转行为，必须调用该方法来 resolve 这个钩子。(已经不推荐)</li>
+<li>使用返回值<ul>
+<li>false : 取消当前导航</li>
+<li>默认或者undefined : 默认导航</li>
+<li>返回路由地址<ul>
+<li>string类型的path</li>
+<li>对象( path , query , params)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>全局解析守卫</strong></p>
+<p>和 <code>beforeEach</code> 类似，但在导航被确认之前，同时所有组件内守卫和异步路由组件被解析之后调用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript">router.<span class="hljs-title function_">beforeResolve</span>(<span class="hljs-function">(<span class="hljs-params">to, <span class="hljs-keyword">from</span>, next</span>) =&gt;</span> &#123;<br>  <span class="hljs-comment">// 在这里可以进行一些数据预获取等操作</span><br>  <br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>全局后置钩子</strong></p>
+<p>在路由跳转之后执行，不接收 <code>next</code> 函数，不能改变导航本身。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript">router.<span class="hljs-title function_">afterEach</span>(<span class="hljs-function">(<span class="hljs-params">to, <span class="hljs-keyword">from</span></span>) =&gt;</span> &#123;<br>  <span class="hljs-comment">// 可以在这里进行一些页面统计、日志记录等操作</span><br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`从 <span class="hljs-subst">$&#123;<span class="hljs-keyword">from</span>.name&#125;</span> 页面跳转到了 <span class="hljs-subst">$&#123;to.name&#125;</span> 页面`</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="vt6h9">路由独享守卫</h5>
+
+<p>路由独享守卫只作用于某个特定的路由配置，在路由配置中直接定义 <code>beforeEnter</code> 钩子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> routes = [<br>  &#123;<br>    <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/dashboard&#x27;</span>,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Dashboard&#x27;</span>,<br>    <span class="hljs-attr">component</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">&#x27;../views/Dashboard.vue&#x27;</span>),<br>    <span class="hljs-attr">beforeEnter</span>: <span class="hljs-function">(<span class="hljs-params">to, <span class="hljs-keyword">from</span>, next</span>) =&gt;</span> &#123;<br>      <span class="hljs-keyword">const</span> hasPermission = <span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">getItem</span>(<span class="hljs-string">&#x27;hasPermission&#x27;</span>);<br>      <span class="hljs-keyword">if</span> (hasPermission) &#123;<br>       <span class="hljs-keyword">return</span> <span class="hljs-comment">// 允许访问</span><br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span>(<span class="hljs-string">&#x27;/&#x27;</span>); <span class="hljs-comment">// 重定向到首页</span><br>      &#125;<br>    &#125;<br>  &#125;<br>];<br></code></pre></td></tr></table></figure>
+
+<h5 id="Rqyno">**组件内守卫**</h5>
+
+<p>组件内守卫定义在路由组件内部，用于在组件层面进行导航控制。</p>
+<p><code>**beforeRouteEnter**</code></p>
+<p>在渲染该组件的对应路由被确认前调用，不能访问 <code>this</code>，因为组件实例还未创建。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;h1&gt;Product Detail&lt;/h1&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>export default &#123;<br>  beforeRouteEnter(to, from,next) &#123;<br>    // 在渲染该组件的对应路由被验证前调用<br>    // 不能获取组件实例 `this` ！<br>    // 因为当守卫执行时，组件实例还没被创建！<br><br>    next(vm =&gt; &#123;<br>    // 通过 `vm` 访问组件实例,可以通过传一个回调给 next 来访问组件实例。<br>    // 在导航被确认的时候执行回调，并且把组件实例作为回调方法的参数<br>  &#125;)<br>  &#125;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><code>**beforeRouteUpdate**</code></p>
+<p>在当前路由改变，但是该组件被复用时调用，比如 <code>/product/1</code> 跳转到 <code>/product/2</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;h1&gt;Product Detail&lt;/h1&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>export default &#123;<br>  beforeRouteUpdate(to, from) &#123;<br>    // 在当前路由改变，但是该组件被复用时调用<br>    // 举例来说，对于一个带有动态参数的路径 `/users/:id`，在 `/users/1` 和 `/users/2` 之间跳转的时候，<br>    // 由于会渲染同样的 `UserDetails` 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。<br>    // 因为在这种情况发生的时候，组件已经挂载好了，导航守卫可以访问组件实例 `this`<br>  &#125;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><code>**beforeRouteLeave**</code></p>
+<p>在导航离开该组件的对应路由时调用，可用于阻止用户离开，比如表单未保存时提示用户。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;form&gt;<br>      &lt;input v-model=&quot;message&quot; /&gt;<br>      &lt;button @click=&quot;submit&quot;&gt;提交&lt;/button&gt;<br>    &lt;/form&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>export default &#123;<br>  data() &#123;<br>    return &#123;<br>      message: &#x27;&#x27;<br>    &#125;;<br>  &#125;,<br>  beforeRouteLeave(to, from) &#123;<br>    if (this.message) &#123;<br>      if (confirm(&#x27;表单还未保存，确定要离开吗？&#x27;)) &#123;<br>       return // 允许离开<br>      &#125; else &#123;<br>        return false // 阻止离开<br>      &#125;<br>    &#125; else &#123;<br>      return // 没有数据，直接离开<br>    &#125;<br>  &#125;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<h5 id="T6x2H">导航解析流程</h5>
+
+<ol>
+<li>导航被触发。</li>
+<li>在失活的组件里调用 beforeRouteLeave 守卫。</li>
+<li>调用全局的 beforeEach 守卫</li>
+<li>在重用的组件里调用 beforeRouteUpdate 守卫(2.2+)。</li>
+<li>在路由配置里调用 beforeEnter。</li>
+<li>解析异步路由组件。</li>
+<li>在被激活的组件里调用 beforeRouteEnter。</li>
+<li>调用全局的 beforeResolve 守卫(2.5+)。</li>
+<li>导航被确认。</li>
+<li>调用全局的 afterEach 钩子,</li>
+<li>触发 DOM 更新。</li>
+<li>调用 beforeRouteEnter 守卫中传给 next 的回调函数，创建好的组件实例会作为回调函数的参数传入</li>
+</ol>
+<h3 id="KhYDH">状态管理</h3>
+<h4 id="V108E">VueX</h4>
+
+<p>在 Vue  中，Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。</p>
+<h5 id="ZB1JN">安装和基本使用</h5>
+
+<p><strong>安装</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vue"># 使用 npm<br>npm install vuex@next --save<br><br># 使用 yarn<br>yarn add vuex@next<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>基本使用</strong></p>
+<p>在项目中创建一个 <code>store</code> 目录，并在其中创建 <code>index.js</code> 文件，用于配置和导出 Vuex store。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs vue">// store/index.js<br>import &#123; createStore &#125; from &#x27;vuex&#x27;;<br><br>const store = createStore(&#123;<br>  // 状态（state）：用于存储应用的所有数据<br>  state() &#123;<br>    return &#123;<br>      count: 0<br>    &#125;;<br>  &#125;,<br>  // 突变（mutations）：是唯一可以修改 state 的地方，必须是同步函数<br>  mutations: &#123;<br>    increment(state) &#123;<br>      state.count++;<br>    &#125;<br>  &#125;,<br>  // 动作（actions）：用于处理异步操作，最终通过提交 mutations 来修改 state<br>  actions: &#123;<br>    incrementAsync(context) &#123;<br>      setTimeout(() =&gt; &#123;<br>        context.commit(&#x27;increment&#x27;);<br>      &#125;, 1000);<br>    &#125;<br>  &#125;,<br>  // 获取器（getters）：类似于计算属性，用于获取 state 中的数据并进行计算<br>  getters: &#123;<br>    doubleCount(state) &#123;<br>      return state.count * 2;<br>    &#125;<br>  &#125;<br>&#125;);<br><br>export default store;<br></code></pre></td></tr></table></figure>
+
+<p>在 <code>main.js</code> 中引入并使用创建好的 store。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs vue">// main.js<br>import &#123; createApp &#125; from &#x27;vue&#x27;;<br>import App from &#x27;./App.vue&#x27;;<br>import store from &#x27;./store&#x27;;<br><br>const app = createApp(App);<br>app.use(store);<br>app.mount(&#x27;#app&#x27;);<br></code></pre></td></tr></table></figure>
+
+<p>在模板中直接使用<code>$store.state</code>获取数据</p>
+<p>在组合式api中使用<code>useStore</code>获取</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &#123;&#123; $store.state.count &#125;&#125;<br>        &lt;button @click=&quot;addClick&quot;&gt;+&lt;/button&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br>import &#123; useStore &#125; from &#x27;vuex&#x27;;<br><br>const store = useStore()<br>console.log(store.state.count);<br>//不能直接修改stata的数据,需要使用mutation(commit)进行提交<br>function addClick() &#123;<br>    store.commit(&#x27;add&#x27;)<br>&#125;<br><br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>Vuex 使用单一状态树:</strong></p>
+<ul>
+<li>用一个对象就包含了全部的应用层级的状态 , 采用的是SSOT，Single Source of Truth，也可以翻译成单一数据源</li>
+<li>这也意味着，每个应用将仅仅包含一个 store 实例: 单状态树和模块化并不冲突,store中存在module</li>
+</ul>
+<p><strong>单一状态树的优势:</strong></p>
+<ul>
+<li>如果你的状态信息是保存到多个Store对象中的，那么之后的管理和维护等等都会变得特别困难;所以Vuex也使用了单一状态树来管理应用层级的全部状态</li>
+<li>单一状态树能够让我们最直接的方式找到某个状态的片段:而且在之后的维护和调试过程中，也可以非常方便的管理和维护</li>
+</ul>
+<hr>
+<p><strong>Vuex-Store状态映射</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;h3&gt;<br>            &#123;&#123; name &#125;&#125;<br>            &#123;&#123; age &#125;&#125;<br>        &lt;/h3&gt;<br>        &lt;h3&gt;<br>            &#123;&#123; zName &#125;&#125;<br>            &#123;&#123; zAge &#125;&#125;<br>        &lt;/h3&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br><br>&lt;/script&gt;<br>&lt;script&gt;<br>import &#123; mapState &#125; from &#x27;vuex&#x27;;<br>export default &#123;<br>    data() &#123;<br>    &#125;,<br>    computed: &#123;<br>        //数组写法<br>        ...mapState([&quot;name&quot;, &quot;age&quot;]),<br>        //对象写法,命名重复<br>        ...mapState(&#123;<br>            zName: state =&gt; state.name,<br>            zAge: state =&gt; state.age<br>        &#125;)<br>    &#125;<br>&#125;<br>&lt;/script&gt;<br>&lt;style lang=&quot;less&quot; scoped&gt;&lt;/style&gt;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &#123;&#123; $store.state.count &#125;&#125;<br>        &lt;button @click=&quot;addClick&quot;&gt;+&lt;/button&gt;<br>        &lt;h3&gt;<br>            &#123;&#123; Zname &#125;&#125;<br>            &#123;&#123; age &#125;&#125;<br>        &lt;/h3&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br>import &#123; toRefs,computed &#125; from &#x27;vue&#x27;;<br>import &#123; useStore &#125; from &#x27;vuex&#x27;;<br>const store = useStore()<br>console.log(store.state.count);<br>//不能直接修改stata的数据,需要使用mutation(commit)进行提交<br>function addClick() &#123;<br>    store.commit(&#x27;add&#x27;)<br>&#125;<br>//也可以使用映射<br>//const &#123;name:Zname&#125;=mapState([&quot;name&quot;]),<br>//const name=computed(name.bind(&#123;$store:store&#125;)  <br>const &#123; name:Zname, age &#125; = toRefs(store.state) <br><br>&lt;/script&gt;<br><br><br>&lt;style lang=&quot;less&quot; scoped&gt;&lt;/style&gt;<br></code></pre></td></tr></table></figure>
+
+<h5 id="oRMVl">Getters</h5>
+
+<ul>
+<li><strong>概念</strong>：<code>getters</code> 是 <code>store</code> 中的计算属性，用于获取 <code>state</code> 中的数据并进行处理，返回一个新的值。</li>
+<li><strong>作用</strong>：可以对 <code>state</code> 中的数据进行封装和计算，避免在组件中重复编写相同的逻辑，提高代码的可维护性和复用性。</li>
+</ul>
+<hr>
+<p>在创建 <code>store</code> 时，可以在 <code>getters</code> 对象中定义获取器函数。每个获取器函数接收 <code>state</code> 作为第一个参数，还可以接收其他 <code>getters</code> 作为第二个参数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs vue">// store/index.js<br>import &#123; createStore &#125; from &#x27;vuex&#x27;;<br><br>const store = createStore(&#123;<br>  state() &#123;<br>    return &#123;<br>      todos: [<br>        &#123; id: 1, text: &#x27;Learn Vue 3&#x27;, done: true &#125;,<br>        &#123; id: 2, text: &#x27;Learn Vuex&#x27;, done: false &#125;<br>      ]<br>    &#125;;<br>  &#125;,<br>  getters: &#123;<br>    // 获取已完成的 todos<br>    doneTodos(state) &#123;<br>      return state.todos.filter(todo =&gt; todo.done);<br>    &#125;,<br>    // 获取已完成 todos 的数量<br>    doneTodosCount(state, getters) &#123;<br>      return getters.doneTodos.length;<br>    &#125;<br>  &#125;<br>&#125;);<br><br>export default store;<br></code></pre></td></tr></table></figure>
+
+<p>组合式 API 中，可以使用 <code>useStore</code> 函数来访问 <code>store</code>，进而访问 <code>getters</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;p&gt;Done Todos Count: &#123;&#123; doneTodosCount &#125;&#125;&lt;/p&gt;<br>    &lt;ul&gt;<br>      &lt;li v-for=&quot;todo in doneTodos&quot; :key=&quot;todo.id&quot;&gt;&#123;&#123; todo.text &#125;&#125;&lt;/li&gt;<br>    &lt;/ul&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br>import &#123; computed &#125; from &#x27;vue&#x27;;<br>import &#123; useStore &#125; from &#x27;vuex&#x27;;<br><br>const store = useStore();<br>const doneTodos = computed(() =&gt; store.getters.doneTodos);<br>const doneTodosCount = computed(() =&gt; store.getters.doneTodosCount);<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<p>有时候，我们需要根据不同的条件来获取数据，这时可以让 <code>getters</code> 返回一个函数，从而实现接收参数的功能。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs vue">// store/index.js<br>import &#123; createStore &#125; from &#x27;vuex&#x27;;<br><br>const store = createStore(&#123;<br>  state() &#123;<br>    return &#123;<br>      todos: [<br>        &#123; id: 1, text: &#x27;Learn Vue 3&#x27;, done: true &#125;,<br>        &#123; id: 2, text: &#x27;Learn Vuex&#x27;, done: false &#125;<br>      ]<br>    &#125;;<br>  &#125;,<br>  getters: &#123;<br>    // 根据 id 获取 todo<br>    getTodoById: (state) =&gt; (id) =&gt; &#123;<br>      return state.todos.find(todo =&gt; todo.id === id);<br>    &#125;<br>  &#125;<br>&#125;);<br><br>export default store;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>getter的映射</strong></p>
+<p>在选项式 API 中，可以通过 <code>this.$store.getters</code> 访问 <code>getters</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;p&gt;Done Todos Count: &#123;&#123; $store.getters.doneTodosCount &#125;&#125;&lt;/p&gt;<br>    &lt;ul&gt;<br>      &lt;li v-for=&quot;todo in $store.getters.doneTodos&quot; :key=&quot;todo.id&quot;&gt;&#123;&#123; todo.text &#125;&#125;&lt;/li&gt;<br>    &lt;/ul&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>export default &#123;<br>  name: &#x27;TodoList&#x27;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<p>也可以使用 <code>mapGetters</code> 辅助函数来简化代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;p&gt;Done Todos Count: &#123;&#123; doneTodosCount &#125;&#125;&lt;/p&gt;<br>    &lt;ul&gt;<br>      &lt;li v-for=&quot;todo in doneTodos&quot; :key=&quot;todo.id&quot;&gt;&#123;&#123; todo.text &#125;&#125;&lt;/li&gt;<br>    &lt;/ul&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>import &#123; mapGetters &#125; from &#x27;vuex&#x27;;<br><br>export default &#123;<br>  name: &#x27;TodoList&#x27;,<br>  computed: &#123;<br>    ...mapGetters([&#x27;doneTodos&#x27;, &#x27;doneTodosCount&#x27;])<br>  &#125;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<h5 id="hNhTF">Mutation</h5>
+
+<p><code>mutation</code> 是用于修改 <code>store</code> 中 <code>state</code> 的唯一途径，并且它必须是<strong>同步函数</strong>，这保证了状态变化的可追踪性和可预测性。</p>
+<ul>
+<li><strong>概念</strong>：<code>mutation</code> 本质上是一个包含修改 <code>state</code> 逻辑的函数，它接收 <code>state</code> 作为第一个参数，还可以接收一个可选的 <code>payload</code>（即传递给 <code>mutation</code> 的额外参数）</li>
+<li><strong>作用</strong>：集中管理状态的修改操作，使得状态的变化可追踪，方便调试和维护代码</li>
+</ul>
+<hr>
+<p>在创建 <code>store</code> 时，在 <code>mutations</code> 对象中定义具体的 <code>mutation</code> 函数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs vue">// store/index.js<br>import &#123; createStore &#125; from &#x27;vuex&#x27;;<br><br>const store = createStore(&#123;<br>    state() &#123;<br>        return &#123;<br>            count: 0<br>        &#125;;<br>    &#125;,<br>    mutations: &#123;<br>        // 定义一个简单的 mutation 来增加 count 的值<br>        increment(state) &#123;<br>            state.count++;<br>        &#125;,<br>        // 定义一个接收 payload 的 mutation，用于设置 count 为指定的值<br>        setCount(state, payload) &#123;<br>            state.count = payload;<br>        &#125;<br>    &#125;<br>&#125;);<br><br>export default store;<br></code></pre></td></tr></table></figure>
+
+<p>组合式 API 中，借助 <code>useStore</code> 函数访问 <code>store</code>，再使用 <code>commit</code> 方法触发 <code>mutation</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;p&gt;Count: &#123;&#123; count &#125;&#125;&lt;/p&gt;<br>        &lt;button @click=&quot;increment&quot;&gt;Increment&lt;/button&gt;<br>        &lt;button @click=&quot;setCount(10)&quot;&gt;Set Count to 10&lt;/button&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br>import &#123; computed &#125; from &#x27;vue&#x27;;<br>import &#123; useStore &#125; from &#x27;vuex&#x27;;<br><br>const store = useStore();<br>const count = computed(() =&gt; store.state.count);<br><br>const increment = () =&gt; store.commit(&#x27;increment&#x27;);<br>const setCount = (value) =&gt; store.commit(&#x27;setCount&#x27;, value);<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p>为了增强代码的可读性和可维护性，通常会采用常量来定义 <code>mutation</code> 的名称</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs vue">// store/mutation-types.js<br>export const INCREMENT = &#x27;INCREMENT&#x27;;<br>export const SET_COUNT = &#x27;SET_COUNT&#x27;;<br><br>// store/index.js<br>import &#123; createStore &#125; from &#x27;vuex&#x27;;<br>import &#123; INCREMENT, SET_COUNT &#125; from &#x27;./mutation-types&#x27;;<br><br>const store = createStore(&#123;<br>    state() &#123;<br>        return &#123;<br>            count: 0<br>        &#125;;<br>    &#125;,<br>    mutations: &#123;<br>        [INCREMENT](state) &#123;<br>            state.count++;<br>        &#125;,<br>        [SET_COUNT](state, payload) &#123;<br>            state.count = payload;<br>        &#125;<br>    &#125;<br>&#125;);<br><br>export default store;<br></code></pre></td></tr></table></figure>
+
+<p>在组件中使用常量触发 <code>mutation</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;p&gt;Count: &#123;&#123; count &#125;&#125;&lt;/p&gt;<br>        &lt;button @click=&quot;increment&quot;&gt;Increment&lt;/button&gt;<br>        &lt;button @click=&quot;setCount(10)&quot;&gt;Set Count to 10&lt;/button&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br>import &#123; computed &#125; from &#x27;vue&#x27;;<br>import &#123; useStore &#125; from &#x27;vuex&#x27;;<br>import &#123; INCREMENT, SET_COUNT &#125; from &#x27;../store/mutation-types&#x27;;<br><br>const store = useStore();<br>const count = computed(() =&gt; store.state.count);<br><br>const increment = () =&gt; store.commit(INCREMENT);<br>const setCount = (value) =&gt; store.commit(SET_COUNT, value);<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>Mutation的映射</strong></p>
+<p>在选项式 API 里，可以通过 <code>this.$store.commit</code> 方法来触发 <code>mutation</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;p&gt;Count: &#123;&#123; $store.state.count &#125;&#125;&lt;/p&gt;<br>        &lt;button @click=&quot;$store.commit(&#x27;increment&#x27;)&quot;&gt;Increment&lt;/button&gt;<br>        &lt;button @click=&quot;$store.commit(&#x27;setCount&#x27;, 10)&quot;&gt;Set Count to 10&lt;/button&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>export default &#123;<br>    name: &#x27;Counter&#x27;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<p>使用 <code>mapMutations</code> 辅助函数来简化代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;p&gt;Count: &#123;&#123; $store.state.count &#125;&#125;&lt;/p&gt;<br>        &lt;button @click=&quot;increment&quot;&gt;Increment&lt;/button&gt;<br>        &lt;button @click=&quot;setCount(10)&quot;&gt;Set Count to 10&lt;/button&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>import &#123; mapMutations &#125; from &#x27;vuex&#x27;;<br><br>export default &#123;<br>    name: &#x27;Counter&#x27;,<br>    methods: &#123;<br>        ...mapMutations([&#x27;increment&#x27;, &#x27;setCount&#x27;])<br>    &#125;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<h5 id="LgNMW">Actions</h5>
+
+<p><code>actions</code> 是用来处理异步操作并最终提交 <code>mutations</code> 以修改 <code>state</code> 的。由于 <code>mutations</code> 必须是同步的，而异步操作（如网络请求）无法保证其同步性，所以就需要 <code>actions</code> 来处理这类情况</p>
+<ul>
+<li><strong>概念</strong>：<code>actions</code> 是一些包含异步操作逻辑的函数，它不直接修改 <code>state</code>，而是通过提交 <code>mutations</code> 来间接修改 <code>state</code>。<code>actions</code> 接收一个与 <code>store</code> 实例具有相同方法和属性的 <code>context</code> 对象，通过它可以访问 <code>state</code>、<code>getters</code> 以及提交 <code>mutations</code>。</li>
+<li><strong>作用</strong>：处理异步操作，如发起网络请求、定时器操作等，确保 <code>state</code> 的修改是可追踪和可预测的。</li>
+</ul>
+<hr>
+<p>在创建 <code>store</code> 时，在 <code>actions</code> 对象中定义具体的 <code>action</code> 函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs vue">// store/index.js<br>import &#123; createStore &#125; from &#x27;vuex&#x27;;<br><br>const store = createStore(&#123;<br>    state() &#123;<br>        return &#123;<br>            count: 0<br>        &#125;;<br>    &#125;,<br>    mutations: &#123;<br>        increment(state) &#123;<br>            state.count++;<br>        &#125;<br>    &#125;,<br>    actions: &#123;<br>        // 定义一个异步 action，1 秒后提交 increment mutation<br>        incrementAsync(context) &#123;<br>            setTimeout(() =&gt; &#123;<br>                context.commit(&#x27;increment&#x27;);<br>            &#125;, 1000);<br>        &#125;,<br>        // 使用 ES6 参数解构简化代码<br>        anotherIncrementAsync(&#123; commit &#125;) &#123;<br>            setTimeout(() =&gt; &#123;<br>                commit(&#x27;increment&#x27;);<br>            &#125;, 1500);<br>        &#125;<br>    &#125;<br>&#125;);<br><br>export default store;<br></code></pre></td></tr></table></figure>
+
+<p>组合式 API 中，利用 <code>useStore</code> 函数访问 <code>store</code>，再使用 <code>dispatch</code> 方法触发 <code>action</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;p&gt;Count: &#123;&#123; count &#125;&#125;&lt;/p&gt;<br>        &lt;button @click=&quot;incrementAsync&quot;&gt;Increment Async&lt;/button&gt;<br>        &lt;button @click=&quot;anotherIncrementAsync&quot;&gt;Another Increment Async&lt;/button&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br>import &#123; computed &#125; from &#x27;vue&#x27;;<br>import &#123; useStore &#125; from &#x27;vuex&#x27;;<br><br>const store = useStore();<br>const count = computed(() =&gt; store.state.count);<br><br>const incrementAsync = () =&gt; store.dispatch(&#x27;incrementAsync&#x27;);<br>const anotherIncrementAsync = () =&gt; store.dispatch(&#x27;anotherIncrementAsync&#x27;);<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><code>action</code> 函数可以接收第二个参数作为 <code>payload</code>，用于传递额外的数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs vue">// store/index.js<br>import &#123; createStore &#125; from &#x27;vuex&#x27;;<br><br>const store = createStore(&#123;<br>    state() &#123;<br>        return &#123;<br>            count: 0<br>        &#125;;<br>    &#125;,<br>    mutations: &#123;<br>        incrementByAmount(state, amount) &#123;<br>            state.count += amount;<br>        &#125;<br>    &#125;,<br>    actions: &#123;<br>        incrementByAmountAsync(&#123; commit &#125;, amount) &#123;<br>            setTimeout(() =&gt; &#123;<br>                commit(&#x27;incrementByAmount&#x27;, amount);<br>            &#125;, 1000);<br>        &#125;<br>    &#125;<br>&#125;);<br><br>export default store;<br></code></pre></td></tr></table></figure>
+
+<p>组件中触发接收参数的 <code>action</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;p&gt;Count: &#123;&#123; count &#125;&#125;&lt;/p&gt;<br>        &lt;button @click=&quot;incrementByAmountAsync(5)&quot;&gt;Increment by 5 Async&lt;/button&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br>import &#123; computed &#125; from &#x27;vue&#x27;;<br>import &#123; useStore &#125; from &#x27;vuex&#x27;;<br><br>const store = useStore();<br>const count = computed(() =&gt; store.state.count);<br><br>const incrementByAmountAsync = (amount) =&gt; store.dispatch(&#x27;incrementByAmountAsync&#x27;, amount);<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>actions的映射</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;p&gt;Count: &#123;&#123; $store.state.count &#125;&#125;&lt;/p&gt;<br>        &lt;button @click=&quot;$store.dispatch(&#x27;incrementAsync&#x27;)&quot;&gt;Increment Async&lt;/button&gt;<br>        &lt;button @click=&quot;$store.dispatch(&#x27;anotherIncrementAsync&#x27;)&quot;&gt;Another Increment Async&lt;/button&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>export default &#123;<br>    name: &#x27;Counter&#x27;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<p>使用 <code>mapActions</code> 辅助函数来简化</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;p&gt;Count: &#123;&#123; $store.state.count &#125;&#125;&lt;/p&gt;<br>        &lt;button @click=&quot;incrementAsync&quot;&gt;Increment Async&lt;/button&gt;<br>        &lt;button @click=&quot;anotherIncrementAsync&quot;&gt;Another Increment Async&lt;/button&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br>import &#123; mapActions &#125; from &#x27;vuex&#x27;;<br><br>export default &#123;<br>    name: &#x27;Counter&#x27;,<br>    methods: &#123;<br>        ...mapActions([&#x27;incrementAsync&#x27;, &#x27;anotherIncrementAsync&#x27;])<br>    &#125;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="BkD7v">Modules</h5>
+
+<p>Vuex 的 <code>module</code>（模块）允许将 <code>store</code> 分割成多个小模块，每个模块拥有自己独立的 <code>state</code>、<code>mutations</code>、<code>actions</code> 和 <code>getters</code>，使代码结构更加清晰、易于管理</p>
+<ul>
+<li><strong>模块</strong>：模块是 Vuex 中用于组织代码的一种方式，将一个大的 <code>store</code> 拆分成多个小的模块，每个模块有自己独立的状态管理逻辑。</li>
+<li><strong>命名空间</strong>：通过设置 <code>namespaced: true</code>，可以为模块开启命名空间，避免不同模块之间的命名冲突。</li>
+</ul>
+<hr>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs vue">// store/modules/user.js<br>const userModule = &#123;<br>    // 开启命名空间<br>    namespaced: true,<br>    state() &#123;<br>        return &#123;<br>            username: &#x27;Guest&#x27;,<br>            age: 0<br>        &#125;;<br>    &#125;,<br>    mutations: &#123;<br>        setUsername(state, newUsername) &#123;<br>            state.username = newUsername;<br>        &#125;,<br>        setAge(state, newAge) &#123;<br>            state.age = newAge;<br>        &#125;<br>    &#125;,<br>    actions: &#123;<br>        updateUserInfo(&#123; commit &#125;, &#123; username, age &#125;) &#123;<br>            commit(&#x27;setUsername&#x27;, username);<br>            commit(&#x27;setAge&#x27;, age);<br>        &#125;<br>    &#125;,<br>    getters: &#123;<br>        userFullInfo(state) &#123;<br>            return `Name: $&#123;state.username&#125;, Age: $&#123;state.age&#125;`;<br>        &#125;<br>    &#125;<br>&#125;;<br><br>export default userModule;<br></code></pre></td></tr></table></figure>
+
+<p>在store中引入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs vue">// store/index.js<br>import &#123; createStore &#125; from &#x27;vuex&#x27;;<br>import userModule from &#x27;./modules/user&#x27;;<br><br>const store = createStore(&#123;<br>    modules: &#123;<br>        user: userModule<br>    &#125;<br>&#125;);<br><br>export default store;<br></code></pre></td></tr></table></figure>
+
+<p>在组件中使用模块时，需要根据模块是否开启命名空间来决定访问方式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;p&gt;User Info: &#123;&#123; userFullInfo &#125;&#125;&lt;/p&gt;<br>        &lt;button @click=&quot;updateUser(&#x27;John&#x27;, 25)&quot;&gt;Update User&lt;/button&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br>import &#123; computed &#125; from &#x27;vue&#x27;;<br>import &#123; useStore &#125; from &#x27;vuex&#x27;;<br><br>const store = useStore();<br>// 获取模块中的 getters<br>const userFullInfo = computed(() =&gt; store.getters[&#x27;user/userFullInfo&#x27;]);<br>// 触发模块中的 actions<br>const updateUser = (username, age) =&gt; &#123;<br>    store.dispatch(&#x27;user/updateUserInfo&#x27;, &#123; username, age &#125;);<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p>有时候，一个模块的 <code>action</code> 可能需要调用另一个模块的 <code>action</code> 或 <code>mutation</code>。可以通过 <code>context.rootState</code>、<code>context.rootGetters</code>、<code>context.rootCommit</code> 和 <code>context.rootDispatch</code> 来访问根 <code>store</code> 的状态和方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;p&gt;User Info: &#123;&#123; userFullInfo &#125;&#125;&lt;/p&gt;<br>        &lt;button @click=&quot;updateUser(&#x27;John&#x27;, 25)&quot;&gt;Update User&lt;/button&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br>import &#123; computed &#125; from &#x27;vue&#x27;;<br>import &#123; useStore &#125; from &#x27;vuex&#x27;;<br><br>const store = useStore();<br>// 获取模块中的 getters<br>const userFullInfo = computed(() =&gt; store.getters[&#x27;user/userFullInfo&#x27;]);<br>// 触发模块中的 actions<br>const updateUser = (username, age) =&gt; &#123;<br>    store.dispatch(&#x27;user/updateUserInfo&#x27;, &#123; username, age &#125;);<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<h4 id="Mr9zj">Pinia</h4>
+
+<p>Pinia 是一个轻量级的状态管理库，它提供了直观且可扩展的方式来管理应用程序的状态。</p>
+<h5 id="QGmeo">vuex与pinia区别</h5>
+
+<table>
+<thead>
+<tr>
+<th align="left">****</th>
+<th align="left"><strong>Vuex</strong></th>
+<th align="left"><strong>Pinia</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>设计理念</strong></td>
+<td align="left">遵循 Flux 架构，强调严格单向数据流，通过 <code>mutations</code>同步修改 <code>state</code>，异步操作使用 <code>actions</code></td>
+<td align="left">更轻量灵活，弱化 <code>mutations</code><br> 概念，允许在 <code>actions</code>中进行同步和异步操作</td>
+</tr>
+<tr>
+<td align="left"><strong>API 风格</strong></td>
+<td align="left">需要定义 <code>state</code>、<code>mutations</code><br>、<code>actions</code> 和 <code>getters</code>，使用 <code>commit</code>触发 <code>mutations</code>，<code>dispatch</code>触发 <code>actions</code></td>
+<td align="left">仅需定义 <code>state</code>、<code>actions</code><br> 和 <code>getters</code>，可直接调用 <code>actions</code>修改状态</td>
+</tr>
+<tr>
+<td align="left"><strong>类型支持</strong></td>
+<td align="left">Vue 2 中对 TypeScript 支持弱，Vue 3 有改进但仍需额外配置</td>
+<td align="left">从设计上对 TypeScript 有良好支持，减少手动编写类型声明工作量</td>
+</tr>
+<tr>
+<td align="left"><strong>代码结构和模块化</strong></td>
+<td align="left">项目变大时 <code>store</code>文件庞大，需用 <code>modules</code>拆分，模块交互和命名空间管理较复杂</td>
+<td align="left">本身模块化，通过 <code>defineStore</code><br> 定义独立 <code>store</code>，代码结构清晰，无命名空间问题</td>
+</tr>
+<tr>
+<td align="left"><strong>性能</strong></td>
+<td align="left">状态变化需经过 <code>mutations</code>，处理大量数据或频繁更新状态时可能有性能开销</td>
+<td align="left">无 <code>mutations</code>限制，状态变化可直接在 <code>actions</code>中进行，性能可能更优</td>
+</tr>
+<tr>
+<td align="left"><strong>生态系统和社区支持</strong></td>
+<td align="left">是 Vue.js 官方推荐，发展历史长，生态丰富，社区支持强大</td>
+<td align="left">较新但获 Vue.js 核心团队支持，社区受欢迎，生态在不断发展完善</td>
+</tr>
+</tbody></table>
+<h5 id="oCSG2">安装和基本使用</h5>
+
+<p><strong>安装</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vue">npm install pinia<br># 或者<br>yarn add pinia<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>基本使用</strong></p>
+<p>创建并初始化 Pinia 实例，然后将其挂载到 Vue 应用上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vue">import &#123; createPinia &#125; from &quot;pinia&quot;;<br><br>const pinia = createPinia()<br><br>export default pinia<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs vue">import &#123; createApp &#125; from &#x27;vue&#x27;<br>import router from &#x27;./router&#x27;<br>import App from &#x27;./App.vue&#x27;<br>import store from &#x27;./store&#x27;<br>createApp(App).use(router).use(store).mount(&#x27;#app&#x27;)<br><br></code></pre></td></tr></table></figure>
+
+<p>可以通过<code>defineStore</code>函数来创建一个 store</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs vue">import &#123; defineStore &#125; from &quot;pinia&quot;;<br>//返回值为一个函数,defineStore第一个参数为唯一标识<br>export const useCountStore = defineStore(&#x27;count&#x27;, &#123;<br>    state() &#123;<br>        return &#123;<br>            count:10<br>        &#125;<br>    &#125;<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<p>在组件中使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;h2&gt;App&lt;/h2&gt;<br>        &lt;h3&gt;计数-&#123;&#123; store.count  &#125;&#125;&lt;/h3&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br>import &#123; useCountStore &#125; from &#x27;./store/count&#x27;;<br>const store = useCountStore()<br><br><br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p>直接解构 store 获取数据会丢失响应式 , 需要使用 storeToRefs 使结构的数据保持响应式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;h2&gt;App&lt;/h2&gt;<br>        &lt;router-view&gt;&lt;/router-view&gt;<br>        &lt;h3&gt;计数-&#123;&#123; store.count &#125;&#125;&lt;/h3&gt;<br>        &lt;h3&gt;计数-&#123;&#123; count &#125;&#125;&lt;/h3&gt;<br>        &lt;button @click=&quot;addCount&quot;&gt;+&lt;/button&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br>import &#123; useCountStore &#125; from &#x27;./store/count&#x27;;<br>import &#123; toRefs &#125; from &#x27;vue&#x27;;<br>import &#123; storeToRefs &#125; from &#x27;pinia&#x27;;<br>const store = useCountStore()<br>//直接使用解构会丢失响应式<br>// const &#123; count &#125; = store<br>//使用toRefs/storeToRefs保持响应式<br>const &#123; count &#125; = storeToRefs(store) <br><br>function addCount() &#123;<br>    store.count++<br>&#125;<br><br><br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<h5 id="ld1TN">State</h5>
+
+<p><code>state</code> 是一个函数，它返回一个包含状态属性的对象。在使用 <code>defineStore</code> 函数创建 store 时，需要定义 <code>state</code></p>
+<hr>
+<ul>
+<li>你需要从 store 中解构出状态属性时，为了保持响应式，需要使用 <code>storeToRefs</code> 函数</li>
+</ul>
+<hr>
+<p><strong>修改state</strong></p>
+<ul>
+<li>可以直接在组件中修改 <code>state</code> 的属性。Pinia 会自动跟踪这些变化并触发组件的重新渲染</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;p&gt;Count: &#123;&#123; counterStore.count &#125;&#125;&lt;/p&gt;<br>        &lt;button @click=&quot;increment&quot;&gt;Increment&lt;/button&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br>import &#123; useCounterStore &#125; from &#x27;../stores/counter&#x27;;<br><br>const counterStore = useCounterStore();<br><br>const increment = () =&gt; &#123;<br>    counterStore.count++;<br>&#125;;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>为了更好地组织代码和管理状态变化，建议使用 <code>actions</code> 来修改 <code>state</code>。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs vue">// stores/counter.js<br>import &#123; defineStore &#125; from &#x27;pinia&#x27;;<br><br>export const useCounterStore = defineStore(&#x27;counter&#x27;, &#123;<br>    state: () =&gt; (&#123;<br>        count: 0<br>    &#125;),<br>    actions: &#123;<br>        increment() &#123;<br>            this.count++;<br>        &#125;,<br>        decrement() &#123;<br>            this.count--;<br>        &#125;<br>    &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;p&gt;Count: &#123;&#123; counterStore.count &#125;&#125;&lt;/p&gt;<br>        &lt;button @click=&quot;counterStore.increment&quot;&gt;Increment&lt;/button&gt;<br>        &lt;button @click=&quot;counterStore.decrement&quot;&gt;Decrement&lt;/button&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br>import &#123; useCounterStore &#125; from &#x27;../stores/counter&#x27;;<br><br>const counterStore = useCounterStore();<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p>**重置 **<code>**state**</code></p>
+<p>可以使用 <code>$reset</code> 方法将 <code>state</code> 重置为初始值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; useCounterStore &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../stores/counter&#x27;</span>;<br><br><span class="hljs-keyword">const</span> counterStore = <span class="hljs-title function_">useCounterStore</span>();<br>counterStore.$reset();<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p>**批量修改 **<code>**state**</code></p>
+<p>可以使用 <code>$patch</code> 方法批量修改 <code>state</code>，这样可以减少不必要的重新渲染。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; useCounterStore &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../stores/counter&#x27;</span>;<br><br><span class="hljs-keyword">const</span> counterStore = <span class="hljs-title function_">useCounterStore</span>();<br><br><span class="hljs-comment">// 方式一：对象形式</span><br>counterStore.$patch(&#123;<br>    <span class="hljs-attr">count</span>: <span class="hljs-number">10</span>,<br>    <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;New message&#x27;</span><br>&#125;);<br><br><span class="hljs-comment">// 方式二：函数形式</span><br>counterStore.$patch(<span class="hljs-function">(<span class="hljs-params">state</span>) =&gt;</span> &#123;<br>    state.<span class="hljs-property">count</span> += <span class="hljs-number">5</span>;<br>    state.<span class="hljs-property">user</span>.<span class="hljs-property">name</span> = <span class="hljs-string">&#x27;Jane&#x27;</span>;<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>持久化state</strong></p>
+<p>如果你希望 <code>state</code> 在页面刷新后仍然保留，可以使用 <code>pinia-plugin-persistedstate</code> 插件。</p>
+<p><strong>安装插件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vue">npm install pinia-plugin-persistedstate<br></code></pre></td></tr></table></figure>
+
+<p><strong>使用插件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs vue">import &#123; createPinia &#125; from &quot;pinia&quot;;<br>import piniaPluginPersistedstate from &#x27;pinia-plugin-persistedstate&#x27;;<br><br><br>const pinia = createPinia()<br>pinia.use(piniaPluginPersistedstate)<br>export default pinia<br></code></pre></td></tr></table></figure>
+
+<p><strong>启用持久化</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs vue">// stores/counter.js<br>import &#123; defineStore &#125; from &#x27;pinia&#x27;;<br><br>export const useCounterStore = defineStore(&#x27;counter&#x27;, &#123;<br>    state: () =&gt; (&#123;<br>        count: 0<br>    &#125;),<br>    persist: true // 开启持久化<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<h5 id="U84R6">Getters</h5>
+
+<p><code>getters</code> 类似于 Vue 组件中的计算属性，用于从 <code>state</code> 中派生数据。它们可以提供一种简洁且高效的方式来获取基于 <code>state</code> 的计算值，并且会自动响应 <code>state</code> 的变化。</p>
+<hr>
+<p>在使用 <code>defineStore</code> 创建 store 时，可以通过 <code>getters</code> 选项来定义获取器。<code>getters</code> 是一个对象，其中每个属性都是一个函数，该函数接收 <code>state</code> 作为第一个参数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs vue">import &#123; defineStore &#125; from &#x27;pinia&#x27;;<br><br>export const useCounterStore = defineStore(&#x27;counter&#x27;, &#123;<br>    state: () =&gt; (&#123;<br>        count: 0<br>    &#125;),<br>    getters: &#123;<br>        // 简单的 getter，返回 count 的两倍<br>        doubleCount: (state) =&gt; state.count * 2,<br>        // 可以使用 this 来访问其他 getter 或 state<br>        doubleCountPlusOne() &#123;<br>            return this.doubleCount + 1;<br>        &#125;<br>    &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<p>组件中访问 <code>getters</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;p&gt;Count: &#123;&#123; counterStore.count &#125;&#125;&lt;/p&gt;<br>        &lt;p&gt;Double Count: &#123;&#123; counterStore.doubleCount &#125;&#125;&lt;/p&gt;<br>        &lt;p&gt;Double Count Plus One: &#123;&#123; counterStore.doubleCountPlusOne &#125;&#125;&lt;/p&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br>import &#123; useCounterStore &#125; from &#x27;../stores/counter&#x27;;<br><br>const counterStore = useCounterStore();<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>getters接收参数</strong></p>
+<p><code>getters</code> 也可以返回一个函数，从而实现接收参数的功能。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs vue">import &#123; defineStore &#125; from &#x27;pinia&#x27;;<br><br>export const useUserStore = defineStore(&#x27;user&#x27;, &#123;<br>    state: () =&gt; (&#123;<br>        users: [<br>            &#123; id: 1, name: &#x27;Alice&#x27;, age: 25 &#125;,<br>            &#123; id: 2, name: &#x27;Bob&#x27;, age: 30 &#125;,<br>            &#123; id: 3, name: &#x27;Charlie&#x27;, age: 35 &#125;<br>        ]<br>    &#125;),<br>    getters: &#123;<br>        // 返回一个函数，根据用户 ID 获取用户信息<br>        getUserById: (state) =&gt; (id) =&gt; &#123;<br>            return state.users.find(user =&gt; user.id === id);<br>        &#125;<br>    &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<p>组件中使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;p&gt;User with ID 2: &#123;&#123; userStore.getUserById(2)?.name &#125;&#125;&lt;/p&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br>import &#123; useUserStore &#125; from &#x27;../stores/user&#x27;;<br><br>const userStore = useUserStore();<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="D7C6T">Actions</h5>
+
+<p><code>actions</code> 用于定义修改 <code>state</code> 的方法，它类似于 Vue 组件中的方法。<code>actions</code> 可以包含同步或异步操作，比如数据的获取、状态的更新等。</p>
+<hr>
+<p>在使用 <code>defineStore</code> 创建 store 时，可以通过 <code>actions</code> 选项来定义行为。<code>actions</code> 是一个对象，其中每个属性都是一个函数，在函数内部可以使用 <code>this</code> 来访问 <code>state</code>、<code>getters</code> 以及其他 <code>actions</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs vue">import &#123; defineStore &#125; from &#x27;pinia&#x27;;<br><br>export const useCounterStore = defineStore(&#x27;counter&#x27;, &#123;<br>    state: () =&gt; (&#123;<br>        count: 0<br>    &#125;),<br>    actions: &#123;<br>        // 同步：增加计数<br>        increment() &#123;<br>            this.count++;<br>        &#125;,<br>        // 同步：减少计数<br>        decrement() &#123;<br>            this.count--;<br>        &#125;,<br>        // 带参数的同步：将计数增加指定的值<br>        incrementBy(value) &#123;<br>            this.count += value;<br>        &#125;<br>    &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<p>组件中，可以直接调用 store 中的 <code>actions</code> 方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;p&gt;Count: &#123;&#123; counterStore.count &#125;&#125;&lt;/p&gt;<br>        &lt;button @click=&quot;counterStore.increment&quot;&gt;Increment&lt;/button&gt;<br>        &lt;button @click=&quot;counterStore.decrement&quot;&gt;Decrement&lt;/button&gt;<br>        &lt;button @click=&quot;counterStore.incrementBy(5)&quot;&gt;Increment by 5&lt;/button&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br>import &#123; useCounterStore &#125; from &#x27;../stores/counter&#x27;;<br><br>const counterStore = useCounterStore();<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><code>actions</code> 可以包含异步操作，比如发起网络请求。在 <code>actions</code> 中使用 <code>async/await</code> 语法可以方便地处理异步逻辑</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs vue">import &#123; defineStore &#125; from &#x27;pinia&#x27;;<br>import axios from &#x27;axios&#x27;;<br><br>export const useUserStore = defineStore(&#x27;user&#x27;, &#123;<br>    state: () =&gt; (&#123;<br>        user: null,<br>        isLoading: false,<br>        error: null<br>    &#125;),<br>    actions: &#123;<br>        async fetchUser() &#123;<br>            this.isLoading = true;<br>            this.error = null;<br>            try &#123;<br>                const response = await axios.get(&#x27;https://api.example.com/user&#x27;);<br>                this.user = response.data;<br>            &#125; catch (error) &#123;<br>                this.error = error.message;<br>            &#125; finally &#123;<br>                this.isLoading = false;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>    &lt;div&gt;<br>        &lt;div v-if=&quot;userStore.isLoading&quot;&gt;Loading...&lt;/div&gt;<br>        &lt;div v-else-if=&quot;userStore.error&quot;&gt;&#123;&#123; userStore.error &#125;&#125;&lt;/div&gt;<br>        &lt;div v-else&gt;<br>            &lt;p&gt;User Name: &#123;&#123; userStore.user?.name &#125;&#125;&lt;/p&gt;<br>            &lt;button @click=&quot;userStore.fetchUser&quot;&gt;Fetch User&lt;/button&gt;<br>        &lt;/div&gt;<br>    &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br>import &#123; useUserStore &#125; from &#x27;../stores/user&#x27;;<br><br>const userStore = useUserStore();<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p>在一个 <code>action</code> 中可以调用同一个 store 中的其他 <code>actions</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs vue">import &#123; defineStore &#125; from &#x27;pinia&#x27;;<br><br>export const useCounterStore = defineStore(&#x27;counter&#x27;, &#123;<br>    state: () =&gt; (&#123;<br>        count: 0<br>    &#125;),<br>    actions: &#123;<br>        increment() &#123;<br>            this.count++;<br>        &#125;,<br>        incrementTwice() &#123;<br>            this.increment();<br>            this.increment();<br>        &#125;<br>    &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><code>actions</code> 可以返回值，这在需要处理异步操作的结果或者链式调用 <code>actions</code> 时非常有用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs vue">import &#123; defineStore &#125; from &#x27;pinia&#x27;;<br>import axios from &#x27;axios&#x27;;<br><br>export const useUserStore = defineStore(&#x27;user&#x27;, &#123;<br>    state: () =&gt; (&#123;<br>        user: null<br>    &#125;),<br>    actions: &#123;<br>        async fetchUser() &#123;<br>            try &#123;<br>                const response = await axios.get(&#x27;https://api.example.com/user&#x27;);<br>                this.user = response.data;<br>                return response.data;<br>            &#125; catch (error) &#123;<br>                console.error(&#x27;Error fetching user:&#x27;, error);<br>                return null;<br>            &#125;<br>        &#125;,<br>        async fetchUserAndLog() &#123;<br>            const user = await this.fetchUser();<br>            if (user) &#123;<br>                console.log(&#x27;Fetched user:&#x27;, user);<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
