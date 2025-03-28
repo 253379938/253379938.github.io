@@ -44,7 +44,7 @@
 <meta property="og:image" content="http://example.com/2024/12/23/%E6%A8%A1%E5%9D%97%E5%8C%96/1732444277761-42890bd8-79e6-4958-bf00-40fa94c983e3.png">
 <meta property="og:image" content="http://example.com/2024/12/23/%E6%A8%A1%E5%9D%97%E5%8C%96/1732932495501-3ed374b2-a1ee-40bb-a5e7-35d36fb3697f.png">
 <meta property="article:published_time" content="2024-12-23T12:31:05.000Z">
-<meta property="article:modified_time" content="2025-02-28T15:40:37.081Z">
+<meta property="article:modified_time" content="2025-03-28T15:31:46.537Z">
 <meta property="article:author" content="MrZ">
 <meta property="article:tag" content="模块化">
 <meta name="twitter:card" content="summary_large_image">
@@ -241,7 +241,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          1.4k 字
         
       </span>
     
@@ -252,7 +252,7 @@
         
         
         
-          10 分钟
+          12 分钟
         
       </span>
     
@@ -437,6 +437,35 @@
 
 <p>:::tips<br><img src="1732932495501-3ed374b2-a1ee-40bb-a5e7-35d36fb3697f.png" srcset="/img/loading.gif" lazyload></p>
 <p>:::</p>
+<h3 id="7-ESM和CommonJs的区别"><a href="#7-ESM和CommonJs的区别" class="headerlink" title="7.ESM和CommonJs的区别"></a>7.ESM和CommonJs的区别</h3><p><strong>标准来源</strong></p>
+<ul>
+<li><font style="color:rgb(64, 64, 64);">CommonJS是Node.js早期为解决模块化问题而采用的规范，由</font><strong><font style="color:rgb(64, 64, 64);">社区</font></strong><font style="color:rgb(64, 64, 64);">提出并实现</font><ul>
+<li><strong><font style="color:rgb(64, 64, 64);">社区标准(API层面)</font></strong></li>
+</ul>
+</li>
+<li><font style="color:rgb(64, 64, 64);">ESM是ECMAScript语言规范（ES6&#x2F;ES2015）的一部分，由JavaScript</font><strong><font style="color:rgb(64, 64, 64);">官方标准化</font></strong><ul>
+<li><strong><font style="color:rgb(64, 64, 64);">官方标准(语法层面)</font></strong></li>
+</ul>
+</li>
+</ul>
+<p><strong>时态</strong></p>
+<ul>
+<li><font style="color:rgb(64, 64, 64);">CommonJS是运行时态</font><ul>
+<li><font style="color:rgb(64, 64, 64);">CommonJS本质上一个环境(Node) , 函数 . 它将模块化放在一个函数中</font></li>
+<li><font style="color:rgb(64, 64, 64);">依赖关系确定在运行时( 可能导出未初始化的值 )</font></li>
+<li><font style="color:rgb(64, 64, 64);">同步、动态加载（运行时解析）</font></li>
+</ul>
+</li>
+<li><font style="color:rgb(64, 64, 64);">ESM 运行时态( import() )  +   编译时态( 静态 )</font><ul>
+<li><font style="color:rgb(64, 64, 64);">预解析后执行（静态分析依赖关系）</font></li>
+<li><font style="color:rgb(64, 64, 64);">在运行之前确定依赖关系</font></li>
+<li><font style="color:rgb(64, 64, 64);">异步、静态加载（编译时解析）</font><ul>
+<li><font style="color:rgb(64, 64, 64);">tree shaking依赖于ESM( 静态语法 ) , tree shaking在工程化环境中是在运行之前执行的( 打包 ),静态语法确定依赖关系</font></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
                 
               </div>
