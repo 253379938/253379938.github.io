@@ -27,7 +27,7 @@
 <meta property="og:description" content="Webpack性能优化 代码分离  由于Webpack打包后的代码都糅杂在bundle.js中 , 导致bundle.js 比较大,加载速度比较慢 ,导致首屏渲染速度慢 ,可能用户打开会有白屏时间 , 所以需要进行分包处理 Webpack常用代码分离:  入口起点：使用entry配置手动分离代码；  防止重复：使用Entry Dependencies或者SplitChunksPlugin去重和分离">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-04-04T13:08:13.000Z">
-<meta property="article:modified_time" content="2025-04-04T14:48:05.350Z">
+<meta property="article:modified_time" content="2025-04-05T16:45:19.019Z">
 <meta property="article:author" content="MrZ">
 <meta property="article:tag" content="webpack补充">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.3k 字
+          6.5k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          36 分钟
+          55 分钟
         
       </span>
     
@@ -561,9 +561,133 @@
 
 <p>打包webpack的时候，这个工具是帮助我们打开一个8888端口上的服务，我们可以直接的看到每个包的大小。 </p>
 <ul>
-<li>比如有一个包时通过一个Vue组件打包的，但是非常的大，那么我们可以考虑是否可以拆分出多个组件，并且对其进行懒加载； </li>
-<li>比如一个图片或者字体文件特别大，是否可以对其进行压缩或者其他的优化处理；</li>
+<li><p>比如有一个包时通过一个Vue组件打包的，但是非常的大，那么我们可以考虑是否可以拆分出多个组件，并且对其进行懒加载； </p>
+</li>
+<li><p>比如一个图片或者字体文件特别大，是否可以对其进行压缩或者其他的优化处理；</p>
+</li>
+<li></li>
 </ul>
+<h3 id="yxWzu">webpack构建流程</h3>
+
+<ol>
+<li>初始化参数：从配置文件和 Shell 语句中读取与合并参数,得出最终的参数。</li>
+<li>开始编译：用上一步得到的参数初始化 Compiler 对象,注册所有配置的插件,执行对象的 run 方法开始执行编译。</li>
+<li>确定入口：根据配置中的 entry 找出所有的入口文件。</li>
+<li>编译模块：<font style="color:rgb(35, 38, 59);">创建编译过程 Compilation 实例 , </font>从入口文件出发,调用所有配置的 Loader 对模块进行翻译,再找出该模块依赖的模块,再递归本步骤直到所有入口依赖的文件都被处理。</li>
+<li>完成模块编译：在经过第 4 步使用 Loader 翻译完所有模块后,得到了每个模块被翻译后的最终内容以及它们之间的依赖关系。</li>
+<li>输出资源：根据入口和模块之间的依赖关系,组装成一个个包含多个模块的 Chunk,再把每个 Chunk 转换成一个单独的文件加入到输出列表,这步是可以修改输出内容的最后机会。[<font style="color:rgb(0, 0, 0);">Tree Shaking、代码分割、压缩等操作都在该步骤执行</font>]</li>
+<li>输出完成：在确定好输出内容后,根据配置确定输出的路径和文件名,把文件内容写入到文件系统</li>
+</ol>
+<hr>
+<p><font style="color:rgb(35, 38, 59);">Webpack 工作流程中最核心的两个模块：Compiler 和 Compilation 都扩展自 Tapable 类，用于实现工作流程中的生命周期划分，以便在不同的生命周期节点上注册和</font><strong><font style="color:rgb(35, 38, 59);">调用插件</font></strong><font style="color:rgb(35, 38, 59);">。其中所暴露出来的生命周期节点称为</font><strong><font style="color:rgb(35, 38, 59);">Hook</font></strong><font style="color:rgb(35, 38, 59);">（俗称钩子）</font></p>
+<ol>
+<li><font style="color:rgb(35, 38, 59);">在构造函数中定义 Hook 类型和参数，生成 Hook 对象。</font></li>
+<li><font style="color:rgb(35, 38, 59);">在插件中注册 Hook，添加对应 Hook 触发时的执行函数。</font></li>
+<li><font style="color:rgb(35, 38, 59);">生成插件实例，运行 apply 方法。</font></li>
+<li><font style="color:rgb(35, 38, 59);">在运行到对应生命周期节点时调用 Hook，执行注册过的插件的回调函数</font></li>
+</ol>
+<hr>
+<p><font style="color:rgb(35, 38, 59);">compiler.run(callback) 中的执行逻辑较为复杂，我们把它按流程抽象一下。抽象后的执行流程如下：</font></p>
+<ol>
+<li><strong><font style="color:rgb(35, 38, 59);">readRecords</font></strong><font style="color:rgb(35, 38, 59);">：读取</font><a target="_blank" rel="noopener" href="https://webpack.js.org/configuration/other-options/#recordspath"><font style="color:rgb(92, 142, 198);">构建记录</font></a><font style="color:rgb(35, 38, 59);">，用于分包缓存优化，在未设置 recordsPath 时直接返回。</font></li>
+<li><strong><font style="color:rgb(35, 38, 59);">compile 的主要构建过程</font></strong><font style="color:rgb(35, 38, 59);">，涉及以下几个环节：</font><ol>
+<li><strong><font style="color:rgb(35, 38, 59);">newCompilationParams</font></strong><font style="color:rgb(35, 38, 59);">：创建 NormalModule 和 ContextModule 的工厂实例，用于创建后续模块实例。</font></li>
+<li><strong><font style="color:rgb(35, 38, 59);">newCompilation</font></strong><font style="color:rgb(35, 38, 59);">：创建编译过程 Compilation 实例，传入上一步的两个工厂实例作为参数。</font></li>
+<li><strong><font style="color:rgb(35, 38, 59);">compiler.hooks.make.callAsync</font></strong><font style="color:rgb(35, 38, 59);">：触发 make 的 Hook，执行所有监听 make 的插件（例如 </font><a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/blob/webpack-4/lib/SingleEntryPlugin.js"><font style="color:rgb(92, 142, 198);">SingleEntryPlugin.js</font></a><font style="color:rgb(35, 38, 59);"> 中，会在相应的监听中触发 compilation 的 addEntry 方法）。</font></li>
+<li><strong><font style="color:rgb(35, 38, 59);">compilation.finish</font></strong><font style="color:rgb(35, 38, 59);">：编译过程实例的 finish 方法，触发相应的 Hook 并报告构建模块的错误和警告。</font></li>
+<li><strong><font style="color:rgb(35, 38, 59);">compilation.seal</font></strong><font style="color:rgb(35, 38, 59);">：编译过程的 seal 方法</font></li>
+</ol>
+</li>
+<li><strong><font style="color:rgb(35, 38, 59);">emitAssets</font></strong><font style="color:rgb(35, 38, 59);">：调用 compilation.getAssets()，将产物内容写入输出文件中。</font></li>
+<li><strong><font style="color:rgb(35, 38, 59);">emitRecords</font></strong><font style="color:rgb(35, 38, 59);">：对应第一步的 readRecords，用于写入构建记录，在未设置 recordsPath 时直接返回。</font></li>
+</ol>
+<p><font style="color:rgb(35, 38, 59);">在编译器运行的流程里，核心过程是第二步编译。具体流程在生成的 Compilation 实例中进行，接下来我们再来看下这部分的源码逻辑。</font></p>
+<p><strong><font style="color:rgb(35, 38, 59);">Compilation.js 中的基本流程</font></strong></p>
+<p><font style="color:rgb(35, 38, 59);">这部分的源码位于</font><font style="color:rgb(35, 38, 59);"> </font><a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/blob/webpack-4/lib/Compilation.js"><font style="color:rgb(92, 142, 198);">Compilation.js</font></a><font style="color:rgb(35, 38, 59);"> </font><font style="color:rgb(35, 38, 59);">中。其中，在编译执行过程中，我们主要从外部调用的是两个方法：</font></p>
+<ol>
+<li><strong><font style="color:rgb(35, 38, 59);">addEntry</font></strong><font style="color:rgb(35, 38, 59);">：从 entry 开始递归添加和构建模块。</font></li>
+<li><strong><font style="color:rgb(35, 38, 59);">seal</font></strong><font style="color:rgb(35, 38, 59);">：冻结模块，进行一系列优化，以及触发各优化阶段的 Hooks。</font></li>
+</ol>
+<h3 id="WgnID">自定义loader,plugin</h3>
+<h4 id="IK5uq">自定义loader</h4>
+
+<p><font style="color:rgb(64,64,64);">Loader是用于对模块的源代码进行转换（处理）</font></p>
+<ul>
+<li>Loader本质上是一个导出为函数的JavaScript模块； </li>
+<li>loader runner库会调用这个函数，然后将上一个loader产生的结果或者资源文件传入进去</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>)<br><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;<br>    <span class="hljs-attr">mode</span>: <span class="hljs-string">&#x27;development&#x27;</span>,<br>    <span class="hljs-attr">entry</span>: <span class="hljs-string">&quot;./src/index.js&quot;</span>,<br>    <span class="hljs-attr">output</span>: &#123;<br>        <span class="hljs-attr">path</span>: path.<span class="hljs-title function_">resolve</span>(__dirname, <span class="hljs-string">&#x27;./dist&#x27;</span>),<br>        <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;bundle.js&#x27;</span>,<br>        <span class="hljs-attr">clean</span>: <span class="hljs-literal">true</span><br>    &#125;,<br>    <span class="hljs-attr">module</span>: &#123;<br>        <span class="hljs-attr">rules</span>: [<br>            &#123;<br>                <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.js$/</span>,<br>                <span class="hljs-attr">use</span>: [<br>                    <span class="hljs-string">&#x27;./my-loader/my-loader2.js&#x27;</span>,<br>                    <span class="hljs-comment">// &#x27;./my-loader/my-loader1.js&#x27;</span><br>                ]<br>            &#125;<br>        ]<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">module.exports = <span class="hljs-keyword">function</span> (content,map,meta) &#123;<br>    console.log(<span class="hljs-string">&#x27;loader2&#x27;</span>, content);<br>    <span class="hljs-built_in">return</span> content<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<pre><code class="hljs">- &lt;font style=&quot;color:rgb(64,64,64);&quot;&gt;content：资源文件的内容； &lt;/font&gt;
+- &lt;font style=&quot;color:rgb(64,64,64);&quot;&gt;map：sourcemap相关的数据； &lt;/font&gt;
+- &lt;font style=&quot;color:rgb(64,64,64);&quot;&gt;meta：一些元数据；&lt;/font&gt;
+</code></pre>
+<p>如果希望直接加载loader的文件夹,可以配置resolveLoader</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>)<br><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;<br>    <span class="hljs-attr">mode</span>: <span class="hljs-string">&#x27;development&#x27;</span>,<br>    <span class="hljs-attr">entry</span>: <span class="hljs-string">&quot;./src/index.js&quot;</span>,<br>    <span class="hljs-attr">output</span>: &#123;<br>        <span class="hljs-attr">path</span>: path.<span class="hljs-title function_">resolve</span>(__dirname, <span class="hljs-string">&#x27;./dist&#x27;</span>),<br>        <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;bundle.js&#x27;</span>,<br>        <span class="hljs-attr">clean</span>: <span class="hljs-literal">true</span><br>    &#125;,<br>    <span class="hljs-attr">resolveLoader</span>: &#123;<br>      <span class="hljs-attr">modules</span>:[<span class="hljs-string">&quot;node_modules&quot;</span>,<span class="hljs-string">&quot;./my-loader&quot;</span>]  <br>    &#125;,<br>    <span class="hljs-attr">module</span>: &#123;<br>        <span class="hljs-attr">rules</span>: [<br>            &#123;<br>                <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.js$/</span>,<br>                <span class="hljs-attr">use</span>: [<br>                    <span class="hljs-string">&#x27;my-loader2.js&#x27;</span>,<br>                    <span class="hljs-comment">// &#x27;./my-loader/my-loader1.js&#x27;</span><br>                ]<br>            &#125;<br>        ]<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><font style="color:rgba(0, 0, 0, 0.85);">在 Webpack 里，</font><strong><font style="color:rgba(0, 0, 0, 0.85);">pitch-loader</font></strong><font style="color:rgba(0, 0, 0, 0.85);"> 是 loader 执行流程中的一个特殊阶段</font></p>
+<p><font style="color:rgba(0, 0, 0, 0.85);">每个 loader 都可以有一个 </font><strong><font style="color:rgba(0, 0, 0, 0.85);">pitch</font></strong><font style="color:rgba(0, 0, 0, 0.85);"> 方法。当 Webpack 解析模块时，在正常的从右到左执行 loader 之前，会先从左到右执行所有 loader 的 pitch 方法。若某个 pitch 方法返回了一个值，那么后续的 loader 的 pitch 方法和正常的 loader 执行流程都会被跳过。</font></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// loader1.js</span><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">content</span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;loader1 normal&#x27;</span>);<br>  <span class="hljs-keyword">return</span> content;<br>&#125;;<br><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span>.<span class="hljs-property">pitch</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;loader1 pitch&#x27;</span>);<br>&#125;;<br><br><span class="hljs-comment">// loader2.js</span><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">content</span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;loader2 normal&#x27;</span>);<br>  <span class="hljs-keyword">return</span> content;<br>&#125;;<br><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span>.<span class="hljs-property">pitch</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;loader2 pitch&#x27;</span>);<br>  <span class="hljs-comment">// 这里返回值，后续的 pitch 和正常 loader 执行会被跳过</span><br>  <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;return &quot;Skipped other loaders&quot;;&#x27;</span>;<br>&#125;;<br><br><span class="hljs-comment">// loader3.js</span><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">content</span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;loader3 normal&#x27;</span>);<br>  <span class="hljs-keyword">return</span> content;<br>&#125;;<br><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span>.<span class="hljs-property">pitch</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;loader3 pitch&#x27;</span>);<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p><font style="color:rgba(0, 0, 0, 0.85);">loader 的执行顺序是从</font><strong><font style="color:rgba(0, 0, 0, 0.85);">右到左、从下到上</font></strong><font style="color:rgba(0, 0, 0, 0.85);">。</font></p>
+<ul>
+<li><font style="color:rgba(0, 0, 0, 0.85);">这样设计符合函数式编程的组合式思想f(g(h(x))),中h函数限制,从右向左</font></li>
+</ul>
+<p>Webpack 的 loader 还提供了 **enforce **属性，该属性有两个可选值：’<strong>pre</strong>‘ 和 ‘<strong>post</strong>‘。</p>
+<ul>
+<li><strong>pre</strong>：表示这个 loader 会在所有普通 loader 之前执行。</li>
+<li><strong>post</strong>：表示这个 loader 会在所有普通 loader 之后执行。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs bash">module: &#123;<br>    rules: [<br>        &#123;<br>            <span class="hljs-built_in">test</span>: /\.js$/,<br>            enforce: <span class="hljs-string">&#x27;pre&#x27;</span>,<br>            loader: <span class="hljs-string">&#x27;eslint-loader&#x27;</span><br>        &#125;,<br>        &#123;<br>            <span class="hljs-built_in">test</span>: /\.js$/,<br>            loader: <span class="hljs-string">&#x27;babel-loader&#x27;</span><br>        &#125;,<br>        &#123;<br>            <span class="hljs-built_in">test</span>: /\.js$/,<br>            enforce: <span class="hljs-string">&#x27;post&#x27;</span>,<br>            loader: <span class="hljs-string">&#x27;my-post-loader&#x27;</span><br>        &#125;<br>    ]<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>执行顺序为eslint-loader-&gt;babel-loader-&gt;my-post-loader</p>
+<hr>
+<p><strong>同步loader和异步loader的区分</strong></p>
+<p>在loader中,可以用return来返回处理过后的对象,但是处理中可能遇到一些异步操作,此时使用return返回值为undefined, 在this绑定对象上有两个callback函数可以帮助我们返回</p>
+<pre><code class="hljs">- this.callback   用来处理同步loader的返回
+- this.async()  	用来处理异步loader的返回
+</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">content</span>) &#123;<br>  <span class="hljs-comment">//this绑定对象</span><br>  <span class="hljs-comment">//获取同步的callback</span><br>  <span class="hljs-comment">// const callback = this.callback</span><br>  <span class="hljs-comment">//异步的callback async</span><br>  <span class="hljs-keyword">const</span> callback = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">async</span>()<br>  <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-comment">//异步操作 本质返回的undefined</span><br>    <span class="hljs-comment">// return content + &#x27;123&#x27;</span><br>    <span class="hljs-title function_">callback</span>(<span class="hljs-literal">null</span>,<span class="hljs-string">&#x27;异步的callback返回值&#x27;</span>)<br>  &#125;, <span class="hljs-number">2000</span><br>            )<br>  <span class="hljs-comment">//可以通过callback函数返回 参数1 错误信息 参数2 传递的内容</span><br>  <span class="hljs-comment">// callback(null, &#x27;callback返回结果&#x27;)</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p>传递参数 ,使用<strong>this.getOptions()</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-attr">use</span>: [<br>  &#123;<br>    <span class="hljs-attr">loader</span>: <span class="hljs-string">&#x27;my-loader2&#x27;</span>,<br>    <span class="hljs-attr">options</span>: &#123;<br>      <span class="hljs-attr">arg</span>: <span class="hljs-string">&#x27;我是参数&#x27;</span><br>    &#125;<br>  &#125;<br>  <span class="hljs-comment">// &#x27;./my-loader/my-loader1.js&#x27;</span><br>]<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">content</span>) &#123;<br>    <span class="hljs-comment">//获取传递的参数</span><br>    <span class="hljs-comment">//方式一:早期通过loader-utils(webpack官方库)提供</span><br>    <span class="hljs-comment">//方式二:直接通过this.getOptions()</span><br>    <span class="hljs-keyword">const</span> opts = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getOptions</span>()<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;optL:&#x27;</span>, opts);<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;loader2&#x27;</span>, content);<br>    <span class="hljs-keyword">return</span> content<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(64,64,64);">我们可以通过一个webpack官方提供的校验库 schema-utils来校验参数，安装对应的库</font></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">npm install schema-utils -D<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> &#123; validate &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;schema-utils&#x27;</span>)<br><span class="hljs-keyword">const</span> loader2Schema = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./schema/loader2-schema.json&#x27;</span>)<br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">content</span>) &#123;<br>    <span class="hljs-keyword">const</span> opts = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getOptions</span>()<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;opt:&#x27;</span>, opts);<br>    <span class="hljs-title function_">validate</span>(loader2Schema, opts)<br>    <span class="hljs-keyword">return</span> content<br>&#125;<br><br><span class="hljs-comment">// JSON</span><br>&#123;<br>    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;object&quot;</span>,<br>    <span class="hljs-string">&quot;properties&quot;</span>: &#123;<br>        <span class="hljs-string">&quot;name&quot;</span>: &#123;<br>            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,<br>            <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;请输入string类型&quot;</span><br>        &#125;,<br>        <span class="hljs-string">&quot;num&quot;</span>: &#123;<br>            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;number&quot;</span>,<br>            <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;number类型&quot;</span><br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="qgpak">自定义pulgin</h4>
+<h5 id="GrdvA">Tapable</h5>
+
+<p><font style="color:rgb(64,64,64);">我们知道webpack有两个非常重要的类：</font><strong><font style="color:rgb(64,64,64);">Compiler和Compilation</font></strong><font style="color:rgb(64,64,64);"> </font></p>
+<ul>
+<li><font style="color:rgb(64,64,64);">他们通过注入插件的方式，来监听webpack的所有生命周期； </font></li>
+<li><font style="color:rgb(64,64,64);">插件的注入离不开各种各样的Hook，而他们的Hook是如何得到的呢？ 其实是创建了Tapable库中的各种Hook的实例；</font></li>
+<li>Tapable是官方编写和维护的一个库； Tapable是管理着需要的Hook，这些Hook可以被应用到我们的插件中</li>
+</ul>
+<hr>
+<p>Tapable库中的hooks主要分为*<em>Sync</em>(同步)<strong>和</strong>Async(异步)**两种</p>
+<p><strong>其他分类</strong></p>
+<ul>
+<li>bail：当有返回值时，就不会执行后续的事件触发了； </li>
+<li>Loop：当返回值为true，就会反复执行该事件，当返回值为undefined或者不返回内容，就退出事件； </li>
+<li>Waterfall：当返回值不为undefined时，会将这次返回的结果作为下次事件的第一个参数； </li>
+<li>Parallel：并行，不会等到上一个事件回调执行结束，才执行下一次事件处理回调； </li>
+<li>Series：串行，会等待上一是异步的Hook；</li>
+</ul>
+<hr>
+<p><strong>基本使用</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> &#123; <span class="hljs-title class_">SyncHook</span> &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;tapable&#x27;</span>)<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyCompiler</span> &#123;<br>    <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">hooks</span> = &#123;<br>            <span class="hljs-comment">//1.创建hook</span><br>            <span class="hljs-attr">syncHook</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">SyncHook</span>([<span class="hljs-string">&#x27;name&#x27;</span>, <span class="hljs-string">&#x27;age&#x27;</span>])<br>        &#125;<br>        <span class="hljs-comment">//2.使用hooks监听事件(自定义hooks)</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">hooks</span>.<span class="hljs-property">SyncHook</span>.<span class="hljs-title function_">tap</span>(<span class="hljs-string">&#x27;event1&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> &#123;<br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;监听到event1&#x27;</span>, name);<br>        &#125;)<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">const</span> compiler = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MyCompiler</span>()<br><span class="hljs-comment">//3.监听事件</span><br>compiler.<span class="hljs-property">hooks</span>.<span class="hljs-property">syncHook</span>.<span class="hljs-title function_">call</span>(<span class="hljs-string">&#x27;mir&#x27;</span>, <span class="hljs-number">18</span>)<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
