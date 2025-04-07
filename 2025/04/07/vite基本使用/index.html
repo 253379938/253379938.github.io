@@ -1,0 +1,734 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/baike.png">
+  <link rel="icon" href="/img/baike.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="MrZ">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="认识vite  Vite 是一个现代化的前端构建工具  定义：Vite 旨在利用现代浏览器的原生 ES 模块支持，提供快速的开发体验，由开发服务器和构建命令两部分组成。开发服务器基于原生 ES 模块，提供超快的热更新(ESBuild)；构建命令使用 Rollup 打包代码，生成适用于生产环境的优化静态资源。 优势：与传统构建工具如 Webpack 相比，Vite 具有极速启动、快速热更新、丰富的功">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vite基本使用">
+<meta property="og:url" content="http://example.com/2025/04/07/vite%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="MrZ的个人博客">
+<meta property="og:description" content="认识vite  Vite 是一个现代化的前端构建工具  定义：Vite 旨在利用现代浏览器的原生 ES 模块支持，提供快速的开发体验，由开发服务器和构建命令两部分组成。开发服务器基于原生 ES 模块，提供超快的热更新(ESBuild)；构建命令使用 Rollup 打包代码，生成适用于生产环境的优化静态资源。 优势：与传统构建工具如 Webpack 相比，Vite 具有极速启动、快速热更新、丰富的功">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-04-07T13:41:11.000Z">
+<meta property="article:modified_time" content="2025-04-07T13:42:41.724Z">
+<meta property="article:author" content="MrZ">
+<meta property="article:tag" content="vite基本使用">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>vite基本使用 - MrZ的个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>MirZ Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="vite基本使用"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-04-07 21:41" pubdate>
+          2025年4月7日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">vite基本使用</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h4 id="G9X6h">认识vite</h4>
+
+<p>Vite 是一个现代化的前端构建工具</p>
+<ul>
+<li><strong>定义</strong>：Vite 旨在利用现代浏览器的原生 ES 模块支持，提供快速的开发体验，由开发服务器和构建命令两部分组成。开发服务器基于原生 ES 模块，提供超快的热更新(ESBuild)；构建命令使用 Rollup 打包代码，生成适用于生产环境的优化静态资源。</li>
+<li><strong>优势</strong>：与传统构建工具如 Webpack 相比，Vite 具有极速启动、快速热更新、丰富的功能以及高度可扩展等优势。它解决了传统构建工具启动速度慢、热更新慢和配置复杂的痛点。</li>
+</ul>
+<hr>
+<p>在Webpack中,运行本地服务本质上是打开一个本地服务器,用本地服务器去访问内存中打包转换后的代码(在<strong>内存中</strong>进行构建处理后的代码,并未真正打包),然后运行在浏览器上,当开发代码发生变化时,对应的打包后的文件也发生变化,本地服务器在去拿到更新后的代码,通过 HMR 或自动刷新机制更新浏览器内容</p>
+<p>而Vite则不会对项目中所有的代码进行构建,Vite会开启一个本地开发服务器,此服务器具备静态文件服务和处理模块请求的能力(使用ESBuild进行代码转化 快10~100倍),开发阶段，服务器会直接将项目中文件以 ES 模块的形式提供给浏览器,浏览器在解析时遇到 ES 模块导入会向服务器按需对相应模块进行编译和转换，然后返回给浏览器,这种方式避免了对整个项目进行提前打包，显著加快了启动速度</p>
+<p>Vite 运行本地服务的核心优势在于利用现代浏览器的 ES 模块支持，实现了按需加载和快速热更新,提升了启动速度</p>
+<h4 id="h4ZEa">vite的基本使用</h4>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">npm i vite -D<br></code></pre></td></tr></table></figure>
+
+<p>如果在代码中已经提供模板和逻辑代码,直接进行 npx vite 运行项目即可</p>
+<hr>
+<ul>
+<li>**vite可以直接支持css的处理 直接导入css即可； **</li>
+<li><strong>vite可以直接支持css预处理器，比如less ,sass</strong><ul>
+<li>直接导入less,安装less编译器 npm i less -D</li>
+</ul>
+</li>
+<li>**vite直接支持postcss的转换： **<ul>
+<li>只需要安装postcss，并且配置 postcss.config.js 的配置文件即可； </li>
+<li>npm install postcss postcss-preset-env -D</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;<br>    <span class="hljs-attr">plugins</span>:[<span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;postcss-preset-env&quot;</span>)]<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p>Vite对TypeScript是原生支持的，它会直接使用ESBuild来完成编译：只需要直接导入即可 , 如果我们查看浏览器中的请求，会发现请求的依然是ts的代码：这是因为vite中的服务器Connect会对我们的请求进行转发；获取ts编译后的代码，给浏览器返回，浏览器可以直接进行解析</p>
+<ul>
+<li>注意：在vite2中，已经不再使用Koa了，而是使用Connect来搭建的服务器<ul>
+<li>由于大多数逻辑应该通过插件钩子而不是中间件来完成，因此对中间件的需求大大减少。内部服务器应用现在是一个很好的旧版的 connect 实例，而不是 Koa。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>Vite对Vue的支持</strong></p>
+<p>vite对vue提供第一优先级支持 </p>
+<ul>
+<li>Vue 3 单文件组件支持：@vitejs&#x2F;plugin-vue </li>
+<li>Vue 3 JSX 支持：@vitejs&#x2F;plugin-vue-jsx </li>
+<li>Vue 2 支持：underfin&#x2F;vite-plugin-vue2</li>
+</ul>
+<ol>
+<li>安装支持vue的插件： </li>
+<li>在vite.config.js中配置插件：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; defineConfig &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vite&#x27;</span><br><span class="hljs-keyword">import</span> vue <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@vitejs/plugin-vue&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title function_">defineConfig</span>(&#123;<br>    <span class="hljs-attr">plugins</span>: [<br>        <span class="hljs-title function_">vue</span>()<br>    ]<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<p><strong>Vite对React的支持</strong></p>
+<p>.jsx 和 .tsx 文件同样开箱即用，它们也是通过 ESBuild来完成的编译： </p>
+<ul>
+<li>所以我们只需要直接编写react的代码即可； </li>
+<li>注意：在index.html加载main.js时，我们需要将main.js的后缀，修改为 main.jsx 作为后缀名；</li>
+</ul>
+<hr>
+<ul>
+<li>我们可以直接通过vite build来完成对当前项目的打包工具： npx vite build </li>
+<li>我们可以通过preview的方式，开启一个本地服务来预览打包后的效果： npx vite preview</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-string">&quot;scripts&quot;</span>: &#123;<br>   <span class="hljs-string">&quot;dev&quot;</span>: <span class="hljs-string">&quot;npx vite&quot;</span>,<br>   <span class="hljs-string">&quot;build&quot;</span>: <span class="hljs-string">&quot;npx vite build&quot;</span>,<br>   <span class="hljs-string">&quot;preview&quot;</span>: <span class="hljs-string">&quot;npx vite preview&quot;</span><br> &#125;,<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p>在开发中，我们不可能所有的项目都使用vite从零去搭建，比如一个react项目、Vue项目； </p>
+<p>这个时候vite还给我们提供了对应的脚手架工具,Vite实际上是有两个工具的： </p>
+<ul>
+<li>vite：相当于是一个构件工具，类似于webpack、rollup； </li>
+<li>@vitejs&#x2F;create-app：类似vue-cli、create-react-app；</li>
+</ul>
+<p>如果使用脚手架工具呢？ </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript">npm create vite <br>yarn create vite <br>pnpm create vite<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>ESBuild特点</strong></p>
+<ul>
+<li>超快的构建速度，并且不需要缓存;</li>
+<li>支持ES6和CommonJS的模块化;</li>
+<li>支持ES6的Tree Shaking;</li>
+<li>支持Go、JavaScript的APl;支持TypeScript、JSX等语法编译;支持SourceMap;</li>
+<li>支持代码压缩;</li>
+<li>支持扩展其他插件;</li>
+</ul>
+<p><strong>ESBuild为什么这么快呢?</strong></p>
+<ul>
+<li>使用Go语言编写的，可以直接转换成机器代码，而无需经过字节码;</li>
+<li>ESBuild可以充分利用CPU的多内核，尽可能让它们饱和运行;</li>
+<li>ESBuild的所有内容都是从零开始编写的，而不是使用第三方，所以从一开始就可以考虑各种性能问题;</li>
+<li>等等…</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%A8%A1%E5%9D%97%E5%8C%96/" class="category-chain-item">模块化</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/vite%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" class="print-no-link">#vite基本使用</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>vite基本使用</div>
+      <div>http://example.com/2025/04/07/vite基本使用/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>MrZ</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月7日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/04/07/rollup%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="rollup基本使用">
+                        <span class="hidden-mobile">rollup基本使用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
