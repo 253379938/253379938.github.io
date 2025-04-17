@@ -28,8 +28,10 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2025/04/12/react%E5%9F%BA%E7%A1%80/1744386284984-676dc266-9ac5-4554-8584-50f62eff24cc.png">
 <meta property="og:image" content="http://example.com/2025/04/12/react%E5%9F%BA%E7%A1%80/1744387760852-a136d340-d4e9-402d-a67c-e617ba9da4ef.png">
+<meta property="og:image" content="http://example.com/2025/04/12/react%E5%9F%BA%E7%A1%80/1744898155850-0b0a907a-637e-45a9-8a30-d502af3d7ed8.png">
+<meta property="og:image" content="http://example.com/2025/04/12/react%E5%9F%BA%E7%A1%80/1744898227338-e63c015e-ba7d-4846-8ee3-5f7c960a7cba.png">
 <meta property="article:published_time" content="2025-04-11T16:20:15.000Z">
-<meta property="article:modified_time" content="2025-04-17T08:06:30.301Z">
+<meta property="article:modified_time" content="2025-04-17T14:08:38.015Z">
 <meta property="article:author" content="MrZ">
 <meta property="article:tag" content="React基础">
 <meta name="twitter:card" content="summary_large_image">
@@ -226,7 +228,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          16k 字
+          17k 字
         
       </span>
     
@@ -237,7 +239,7 @@
         
         
         
-          136 分钟
+          145 分钟
         
       </span>
     
@@ -1359,6 +1361,97 @@
 <li><strong>使用</strong>** <strong><code>**classNames**</code></strong> **<strong>函数</strong>：借助 <code>classNames</code> 函数依据 <code>isActive</code> 状态动态生成类名。</li>
 <li><strong>渲染组件</strong>：把生成的类名应用到 <code>div</code> 元素上，并添加一个按钮来切换 <code>isActive</code> 状态。</li>
 </ol>
+<h3 id="MKyi5">redux</h3>
+<h4 id="uJFIE">redux核心思想</h4>
+
+<p>React中就要求我们无论是函数还是class声明一个组件，这个组件都必须像纯函数一样，保护它们的props不被修改 , redux中，reducer也被要求是一个纯函数</p>
+<p><strong>react-redux</strong> 是 React 官方推荐的用于管理应用状态的库，它是 Redux 在 React 中的绑定库。<strong>Redux</strong>就是一个帮助我们管理State的容器：Redux是JavaScript的状态容器，提供了<strong>可预测</strong>的状态管理</p>
+<hr>
+<p><strong>Redux的核心思想:</strong></p>
+<ul>
+<li><strong>store</strong></li>
+<li><strong>action</strong><ul>
+<li>Redux要求我们通过action来更新数据： </li>
+<li>所有数据的变化，必须通过<strong>派发（dispatch）action</strong>来更新； action是一个普通的JavaScript对象，用来描述这次更新的type和content； </li>
+<li>可以清晰的知道数据到底发生了什么样的变化，所有的数据变化都是可跟追、可预测的；</li>
+</ul>
+</li>
+<li><strong>reducer</strong><ul>
+<li>reducer是一个<strong>纯函数</strong>； </li>
+<li>reducer做的事情就是将传入的state和action结合起来生成一个新的state；</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>redux三大原则</strong></p>
+<p>**单一数据源 **</p>
+<ul>
+<li>整个应用程序的state被存储在单一的 JavaScript 对象（即状态树）中，并且这个状态树是唯一的数据源</li>
+<li>Redux并没有强制让我们不能创建多个Store，但是那样做并不利于数据的维护； </li>
+<li>单一的数据源可以让整个应用程序的state变得方便维护、追踪、修改；</li>
+</ul>
+<p>**State是只读的 **</p>
+<ul>
+<li>唯一修改State的方法一定是触发action，不要试图在其他地方通过任何的方式来修改State： </li>
+<li>这样就确保了View或网络请求都不能直接修改state，它们只能通过action来描述自己想要如何修改state； </li>
+<li>这样可以保证所有的修改都被集中化处理，并且按照严格的顺序来执行，所以不需要担心race condition（竟态）的问题；</li>
+</ul>
+<p>**使用纯函数来执行修改 **</p>
+<ul>
+<li>通过reducer将 旧state和 actions联系在一起，并且返回一个新的State： </li>
+<li>随着应用程序的复杂度增加，我们可以将reducer拆分成多个小的reducers，分别操作不同state tree的一部分； </li>
+<li>但是所有的reducer都应该是纯函数，不能产生任何的副作用；</li>
+</ul>
+<hr>
+<h4 id="rxT7r">redux基本使用</h4>
+
+<p><strong>安装</strong></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs jsx"># 旧版<span class="hljs-title function_">redux</span>(弃用)<br>npm install redux<br># 新版已被迁移到@reduxjs/toolkit<br>npm install @reduxjs/toolkit<br></code></pre></td></tr></table></figure>
+
+<p><strong>基本使用</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; createStore &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;redux&quot;</span>;<br><br><span class="hljs-comment">//初始化数据</span><br><span class="hljs-keyword">const</span> initState = &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;mir&#x27;</span><br>&#125;<br><br><span class="hljs-comment">//定义reducer函数:纯函数</span><br><span class="hljs-comment">//参数一:上一次的state</span><br><span class="hljs-comment">//参数二:action(dispatch的传入值)</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">reducer</span>(<span class="hljs-params">state = initState, action</span>) &#123;<br>    <span class="hljs-keyword">if</span> (action.<span class="hljs-property">type</span> == <span class="hljs-string">&quot;change_name&quot;</span>) &#123;<br>        <span class="hljs-keyword">return</span> &#123; ...state, <span class="hljs-attr">name</span>: action.<span class="hljs-property">name</span> &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> state<br>&#125;<br><br><br><span class="hljs-comment">//创建store</span><br><span class="hljs-keyword">const</span> store = <span class="hljs-title function_">createStore</span>(reducer)<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> store<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;<br><span class="hljs-keyword">import</span> store <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./store&quot;</span>;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">App</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.Component</span> &#123;<br>  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">props</span>) &#123;<br>    <span class="hljs-variable language_">super</span>(props);<br>  &#125;<br>  <span class="hljs-title function_">handleClick</span>(<span class="hljs-params"></span>) &#123;<br>    store.<span class="hljs-title function_">dispatch</span>(&#123; <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;change_name&quot;</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;m&quot;</span> &#125;);<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(store.<span class="hljs-title function_">getState</span>());<br>  &#125;<br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>&#123;store.getState().name&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;()</span> =&gt;</span> this.handleClick()&#125;&gt;修改<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>    );<br>  &#125;<br>&#125;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">App</span>;<br><br></code></pre></td></tr></table></figure>
+
+<p><strong>订阅数据</strong></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;<br><span class="hljs-keyword">import</span> store <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./store&quot;</span>;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">App</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">React.Component</span> &#123;<br>  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">props</span>) &#123;<br>    <span class="hljs-variable language_">super</span>(props);<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span> = &#123;<br>      <span class="hljs-attr">name</span>: store.<span class="hljs-title function_">getState</span>().<span class="hljs-property">name</span><br>    &#125;;<br>  &#125;<br><br>  <span class="hljs-title function_">componentDidMount</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">// 订阅 store 的状态变化</span><br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">unsubscribe</span> = store.<span class="hljs-title function_">subscribe</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setState</span>(&#123;<br>        <span class="hljs-attr">name</span>: store.<span class="hljs-title function_">getState</span>().<span class="hljs-property">name</span><br>      &#125;);<br>    &#125;);<br>  &#125;<br><br>  <span class="hljs-title function_">componentWillUnmount</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">// 取消订阅</span><br>    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">unsubscribe</span>();<br>  &#125;<br><br>  <span class="hljs-title function_">handleClick</span>(<span class="hljs-params"></span>) &#123;<br>    store.<span class="hljs-title function_">dispatch</span>(&#123; <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;change_name&quot;</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;m&quot;</span> &#125;);<br>  &#125;<br><br>  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>&#123;this.state.name&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;()</span> =&gt;</span> this.handleClick()&#125;&gt;修改<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>    );<br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">App</span>;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> &#123; createStore &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;redux&quot;</span>;<br><br><span class="hljs-comment">//初始化数据</span><br><span class="hljs-keyword">const</span> initState = &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;mir&#x27;</span><br>&#125;<br><br><span class="hljs-comment">//定义reducer函数:纯函数</span><br><span class="hljs-comment">//参数一:上一次的state</span><br><span class="hljs-comment">//参数二:action(dispatch的传入值)</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">reducer</span>(<span class="hljs-params">state = initState, action</span>) &#123;<br>    <span class="hljs-comment">// if (action.type == &quot;change_name&quot;) &#123;</span><br>    <span class="hljs-comment">//     return &#123; ...state, name: action.name &#125;</span><br>    <span class="hljs-comment">// &#125;</span><br>    <span class="hljs-keyword">switch</span> (action.<span class="hljs-property">type</span>) &#123;<br>        <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;change_name&quot;</span>:<br>            <span class="hljs-keyword">return</span> &#123; ...state, <span class="hljs-attr">name</span>: action.<span class="hljs-property">name</span> &#125;<br>        <span class="hljs-attr">default</span>:<br>            <span class="hljs-keyword">return</span> state<br>    &#125;<br>&#125;<br><br><br><span class="hljs-comment">//创建store</span><br><span class="hljs-keyword">const</span> store = <span class="hljs-title function_">createStore</span>(reducer)<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> store<br></code></pre></td></tr></table></figure>
+
+<p><strong>拆分结构</strong></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> &#123; createStore &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;redux&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; reducer &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./reducer&quot;</span>;<br><br><span class="hljs-comment">//创建store</span><br><span class="hljs-keyword">const</span> store = <span class="hljs-title function_">createStore</span>(reducer)<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> store<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> &#123; <span class="hljs-variable constant_">CHANGE_NAME</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./constants&quot;</span><br><span class="hljs-keyword">const</span> initState = &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;mir&#x27;</span><br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">reducer</span>(<span class="hljs-params">state = initState, action</span>) &#123;<br>    <span class="hljs-keyword">switch</span> (action.<span class="hljs-property">type</span>) &#123;<br>        <span class="hljs-keyword">case</span> <span class="hljs-attr">CHANGE_NAME</span>:<br>            <span class="hljs-keyword">return</span> &#123; ...state, <span class="hljs-attr">name</span>: action.<span class="hljs-property">name</span> &#125;<br>        <span class="hljs-attr">default</span>:<br>            <span class="hljs-keyword">return</span> state<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">CHANGE_NAME</span> = <span class="hljs-string">&quot;change_name&quot;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">changeNameAction</span>(<span class="hljs-params">name</span>) &#123;<br>    <span class="hljs-keyword">return</span> &#123;<br>        <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;change_name&quot;</span>,<br>        name<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>使用redux过程</strong></p>
+<ul>
+<li>1.创建一个对象，作为我们要保存的状态： </li>
+<li>2.创建Store来存储这个state <ul>
+<li>创建store时必须创建reducer； </li>
+<li>我们可以通过 store.getState 来获取当前的state；</li>
+</ul>
+</li>
+<li>3.通过action来修改state <ul>
+<li>通过dispatch来派发action； </li>
+<li>通常action中都会有type属性，也可以携带其他的数据；</li>
+</ul>
+</li>
+<li>4.修改reducer中的处理代码 <ul>
+<li>这里一定要记住，reducer是一个纯函数，不需要直接修改state； </li>
+<li>后面我会讲到直接修改state带来的问题；</li>
+</ul>
+</li>
+<li>5.可以在派发action之前，监听store的变化：</li>
+</ul>
+<hr>
+<p><strong>redux流程图</strong></p>
+<p><img src="1744898155850-0b0a907a-637e-45a9-8a30-d502af3d7ed8.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>官方图</strong></p>
+<p><img src="1744898227338-e63c015e-ba7d-4846-8ee3-5f7c960a7cba.png" srcset="/img/loading.gif" lazyload></p>
 
                 
               </div>
